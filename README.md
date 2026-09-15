@@ -1,9 +1,13 @@
-# GlucoFM
+# GlucoTrace
 
-GlucoFM is a deliberately small PyTorch encoder for experiments with continuous
+GlucoTrace is a deliberately small PyTorch encoder for experiments with continuous
 glucose monitor (CGM) time series. It is intended to be easy to read, change,
 and test. The repository contains one research-only checkpoint, no dashboard,
 and no clinical or state-of-the-art claims.
+
+The repository is branded **GlucoTrace**. The Python import package, model class,
+and command-line entry points retain their `glucofm` names for compatibility
+with the first release.
 
 > **Research software only.** This project is not a medical device and must not
 > be used for diagnosis, treatment, dosing, alerts, or patient care.
