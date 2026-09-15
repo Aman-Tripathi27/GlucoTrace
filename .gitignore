@@ -1,0 +1,15 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.venv/
+.DS_Store
+dist/
+build/
+*.pt
+!checkpoints/glucofm-research.pt
+data/
+prepared/
+evaluations/*.json
+!evaluations/protocol-1.0-candidate.json
+!evaluations/protocol-1.1.json

@@ -1,0 +1,51 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "glucofm"
+version = "0.1.0"
+description = "A small, readable Transformer encoder for research with continuous glucose monitor time series."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "GlucoFM contributors" }]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = [
+  "numpy>=1.24",
+  "torch>=2.1",
+]
+
+[project.urls]
+Homepage = "https://github.com/Aman-Tripathi27/GlucoFM"
+Repository = "https://github.com/Aman-Tripathi27/GlucoFM"
+Issues = "https://github.com/Aman-Tripathi27/GlucoFM/issues"
+
+[project.optional-dependencies]
+dev = ["pytest>=7.4"]
+
+[project.scripts]
+glucofm-train = "glucofm.train:main"
+glucofm-prepare-big-ideas = "glucofm.adapters.big_ideas:main"
+glucofm-prepare-colas = "glucofm.adapters.colas:main"
+glucofm-pretrain = "glucofm.pretrain:main"
+glucofm-evaluate = "glucofm.evaluate:main"
+glucofm-calibrate = "glucofm.calibrate:main"
+glucofm-encode = "glucofm.commands:encode_main"
+glucofm-compare = "glucofm.commands:compare_main"
+glucofm-search = "glucofm.commands:search_main"
+glucofm-reserve-holdout = "glucofm.reserve:main"
+glucofm-split-corpus = "glucofm.corpus:main"
+
+[tool.setuptools.packages.find]
+include = ["glucofm*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+pythonpath = ["."]

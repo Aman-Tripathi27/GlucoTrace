@@ -1,0 +1,267 @@
+{
+  "checkpoint": "checkpoints/glucofm-research-candidate.pt",
+  "checkpoint_sha256": "d35299dfd119aa5b2f9d8b47c4a4ce54c68bf26300a51eb92782e8271202fe5d",
+  "corpora": [
+    {
+      "manifest": "data/processed/big_ideas/manifest.json",
+      "manifest_sha256": "29402437dbab6ef8cfed58882b36b937c96fb850eebc8498becd5bb03e4cbd24",
+      "split_file": "data/processed/big_ideas/splits.json",
+      "split_sha256": "a75398f7ec89410fbde9e062ff6a7721d70ed5f66d07deb1e7bf3308b9285294"
+    },
+    {
+      "manifest": "data/processed/colas/manifest.json",
+      "manifest_sha256": "cc660486424e6c51a47671eadf06ad0bdc849cf6f6120c52722225ac7ad136ff",
+      "split_file": "data/processed/colas/splits.json",
+      "split_sha256": "b03fa6f67738a0ca98495d3b4b3aa9cbdcec6f889e8fc576606cd45d18d6b0b9"
+    }
+  ],
+  "embedding_diagnostics": {
+    "effective_rank": 1.4331104755401611,
+    "mean_absolute_off_diagonal_cosine": 0.7051435112953186,
+    "mean_feature_std": 0.16932131350040436,
+    "minimum_feature_std": 0.03338738903403282
+  },
+  "missingness_robustness": {
+    "cadence_10_minutes": {
+      "amount": 2,
+      "kind": "cadence",
+      "mean_removed_observation_fraction": 0.5,
+      "model": {
+        "mean_cosine_similarity": 0.22491438686847687,
+        "median_cosine_similarity": 0.2103900909423828,
+        "median_relative_l2_drift": 4.704722881317139,
+        "p10_cosine_similarity": -0.10627424716949463,
+        "top1_neighbor_agreement": 0.0892857164144516,
+        "top5_neighbor_overlap": 0.21190477907657623
+      },
+      "repeats": 2,
+      "summary_baseline": {
+        "mean_cosine_similarity": 0.017961570993065834,
+        "median_cosine_similarity": 0.001242130994796753,
+        "median_relative_l2_drift": 8.95980453491211,
+        "p10_cosine_similarity": -0.1598316729068756,
+        "top1_neighbor_agreement": 0.0357142873108387,
+        "top5_neighbor_overlap": 0.06666667014360428
+      }
+    },
+    "cadence_15_minutes": {
+      "amount": 3,
+      "kind": "cadence",
+      "mean_removed_observation_fraction": 0.6666667461395264,
+      "model": {
+        "mean_cosine_similarity": 0.15023274719715118,
+        "median_cosine_similarity": 0.12744808197021484,
+        "median_relative_l2_drift": 6.474968910217285,
+        "p10_cosine_similarity": -0.19312407076358795,
+        "top1_neighbor_agreement": 0.0674603208899498,
+        "top5_neighbor_overlap": 0.1468254178762436
+      },
+      "repeats": 3,
+      "summary_baseline": {
+        "mean_cosine_similarity": -0.0016295199748128653,
+        "median_cosine_similarity": -0.025454267859458923,
+        "median_relative_l2_drift": 11.878287315368652,
+        "p10_cosine_similarity": -0.1851569414138794,
+        "top1_neighbor_agreement": 0.0357142873108387,
+        "top5_neighbor_overlap": 0.06666666269302368
+      }
+    },
+    "contiguous_120_minutes": {
+      "amount": 24,
+      "kind": "block",
+      "mean_removed_observation_fraction": 0.0832221657037735,
+      "model": {
+        "mean_cosine_similarity": 0.741899311542511,
+        "median_cosine_similarity": 0.7769883871078491,
+        "median_relative_l2_drift": 0.8147968053817749,
+        "p10_cosine_similarity": 0.4833182096481323,
+        "top1_neighbor_agreement": 0.2785714268684387,
+        "top5_neighbor_overlap": 0.5457143187522888
+      },
+      "repeats": 5,
+      "summary_baseline": {
+        "mean_cosine_similarity": 0.205116868019104,
+        "median_cosine_similarity": 0.17454794049263,
+        "median_relative_l2_drift": 3.1406641006469727,
+        "p10_cosine_similarity": -0.19655895233154297,
+        "top1_neighbor_agreement": 0.0357142873108387,
+        "top5_neighbor_overlap": 0.08190476894378662
+      }
+    },
+    "contiguous_30_minutes": {
+      "amount": 6,
+      "kind": "block",
+      "mean_removed_observation_fraction": 0.020785940811038017,
+      "model": {
+        "mean_cosine_similarity": 0.9543134570121765,
+        "median_cosine_similarity": 0.9715819358825684,
+        "median_relative_l2_drift": 0.24570421874523163,
+        "p10_cosine_similarity": 0.8872349262237549,
+        "top1_neighbor_agreement": 0.7047619223594666,
+        "top5_neighbor_overlap": 0.8333333134651184
+      },
+      "repeats": 5,
+      "summary_baseline": {
+        "mean_cosine_similarity": 0.6603714823722839,
+        "median_cosine_similarity": 0.7432304620742798,
+        "median_relative_l2_drift": 0.7855464220046997,
+        "p10_cosine_similarity": 0.2376384437084198,
+        "top1_neighbor_agreement": 0.17380952835083008,
+        "top5_neighbor_overlap": 0.3866666555404663
+      }
+    },
+    "contiguous_60_minutes": {
+      "amount": 12,
+      "kind": "block",
+      "mean_removed_observation_fraction": 0.041752006858587265,
+      "model": {
+        "mean_cosine_similarity": 0.8912140130996704,
+        "median_cosine_similarity": 0.9214529395103455,
+        "median_relative_l2_drift": 0.42314717173576355,
+        "p10_cosine_similarity": 0.742860734462738,
+        "top1_neighbor_agreement": 0.488095223903656,
+        "top5_neighbor_overlap": 0.7199999690055847
+      },
+      "repeats": 5,
+      "summary_baseline": {
+        "mean_cosine_similarity": 0.4158094525337219,
+        "median_cosine_similarity": 0.44145068526268005,
+        "median_relative_l2_drift": 1.5704073905944824,
+        "p10_cosine_similarity": -0.0489625483751297,
+        "top1_neighbor_agreement": 0.05000000074505806,
+        "top5_neighbor_overlap": 0.1609523892402649
+      }
+    },
+    "random_10_percent": {
+      "amount": 0.1,
+      "kind": "random",
+      "mean_removed_observation_fraction": 0.10070041567087173,
+      "model": {
+        "mean_cosine_similarity": 0.7987998127937317,
+        "median_cosine_similarity": 0.8398779034614563,
+        "median_relative_l2_drift": 0.6705928444862366,
+        "p10_cosine_similarity": 0.5575889945030212,
+        "top1_neighbor_agreement": 0.4095238149166107,
+        "top5_neighbor_overlap": 0.59333336353302
+      },
+      "repeats": 5,
+      "summary_baseline": {
+        "mean_cosine_similarity": 0.37989097833633423,
+        "median_cosine_similarity": 0.4087156653404236,
+        "median_relative_l2_drift": 1.8149316310882568,
+        "p10_cosine_similarity": -0.014026314951479435,
+        "top1_neighbor_agreement": 0.02857142873108387,
+        "top5_neighbor_overlap": 0.2490476369857788
+      }
+    },
+    "random_30_percent": {
+      "amount": 0.3,
+      "kind": "random",
+      "mean_removed_observation_fraction": 0.2989966571331024,
+      "model": {
+        "mean_cosine_similarity": 0.48642170429229736,
+        "median_cosine_similarity": 0.4847565293312073,
+        "median_relative_l2_drift": 1.7710603475570679,
+        "p10_cosine_similarity": 0.08520784974098206,
+        "top1_neighbor_agreement": 0.19523809850215912,
+        "top5_neighbor_overlap": 0.3161904811859131
+      },
+      "repeats": 5,
+      "summary_baseline": {
+        "mean_cosine_similarity": 0.10549288988113403,
+        "median_cosine_similarity": 0.08681746572256088,
+        "median_relative_l2_drift": 5.300755977630615,
+        "p10_cosine_similarity": -0.15941020846366882,
+        "top1_neighbor_agreement": 0.02380952425301075,
+        "top5_neighbor_overlap": 0.07952381670475006
+      }
+    },
+    "random_50_percent": {
+      "amount": 0.5,
+      "kind": "random",
+      "mean_removed_observation_fraction": 0.5003543496131897,
+      "model": {
+        "mean_cosine_similarity": 0.3043745756149292,
+        "median_cosine_similarity": 0.3000175952911377,
+        "median_relative_l2_drift": 3.2090024948120117,
+        "p10_cosine_similarity": -0.13246244192123413,
+        "top1_neighbor_agreement": 0.12619048357009888,
+        "top5_neighbor_overlap": 0.23000001907348633
+      },
+      "repeats": 5,
+      "summary_baseline": {
+        "mean_cosine_similarity": 0.03827933967113495,
+        "median_cosine_similarity": 0.015380822122097015,
+        "median_relative_l2_drift": 8.891458511352539,
+        "p10_cosine_similarity": -0.1893933266401291,
+        "top1_neighbor_agreement": 0.02380952425301075,
+        "top5_neighbor_overlap": 0.07380952686071396
+      }
+    }
+  },
+  "predeclared_engineering_checks": {
+    "all_passed": false,
+    "checks": {
+      "noncollapsed_effective_rank": {
+        "criterion": "effective_rank >= 8.0",
+        "passed": false,
+        "value": 1.4331104755401611
+      },
+      "noncollapsed_feature_dispersion": {
+        "criterion": "mean_feature_std >= 0.05",
+        "passed": true,
+        "value": 0.16932131350040436
+      },
+      "stability_cadence_15_minutes": {
+        "criterion": "median_cosine_similarity >= 0.80; p10_cosine_similarity >= 0.50; top5_neighbor_overlap >= 0.50",
+        "passed": false,
+        "values": {
+          "median_cosine_similarity": 0.12744808197021484,
+          "p10_cosine_similarity": -0.19312407076358795,
+          "top5_neighbor_overlap": 0.1468254178762436
+        }
+      },
+      "stability_contiguous_60_minutes": {
+        "criterion": "median_cosine_similarity >= 0.80; p10_cosine_similarity >= 0.50; top5_neighbor_overlap >= 0.50",
+        "passed": true,
+        "values": {
+          "median_cosine_similarity": 0.9214529395103455,
+          "p10_cosine_similarity": 0.742860734462738,
+          "top5_neighbor_overlap": 0.7199999690055847
+        }
+      },
+      "stability_random_30_percent": {
+        "criterion": "median_cosine_similarity >= 0.80; p10_cosine_similarity >= 0.50; top5_neighbor_overlap >= 0.50",
+        "passed": false,
+        "values": {
+          "median_cosine_similarity": 0.4847565293312073,
+          "p10_cosine_similarity": 0.08520784974098206,
+          "top5_neighbor_overlap": 0.3161904811859131
+        }
+      }
+    },
+    "interpretation_limit": "These fixed thresholds are representation sanity checks, not scientific or clinical validation."
+  },
+  "protocol_version": "1.0",
+  "research_only": true,
+  "source_separability": {
+    "interpretation_limit": "Sources differ in device, population, protocol, and collection era; separability cannot be attributed to sensor hardware alone.",
+    "model": {
+      "accuracy": 0.7142857313156128,
+      "balanced_accuracy": 0.7771260738372803,
+      "mean_centroid_distance": 13.426492691040039
+    },
+    "summary_baseline": {
+      "accuracy": 0.75,
+      "balanced_accuracy": 0.8013196587562561,
+      "mean_centroid_distance": 3.226808786392212
+    }
+  },
+  "test_days": 84,
+  "test_days_by_source": {
+    "BIG_IDEAs": 22,
+    "Colas2019": 62
+  },
+  "test_participants": 35,
+  "validation_days": 71
+}
