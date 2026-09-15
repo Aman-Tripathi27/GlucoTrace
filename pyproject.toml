@@ -22,9 +22,9 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/Aman-Tripathi27/GlucoFM"
-Repository = "https://github.com/Aman-Tripathi27/GlucoFM"
-Issues = "https://github.com/Aman-Tripathi27/GlucoFM/issues"
+Homepage = "https://github.com/Aman-Tripathi27/GlucoTrace"
+Repository = "https://github.com/Aman-Tripathi27/GlucoTrace"
+Issues = "https://github.com/Aman-Tripathi27/GlucoTrace/issues"
 
 [project.optional-dependencies]
 dev = ["pytest>=7.4"]
