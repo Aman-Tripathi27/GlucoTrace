@@ -1,4 +1,4 @@
-# Contributing to GlucoFM
+# Contributing to GlucoTrace
 
 Thank you for helping make this small CGM representation-learning project more
 readable and reproducible. Contributions are welcome from software engineers,
@@ -6,7 +6,7 @@ data stewards, researchers, and documentation reviewers.
 
 ## Project boundary
 
-GlucoFM is research software. Contributions must not present it as a medical
+GlucoTrace is research software. Contributions must not present it as a medical
 device or make diagnostic, treatment, dosing, monitoring, alerting, safety, or
 state-of-the-art claims. A pull request that changes this boundary will not be
 accepted without a separately governed project decision.

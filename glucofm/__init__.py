@@ -12,6 +12,9 @@ from .data import CGMSeries, CGMWindowDataset, load_cgm_csv
 from .inference import ResearchEncoder, cosine_similarity, search_manifests
 from .model import GlucoFM, GlucoFMConfig
 
+# Public branding alias; GlucoFM remains available for backward compatibility.
+GlucoTrace = GlucoFM
+
 __all__ = [
     "CGMSeries",
     "CGMDay",
@@ -22,6 +25,7 @@ __all__ = [
     "SourceBalancedSampler",
     "GlucoFM",
     "GlucoFMConfig",
+    "GlucoTrace",
     "ResearchEncoder",
     "SourceProvenance",
     "build_24h_windows",

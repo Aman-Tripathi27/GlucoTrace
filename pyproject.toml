@@ -9,7 +9,7 @@ description = "A small, readable Transformer encoder for research with continuou
 readme = "README.md"
 requires-python = ">=3.10"
 license = { text = "MIT" }
-authors = [{ name = "GlucoFM contributors" }]
+authors = [{ name = "GlucoTrace contributors" }]
 classifiers = [
   "Development Status :: 3 - Alpha",
   "License :: OSI Approved :: MIT License",

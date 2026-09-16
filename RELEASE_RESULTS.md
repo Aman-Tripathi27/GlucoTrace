@@ -1,4 +1,4 @@
-# GlucoFM research checkpoint results
+# GlucoTrace research checkpoint results
 
 This report describes `checkpoints/glucofm-research.pt`. It is an experimental
 representation model, not a medical device or a clinically evaluated model.

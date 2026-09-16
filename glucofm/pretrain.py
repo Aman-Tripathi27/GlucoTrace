@@ -427,7 +427,7 @@ def run_epoch(
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
-        description="Research-only source-balanced latent pretraining for GlucoFM."
+        description="Research-only source-balanced latent pretraining for GlucoTrace."
     )
     parser.add_argument(
         "--corpus",

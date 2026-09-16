@@ -76,7 +76,7 @@ def train_epoch(
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
-        description="Train the small GlucoFM encoder with masked reconstruction."
+        description="Train the small GlucoTrace encoder with masked reconstruction."
     )
     parser.add_argument("csv", type=Path, help="CSV with timestamp and glucose columns")
     parser.add_argument("--timestamp-col", default="timestamp")

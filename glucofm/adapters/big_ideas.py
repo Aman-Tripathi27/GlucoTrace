@@ -144,7 +144,7 @@ def prepare_big_ideas(
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
-        description="Prepare PhysioNet BIG IDEAs Dexcom files for GlucoFM research."
+        description="Prepare PhysioNet BIG IDEAs Dexcom files for GlucoTrace research."
     )
     parser.add_argument("dataset_root", type=Path)
     parser.add_argument("output_dir", type=Path)

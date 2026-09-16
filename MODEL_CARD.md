@@ -1,8 +1,8 @@
-# Model Card: GlucoFM (research checkpoint)
+# Model Card: GlucoTrace (research checkpoint)
 
 ## Summary
 
-GlucoFM is a compact PyTorch Transformer encoder for regularly sampled
+GlucoTrace is a compact PyTorch Transformer encoder for regularly sampled
 continuous glucose monitor time series. This repository includes source code,
 tests, and one research-only checkpoint. It is not clinically evaluated.
 

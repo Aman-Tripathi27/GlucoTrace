@@ -1,6 +1,6 @@
 # Code of conduct
 
-We want GlucoFM collaboration to be rigorous, welcoming, and safe.
+We want GlucoTrace collaboration to be rigorous, welcoming, and safe.
 
 Contributors must communicate respectfully, critique ideas rather than people,
 credit others' work, protect private information, and avoid harassment,

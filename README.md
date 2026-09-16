@@ -140,12 +140,12 @@ Python API, output schemas, and privacy limitations.
 ## Architecture API
 
 ```python
-from glucofm import CGMWindowDataset, GlucoFM, load_cgm_csv
+from glucofm import CGMWindowDataset, GlucoTrace, load_cgm_csv
 
 series = load_cgm_csv("cgm.csv", interval_minutes=5)
 windows = CGMWindowDataset(series, window_size=288, stride=72)
 
-model = GlucoFM()
+model = GlucoTrace()
 sample = windows[0]
 result = model(
     sample["glucose"],

@@ -1,6 +1,6 @@
 # Research candidate 1 results
 
-This document records the first full GlucoFM training attempt and its negative
+This document records the first full GlucoTrace training attempt and its negative
 release decision. The checkpoint is a research candidate, not a released model,
 and the results do not establish scientific or clinical usefulness.
 
@@ -9,7 +9,7 @@ and the results do not establish scientific or clinical usefulness.
 - candidate file: `checkpoints/glucofm-research-candidate.pt`
 - checkpoint SHA-256:
   `d35299dfd119aa5b2f9d8b47c4a4ce54c68bf26300a51eb92782e8271202fe5d`
-- architecture: default 412,684-parameter GlucoFM encoder
+- architecture: default 412,684-parameter GlucoTrace encoder
 - objective: masked latent prediction with an exponential-moving-average teacher
 - sources: BIG IDEAs and Colas 2019
 - unique training days: 348

@@ -45,7 +45,7 @@ def load_model_payload(
         model = GlucoFM(GlucoFMConfig(**config_values))
         model.load_state_dict(checkpoint["model_state_dict"], strict=True)
     except (KeyError, TypeError, RuntimeError, ValueError) as exc:
-        raise ValueError(f"invalid GlucoFM checkpoint: {exc}") from exc
+        raise ValueError(f"invalid GlucoTrace checkpoint: {exc}") from exc
     return model.to(device).eval(), checkpoint
 
 
