@@ -150,11 +150,12 @@ footer{padding-block:28px 48px;font-size:13px;color:var(--muted);display:flex;fl
 </header>
 
 <section id="start">
-  <h2>Four commands to your first report</h2>
+  <h2>From install to your first report</h2>
   <p class="sub">A CSV with <code>timestamp,glucose</code> goes in, in mg/dL or with <code>--unit mmol/L</code>. You get back a fingerprint, a similarity score, or a single HTML report that works offline and loads no scripts.</p>
   <div class="term">
     <button class="copy" type="button" id="copy">Copy</button>
-<pre id="cmds"><span class="p">$</span> pip install glucotrace && glucotrace download-model
+<pre id="cmds"><span class="p">$</span> pip install git+https://github.com/Aman-Tripathi27/GlucoTrace
+<span class="p">$</span> glucotrace download-model
 <span class="p">$</span> glucotrace encode my-day.csv            <span class="c"># 128-number fingerprint</span>
 <span class="p">$</span> glucotrace compare monday.csv tuesday.csv
 <span class="p">$</span> glucotrace report my-day.csv --manifest corpus/manifest.json --output report.html</pre>

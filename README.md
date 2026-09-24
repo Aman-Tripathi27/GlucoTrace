@@ -28,7 +28,7 @@ training, including the failures.
 ## Quickstart
 
 ```bash
-pip install glucotrace          # or, from a clone: pip install -e .
+pip install git+https://github.com/Aman-Tripathi27/GlucoTrace
 glucotrace download-model       # fetches the 2 MB checkpoint, verifies SHA-256
 glucotrace encode my-day.csv --output fingerprint.json      # 128-number fingerprint
 glucotrace compare monday.csv tuesday.csv                    # cosine similarity

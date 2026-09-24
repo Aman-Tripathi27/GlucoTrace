@@ -23,7 +23,7 @@ representation research.
 ## Use
 
 ```bash
-pip install glucotrace
+pip install git+https://github.com/Aman-Tripathi27/GlucoTrace
 glucotrace download-model
 glucotrace encode day.csv
 glucotrace report day.csv --manifest corpus/manifest.json --output report.html

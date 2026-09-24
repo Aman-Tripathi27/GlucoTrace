@@ -47,17 +47,25 @@ gh release create v0.2.0 checkpoints/glucofm-research.pt \
 For later versions, update `CHECKPOINT_URL` (and `CHECKPOINT_SHA256` if the
 weights change) before tagging.
 
-## 4. PyPI
+## 4. PyPI (automatic after a one-time setup)
 
-The name `glucotrace` was unclaimed on 2026-09-23. Use a PyPI API token;
-Trusted Publishing from GitHub Actions is better once the project exists.
+`.github/workflows/publish.yml` uploads the package to PyPI whenever a GitHub
+release is published. It uses PyPI Trusted Publishing, so no password or API
+token is ever stored in the repository.
 
-```bash
-python -m build
-python -m twine check dist/*
-python -m twine upload --repository testpypi dist/*   # rehearse first
-python -m twine upload dist/*
-```
+One-time setup:
+
+1. Create an account at https://pypi.org and turn on two-factor authentication.
+2. Open https://pypi.org/manage/account/publishing/ and add a **pending
+   publisher** with these values:
+   - PyPI project name: `glucotrace`
+   - Owner: `Aman-Tripathi27`
+   - Repository name: `GlucoTrace`
+   - Workflow name: `publish.yml`
+   - Environment name: `pypi`
+3. Publish a release, or run the **publish** workflow manually from the
+   repository's Actions tab. The package then appears at
+   https://pypi.org/project/glucotrace/.
 
 The wheel contains code only (about 65 KB). Weights come from the GitHub
 release.
