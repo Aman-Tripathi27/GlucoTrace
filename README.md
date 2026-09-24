@@ -4,6 +4,7 @@
 fingerprint, then compare it with, search for, and visualize similar days.**
 
 [![tests](https://github.com/Aman-Tripathi27/GlucoTrace/actions/workflows/tests.yml/badge.svg)](https://github.com/Aman-Tripathi27/GlucoTrace/actions/workflows/tests.yml)
+[![PyPI](https://img.shields.io/pypi/v/glucotrace)](https://pypi.org/project/glucotrace/)
 ![python](https://img.shields.io/badge/python-3.10%20%7C%203.13-blue)
 ![license](https://img.shields.io/badge/license-MIT-green)
 ![status](https://img.shields.io/badge/status-research%20only-orange)
@@ -28,7 +29,7 @@ training, including the failures.
 ## Quickstart
 
 ```bash
-pip install git+https://github.com/Aman-Tripathi27/GlucoTrace
+pip install glucotrace
 glucotrace download-model       # fetches the 2 MB checkpoint, verifies SHA-256
 glucotrace encode my-day.csv --output fingerprint.json      # 128-number fingerprint
 glucotrace compare monday.csv tuesday.csv                    # cosine similarity
@@ -54,8 +55,10 @@ In Python, `import glucotrace` exposes the same API as `glucofm`.
   mean glucose of a hidden 6-hour window with lower error than 11 hand-built
   summary statistics (7.7 vs 8.2 mg/dL, released checkpoint).
 - **Honest about its weak spot.** The embedding still reveals which dataset a
-  day came from. [Protocol 1.2](PROTOCOL_1_2_RESULTS.md) traced this to how the
-  datasets align days to clock time, not to physiology.
+  day came from. [Protocol 1.2](PROTOCOL_1_2_RESULTS.md) traced this to clock
+  alignment, and [protocol 1.3](PROTOCOL_1_3_RESULTS.md) confirmed it: starting
+  every day at midnight halved the leakage, at a cost in usefulness that is
+  still being investigated.
 - **Small and hackable.** About 5,000 lines of typed Python, 66 tests, CPU
   training in minutes.
 
@@ -65,7 +68,7 @@ In Python, `import glucotrace` exposes the same API as `glucofm`.
 |---|---|---|
 | Is the embedding non-collapsed and stable when data goes missing? | Yes, all five protocol 1.1 checks passed on a held-out test set (e.g. 30% random removal: median cosine 0.994) | [RELEASE_RESULTS.md](RELEASE_RESULTS.md) |
 | Is it more useful than summary statistics? | Yes on validation: 4 to 13% lower hidden-window error for 5 of 6 new candidates | [PROTOCOL_1_2_RESULTS.md](PROTOCOL_1_2_RESULTS.md) |
-| Does it encode which dataset a day came from? | Yes, too much (linear probe 0.88 to 0.98); the likely cause is clock alignment of source days | [PROTOCOL_1_2_RESULTS.md](PROTOCOL_1_2_RESULTS.md) |
+| Does it encode which dataset a day came from? | Yes, too much (linear probe 0.88 to 0.98). Aligning days to midnight halved the excess (margin 0.19 to 0.10) but cost usefulness | [PROTOCOL_1_2_RESULTS.md](PROTOCOL_1_2_RESULTS.md), [PROTOCOL_1_3_RESULTS.md](PROTOCOL_1_3_RESULTS.md) |
 | Can a fingerprint link days from the same person? | Often: top-1 same-person match about 25% vs 3.5% chance. Treat fingerprints as personal data | [MODEL_CARD.md](MODEL_CARD.md) |
 | Is it clinically validated? | **No.** No clinical, diagnostic, or safety claim is made | [MODEL_CARD.md](MODEL_CARD.md) |
 
@@ -245,7 +248,7 @@ details.
 
 ## Frozen representation evaluation
 
-Evaluation protocols 1.0, 1.1, and 1.2 were specified before their corresponding
+Evaluation protocols 1.0 through 1.3 were specified before their corresponding
 training decisions. They measure
 embedding collapse, controlled missingness stability, retrieval consistency,
 and cross-source separability against a transparent summary-feature baseline:

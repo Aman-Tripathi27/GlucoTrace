@@ -1,5 +1,28 @@
 # Changelog
 
+## 0.2.1 (2026-09-24)
+
+Available on PyPI: `pip install glucotrace`. The research checkpoint is
+unchanged.
+
+### Added
+
+- `--anchor midnight` for the BIG IDEAs and Colas adapters: each day starts
+  in the first five minutes after local midnight, on the device's own
+  sampling grid.
+- `glucofm-reserve-holdout --carry-membership`: copy a split's exact
+  participant partitions onto a re-windowed manifest.
+- Evaluation protocol 1.3 declaration, three validation reports, and results.
+- PyPI publishing through GitHub Actions Trusted Publishing, and Zenodo
+  archiving for a citable DOI.
+
+### Findings
+
+- Midnight alignment halved source leakage (best margin 0.193 to 0.099),
+  confirming the protocol 1.2 diagnosis.
+- Aligned candidates lost their hidden-window advantage over the baseline, so
+  none passed all checks and the checkpoint is unchanged.
+
 ## 0.2.0 (2026-09-23)
 
 The distribution is now named `glucotrace`. The research checkpoint is

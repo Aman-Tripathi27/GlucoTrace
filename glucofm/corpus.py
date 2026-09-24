@@ -289,6 +289,86 @@ def create_prospective_holdout_split(
     return destination
 
 
+def carry_split_membership(
+    manifest_path: str | Path,
+    parent_split_path: str | Path,
+    output_path: str | Path,
+    *,
+    overwrite: bool = False,
+) -> Path:
+    """Bind a parent split's exact participant membership to a new manifest.
+
+    Use this when the same participants are re-windowed (for example aligned to
+    midnight) so no participant changes partition. Every participant in the new
+    manifest must belong to the parent split; participants who no longer have
+    any day are listed as dropped rather than reassigned.
+    """
+
+    source = Path(manifest_path)
+    parent = Path(parent_split_path)
+    destination = Path(output_path)
+    if destination.exists() and not overwrite:
+        raise FileExistsError(
+            f"{destination} already exists; pass overwrite=True to replace it"
+        )
+    manifest = _read_manifest(source)
+    manifest_members = {_participant_key(record) for record in manifest["records"]}
+    parent_members = {
+        split_name: _load_split_members(parent, split_name)[0]
+        for split_name in SPLIT_NAMES
+    }
+    declared = set().union(*parent_members.values())
+    unknown = manifest_members.difference(declared)
+    if unknown:
+        raise ValueError(
+            "manifest contains participants absent from the parent split: "
+            + ", ".join(f"{dataset}/{pid}" for dataset, pid in sorted(unknown))
+        )
+
+    records_per_participant: dict[tuple[str, str], int] = {}
+    for record in manifest["records"]:
+        key = _participant_key(record)
+        records_per_participant[key] = records_per_participant.get(key, 0) + 1
+    split_payload: dict[str, Any] = {}
+    dropped: list[dict[str, str]] = []
+    for split_name in SPLIT_NAMES:
+        kept = sorted(parent_members[split_name] & manifest_members)
+        dropped.extend(
+            {"dataset": dataset, "participant_id": pid, "split": split_name}
+            for dataset, pid in sorted(parent_members[split_name] - manifest_members)
+        )
+        if not kept:
+            raise ValueError(f"split {split_name!r} has no participants left")
+        split_payload[split_name] = {
+            "participants": [
+                {"dataset": dataset, "participant_id": pid} for dataset, pid in kept
+            ],
+            "participant_count": len(kept),
+            "record_count": sum(records_per_participant[member] for member in kept),
+        }
+
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    payload = {
+        "schema_version": "1.0",
+        "strategy": "membership_carried_from_parent_v1",
+        "participant_key": ["dataset", "participant_id"],
+        "source_manifest": os.path.relpath(
+            source.resolve(), destination.parent.resolve()
+        ),
+        "source_manifest_sha256": _sha256(source),
+        "parent_split": os.path.relpath(
+            parent.resolve(), destination.parent.resolve()
+        ),
+        "parent_split_sha256": _sha256(parent),
+        "dropped_participants": dropped,
+        "splits": split_payload,
+    }
+    destination.write_text(
+        json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8"
+    )
+    return destination
+
+
 def _load_split_members(
     split_path: Path, split: SplitName
 ) -> tuple[set[tuple[str, str]], str, set[tuple[str, str]]]:

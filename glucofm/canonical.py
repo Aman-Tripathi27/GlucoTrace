@@ -198,6 +198,9 @@ def _build_window(
     )
 
 
+WINDOW_ANCHORS = ("segment_start", "midnight")
+
+
 def build_24h_windows(
     readings: Iterable[CGMReading],
     provenance: SourceProvenance,
@@ -207,17 +210,23 @@ def build_24h_windows(
     min_observed_fraction: float = 0.8,
     max_gap_minutes: int = 60,
     alignment_tolerance_seconds: float | None = None,
+    anchor: str = "segment_start",
 ) -> list[CGMDay]:
     """Create non-partial 24-hour windows from continuous recording segments.
 
-    Each segment begins at its first real measurement, preserving that
-    timestamp's circadian phase. By default, windows do not overlap.
+    With ``anchor="segment_start"`` each segment's windows begin at its first
+    real measurement. With ``anchor="midnight"`` they begin at the first
+    grid-consistent time in the first sampling interval after local midnight,
+    so every day covers the same clock hours and window start time carries no
+    information about the source. By default, windows do not overlap.
     """
 
     if interval_minutes <= 0 or 24 * 60 % interval_minutes:
         raise ValueError("interval_minutes must evenly divide 24 hours")
     if stride_hours <= 0:
         raise ValueError("stride_hours must be positive")
+    if anchor not in WINDOW_ANCHORS:
+        raise ValueError(f"anchor must be one of {WINDOW_ANCHORS}")
     if not 0.0 <= min_observed_fraction <= 1.0:
         raise ValueError("min_observed_fraction must be in [0, 1]")
     tolerance = (
@@ -236,6 +245,8 @@ def build_24h_windows(
         readings, max_gap_minutes=max_gap_minutes
     ):
         start = segment[0].timestamp
+        if anchor == "midnight":
+            start = _first_start_after_midnight(start, interval_minutes)
         while start + final_offset <= segment[-1].timestamp:
             day = _build_window(
                 segment,
@@ -249,6 +260,18 @@ def build_24h_windows(
                 days.append(day)
             start += stride
     return days
+
+
+def _first_start_after_midnight(first: datetime, interval_minutes: int) -> datetime:
+    """Return the earliest time >= ``first`` that falls in [00:00, 00:00 + interval)
+    and keeps ``first``'s phase on the sampling grid."""
+
+    step = timedelta(minutes=interval_minutes)
+    midnight = first.replace(hour=0, minute=0, second=0, microsecond=0)
+    start = midnight + (first - midnight) % step
+    if start < first:
+        start += timedelta(days=1)
+    return start
 
 
 def _safe_name(value: str) -> str:

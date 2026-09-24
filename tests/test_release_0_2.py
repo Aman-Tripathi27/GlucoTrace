@@ -182,7 +182,9 @@ def test_cli_lists_and_dispatches(capsys: pytest.CaptureFixture[str]) -> None:
     assert all(name in listing for name in COMMANDS)
     assert cli_main(["nope"]) == 2
     assert cli_main(["--version"]) == 0
-    assert "glucotrace 0.2.0" in capsys.readouterr().out
+    from glucofm import __version__
+
+    assert f"glucotrace {__version__}" in capsys.readouterr().out
     with pytest.raises(SystemExit) as exit_info:
         cli_main(["encode", "--help"])
     assert exit_info.value.code == 0
@@ -194,7 +196,9 @@ def test_glucotrace_alias_exposes_public_api() -> None:
     import glucotrace
 
     assert glucotrace.GlucoTrace is glucotrace.GlucoFM
-    assert glucotrace.__version__ == "0.2.0"
+    import glucofm
+
+    assert glucotrace.__version__ == glucofm.__version__
 
 
 def test_checkpoint_resolution_order(

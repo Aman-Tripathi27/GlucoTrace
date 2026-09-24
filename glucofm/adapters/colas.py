@@ -171,6 +171,7 @@ def load_colas(
     *,
     stride_hours: int = 24,
     min_observed_fraction: float = 0.8,
+    anchor: str = "segment_start",
 ) -> list[CGMDay]:
     """Convert all discovered Colas cases into canonical CGM days."""
 
@@ -197,6 +198,7 @@ def load_colas(
                 provenance,
                 stride_hours=stride_hours,
                 min_observed_fraction=min_observed_fraction,
+                anchor=anchor,
             )
         )
     if not seen_participants:
@@ -214,6 +216,7 @@ def prepare_colas(
     *,
     stride_hours: int = 24,
     min_observed_fraction: float = 0.8,
+    anchor: str = "segment_start",
     overwrite: bool = False,
 ) -> Path:
     """Build canonical Colas CSVs and return the manifest path."""
@@ -222,6 +225,7 @@ def prepare_colas(
         source,
         stride_hours=stride_hours,
         min_observed_fraction=min_observed_fraction,
+        anchor=anchor,
     )
     return write_canonical_corpus(days, output_dir, overwrite=overwrite)
 
@@ -234,6 +238,12 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("output_dir", type=Path)
     parser.add_argument("--stride-hours", type=int, default=24)
     parser.add_argument("--min-observed-fraction", type=float, default=0.8)
+    parser.add_argument(
+        "--anchor",
+        choices=("segment_start", "midnight"),
+        default="segment_start",
+        help="start each day at the recording start or just after midnight",
+    )
     parser.add_argument("--overwrite", action="store_true")
     return parser
 
@@ -244,6 +254,7 @@ def main() -> None:
         args.source,
         stride_hours=args.stride_hours,
         min_observed_fraction=args.min_observed_fraction,
+        anchor=args.anchor,
     )
     manifest = write_canonical_corpus(
         days, args.output_dir, overwrite=args.overwrite

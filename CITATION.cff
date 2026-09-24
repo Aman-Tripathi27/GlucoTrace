@@ -1,8 +1,8 @@
 cff-version: 1.2.0
 message: "If you use GlucoTrace in research, please cite it as below."
 title: "GlucoTrace: a small, pre-registered representation encoder for continuous glucose monitor data"
-version: 0.2.0
-date-released: 2026-09-23
+version: 0.2.1
+date-released: 2026-09-24
 license: MIT
 repository-code: "https://github.com/Aman-Tripathi27/GlucoTrace"
 authors:
