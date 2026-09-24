@@ -13,3 +13,5 @@ prepared/
 evaluations/*.json
 !evaluations/protocol-1.0-candidate.json
 !evaluations/protocol-1.1.json
+!evaluations/protocol-1.2-candidate-*-validation.json
+checkpoints/protocol-*/

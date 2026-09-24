@@ -185,6 +185,7 @@ def create_prospective_holdout_split(
     reserve_fraction: float = 0.20,
     seed: int = 29,
     overwrite: bool = False,
+    parent_protocol: str = "1.0",
 ) -> Path:
     """Reserve an unseen holdout from a parent split's former training members.
 
@@ -276,7 +277,9 @@ def create_prospective_holdout_split(
             parent.resolve(), destination.parent.resolve()
         ),
         "parent_split_sha256": _sha256(parent),
-        "parent_test_disposition": "moved_to_train_after_protocol_1.0_consumption",
+        "parent_test_disposition": (
+            f"moved_to_train_after_protocol_{parent_protocol}_consumption"
+        ),
         "prospective_test_origin": "parent_train",
         "splits": split_payload,
     }

@@ -6,7 +6,7 @@ GlucoTrace is a compact PyTorch Transformer encoder for regularly sampled
 continuous glucose monitor time series. This repository includes source code,
 tests, and one research-only checkpoint. It is not clinically evaluated.
 
-- Version: 0.1.0
+- Version: 0.2.0 (software); checkpoint unchanged from 0.1.0
 - License: MIT
 - Status: experimental research checkpoint
 
@@ -110,7 +110,15 @@ remained highly predictable, which is a warning that collection artifacts are
 retained. Exact provenance and aggregate results are in
 [RELEASE_RESULTS.md](RELEASE_RESULTS.md).
 
-No downstream benchmark, clinically validated threshold, claim of external
+Protocol 1.2 added a linear source probe, same-participant retrieval, and a
+hidden-window utility probe, and trained six source-invariance candidates. On
+validation, the released checkpoint predicts the mean glucose of a hidden
+six-hour window with lower error than a summary-statistics baseline (7.71 vs
+8.22 mg/dL). No protocol 1.2 candidate passed the new source-leakage gate, so
+its test partition was not opened and the checkpoint was not replaced. See
+[PROTOCOL_1_2_RESULTS.md](PROTOCOL_1_2_RESULTS.md).
+
+No clinically validated threshold, claim of external
 generalization, or state-of-the-art comparison is provided. A downstream
 study should report at least data provenance, participant-level splitting,
 missingness, sensor type, units, demographics where lawful and appropriate,
@@ -133,6 +141,11 @@ unrelated identifiers across different datasets represent different people.
 - Similar-day search can reveal participant identifiers and filenames from a
   private manifest if its output is not access-controlled.
 - Reconstructions can look plausible while being wrong.
+- Fingerprints are personal data. On validation, a day's nearest neighbor was
+  from the same participant about 25% of the time (chance is about 3.5%), so
+  shared fingerprints can link days to one person.
+- In the current corpora, window start time differs systematically by source
+  (Colas days start at midnight), which lets the model identify the dataset.
 - This implementation has no privacy protection, uncertainty estimation,
   calibration, fairness mitigation, or deployment safeguards.
 

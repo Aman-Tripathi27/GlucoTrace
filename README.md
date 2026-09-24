@@ -1,25 +1,76 @@
 # GlucoTrace
 
-GlucoTrace is a deliberately small PyTorch encoder for experiments with continuous
-glucose monitor (CGM) time series. It is intended to be easy to read, change,
-and test. The repository contains one research-only checkpoint, no dashboard,
-and no clinical or state-of-the-art claims.
+**Turn a day of continuous glucose monitor (CGM) data into a 128-number
+fingerprint, then compare it with, search for, and visualize similar days.**
 
-The repository is branded **GlucoTrace**. The Python import package, model class,
-and command-line entry points retain their `glucofm` names for compatibility
-with the first release.
+[![tests](https://github.com/Aman-Tripathi27/GlucoTrace/actions/workflows/tests.yml/badge.svg)](https://github.com/Aman-Tripathi27/GlucoTrace/actions/workflows/tests.yml)
+![python](https://img.shields.io/badge/python-3.10%20%7C%203.13-blue)
+![license](https://img.shields.io/badge/license-MIT-green)
+![status](https://img.shields.io/badge/status-research%20only-orange)
 
-> **Research software only.** This project is not a medical device and must not
+GlucoTrace is a small, readable PyTorch Transformer (511k parameters) for
+representation learning on CGM time series. It trains on public data, never
+invents missing glucose readings, and reports its results honestly: every
+release decision follows an evaluation protocol written down *before*
+training, including the failures.
+
+> **Research software only.** GlucoTrace is not a medical device and must not
 > be used for diagnosis, treatment, dosing, alerts, or patient care.
 
-## Project status
+<p align="center">
+  <img src="docs/report-preview.png" width="720"
+       alt="GlucoTrace HTML report: a query CGM day overlaid with its five most similar days, with a similarity table">
+  <br><sub><code>glucotrace report</code> output for a public BIG IDEAs day
+  (PhysioNet, ODC-By 1.0). The top three matches are other days from the same
+  participant.</sub>
+</p>
 
-The data layer, two public-source adapters, dual-stream encoder, source-balanced
-pretraining pipeline, frozen evaluation, and first research checkpoint are
-implemented. Candidate 1's negative result is preserved in
-[CANDIDATE_RESULTS.md](CANDIDATE_RESULTS.md); the repaired checkpoint and its
-limits are documented in [RELEASE_RESULTS.md](RELEASE_RESULTS.md). The
-`encode`, `compare`, and `search` commands are implemented.
+## Quickstart
+
+```bash
+pip install glucotrace          # or, from a clone: pip install -e .
+glucotrace download-model       # fetches the 2 MB checkpoint, verifies SHA-256
+glucotrace encode my-day.csv --output fingerprint.json      # 128-number fingerprint
+glucotrace compare monday.csv tuesday.csv                    # cosine similarity
+glucotrace report my-day.csv \
+  --manifest data/processed/big_ideas/manifest.json \
+  --output report.html                                       # offline visual report
+```
+
+The input is a CSV with `timestamp,glucose` columns in mg/dL, or pass
+`--unit mmol/L`. Files whose values contradict the declared unit are rejected
+rather than silently misread. Run `glucotrace --help` for all thirteen commands.
+In Python, `import glucotrace` exposes the same API as `glucofm`.
+
+## Why GlucoTrace
+
+- **Missing data stays missing.** Gaps are tracked with an explicit
+  observation mask and gap age; nothing is interpolated.
+- **Leakage-resistant by construction.** Participant-disjoint splits are tied
+  to checksummed manifests, and the loader refuses stale splits.
+- **Pre-registered evaluation.** Thresholds, probes, and candidate budgets are
+  declared before training; a test partition is opened once.
+- **Beats a transparent baseline.** On validation, the embedding predicts the
+  mean glucose of a hidden 6-hour window with lower error than 11 hand-built
+  summary statistics (7.7 vs 8.2 mg/dL, released checkpoint).
+- **Honest about its weak spot.** The embedding still reveals which dataset a
+  day came from. [Protocol 1.2](PROTOCOL_1_2_RESULTS.md) traced this to how the
+  datasets align days to clock time, not to physiology.
+- **Small and hackable.** About 5,000 lines of typed Python, 66 tests, CPU
+  training in minutes.
+
+## Results at a glance
+
+| Question | Result | Where |
+|---|---|---|
+| Is the embedding non-collapsed and stable when data goes missing? | Yes, all five protocol 1.1 checks passed on a held-out test set (e.g. 30% random removal: median cosine 0.994) | [RELEASE_RESULTS.md](RELEASE_RESULTS.md) |
+| Is it more useful than summary statistics? | Yes on validation: 4 to 13% lower hidden-window error for 5 of 6 new candidates | [PROTOCOL_1_2_RESULTS.md](PROTOCOL_1_2_RESULTS.md) |
+| Does it encode which dataset a day came from? | Yes, too much (linear probe 0.88 to 0.98); the likely cause is clock alignment of source days | [PROTOCOL_1_2_RESULTS.md](PROTOCOL_1_2_RESULTS.md) |
+| Can a fingerprint link days from the same person? | Often: top-1 same-person match about 25% vs 3.5% chance. Treat fingerprints as personal data | [MODEL_CARD.md](MODEL_CARD.md) |
+| Is it clinically validated? | **No.** No clinical, diagnostic, or safety claim is made | [MODEL_CARD.md](MODEL_CARD.md) |
+
+The repository is branded **GlucoTrace**. The original `glucofm` import
+package, model class, and `glucofm-*` commands remain for compatibility.
 
 ## Prepare public datasets
 
@@ -120,7 +171,7 @@ Rows can be out of order. Empty glucose cells and absent grid times are missing.
 By default the first timestamp anchors a 5-minute grid and each later timestamp
 must be within 2 minutes of its nearest grid point.
 
-## Encode, compare, and search
+## Encode, compare, search, and report
 
 ```bash
 glucofm-encode day.csv --output day.fingerprint.json
@@ -128,7 +179,14 @@ glucofm-compare first-day.csv second-day.csv --output comparison.json
 glucofm-search query-day.csv \
   --manifest data/processed/big_ideas/manifest.json \
   --top-k 5 --output nearest-days.json
+glucofm-report query-day.csv \
+  --manifest data/processed/big_ideas/manifest.json \
+  --output report.html
 ```
+
+The report is one self-contained HTML file with inline SVG. It loads no
+scripts or network resources, so it opens offline and can be attached to an
+email. Missing readings are drawn as gaps.
 
 The encode command produces a validation-standardized, unit-length 128-number
 fingerprint. Compare reports cosine similarity without assigning a clinical
@@ -187,7 +245,7 @@ details.
 
 ## Frozen representation evaluation
 
-Evaluation protocols 1.0 and 1.1 were specified before their corresponding
+Evaluation protocols 1.0, 1.1, and 1.2 were specified before their corresponding
 training decisions. They measure
 embedding collapse, controlled missingness stability, retrieval consistency,
 and cross-source separability against a transparent summary-feature baseline:
@@ -206,6 +264,13 @@ representation gate, but source predictability remains high. Cross-source
 separability is dataset-confounded and is not a sensor-performance result. See
 [EVALUATION_1_1.md](EVALUATION_1_1.md) and
 [RELEASE_RESULTS.md](RELEASE_RESULTS.md) for the exact boundary and limitations.
+
+Protocol 1.2 (`--protocol-version 1.2`) adds three probes, each fitted on
+training data: a linear source probe, same-participant retrieval, and
+hidden-window utility. It also adds two release gates. Source-invariance
+training options are available as `--within-source-negatives` and
+`--source-adversary-weight`. See [EVALUATION_1_2.md](EVALUATION_1_2.md) and
+[PROTOCOL_1_2_RESULTS.md](PROTOCOL_1_2_RESULTS.md).
 
 ## Single-CSV reconstruction smoke test
 
@@ -242,7 +307,8 @@ pytest
 Tests cover grid construction, zero-filled missingness, gap age, windows, model
 output shapes, causal trends, placeholder invariance, random masking, gradient
 flow, controlled missingness perturbations, embedding diagnostics, retrieval
-stability, and the source probe.
+stability, the source probe, protocol 1.2 probes, source-invariant
+training, unit validation, HTML reports, and the `glucotrace` CLI.
 
 ## Scope and limitations
 
@@ -251,7 +317,9 @@ artificial-missingness checks. It has not been validated for downstream tasks,
 external generalization, subgroup behavior, device equivalence, privacy, or
 real-world safety. A mask-aware network can still learn dataset artifacts;
 indeed, the source probe is a known warning. Glucose units are not inferred or
-converted. See [MODEL_CARD.md](MODEL_CARD.md) before using the code in research.
+converted unless `--unit mmol/L` is declared. Fingerprints can link days from
+the same person, so treat them as personal data. See
+[MODEL_CARD.md](MODEL_CARD.md) before using the code in research.
 
 ## License
 

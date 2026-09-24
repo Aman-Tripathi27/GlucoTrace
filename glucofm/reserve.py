@@ -18,6 +18,11 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--reserve-fraction", type=float, default=0.20)
     parser.add_argument("--seed", type=int, default=29)
+    parser.add_argument(
+        "--parent-protocol",
+        default="1.0",
+        help="protocol whose test partition was consumed and moves into training",
+    )
     parser.add_argument("--overwrite", action="store_true")
     return parser
 
@@ -31,6 +36,7 @@ def main() -> None:
         reserve_fraction=args.reserve_fraction,
         seed=args.seed,
         overwrite=args.overwrite,
+        parent_protocol=args.parent_protocol,
     )
     payload = json.loads(output.read_text(encoding="utf-8"))
     for name in SPLIT_NAMES:

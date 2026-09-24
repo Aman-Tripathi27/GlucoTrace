@@ -17,6 +17,12 @@ import numpy as np
 import torch
 from torch.utils.data import Dataset
 
+MG_DL_PER_MMOL_L = 18.016
+SUPPORTED_UNITS = ("mg/dL", "mmol/L")
+# No plausible day of mg/dL readings has a median this low, and no plausible
+# day of mmol/L readings has a median this high.
+_UNIT_MEDIAN_BOUNDARY = 35.0
+
 
 def parse_timestamp(value: str) -> datetime:
     text = value.strip()
@@ -84,6 +90,7 @@ def load_cgm_csv(
     glucose_col: str = "glucose",
     interval_minutes: int = 5,
     alignment_tolerance_seconds: float | None = None,
+    unit: str = "mg/dL",
 ) -> CGMSeries:
     """Load a timestamp-and-glucose CSV onto a regular time grid.
 
@@ -91,10 +98,16 @@ def load_cgm_csv(
     ``alignment_tolerance_seconds`` of a grid point; the default is 40% of the
     sampling interval. Duplicate grid positions use the last non-empty value.
     Empty glucose cells and absent time points are marked missing.
+
+    ``unit`` declares the CSV's unit. mmol/L values are converted to mg/dL.
+    Nothing is inferred silently: a file whose median contradicts the declared
+    unit is rejected with a message naming the likely unit.
     """
 
     if interval_minutes <= 0:
         raise ValueError("interval_minutes must be positive")
+    if unit not in SUPPORTED_UNITS:
+        raise ValueError(f"unit must be one of {SUPPORTED_UNITS}")
 
     csv_path = Path(path)
     rows: list[tuple[datetime, float | None]] = []
@@ -163,6 +176,20 @@ def load_cgm_csv(
     observed = np.isfinite(values)
     if not observed.any():
         raise ValueError("CSV contains no observed glucose values")
+
+    median = float(np.median(values[observed]))
+    if unit == "mg/dL" and median < _UNIT_MEDIAN_BOUNDARY:
+        raise ValueError(
+            f"median glucose {median:g} is implausible for mg/dL; the file looks "
+            "like mmol/L (pass unit='mmol/L' or --unit mmol/L)"
+        )
+    if unit == "mmol/L":
+        if median >= _UNIT_MEDIAN_BOUNDARY:
+            raise ValueError(
+                f"median glucose {median:g} is implausible for mmol/L; the file "
+                "looks like mg/dL"
+            )
+        values = values * np.float32(MG_DL_PER_MMOL_L)
 
     observed_values = values[observed].astype(np.float64)
     mean = float(observed_values.mean())

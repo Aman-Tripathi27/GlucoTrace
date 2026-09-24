@@ -34,6 +34,8 @@ class PretrainingConfig:
     pooled_covariance_weight: float = 0.05
     pooled_contrastive_weight: float = 0.25
     contrastive_temperature: float = 0.20
+    within_source_negatives: bool = False
+    source_adversary_weight: float = 0.0
 
     def __post_init__(self) -> None:
         if not 0.0 < self.mask_probability < 1.0:
@@ -46,6 +48,7 @@ class PretrainingConfig:
             self.pooled_variance_weight,
             self.pooled_covariance_weight,
             self.pooled_contrastive_weight,
+            self.source_adversary_weight,
         )
         if any(weight < 0.0 for weight in weights):
             raise ValueError("objective weights cannot be negative")
@@ -208,9 +211,17 @@ def variance_covariance_losses(
 
 
 def symmetric_contrastive_loss(
-    first: torch.Tensor, second: torch.Tensor, *, temperature: float
+    first: torch.Tensor,
+    second: torch.Tensor,
+    *,
+    temperature: float,
+    source_labels: torch.Tensor | None = None,
 ) -> torch.Tensor:
-    """Identify matching day views among the other days in a batch."""
+    """Identify matching day views among the other days in a batch.
+
+    With ``source_labels``, negatives are restricted to days from the same
+    source, so dataset identity cannot help tell two days apart.
+    """
 
     if first.ndim != 2 or first.shape != second.shape:
         raise ValueError("contrastive views must share shape [batch, features]")
@@ -220,11 +231,30 @@ def symmetric_contrastive_loss(
         return first.new_zeros(())
     logits = F.normalize(first, dim=-1) @ F.normalize(second, dim=-1).T
     logits = logits / temperature
+    if source_labels is not None:
+        same_source = source_labels[:, None] == source_labels[None, :]
+        logits = logits.masked_fill(~same_source, -torch.inf)
     targets = torch.arange(first.shape[0], device=first.device)
     return 0.5 * (
         F.cross_entropy(logits, targets)
         + F.cross_entropy(logits.T, targets)
     )
+
+
+class _GradientReversal(torch.autograd.Function):
+    @staticmethod
+    def forward(ctx, inputs: torch.Tensor) -> torch.Tensor:  # type: ignore[override]
+        return inputs.view_as(inputs)
+
+    @staticmethod
+    def backward(ctx, grad: torch.Tensor) -> torch.Tensor:  # type: ignore[override]
+        return -grad
+
+
+def gradient_reversal(inputs: torch.Tensor) -> torch.Tensor:
+    """Identity forward; negated gradient backward (domain-adversarial training)."""
+
+    return _GradientReversal.apply(inputs)
 
 
 class LatentPretrainer(nn.Module):
@@ -234,6 +264,8 @@ class LatentPretrainer(nn.Module):
         self,
         student: GlucoFM | None = None,
         config: PretrainingConfig | None = None,
+        *,
+        num_sources: int = 0,
     ) -> None:
         super().__init__()
         self.student = student or GlucoFM()
@@ -249,6 +281,16 @@ class LatentPretrainer(nn.Module):
             nn.GELU(),
             nn.Linear(hidden_size, hidden_size),
         )
+        # Training-only source classifier; it is never saved with the encoder.
+        self.source_adversary: nn.Module | None = None
+        if self.config.source_adversary_weight > 0.0:
+            if num_sources < 2:
+                raise ValueError("source adversary requires at least two sources")
+            self.source_adversary = nn.Sequential(
+                nn.Linear(hidden_size, hidden_size),
+                nn.GELU(),
+                nn.Linear(hidden_size, num_sources),
+            )
 
     def train(self, mode: bool = True) -> "LatentPretrainer":
         super().train(mode)
@@ -262,8 +304,14 @@ class LatentPretrainer(nn.Module):
         gap_age_minutes: torch.Tensor,
         time_of_day: torch.Tensor,
         *,
+        source_labels: torch.Tensor | None = None,
         generator: torch.Generator | None = None,
     ) -> dict[str, torch.Tensor]:
+        needs_sources = (
+            self.config.within_source_negatives or self.source_adversary is not None
+        )
+        if needs_sources and source_labels is None:
+            raise ValueError("this objective requires source_labels")
         corrupted, visible_mask, patch_mask = mask_cgm_patches(
             glucose,
             observed_mask,
@@ -327,7 +375,20 @@ class LatentPretrainer(nn.Module):
             pooled,
             augmented_pooled,
             temperature=self.config.contrastive_temperature,
+            source_labels=(
+                source_labels if self.config.within_source_negatives else None
+            ),
         )
+        source_adversary_loss = pooled.new_zeros(())
+        source_adversary_accuracy = pooled.new_zeros(())
+        if self.source_adversary is not None:
+            views = torch.cat((pooled, augmented_pooled), dim=0)
+            labels = torch.cat((source_labels, source_labels), dim=0)
+            logits = self.source_adversary(gradient_reversal(views))
+            source_adversary_loss = F.cross_entropy(logits, labels)
+            source_adversary_accuracy = (
+                (logits.argmax(dim=1) == labels).float().mean().detach()
+            )
 
         loss = (
             latent_loss
@@ -336,6 +397,7 @@ class LatentPretrainer(nn.Module):
             + self.config.pooled_variance_weight * pooled_variance_loss
             + self.config.pooled_covariance_weight * pooled_covariance_loss
             + self.config.pooled_contrastive_weight * pooled_contrastive_loss
+            + self.config.source_adversary_weight * source_adversary_loss
         )
         return {
             "loss": loss,
@@ -345,6 +407,8 @@ class LatentPretrainer(nn.Module):
             "pooled_variance_loss": pooled_variance_loss,
             "pooled_covariance_loss": pooled_covariance_loss,
             "pooled_contrastive_loss": pooled_contrastive_loss,
+            "source_adversary_loss": source_adversary_loss,
+            "source_adversary_accuracy": source_adversary_accuracy,
             "patch_mask": patch_mask,
             "masked_patch_fraction": patch_mask.float().mean(),
             "augmentation_strategy": augmentation_strategy,
@@ -391,6 +455,7 @@ def run_epoch(
     *,
     device: torch.device,
     optimizer: torch.optim.Optimizer | None,
+    source_names: Sequence[str] = (),
 ) -> dict[str, float]:
     training = optimizer is not None
     pretrainer.train(training)
@@ -402,15 +467,24 @@ def run_epoch(
         "pooled_variance_loss": 0.0,
         "pooled_covariance_loss": 0.0,
         "pooled_contrastive_loss": 0.0,
+        "source_adversary_loss": 0.0,
+        "source_adversary_accuracy": 0.0,
     }
     batches = 0
     for batch in loader:
+        source_labels = None
+        if source_names:
+            source_labels = torch.tensor(
+                [source_names.index(name) for name in batch["dataset"]],
+                device=device,
+            )
         with torch.set_grad_enabled(training):
             output = pretrainer(
                 batch["glucose"].to(device),
                 batch["observed_mask"].to(device),
                 batch["gap_age_minutes"].to(device),
                 batch["time_of_day"].to(device),
+                source_labels=source_labels,
             )
             if training:
                 optimizer.zero_grad(set_to_none=True)
@@ -450,6 +524,17 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--pooled-covariance-weight", type=float, default=0.05)
     parser.add_argument("--pooled-contrastive-weight", type=float, default=0.25)
     parser.add_argument("--contrastive-temperature", type=float, default=0.20)
+    parser.add_argument(
+        "--within-source-negatives",
+        action="store_true",
+        help="contrast each day only against days from the same source",
+    )
+    parser.add_argument(
+        "--source-adversary-weight",
+        type=float,
+        default=0.0,
+        help="weight of a gradient-reversal source classifier (0 disables it)",
+    )
     parser.add_argument("--seed", type=int, default=7)
     parser.add_argument("--pool-segments", type=int, default=4)
     parser.add_argument("--output", type=Path, default=Path("glucofm-pretrained.pt"))
@@ -485,9 +570,16 @@ def main() -> None:
         pooled_covariance_weight=args.pooled_covariance_weight,
         pooled_contrastive_weight=args.pooled_contrastive_weight,
         contrastive_temperature=args.contrastive_temperature,
+        within_source_negatives=args.within_source_negatives,
+        source_adversary_weight=args.source_adversary_weight,
+    )
+    source_names = tuple(train_data.source_indices)
+    needs_sources = (
+        objective_config.within_source_negatives
+        or objective_config.source_adversary_weight > 0.0
     )
     pretrainer = LatentPretrainer(
-        GlucoFM(model_config), objective_config
+        GlucoFM(model_config), objective_config, num_sources=len(source_names)
     ).to(device)
     trainable_parameters = [
         parameter for parameter in pretrainer.parameters() if parameter.requires_grad
@@ -502,10 +594,18 @@ def main() -> None:
     for epoch in range(args.epochs):
         sampler.set_epoch(epoch)
         train_metrics = run_epoch(
-            pretrainer, train_loader, device=device, optimizer=optimizer
+            pretrainer,
+            train_loader,
+            device=device,
+            optimizer=optimizer,
+            source_names=source_names if needs_sources else (),
         )
         validation_metrics = run_epoch(
-            pretrainer, validation_loader, device=device, optimizer=None
+            pretrainer,
+            validation_loader,
+            device=device,
+            optimizer=None,
+            source_names=source_names if needs_sources else (),
         )
         history.append(
             {
@@ -543,6 +643,7 @@ def main() -> None:
             "weight_decay": args.weight_decay,
         },
         "corpora": corpus_provenance,
+        "source_names": list(source_names),
         "history": history,
         "seed": args.seed,
         "torch_version": str(torch.__version__),

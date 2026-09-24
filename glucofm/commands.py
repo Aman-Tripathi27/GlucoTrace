@@ -7,23 +7,57 @@ import json
 from pathlib import Path
 from typing import Any
 
-from .inference import ResearchEncoder, cosine_similarity, search_manifests
+from .inference import (
+    ResearchEncoder,
+    cosine_similarity,
+    download_checkpoint,
+    search_manifests,
+    sha256_file,
+)
 
 
 def _common_csv_arguments(parser: argparse.ArgumentParser) -> None:
     parser.add_argument("--timestamp-col", default="timestamp")
     parser.add_argument("--glucose-col", default="glucose")
     parser.add_argument("--window-index", type=int)
+    parser.add_argument(
+        "--unit",
+        choices=("mg/dL", "mmol/L"),
+        default="mg/dL",
+        help="glucose unit of the CSV; mmol/L is converted to mg/dL",
+    )
 
 
 def _encoder_arguments(parser: argparse.ArgumentParser) -> None:
     parser.add_argument(
         "--checkpoint",
         type=Path,
-        default=Path("checkpoints/glucofm-research.pt"),
+        default=None,
+        help="defaults to $GLUCOTRACE_CHECKPOINT, ./checkpoints, then the "
+        "download cache",
     )
     parser.add_argument("--device", default="cpu")
     parser.add_argument("--output", type=Path)
+
+
+def build_download_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(
+        description="Download the released research checkpoint and verify it."
+    )
+    parser.add_argument(
+        "--output",
+        type=Path,
+        help="destination (default: $GLUCOTRACE_HOME or ~/.cache/glucotrace)",
+    )
+    parser.add_argument("--force", action="store_true")
+    return parser
+
+
+def download_main() -> None:
+    args = build_download_parser().parse_args()
+    path = download_checkpoint(args.output, force=args.force)
+    print(f"checkpoint={path}")
+    print(f"sha256={sha256_file(path)}")
 
 
 def _emit(payload: dict[str, Any], output: Path | None) -> None:
@@ -63,6 +97,7 @@ def encode_main() -> None:
         timestamp_col=args.timestamp_col,
         glucose_col=args.glucose_col,
         window_index=args.window_index,
+        unit=args.unit,
     )
     _emit(
         {
@@ -96,12 +131,14 @@ def compare_main() -> None:
         timestamp_col=args.timestamp_col,
         glucose_col=args.glucose_col,
         window_index=args.window_index,
+        unit=args.unit,
     )
     second, second_metadata = encoder.encode_csv(
         args.second_csv,
         timestamp_col=args.timestamp_col,
         glucose_col=args.glucose_col,
         window_index=args.window_index,
+        unit=args.unit,
     )
     similarity = cosine_similarity(first, second)
     _emit(
@@ -151,6 +188,7 @@ def search_main() -> None:
         timestamp_col=args.timestamp_col,
         glucose_col=args.glucose_col,
         window_index=args.window_index,
+        unit=args.unit,
     )
     matches = search_manifests(
         encoder,

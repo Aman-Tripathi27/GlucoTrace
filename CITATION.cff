@@ -1,0 +1,21 @@
+cff-version: 1.2.0
+message: "If you use GlucoTrace in research, please cite it as below."
+title: "GlucoTrace: a small, pre-registered representation encoder for continuous glucose monitor data"
+version: 0.2.0
+date-released: 2026-09-23
+license: MIT
+repository-code: "https://github.com/Aman-Tripathi27/GlucoTrace"
+authors:
+  - family-names: Tripathi
+    given-names: Aman
+keywords:
+  - continuous glucose monitoring
+  - representation learning
+  - time series
+  - transformer
+abstract: >-
+  GlucoTrace encodes a 24-hour CGM day into a 128-number fingerprint with a
+  compact mask-aware Transformer. Missing readings are never interpolated,
+  splits are participant-disjoint and checksummed, and every release decision
+  follows an evaluation protocol declared before training. Research use only;
+  not a medical device.

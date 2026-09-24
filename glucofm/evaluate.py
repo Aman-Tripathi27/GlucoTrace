@@ -13,10 +13,15 @@ from typing import Any, Sequence
 import torch
 from torch.nn import functional as F
 
+from . import probes
 from .model import GlucoFM, GlucoFMConfig
 from .pretrain import build_multisource_split
 
 PROTOCOL_VERSION = "1.0"
+PROTOCOL_VERSIONS = ("1.0", "1.1", "1.2")
+# Protocol 1.2: largest allowed excess of model over summary-baseline source
+# probe balanced accuracy. Declared in EVALUATION_1_2.md before training.
+SOURCE_PROBE_MARGIN = 0.10
 
 
 @dataclass(frozen=True)
@@ -479,6 +484,162 @@ def _evaluate_missingness(
     return report
 
 
+def protocol_1_2_probes(
+    model: GlucoFM,
+    train: dict[str, Any],
+    train_embeddings: torch.Tensor,
+    target: dict[str, Any],
+    target_embeddings: torch.Tensor,
+    *,
+    device: torch.device,
+    batch_size: int,
+) -> dict[str, Any]:
+    """Run the protocol 1.2 probes fitted on training and scored on ``target``."""
+
+    train_baseline = summary_baseline(train["glucose"], train["observed_mask"])
+    target_baseline = summary_baseline(target["glucose"], target["observed_mask"])
+
+    def hidden(data: dict[str, Any]) -> dict[str, Any]:
+        glucose, mask, values, eligible = probes.hide_final_window(
+            data["glucose"], data["observed_mask"]
+        )
+        visible = {
+            key: (value[eligible] if isinstance(value, torch.Tensor) else value)
+            for key, value in data.items()
+        }
+        visible["glucose"] = glucose[eligible]
+        visible["observed_mask"] = mask[eligible]
+        embeddings = _encode(
+            model, visible, device=device, batch_size=batch_size, physical_gap_age=False
+        )
+        return {
+            "embeddings": embeddings,
+            "baseline": summary_baseline(visible["glucose"], visible["observed_mask"]),
+            "persistence": probes.last_visible_hour_mean(
+                visible["glucose"], visible["observed_mask"]
+            ),
+            "targets": values[eligible],
+        }
+
+    train_hidden = hidden(train)
+    target_hidden = hidden(target)
+    utility = {
+        "task": "predict mean glucose of the final 6 hours from the first 18 hours",
+        "train_days": int(train_hidden["targets"].numel()),
+        "target_days": int(target_hidden["targets"].numel()),
+        "model": probes.ridge_regression(
+            train_hidden["embeddings"],
+            train_hidden["targets"],
+            target_hidden["embeddings"],
+            target_hidden["targets"],
+        ),
+        "summary_baseline": probes.ridge_regression(
+            train_hidden["baseline"],
+            train_hidden["targets"],
+            target_hidden["baseline"],
+            target_hidden["targets"],
+        ),
+        "last_visible_hour_persistence": probes.persistence_metrics(
+            target_hidden["persistence"], target_hidden["targets"]
+        ),
+    }
+    utility["comparison"] = probes.summarize_utility(utility)
+    return {
+        "linear_source_probe": {
+            "model": probes.linear_source_probe(
+                train_embeddings,
+                train["sources"],
+                target_embeddings,
+                target["sources"],
+            ),
+            "summary_baseline": probes.linear_source_probe(
+                train_baseline,
+                train["sources"],
+                target_baseline,
+                target["sources"],
+            ),
+        },
+        "same_participant_retrieval": {
+            "model": probes.same_participant_retrieval(
+                train_embeddings, target_embeddings, target["participants"]
+            ),
+            "summary_baseline": probes.same_participant_retrieval(
+                train_baseline, target_baseline, target["participants"]
+            ),
+            "interpretation_limit": (
+                "High same-participant retrieval is a personal-pattern signal and "
+                "equally a re-identification risk for shared fingerprints."
+            ),
+        },
+        "hidden_window_utility": utility,
+    }
+
+
+def protocol_1_2_checks(
+    diagnostics: dict[str, float],
+    missingness_report: dict[str, dict[str, Any]],
+    probe_report: dict[str, Any],
+) -> dict[str, Any]:
+    """Protocol 1.1 checks plus the declared source and utility gates."""
+
+    result = predeclared_engineering_checks(diagnostics, missingness_report)
+    checks = dict(result["checks"])
+    source = probe_report["linear_source_probe"]
+    source_margin = (
+        source["model"]["balanced_accuracy"]
+        - source["summary_baseline"]["balanced_accuracy"]
+    )
+    checks["source_leakage_linear_probe"] = {
+        "passed": source_margin <= SOURCE_PROBE_MARGIN,
+        "criterion": (
+            "model linear-probe balanced accuracy - summary-baseline linear-probe "
+            f"balanced accuracy <= {SOURCE_PROBE_MARGIN}"
+        ),
+        "value": source_margin,
+    }
+    utility = probe_report["hidden_window_utility"]["comparison"]
+    checks["hidden_window_utility"] = {
+        "passed": utility["model_minus_baseline_mae_mg_dl"] <= 0.0,
+        "criterion": "model ridge MAE <= summary-baseline ridge MAE (mg/dL)",
+        "value": utility["model_minus_baseline_mae_mg_dl"],
+    }
+    result["checks"] = checks
+    result["all_passed"] = all(bool(check["passed"]) for check in checks.values())
+    return result
+
+
+def _protocol_1_2_section(
+    model: GlucoFM,
+    corpus_pairs: Sequence[Sequence[str | Path]],
+    target: dict[str, Any],
+    target_embeddings: torch.Tensor,
+    diagnostics: dict[str, float],
+    missingness_report: dict[str, dict[str, Any]],
+    *,
+    device: torch.device,
+    batch_size: int,
+) -> dict[str, Any]:
+    train = _collect(build_multisource_split(corpus_pairs, "train"))
+    train_embeddings = _encode(
+        model, train, device=device, batch_size=batch_size, physical_gap_age=True
+    )
+    probe_report = protocol_1_2_probes(
+        model,
+        train,
+        train_embeddings,
+        target,
+        target_embeddings,
+        device=device,
+        batch_size=batch_size,
+    )
+    return {
+        "probes": probe_report,
+        "predeclared_engineering_checks": protocol_1_2_checks(
+            diagnostics, missingness_report, probe_report
+        ),
+    }
+
+
 def evaluate_validation_checkpoint(
     checkpoint_path: str | Path,
     corpus_pairs: Sequence[Sequence[str | Path]],
@@ -526,7 +687,22 @@ def evaluate_validation_checkpoint(
         source: validation["sources"].count(source)
         for source in sorted(set(validation["sources"]))
     }
+    checks = predeclared_engineering_checks(diagnostics, missingness_report)
+    extra: dict[str, Any] = {}
+    if protocol_version == "1.2":
+        extra = _protocol_1_2_section(
+            model,
+            corpus_pairs,
+            validation,
+            clean_embeddings,
+            diagnostics,
+            missingness_report,
+            device=device,
+            batch_size=batch_size,
+        )
+        checks = extra.pop("predeclared_engineering_checks")
     return {
+        **extra,
         "protocol_version": protocol_version,
         "evaluation_partition": "validation_development",
         "research_only": True,
@@ -538,9 +714,7 @@ def evaluate_validation_checkpoint(
         "validation_days_by_source": source_counts,
         "embedding_diagnostics": diagnostics,
         "missingness_robustness": missingness_report,
-        "predeclared_engineering_checks": predeclared_engineering_checks(
-            diagnostics, missingness_report
-        ),
+        "predeclared_engineering_checks": checks,
         "interpretation_limit": (
             "Standardization and diagnostics use the same development partition; "
             "this report is for candidate selection, not held-out evaluation."
@@ -605,7 +779,22 @@ def evaluate_checkpoint(
         source: test["sources"].count(source) for source in sorted(set(test["sources"]))
     }
     diagnostics = embedding_diagnostics(clean_embeddings)
+    checks = predeclared_engineering_checks(diagnostics, missingness_report)
+    extra: dict[str, Any] = {}
+    if protocol_version == "1.2":
+        extra = _protocol_1_2_section(
+            model,
+            corpus_pairs,
+            test,
+            clean_embeddings,
+            diagnostics,
+            missingness_report,
+            device=device,
+            batch_size=batch_size,
+        )
+        checks = extra.pop("predeclared_engineering_checks")
     return {
+        **extra,
         "protocol_version": protocol_version,
         "evaluation_partition": "prospective_test",
         "research_only": True,
@@ -636,9 +825,7 @@ def evaluate_checkpoint(
             ),
         },
         "missingness_robustness": missingness_report,
-        "predeclared_engineering_checks": predeclared_engineering_checks(
-            diagnostics, missingness_report
-        ),
+        "predeclared_engineering_checks": checks,
     }
 
 
@@ -658,7 +845,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--seed", type=int, default=7)
     parser.add_argument("--device", default="auto")
     parser.add_argument(
-        "--protocol-version", choices=("1.0", "1.1"), default="1.0"
+        "--protocol-version", choices=PROTOCOL_VERSIONS, default="1.0"
     )
     parser.add_argument(
         "--validation-only",

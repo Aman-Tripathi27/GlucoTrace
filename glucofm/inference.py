@@ -3,6 +3,9 @@
 from __future__ import annotations
 
 import hashlib
+import os
+import tempfile
+import urllib.request
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Sequence
@@ -13,6 +16,74 @@ from torch.nn import functional as F
 from .corpus import CanonicalCGMDataset
 from .data import CGMWindowDataset, load_cgm_csv
 from .model import GlucoFM, GlucoFMConfig
+
+
+CHECKPOINT_NAME = "glucofm-research.pt"
+CHECKPOINT_SHA256 = "1fbeecd68d81d239fa26726b67ca2d05bf485569a8d3619cdc624f86bba8092b"
+CHECKPOINT_URL = (
+    "https://github.com/Aman-Tripathi27/GlucoTrace/releases/download/"
+    f"v0.2.0/{CHECKPOINT_NAME}"
+)
+
+
+def checkpoint_cache_path() -> Path:
+    """Per-user location for the downloaded research checkpoint."""
+
+    home = os.environ.get("GLUCOTRACE_HOME")
+    root = Path(home) if home else Path.home() / ".cache" / "glucotrace"
+    return root / CHECKPOINT_NAME
+
+
+def default_checkpoint_path() -> Path:
+    """Resolve the checkpoint: $GLUCOTRACE_CHECKPOINT, ./checkpoints, then cache."""
+
+    configured = os.environ.get("GLUCOTRACE_CHECKPOINT")
+    if configured:
+        return Path(configured)
+    local = Path("checkpoints") / CHECKPOINT_NAME
+    if local.is_file():
+        return local
+    return checkpoint_cache_path()
+
+
+def download_checkpoint(
+    destination: str | Path | None = None,
+    *,
+    url: str = CHECKPOINT_URL,
+    expected_sha256: str = CHECKPOINT_SHA256,
+    force: bool = False,
+) -> Path:
+    """Download the released checkpoint and verify its pinned SHA-256.
+
+    The file is written atomically and only after the checksum matches, so a
+    partial or tampered download never replaces a usable checkpoint.
+    """
+
+    target = Path(destination) if destination is not None else checkpoint_cache_path()
+    if target.is_file() and not force and sha256_file(target) == expected_sha256:
+        return target
+    if not url.startswith("https://"):
+        raise ValueError("checkpoint downloads require an https URL")
+    target.parent.mkdir(parents=True, exist_ok=True)
+    handle, temporary_name = tempfile.mkstemp(
+        dir=target.parent, prefix=".download-", suffix=".pt"
+    )
+    temporary = Path(temporary_name)
+    try:
+        with os.fdopen(handle, "wb") as output:
+            with urllib.request.urlopen(url, timeout=60) as response:  # noqa: S310
+                for chunk in iter(lambda: response.read(1024 * 1024), b""):
+                    output.write(chunk)
+        actual = sha256_file(temporary)
+        if actual != expected_sha256:
+            raise ValueError(
+                f"downloaded checkpoint SHA-256 {actual} does not match "
+                f"the pinned {expected_sha256}"
+            )
+        temporary.replace(target)
+    finally:
+        temporary.unlink(missing_ok=True)
+    return target
 
 
 def sha256_file(path: str | Path) -> str:
@@ -35,6 +106,11 @@ def load_model_payload(
     """Load a marked research checkpoint without executing pickled code."""
 
     path = Path(checkpoint_path)
+    if not path.is_file():
+        raise FileNotFoundError(
+            f"checkpoint {path} not found; run 'glucotrace download-model' or "
+            "pass --checkpoint"
+        )
     checkpoint = torch.load(path, map_location="cpu", weights_only=True)
     if checkpoint.get("research_only") is not True:
         raise ValueError("checkpoint lacks the required research_only marker")
@@ -63,9 +139,11 @@ class ResearchEncoder:
 
     @classmethod
     def load(
-        cls, checkpoint_path: str | Path, *, device: str = "cpu"
+        cls, checkpoint_path: str | Path | None = None, *, device: str = "cpu"
     ) -> "ResearchEncoder":
-        path = Path(checkpoint_path)
+        path = (
+            default_checkpoint_path() if checkpoint_path is None else Path(checkpoint_path)
+        )
         resolved_device = resolve_device(device)
         model, payload = load_model_payload(path, device=resolved_device)
         try:
@@ -127,6 +205,7 @@ class ResearchEncoder:
         timestamp_col: str = "timestamp",
         glucose_col: str = "glucose",
         window_index: int | None = None,
+        unit: str = "mg/dL",
     ) -> tuple[torch.Tensor, dict[str, Any]]:
         """Encode exactly one full model window selected from a CSV."""
 
@@ -138,6 +217,7 @@ class ResearchEncoder:
             timestamp_col=timestamp_col,
             glucose_col=glucose_col,
             interval_minutes=interval,
+            unit=unit,
         )
         windows = CGMWindowDataset(
             series,
@@ -177,6 +257,7 @@ class ResearchEncoder:
             "observed_count": observed_count,
             "observed_fraction": observed_count / window_size,
             "interval_minutes": interval,
+            "input_unit": unit,
         }
         return fingerprint, metadata
 

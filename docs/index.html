@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="GlucoTrace: an open-source research encoder that turns a day of CGM data into a 128-number fingerprint.">
+<title>GlucoTrace</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+:root{
+  --ground:#F2F5F3; --surface:#FFFFFF; --ink:#14201C; --muted:#5C6B65; --line:#D9E1DC;
+  --band:#DDEBE2; --band-edge:#B9D3C2; --amber:#B8621A; --amber-soft:#F3E2D0;
+  --slate:#3F5E8C; --warn-bg:#FBEFD9; --warn-ink:#6E4508; --code-bg:#14201C; --code-ink:#E4EEE9;
+  --display:"Bricolage Grotesque", "Avenir Next", "Segoe UI", sans-serif;
+  --body:"IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
+  --mono:"IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --ground:#0E1513; --surface:#151F1C; --ink:#E5EDE9; --muted:#95A59E; --line:#26332E;
+    --band:#1A2D24; --band-edge:#2C4A3B; --amber:#E89A52; --amber-soft:#3A2816;
+    --slate:#86A6D6; --warn-bg:#33240C; --warn-ink:#F2C98A; --code-bg:#0A100E; --code-ink:#DCE8E2;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --ground:#0E1513; --surface:#151F1C; --ink:#E5EDE9; --muted:#95A59E; --line:#26332E;
+  --band:#1A2D24; --band-edge:#2C4A3B; --amber:#E89A52; --amber-soft:#3A2816;
+  --slate:#86A6D6; --warn-bg:#33240C; --warn-ink:#F2C98A; --code-bg:#0A100E; --code-ink:#DCE8E2;
+}
+*{box-sizing:border-box}
+body{background:var(--ground);color:var(--ink);font:16px/1.6 var(--body);padding-inline:20px;margin:0}
+.wrap{max-width:1040px;margin:0 auto}
+a{color:inherit;text-underline-offset:3px}
+a:focus-visible,button:focus-visible{outline:2px solid var(--amber);outline-offset:3px;border-radius:4px}
+nav{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:22px}
+.mark{font:800 20px/1 var(--display);letter-spacing:-.02em;display:flex;align-items:center;gap:10px}
+.mark svg{width:26px;height:26px}
+nav .links{display:flex;gap:20px;font-size:14px;color:var(--muted)}
+nav .links a{text-decoration:none}nav .links a:hover{color:var(--ink)}
+.eyebrow{font:500 12px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+h1{font:800 clamp(38px,6.2vw,72px)/1.02 var(--display);letter-spacing:-.035em;margin:18px 0 18px;text-wrap:balance;max-width:14ch}
+h1 em{font-style:normal;color:var(--amber)}
+.lede{font-size:clamp(17px,2vw,19px);color:var(--muted);max-width:60ch;margin:0}
+.hero{padding-block:28px 12px}
+.instrument{margin:36px 0 0;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:22px 22px 18px}
+.inst-head{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:10px 20px;margin-bottom:10px}
+.inst-head .readout{font:500 13px/1.4 var(--mono);color:var(--muted)}
+.toggle{display:inline-flex;border:1px solid var(--line);border-radius:999px;padding:3px;gap:2px}
+.toggle button{font:500 13px/1 var(--body);border:0;background:transparent;color:var(--muted);padding:8px 14px;border-radius:999px;cursor:pointer}
+.toggle button[aria-pressed="true"]{background:var(--ink);color:var(--ground)}
+.chart-box{position:relative}
+#trace{width:100%;height:auto;display:block}
+#trace text{font:11px var(--mono);fill:var(--muted)}
+.tip{position:absolute;pointer-events:none;font:500 12px/1.3 var(--mono);background:var(--ink);color:var(--ground);padding:6px 8px;border-radius:6px;white-space:nowrap;transform:translate(-50%,-120%)}
+.fp-rows{display:grid;gap:10px;margin-top:14px}
+.fp-row{display:grid;grid-template-columns:150px 1fr;gap:14px;align-items:center}
+.fp-label{font:500 12px/1.3 var(--mono);color:var(--muted)}
+.fp-label b{display:block;color:var(--ink);font-weight:500}
+.fp{display:grid;grid-template-columns:repeat(64,1fr);grid-template-rows:repeat(2,12px);gap:2px}
+.fp span{border-radius:2px}
+.fp-row.dim{opacity:.28;transition:opacity .25s}
+.fp-row{transition:opacity .25s}
+.caption{font-size:14px;color:var(--muted);margin:16px 0 0;max-width:72ch}
+.caption strong{color:var(--ink);font-weight:600}
+section{padding-block:64px 8px}
+h2{font:700 clamp(26px,3.4vw,36px)/1.1 var(--display);letter-spacing:-.025em;margin:0 0 14px;text-wrap:balance}
+.sub{color:var(--muted);max-width:62ch;margin:0 0 26px}
+.term{background:var(--code-bg);color:var(--code-ink);border-radius:12px;padding:18px 20px;position:relative;overflow-x:auto}
+.term pre{margin:0;font:14px/1.75 var(--mono)}
+.term .c{color:#8FA39A}
+.term .p{color:var(--amber)}
+.copy{position:absolute;top:12px;right:12px;font:500 12px/1 var(--body);background:transparent;color:var(--code-ink);border:1px solid #3A4A44;border-radius:6px;padding:7px 10px;cursor:pointer}
+.principles{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:28px 36px}
+.principles h3{font:700 18px/1.25 var(--display);margin:0 0 6px;letter-spacing:-.01em}
+.principles p{margin:0;color:var(--muted);font-size:15px}
+.principles .unit{font:500 12px/1 var(--mono);color:var(--amber);display:block;margin-bottom:10px;letter-spacing:.04em}
+.tbl{overflow-x:auto;border-top:2px solid var(--ink)}
+table{width:100%;border-collapse:collapse;font-size:15px;min-width:620px}
+th,td{text-align:left;vertical-align:top;padding:14px 12px 14px 0;border-bottom:1px solid var(--line)}
+th{font:500 12px/1.2 var(--mono);text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+td.v{font-variant-numeric:tabular-nums;width:40%}
+.pill{display:inline-block;font:500 11px/1 var(--mono);padding:5px 8px;border-radius:999px;margin-right:8px;letter-spacing:.04em;vertical-align:1px}
+.pill.yes{background:var(--band);color:var(--ink)}
+.pill.warn{background:var(--amber-soft);color:var(--amber)}
+.pill.no{background:var(--ink);color:var(--ground)}
+.record{list-style:none;margin:0;padding:0;display:grid;gap:0}
+.record li{display:grid;grid-template-columns:120px 1fr;gap:20px;padding:20px 0;border-bottom:1px solid var(--line)}
+.record .ver{font:500 13px/1.4 var(--mono);color:var(--muted)}
+.record .ver b{display:block;font:800 26px/1 var(--display);color:var(--ink);letter-spacing:-.02em;margin-bottom:6px}
+.record h3{font:700 18px/1.3 var(--display);margin:0 0 4px}
+.record p{margin:0;color:var(--muted);font-size:15px;max-width:68ch}
+.warnbox{background:var(--warn-bg);color:var(--warn-ink);border-radius:12px;padding:18px 20px;font-size:15px;margin-top:64px}
+.warnbox strong{font-weight:600}
+footer{padding-block:28px 48px;font-size:13px;color:var(--muted);display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between}
+@media (max-width:640px){
+  .fp-row{grid-template-columns:1fr;gap:6px}
+  .fp{grid-template-columns:repeat(32,1fr);grid-template-rows:repeat(4,10px)}
+  .record li{grid-template-columns:1fr;gap:6px}
+  nav .links{gap:14px}
+  .instrument{padding:16px 14px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head><body>
+
+<div class="wrap">
+<nav>
+  <div class="mark" aria-label="GlucoTrace">
+    <svg viewBox="0 0 26 26" aria-hidden="true"><rect x="1" y="1" width="24" height="24" rx="6" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M4 16 L8 14 L11 17 L14 8 L17 12 L22 10" fill="none" stroke="var(--amber)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    GlucoTrace
+  </div>
+  <div class="links">
+    <a href="#start">Quickstart</a>
+    <a href="#results">Results</a>
+    <a href="https://github.com/Aman-Tripathi27/GlucoTrace">GitHub</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="eyebrow">Open-source · CGM representation learning · research only</div>
+  <h1>Every glucose day has a shape. <em>Give it a fingerprint.</em></h1>
+  <p class="lede">GlucoTrace turns 24 hours of continuous glucose monitor readings into 128 numbers you can compare, search, and visualize. It's a small, readable Transformer that never fills in missing readings, and it's evaluated against tests written down before training.</p>
+
+  <figure class="instrument" aria-label="A real CGM day, its nearest match, and both fingerprints">
+    <div class="inst-head">
+      <div class="readout" id="readout">288 readings · 5-min cadence · mg/dL</div>
+      <div class="toggle" role="group" aria-label="Show">
+        <button type="button" id="show-query" aria-pressed="true">This day</button>
+        <button type="button" id="show-both" aria-pressed="false">+ nearest match</button>
+      </div>
+    </div>
+    <div class="chart-box" id="chart-box">
+      <svg id="trace" viewBox="0 0 960 260" role="img" aria-label="Glucose trace over 24 hours with the 70 to 180 mg/dL band shaded"></svg>
+      <div class="tip" id="tip" hidden></div>
+    </div>
+    <div class="fp-rows">
+      <div class="fp-row" id="fp-row-q">
+        <div class="fp-label"><b>16 Feb 2020</b>fingerprint · 128</div>
+        <div class="fp" id="fp-q" aria-label="Fingerprint of the query day"></div>
+      </div>
+      <div class="fp-row dim" id="fp-row-n">
+        <div class="fp-label"><b>15 Feb 2020</b>cosine <span id="sim">0.987</span></div>
+        <div class="fp" id="fp-n" aria-label="Fingerprint of the nearest day"></div>
+      </div>
+    </div>
+    <figcaption class="caption">We searched 502 other public CGM days for the closest fingerprint. <strong>It picked the same person's previous day</strong>, with no participant labels involved. Amber cells are positive values and blue cells are negative. Public data: BIG IDEAs participant 001, PhysioNet, ODC-By 1.0.</figcaption>
+  </figure>
+</header>
+
+<section id="start">
+  <h2>Four commands to your first report</h2>
+  <p class="sub">A CSV with <code>timestamp,glucose</code> goes in, in mg/dL or with <code>--unit mmol/L</code>. You get back a fingerprint, a similarity score, or a single HTML report that works offline and loads no scripts.</p>
+  <div class="term">
+    <button class="copy" type="button" id="copy">Copy</button>
+<pre id="cmds"><span class="p">$</span> pip install glucotrace && glucotrace download-model
+<span class="p">$</span> glucotrace encode my-day.csv            <span class="c"># 128-number fingerprint</span>
+<span class="p">$</span> glucotrace compare monday.csv tuesday.csv
+<span class="p">$</span> glucotrace report my-day.csv --manifest corpus/manifest.json --output report.html</pre>
+  </div>
+</section>
+
+<section>
+  <h2>Built to be believed</h2>
+  <p class="sub">Most health-ML demos only show their best number. GlucoTrace was built so you can check its claims yourself.</p>
+  <div class="principles">
+    <div><span class="unit">observed_mask · gap_age</span><h3>Missing stays missing</h3><p>Sensor gaps are tracked explicitly and never interpolated. A dropped reading can't pass for a real one.</p></div>
+    <div><span class="unit">sha-256 · participant-disjoint</span><h3>No leakage by accident</h3><p>Splits are made by participant and bound to checksummed manifests. The loader refuses splits that no longer match their data.</p></div>
+    <div><span class="unit">declared before training</span><h3>Pre-registered tests</h3><p>Thresholds, probes, and the number of candidates are fixed in writing first. Each test set is opened once.</p></div>
+    <div><span class="unit">511,372 parameters</span><h3>Small enough to read</h3><p>A three-layer Transformer that trains on a laptop CPU in minutes, with 66 tests and no hidden services.</p></div>
+  </div>
+</section>
+
+<section id="results">
+  <h2>Results, good and bad</h2>
+  <p class="sub">Every figure below links to a report in the repository that you can reproduce.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>Question</th><th>Answer</th></tr></thead>
+    <tbody>
+      <tr><td>Stable when readings go missing?</td><td class="v"><span class="pill yes">YES</span>Median cosine 0.994 after removing 30% of readings, on held-out participants</td></tr>
+      <tr><td>More useful than summary statistics?</td><td class="v"><span class="pill yes">YES</span>Hidden 6-hour mean: 7.7 vs 8.2 mg/dL error on validation</td></tr>
+      <tr><td>Links days from the same person?</td><td class="v"><span class="pill warn">OFTEN</span>About 25% top-1 vs 3.5% chance. Treat fingerprints as personal data</td></tr>
+      <tr><td>Free of dataset artifacts?</td><td class="v"><span class="pill warn">NOT YET</span>A linear probe identifies the source dataset (0.88–0.98). The likely cause is that the datasets align days to different clock times</td></tr>
+      <tr><td>Clinically validated?</td><td class="v"><span class="pill no">NO</span>No diagnostic, treatment, or safety claim is made</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section>
+  <h2>Every protocol, including the failures</h2>
+  <p class="sub">Each protocol was declared before its candidates were trained. The failures are published alongside the successes.</p>
+  <ol class="record">
+    <li><div class="ver"><b>1.0</b>first candidate</div><div><h3>Failed 3 of 5 checks and was not released</h3><p>The first full candidate collapsed on the declared checks. Its result is kept in the repository and the test set was retired.</p></div></li>
+    <li><div class="ver"><b>1.1</b>candidate 6</div><div><h3>Passed all 5 checks and was released</h3><p>A new untouched holdout of 69 days from 31 participants. The embedding is non-collapsed and stable under random gaps, 60-minute gaps, and 15-minute cadence.</p></div></li>
+    <li><div class="ver"><b>1.2</b>six candidates</div><div><h3>A useful negative result</h3><p>Added source-leakage and usefulness gates, and tried adversarial training. None passed the source gate, so the test set stays closed. The diagnosis: 278 of 281 Colas training days start at midnight. That tells protocol 1.3 what to fix.</p></div></li>
+  </ol>
+
+  <div class="warnbox"><strong>Research software only.</strong> GlucoTrace is not a medical device. Do not use it for diagnosis, treatment, insulin or medication dosing, alerts, or patient care.</div>
+</section>
+
+<footer>
+  <span>GlucoTrace 0.2.0 · MIT license · trained on BIG IDEAs (PhysioNet) and Colas et al. 2019 (PLOS ONE)</span>
+  <a href="https://github.com/Aman-Tripathi27/GlucoTrace">github.com/Aman-Tripathi27/GlucoTrace</a>
+</footer>
+</div>
+
+<script>
+const DATA = {"query":{"values":[null,104,105,106,108,109,109,108,107,107,106,105,104,104,104,106,107,107,108,108,108,107,106,105,103,100,97,96,99,104,106,104,103,105,108,108,108,107,107,108,108,108,110,117,127,135,140,142,140,137,135,136,137,138,138,138,135,131,125,117,109,103,98,95,94,94,94,94,95,94,94,95,96,98,96,94,92,94,96,96,92,89,86,85,85,87,89,90,91,91,92,92,92,92,89,87,86,88,90,93,95,95,94,93,90,88,87,88,91,93,95,97,99,98,97,96,96,97,97,98,98,98,97,97,94,92,90,91,92,92,89,86,83,83,83,83,84,85,87,89,90,92,92,92,91,91,92,92,93,92,92,95,98,100,98,95,92,91,90,90,91,92,94,99,108,117,123,124,120,111,98,85,78,79,83,87,91,96,103,107,108,104,101,98,96,94,93,92,93,94,95,95,95,94,94,93,93,94,95,95,94,94,94,95,95,95,95,96,98,100,100,99,99,99,99,98,98,98,99,101,101,102,101,99,97,94,93,92,92,92,93,97,102,107,111,114,114,113,111,110,108,107,106,106,108,112,116,119,119,117,116,116,117,118,120,124,130,130,125,115,107,101,97,95,95,95,97,99,101,103,105,106,105,103,102,102,102,102,101,101,102,104,105,104,101,98,94,91],"fp":[0.0405,-0.0182,-0.008,-0.0491,0.0087,0.28,-0.0203,-0.0312,0.0554,-0.0178,0.0493,0.0634,0.1943,0.0135,-0.0693,0.0071,-0.0227,-0.0308,-0.0176,-0.0357,0.0607,0.0407,-0.0313,0.0673,0.0087,0.0672,-0.0094,-0.0228,0.0979,-0.0217,-0.0319,-0.0222,-0.0471,-0.023,0.0676,0.0625,-0.0186,-0.0105,-0.0219,-0.0329,-0.0195,-0.0734,0.0079,-0.0552,-0.0454,-0.023,-0.0108,-0.0094,-0.0105,-0.0313,0.0329,0.0912,0.0373,-0.0186,-0.0475,0.3613,-0.0462,0.0149,-0.0026,0.0493,-0.02,-0.0109,-0.0089,-0.0019,-0.0096,-0.0134,0.0061,-0.0209,-0.0417,-0.0084,-0.0226,-0.028,0.0627,-0.0104,-0.0345,0.0031,-0.0198,0.0705,0.0436,-0.0069,0.0114,0.0097,-0.0473,-0.0212,0.5396,-0.0254,-0.0373,0.0159,0.0032,0.0193,-0.0297,-0.0517,-0.0481,-0.0462,0.074,-0.0127,-0.0042,-0.0189,-0.0401,-0.0158,0.0653,-0.018,-0.0197,-0.0413,0.1213,0.0162,-0.023,-0.0068,0.0021,-0.0508,-0.0367,-0.0157,-0.0218,-0.0341,-0.0125,0.028,-0.003,0.4528,0.0587,0.0202,-0.0395,0.0146,-0.0037,-0.0481,-0.0115,-0.0186,0.2923,-0.0107],"start":"2020-02-16T17:23:32"},"neighbor":{"values":[null,95,93,94,96,98,99,101,99,98,98,100,102,97,89,82,79,80,81,82,82,82,80,81,82,84,84,83,83,88,94,97,96,92,88,88,88,89,90,95,102,109,112,109,102,93,89,89,92,96,98,99,102,106,111,113,114,114,113,111,109,108,108,106,103,101,102,103,104,104,105,105,106,108,109,109,108,108,108,108,108,108,108,108,109,110,110,110,110,110,109,108,107,106,106,106,107,108,108,109,109,109,109,107,107,107,109,110,110,110,109,107,106,106,106,106,105,103,102,101,101,102,103,105,105,106,106,106,106,106,106,105,104,103,103,104,104,103,102,101,100,99,98,98,99,100,102,104,104,103,101,99,97,96,97,101,101,98,92,88,87,88,88,87,89,96,108,120,129,133,133,128,116,99,78,60,49,46,48,55,65,79,96,111,120,121,119,114,106,99,94,93,95,98,103,108,114,119,121,116,109,100,92,86,84,85,86,87,88,89,91,91,91,90,90,90,91,90,90,89,90,91,90,87,84,84,90,99,111,123,134,140,138,131,119,109,103,104,110,117,121,119,113,110,109,113,118,121,121,119,118,119,120,120,118,114,111,105,101,96,93,91,88,84,83,84,89,95,99,101,100,99,99,100,101,101,99,97,97,98,101,104,105,106,105,105,102,101],"fp":[0.0604,0.0049,-0.0031,-0.0605,-0.0009,0.3195,-0.0207,-0.0349,0.0598,-0.0187,0.0691,0.0075,0.1992,0.0097,-0.074,0.0012,-0.0233,-0.0344,-0.0527,-0.037,0.0505,0.0352,-0.0323,0.0842,-0.0042,0.0389,-0.0103,-0.0237,0.152,-0.0265,-0.0328,-0.023,-0.049,-0.0182,0.0551,0.0636,-0.0181,-0.0125,-0.0138,-0.0332,-0.0187,-0.0777,0.0045,-0.0589,-0.0444,-0.0251,-0.0154,-0.0119,-0.0149,-0.0349,0.0176,0.1026,0.0352,-0.0216,-0.0517,0.2993,-0.0387,0.0366,-0.0056,0.0698,-0.018,-0.0138,-0.0121,-0.0086,-0.0127,-0.0197,0.0026,-0.022,-0.0408,-0.0118,-0.0105,-0.0297,0.0273,-0.0148,-0.0395,0.003,-0.0224,0.1001,0.0722,-0.0098,0.0341,0.0042,-0.0568,-0.0216,0.5127,-0.0072,-0.039,0.0129,-0.0005,-0.006,-0.0417,-0.0568,-0.0251,-0.0478,0.078,-0.018,0.0153,-0.0073,-0.0436,-0.0221,0.0758,-0.0112,-0.0272,-0.036,0.1424,-0.006,-0.0266,-0.0093,0.0006,-0.0536,-0.038,-0.0169,-0.0264,-0.0365,-0.0148,0.024,-0.0216,0.462,0.0627,0.0289,-0.0414,0.0079,-0.0076,-0.0521,-0.014,-0.0339,0.2837,-0.0139],"start":"2020-02-15T17:23:32","similarity":0.987}};
+(function(){
+  const svg = document.getElementById('trace');
+  const W = 960, H = 260, L = 44, R = 12, T = 12, B = 30;
+  const YMIN = 50, YMAX = 220;
+  const n = DATA.query.values.length;
+  const x = i => L + (W - L - R) * i / (n - 1);
+  const y = v => T + (H - T - B) * (1 - (Math.min(Math.max(v, YMIN), YMAX) - YMIN) / (YMAX - YMIN));
+  const NS = 'http://www.w3.org/2000/svg';
+  const el = (tag, attrs, text) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); if (text != null) e.textContent = text; return e; };
+  const css = name => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+
+  function path(values){
+    let d = '', down = false;
+    values.forEach((v, i) => { if (v == null) { down = false; return; } d += (down ? 'L' : 'M') + x(i).toFixed(1) + ',' + y(v).toFixed(1); down = true; });
+    return d;
+  }
+  const start = new Date(DATA.query.start);
+  const clock = i => { const t = new Date(start.getTime() + i * 5 * 60000); return String(t.getHours()).padStart(2, '0') + ':' + String(t.getMinutes()).padStart(2, '0'); };
+
+  svg.appendChild(el('rect', { x: L, y: y(180), width: W - L - R, height: y(70) - y(180), fill: 'var(--band)' }));
+  [70, 180].forEach(v => {
+    svg.appendChild(el('line', { x1: L, x2: W - R, y1: y(v), y2: y(v), stroke: 'var(--band-edge)', 'stroke-width': 1 }));
+    svg.appendChild(el('text', { x: L - 8, y: y(v) + 4, 'text-anchor': 'end' }, v));
+  });
+  svg.appendChild(el('text', { x: L - 8, y: T + 10, 'text-anchor': 'end' }, 'mg/dL'));
+  for (let h = 0; h <= 24; h += 4) {
+    const i = Math.round(h * (n - 1) / 24);
+    const anchor = h === 0 ? 'start' : h === 24 ? 'end' : 'middle';
+    svg.appendChild(el('text', { x: x(i), y: H - 8, 'text-anchor': anchor }, clock(i)));
+  }
+  const neighbor = el('path', { d: path(DATA.neighbor.values), fill: 'none', stroke: 'var(--amber)', 'stroke-width': 2, 'stroke-linejoin': 'round', opacity: 0 });
+  neighbor.style.transition = 'opacity .3s';
+  const query = el('path', { d: path(DATA.query.values), fill: 'none', stroke: 'var(--ink)', 'stroke-width': 2.4, 'stroke-linejoin': 'round' });
+  svg.appendChild(neighbor); svg.appendChild(query);
+  const cursor = el('line', { y1: T, y2: H - B, stroke: 'var(--muted)', 'stroke-dasharray': '3 3', opacity: 0 });
+  svg.appendChild(cursor);
+
+  function strip(target, fp){
+    const max = Math.max(...fp.map(Math.abs));
+    fp.forEach(v => {
+      const s = document.createElement('span');
+      const a = Math.min(1, Math.abs(v) / max);
+      s.style.background = 'color-mix(in oklab, ' + (v >= 0 ? 'var(--amber)' : 'var(--slate)') + ' ' + Math.round(34 + 66 * a) + '%, var(--surface))';
+      target.appendChild(s);
+    });
+  }
+  strip(document.getElementById('fp-q'), DATA.query.fp);
+  strip(document.getElementById('fp-n'), DATA.neighbor.fp);
+  document.getElementById('sim').textContent = DATA.neighbor.similarity.toFixed(3);
+
+  const bq = document.getElementById('show-query'), bb = document.getElementById('show-both');
+  const rowN = document.getElementById('fp-row-n');
+  let both = false;
+  function set(state){
+    both = state;
+    bq.setAttribute('aria-pressed', String(!state)); bb.setAttribute('aria-pressed', String(state));
+    neighbor.setAttribute('opacity', state ? 1 : 0);
+    rowN.classList.toggle('dim', !state);
+  }
+  bq.addEventListener('click', () => set(false));
+  bb.addEventListener('click', () => set(true));
+
+  const box = document.getElementById('chart-box'), tip = document.getElementById('tip'), readout = document.getElementById('readout');
+  const base = readout.textContent;
+  function move(evt){
+    const r = svg.getBoundingClientRect();
+    const px = (evt.clientX - r.left) * W / r.width;
+    const i = Math.max(0, Math.min(n - 1, Math.round((px - L) / (W - L - R) * (n - 1))));
+    const v = DATA.query.values[i], w = DATA.neighbor.values[i];
+    cursor.setAttribute('x1', x(i)); cursor.setAttribute('x2', x(i)); cursor.setAttribute('opacity', 1);
+    let label = clock(i) + '  ' + (v == null ? 'missing' : v + ' mg/dL');
+    if (both) label += '  ·  prev day ' + (w == null ? 'missing' : w);
+    tip.textContent = label; tip.hidden = false;
+    tip.style.left = (x(i) / W * r.width) + 'px';
+    tip.style.top = ((v == null ? y(120) : y(v)) / H * r.height) + 'px';
+  }
+  box.addEventListener('pointermove', move);
+  box.addEventListener('pointerleave', () => { tip.hidden = true; cursor.setAttribute('opacity', 0); readout.textContent = base; });
+
+  document.getElementById('copy').addEventListener('click', async (e) => {
+    const text = document.getElementById('cmds').innerText.split('\n').map(l => l.replace(/^$ /, '').replace(/\s+#.*$/, '')).join('\n');
+    try { await navigator.clipboard.writeText(text); e.target.textContent = 'Copied'; }
+    catch { const sel = getSelection(); const rg = document.createRange(); rg.selectNodeContents(document.getElementById('cmds')); sel.removeAllRanges(); sel.addRange(rg); e.target.textContent = 'Selected'; }
+    setTimeout(() => { e.target.textContent = 'Copy'; }, 1600);
+  });
+})();
+</script>
+</body></html>

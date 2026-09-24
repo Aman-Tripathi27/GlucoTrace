@@ -6,8 +6,12 @@ be used for treatment, dosing, monitoring, alerts, or patient care.
 
 ## Input contract
 
-CSV input requires an ISO-8601 `timestamp` column and an mg/dL `glucose` column.
-Empty glucose cells are missing. The loader builds a five-minute grid without
+CSV input requires an ISO-8601 `timestamp` column and a `glucose` column in
+mg/dL. For mmol/L files, pass `--unit mmol/L` (Python: `unit="mmol/L"`). Values
+are then multiplied by 18.016 and the fingerprint metadata records
+`input_unit`. The loader rejects a file whose median contradicts the declared
+unit (below 35 for mg/dL, 35 or above for mmol/L); it never guesses. Empty
+glucose cells are missing. The loader builds a five-minute grid without
 interpolation, and the physical observation mask remains authoritative.
 
 One fingerprint represents one complete 288-position window. If a CSV contains
@@ -74,6 +78,23 @@ fraction.
 
 Search output may expose identifiers and filenames from a private manifest.
 Researchers are responsible for access control and appropriate handling.
+
+## Report
+
+```bash
+glucotrace report query-day.csv \
+  --manifest data/processed/big_ideas/manifest.json \
+  --manifest data/processed/colas/manifest.json \
+  --top-k 5 --output report.html
+```
+
+This writes one self-contained HTML file: the query day overlaid with its
+nearest days, a table of similarity, mean, standard deviation, share of
+readings from 70 to 180 mg/dL, and coverage, and one comparison chart per
+neighbor. It uses inline SVG and CSS only and loads no scripts or network
+resources. Missing readings are drawn as gaps. The report contains the same
+participant identifiers and file names as `search`, so share it only when the
+manifests may be shared.
 
 ## Python API
 
