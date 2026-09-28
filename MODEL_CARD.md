@@ -6,7 +6,7 @@ GlucoTrace is a compact PyTorch Transformer encoder for regularly sampled
 continuous glucose monitor time series. This repository includes source code,
 tests, and one research-only checkpoint. It is not clinically evaluated.
 
-- Version: 0.2.0 (software); checkpoint unchanged from 0.1.0
+- Version: 0.2.2 (software); checkpoint unchanged from 0.1.0
 - License: MIT
 - Status: experimental research checkpoint
 

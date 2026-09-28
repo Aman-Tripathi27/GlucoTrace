@@ -15,6 +15,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Sequence
 
+from .commands import input_arguments, warn_out_of_range
 from .inference import ResearchEncoder, search_manifests
 
 _WIDTH = 720
@@ -167,6 +168,18 @@ margin-right:6px;vertical-align:baseline}
 """
 
 
+def _out_of_range_note(metadata: dict[str, Any]) -> str:
+    count = int(metadata.get("out_of_range_readings", 0))
+    if not count:
+        return ""
+    action = (
+        "shown as gaps"
+        if metadata.get("out_of_range_policy") == "missing"
+        else "drawn at the 40/400 mg/dL sensor limits"
+    )
+    return f" · {count} Low/High reading(s) beyond the sensor range, {action}"
+
+
 def render_report(
     query_values: Sequence[float | None],
     query_metadata: dict[str, Any],
@@ -228,7 +241,7 @@ def render_report(
 <h1>GlucoTrace day report</h1>
 <div class="muted">{query_name} · window starting
 {html.escape(str(query_metadata["start_time"]))} ·
-{100 * float(query_metadata["observed_fraction"]):.0f}% of readings observed</div>
+{100 * float(query_metadata["observed_fraction"]):.0f}% of readings observed{_out_of_range_note(query_metadata)}</div>
 <p class="warn">Research software only. This report is not a medical device and
 must not be used for diagnosis, treatment, dosing, alerts, or patient care.
 Similarity describes this experimental embedding, not a clinical finding.</p>
@@ -262,7 +275,9 @@ def build_report(
     *,
     top_k: int = 5,
     include_self: bool = False,
-    unit: str = "mg/dL",
+    unit: str | None = None,
+    input_format: str = "plain",
+    out_of_range: str = "missing",
     window_index: int | None = None,
     timestamp_col: str = "timestamp",
     glucose_col: str = "glucose",
@@ -275,13 +290,18 @@ def build_report(
         glucose_col=glucose_col,
         window_index=window_index,
         unit=unit,
+        input_format=input_format,
+        out_of_range=out_of_range,
     )
+    warn_out_of_range(metadata)
     series = load_cgm_csv(
         query_csv,
         timestamp_col=timestamp_col,
         glucose_col=glucose_col,
         interval_minutes=metadata["interval_minutes"],
         unit=unit,
+        input_format=input_format,
+        out_of_range=out_of_range,
     )
     window = CGMWindowDataset(
         series,
@@ -325,7 +345,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--timestamp-col", default="timestamp")
     parser.add_argument("--glucose-col", default="glucose")
     parser.add_argument("--window-index", type=int)
-    parser.add_argument("--unit", choices=("mg/dL", "mmol/L"), default="mg/dL")
+    input_arguments(parser)
     parser.add_argument(
         "--checkpoint",
         type=Path,
@@ -348,6 +368,8 @@ def main() -> None:
         top_k=args.top_k,
         include_self=args.include_self,
         unit=args.unit,
+        input_format=args.input_format,
+        out_of_range=args.out_of_range,
         window_index=args.window_index,
         timestamp_col=args.timestamp_col,
         glucose_col=args.glucose_col,

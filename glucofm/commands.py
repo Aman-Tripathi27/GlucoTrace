@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import sys
 from pathlib import Path
 from typing import Any
 
@@ -20,11 +21,47 @@ def _common_csv_arguments(parser: argparse.ArgumentParser) -> None:
     parser.add_argument("--timestamp-col", default="timestamp")
     parser.add_argument("--glucose-col", default="glucose")
     parser.add_argument("--window-index", type=int)
+    input_arguments(parser)
+
+
+def input_arguments(parser: argparse.ArgumentParser) -> None:
+    """Options describing how to read a user's CGM CSV."""
+
     parser.add_argument(
         "--unit",
         choices=("mg/dL", "mmol/L"),
-        default="mg/dL",
-        help="glucose unit of the CSV; mmol/L is converted to mg/dL",
+        help="glucose unit of a plain CSV (default mg/dL); mmol/L is converted. "
+        "Dexcom Clarity exports declare their own unit",
+    )
+    parser.add_argument(
+        "--format",
+        dest="input_format",
+        choices=("plain", "dexcom-clarity"),
+        default="plain",
+        help="plain timestamp/glucose CSV, or a Dexcom Clarity CSV export",
+    )
+    parser.add_argument(
+        "--out-of-range",
+        choices=("missing", "clamp"),
+        default="missing",
+        help="treat Low/High readings as missing (default) or record them at "
+        "the sensor limits of 40 and 400 mg/dL",
+    )
+
+
+def warn_out_of_range(metadata: dict[str, Any]) -> None:
+    count = int(metadata.get("out_of_range_readings", 0))
+    if not count:
+        return
+    action = (
+        "treated as missing"
+        if metadata["out_of_range_policy"] == "missing"
+        else "recorded at 40/400 mg/dL"
+    )
+    print(
+        f"warning: {Path(metadata['path']).name}: {count} Low/High reading(s) "
+        f"were outside the sensor range and {action}",
+        file=sys.stderr,
     )
 
 
@@ -98,7 +135,10 @@ def encode_main() -> None:
         glucose_col=args.glucose_col,
         window_index=args.window_index,
         unit=args.unit,
+        input_format=args.input_format,
+        out_of_range=args.out_of_range,
     )
+    warn_out_of_range(input_metadata)
     _emit(
         {
             "schema_version": "1.0",
@@ -132,6 +172,8 @@ def compare_main() -> None:
         glucose_col=args.glucose_col,
         window_index=args.window_index,
         unit=args.unit,
+        input_format=args.input_format,
+        out_of_range=args.out_of_range,
     )
     second, second_metadata = encoder.encode_csv(
         args.second_csv,
@@ -139,8 +181,12 @@ def compare_main() -> None:
         glucose_col=args.glucose_col,
         window_index=args.window_index,
         unit=args.unit,
+        input_format=args.input_format,
+        out_of_range=args.out_of_range,
     )
     similarity = cosine_similarity(first, second)
+    warn_out_of_range(first_metadata)
+    warn_out_of_range(second_metadata)
     _emit(
         {
             "schema_version": "1.0",
@@ -189,7 +235,10 @@ def search_main() -> None:
         glucose_col=args.glucose_col,
         window_index=args.window_index,
         unit=args.unit,
+        input_format=args.input_format,
+        out_of_range=args.out_of_range,
     )
+    warn_out_of_range(input_metadata)
     matches = search_manifests(
         encoder,
         query,

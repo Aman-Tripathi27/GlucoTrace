@@ -1,0 +1,100 @@
+{
+  "fractions": {
+    "test": 0.15,
+    "train": 0.7,
+    "validation": 0.15
+  },
+  "participant_key": [
+    "dataset",
+    "participant_id"
+  ],
+  "schema_version": "1.0",
+  "seed": 7,
+  "source_manifest": "manifest.json",
+  "source_manifest_sha256": "29402437dbab6ef8cfed58882b36b937c96fb850eebc8498becd5bb03e4cbd24",
+  "splits": {
+    "test": {
+      "participant_count": 3,
+      "participants": [
+        {
+          "dataset": "BIG_IDEAs",
+          "participant_id": "011"
+        },
+        {
+          "dataset": "BIG_IDEAs",
+          "participant_id": "002"
+        },
+        {
+          "dataset": "BIG_IDEAs",
+          "participant_id": "003"
+        }
+      ],
+      "record_count": 22
+    },
+    "train": {
+      "participant_count": 11,
+      "participants": [
+        {
+          "dataset": "BIG_IDEAs",
+          "participant_id": "012"
+        },
+        {
+          "dataset": "BIG_IDEAs",
+          "participant_id": "014"
+        },
+        {
+          "dataset": "BIG_IDEAs",
+          "participant_id": "015"
+        },
+        {
+          "dataset": "BIG_IDEAs",
+          "participant_id": "013"
+        },
+        {
+          "dataset": "BIG_IDEAs",
+          "participant_id": "016"
+        },
+        {
+          "dataset": "BIG_IDEAs",
+          "participant_id": "008"
+        },
+        {
+          "dataset": "BIG_IDEAs",
+          "participant_id": "010"
+        },
+        {
+          "dataset": "BIG_IDEAs",
+          "participant_id": "007"
+        },
+        {
+          "dataset": "BIG_IDEAs",
+          "participant_id": "001"
+        },
+        {
+          "dataset": "BIG_IDEAs",
+          "participant_id": "004"
+        },
+        {
+          "dataset": "BIG_IDEAs",
+          "participant_id": "006"
+        }
+      ],
+      "record_count": 74
+    },
+    "validation": {
+      "participant_count": 2,
+      "participants": [
+        {
+          "dataset": "BIG_IDEAs",
+          "participant_id": "009"
+        },
+        {
+          "dataset": "BIG_IDEAs",
+          "participant_id": "005"
+        }
+      ],
+      "record_count": 16
+    }
+  },
+  "strategy": "participant_disjoint_seeded_sha256_order"
+}

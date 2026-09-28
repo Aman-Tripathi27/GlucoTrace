@@ -1,0 +1,100 @@
+{
+  "parent_split": "splits_protocol_1_1.json",
+  "parent_split_sha256": "dca6fbd5dced68f92d59d9e506e8a11ecd87e783f9d68fbb78300f27f2e5aadd",
+  "parent_test_disposition": "moved_to_train_after_protocol_1.1_consumption",
+  "participant_key": [
+    "dataset",
+    "participant_id"
+  ],
+  "prospective_test_origin": "parent_train",
+  "reserve_fraction_of_parent_training": 0.2,
+  "schema_version": "1.0",
+  "seed": 43,
+  "source_manifest": "manifest.json",
+  "source_manifest_sha256": "29402437dbab6ef8cfed58882b36b937c96fb850eebc8498becd5bb03e4cbd24",
+  "splits": {
+    "test": {
+      "participant_count": 2,
+      "participants": [
+        {
+          "dataset": "BIG_IDEAs",
+          "participant_id": "004"
+        },
+        {
+          "dataset": "BIG_IDEAs",
+          "participant_id": "006"
+        }
+      ],
+      "record_count": 16
+    },
+    "train": {
+      "participant_count": 12,
+      "participants": [
+        {
+          "dataset": "BIG_IDEAs",
+          "participant_id": "001"
+        },
+        {
+          "dataset": "BIG_IDEAs",
+          "participant_id": "002"
+        },
+        {
+          "dataset": "BIG_IDEAs",
+          "participant_id": "003"
+        },
+        {
+          "dataset": "BIG_IDEAs",
+          "participant_id": "007"
+        },
+        {
+          "dataset": "BIG_IDEAs",
+          "participant_id": "008"
+        },
+        {
+          "dataset": "BIG_IDEAs",
+          "participant_id": "010"
+        },
+        {
+          "dataset": "BIG_IDEAs",
+          "participant_id": "011"
+        },
+        {
+          "dataset": "BIG_IDEAs",
+          "participant_id": "012"
+        },
+        {
+          "dataset": "BIG_IDEAs",
+          "participant_id": "013"
+        },
+        {
+          "dataset": "BIG_IDEAs",
+          "participant_id": "014"
+        },
+        {
+          "dataset": "BIG_IDEAs",
+          "participant_id": "015"
+        },
+        {
+          "dataset": "BIG_IDEAs",
+          "participant_id": "016"
+        }
+      ],
+      "record_count": 80
+    },
+    "validation": {
+      "participant_count": 2,
+      "participants": [
+        {
+          "dataset": "BIG_IDEAs",
+          "participant_id": "005"
+        },
+        {
+          "dataset": "BIG_IDEAs",
+          "participant_id": "009"
+        }
+      ],
+      "record_count": 16
+    }
+  },
+  "strategy": "prospective_holdout_from_parent_training_v1"
+}

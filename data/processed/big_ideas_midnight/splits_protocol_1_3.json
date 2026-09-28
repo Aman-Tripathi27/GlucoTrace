@@ -1,0 +1,97 @@
+{
+  "dropped_participants": [],
+  "parent_split": "../big_ideas/splits_protocol_1_2.json",
+  "parent_split_sha256": "ae4f34ffdbc235a394d6f65de7510c883c15a685e88abe2884f11ab0cb7f878a",
+  "participant_key": [
+    "dataset",
+    "participant_id"
+  ],
+  "schema_version": "1.0",
+  "source_manifest": "manifest.json",
+  "source_manifest_sha256": "2347aa6588eb86c380267824db2956ebdef58727c7cae81185bd3e458eb59c31",
+  "splits": {
+    "test": {
+      "participant_count": 2,
+      "participants": [
+        {
+          "dataset": "BIG_IDEAs",
+          "participant_id": "004"
+        },
+        {
+          "dataset": "BIG_IDEAs",
+          "participant_id": "006"
+        }
+      ],
+      "record_count": 14
+    },
+    "train": {
+      "participant_count": 12,
+      "participants": [
+        {
+          "dataset": "BIG_IDEAs",
+          "participant_id": "001"
+        },
+        {
+          "dataset": "BIG_IDEAs",
+          "participant_id": "002"
+        },
+        {
+          "dataset": "BIG_IDEAs",
+          "participant_id": "003"
+        },
+        {
+          "dataset": "BIG_IDEAs",
+          "participant_id": "007"
+        },
+        {
+          "dataset": "BIG_IDEAs",
+          "participant_id": "008"
+        },
+        {
+          "dataset": "BIG_IDEAs",
+          "participant_id": "010"
+        },
+        {
+          "dataset": "BIG_IDEAs",
+          "participant_id": "011"
+        },
+        {
+          "dataset": "BIG_IDEAs",
+          "participant_id": "012"
+        },
+        {
+          "dataset": "BIG_IDEAs",
+          "participant_id": "013"
+        },
+        {
+          "dataset": "BIG_IDEAs",
+          "participant_id": "014"
+        },
+        {
+          "dataset": "BIG_IDEAs",
+          "participant_id": "015"
+        },
+        {
+          "dataset": "BIG_IDEAs",
+          "participant_id": "016"
+        }
+      ],
+      "record_count": 67
+    },
+    "validation": {
+      "participant_count": 2,
+      "participants": [
+        {
+          "dataset": "BIG_IDEAs",
+          "participant_id": "005"
+        },
+        {
+          "dataset": "BIG_IDEAs",
+          "participant_id": "009"
+        }
+      ],
+      "record_count": 13
+    }
+  },
+  "strategy": "membership_carried_from_parent_v1"
+}

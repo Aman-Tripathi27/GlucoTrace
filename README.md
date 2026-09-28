@@ -38,9 +38,11 @@ glucotrace report my-day.csv \
   --output report.html                                       # offline visual report
 ```
 
-The input is a CSV with `timestamp,glucose` columns in mg/dL, or pass
-`--unit mmol/L`. Files whose values contradict the declared unit are rejected
-rather than silently misread. Run `glucotrace --help` for all thirteen commands.
+The input is a CSV with `timestamp,glucose` columns in mg/dL (or pass
+`--unit mmol/L`), or a Dexcom Clarity export with `--format dexcom-clarity`.
+Time zones are respected, `Low`/`High` readings are handled explicitly, and
+files whose values contradict the declared unit are rejected rather than
+silently misread. Run `glucotrace --help` for all fourteen commands.
 In Python, `import glucotrace` exposes the same API as `glucofm`.
 
 ## Why GlucoTrace
@@ -59,7 +61,7 @@ In Python, `import glucotrace` exposes the same API as `glucofm`.
   alignment, and [protocol 1.3](PROTOCOL_1_3_RESULTS.md) confirmed it: starting
   every day at midnight halved the leakage, at a cost in usefulness that is
   still being investigated.
-- **Small and hackable.** About 5,000 lines of typed Python, 66 tests, CPU
+- **Small and hackable.** About 5,000 lines of typed Python, 88 tests, CPU
   training in minutes.
 
 ## Results at a glance
@@ -74,6 +76,20 @@ In Python, `import glucotrace` exposes the same API as `glucofm`.
 
 The repository is branded **GlucoTrace**. The original `glucofm` import
 package, model class, and `glucofm-*` commands remain for compatibility.
+
+## Verify the pre-registration
+
+Every protocol's manifests and participant splits are published in
+`data/processed/` (no glucose values) and pinned by SHA-256:
+
+```bash
+glucotrace verify-protocol --all
+```
+
+This checks each file against the checksums in the declaration documents.
+After downloading the public datasets and running the adapters, add
+`--check-days` to confirm every canonical day file matches byte-for-byte.
+The tests run the same check on every push.
 
 ## Prepare public datasets
 

@@ -22,6 +22,12 @@ SUPPORTED_UNITS = ("mg/dL", "mmol/L")
 # No plausible day of mg/dL readings has a median this low, and no plausible
 # day of mmol/L readings has a median this high.
 _UNIT_MEDIAN_BOUNDARY = 35.0
+INPUT_FORMATS = ("plain", "dexcom-clarity")
+OUT_OF_RANGE_POLICIES = ("missing", "clamp")
+OUT_OF_RANGE_TEXT = ("low", "high")
+# Dexcom G6/G7 report readings beyond these limits as "Low"/"High".
+SENSOR_LOW_MG_DL = 40.0
+SENSOR_HIGH_MG_DL = 400.0
 
 
 def parse_timestamp(value: str) -> datetime:
@@ -56,6 +62,9 @@ class CGMSeries:
     mean: float
     std: float
     interval_minutes: int
+    input_unit: str = "mg/dL"
+    out_of_range_count: int = 0
+    out_of_range_policy: str = "missing"
 
 
 def _gap_age(
@@ -83,6 +92,102 @@ def _time_of_day(timestamps: tuple[datetime, ...]) -> np.ndarray:
     return features
 
 
+def _parse_instant(value: str) -> tuple[datetime, timedelta | None]:
+    """Return an instant for gridding plus the timestamp's own UTC offset.
+
+    Aware timestamps are normalized to UTC so readings are placed on the grid
+    by true elapsed time; the original offset is kept so time-of-day can use
+    the wearer's local clock. Naive timestamps are local clock time already.
+    """
+
+    parsed = parse_timestamp(value)
+    if parsed.tzinfo is None:
+        return parsed, None
+    text = value.strip()
+    if text.endswith("Z"):
+        text = text[:-1] + "+00:00"
+    return parsed, datetime.fromisoformat(text).utcoffset()
+
+
+def _parse_glucose_cell(cell: str, line_number: int) -> tuple[float | None, str | None]:
+    """Return (value, out-of-range flag). ``Low``/``High`` text has no value."""
+
+    text = cell.strip()
+    if not text:
+        return None, None
+    lowered = text.lower()
+    if lowered in OUT_OF_RANGE_TEXT:
+        return None, lowered
+    try:
+        value = float(text)
+    except ValueError as exc:
+        raise ValueError(
+            f"line {line_number}: glucose must be numeric, empty, Low, or High"
+        ) from exc
+    if not np.isfinite(value):
+        raise ValueError(f"line {line_number}: glucose must be finite")
+    return value, None
+
+
+_Row = tuple[datetime, "timedelta | None", "float | None", "str | None"]
+
+
+def _read_plain_rows(
+    handle: Any, timestamp_col: str, glucose_col: str
+) -> list[_Row]:
+    reader = csv.DictReader(handle)
+    fields = reader.fieldnames or []
+    missing_columns = {timestamp_col, glucose_col}.difference(fields)
+    if missing_columns:
+        missing = ", ".join(sorted(missing_columns))
+        raise ValueError(f"CSV is missing required column(s): {missing}")
+    rows: list[_Row] = []
+    for line_number, row in enumerate(reader, start=2):
+        try:
+            instant, offset = _parse_instant(row[timestamp_col])
+        except ValueError as exc:
+            raise ValueError(f"line {line_number}: {exc}") from exc
+        value, flag = _parse_glucose_cell(row[glucose_col], line_number)
+        rows.append((instant, offset, value, flag))
+    return rows
+
+
+def _read_dexcom_clarity_rows(handle: Any) -> tuple[list[_Row], str]:
+    """Read glucose (EGV) rows and the unit from a Dexcom Clarity CSV export.
+
+    Clarity exports start with patient and device rows that have no
+    timestamp, and mix in alerts, calibrations, insulin, and carbs. Only
+    estimated glucose value (EGV) rows are glucose readings.
+    """
+
+    reader = csv.DictReader(handle)
+    fields = reader.fieldnames or []
+    timestamp_col = next((f for f in fields if f.startswith("Timestamp")), None)
+    glucose_col = next((f for f in fields if f.startswith("Glucose Value")), None)
+    if timestamp_col is None or glucose_col is None or "Event Type" not in fields:
+        raise ValueError(
+            "not a Dexcom Clarity export: expected 'Timestamp (...)', "
+            "'Event Type', and 'Glucose Value (...)' columns"
+        )
+    if "mmol/L" in glucose_col:
+        unit = "mmol/L"
+    elif "mg/dL" in glucose_col:
+        unit = "mg/dL"
+    else:
+        raise ValueError(f"cannot read the glucose unit from column {glucose_col!r}")
+    rows: list[_Row] = []
+    for line_number, row in enumerate(reader, start=2):
+        if (row.get("Event Type") or "").strip() != "EGV":
+            continue
+        try:
+            instant, offset = _parse_instant(row[timestamp_col] or "")
+        except ValueError as exc:
+            raise ValueError(f"line {line_number}: {exc}") from exc
+        value, flag = _parse_glucose_cell(row[glucose_col] or "", line_number)
+        rows.append((instant, offset, value, flag))
+    return rows, unit
+
+
 def load_cgm_csv(
     path: str | Path,
     *,
@@ -90,59 +195,59 @@ def load_cgm_csv(
     glucose_col: str = "glucose",
     interval_minutes: int = 5,
     alignment_tolerance_seconds: float | None = None,
-    unit: str = "mg/dL",
+    unit: str | None = None,
+    input_format: str = "plain",
+    out_of_range: str = "missing",
 ) -> CGMSeries:
-    """Load a timestamp-and-glucose CSV onto a regular time grid.
+    """Load a CGM CSV onto a regular time grid.
 
-    The earliest timestamp anchors the grid. Later timestamps must fall within
+    The earliest reading anchors the grid. Later readings must fall within
     ``alignment_tolerance_seconds`` of a grid point; the default is 40% of the
     sampling interval. Duplicate grid positions use the last non-empty value.
     Empty glucose cells and absent time points are marked missing.
 
-    ``unit`` declares the CSV's unit. mmol/L values are converted to mg/dL.
-    Nothing is inferred silently: a file whose median contradicts the declared
-    unit is rejected with a message naming the likely unit.
+    Timezone-aware timestamps are placed on the grid by true elapsed time,
+    while time-of-day features use each reading's own local clock, so
+    ``08:00+05:30`` is morning, not 02:30 UTC. Files may mix offsets (for
+    example across a daylight-saving change) but not aware and naive stamps.
+
+    ``input_format`` is ``"plain"`` (``timestamp_col``/``glucose_col``) or
+    ``"dexcom-clarity"`` (a Clarity CSV export, whose header declares the
+    unit). ``unit`` declares a plain file's unit (default mg/dL); mmol/L is
+    converted to mg/dL. A file whose median contradicts the unit is rejected.
+
+    Readings recorded as ``Low``/``High`` (beyond the sensor's range) have no
+    measured value. ``out_of_range="missing"`` marks them missing;
+    ``"clamp"`` records them at the sensor limits of 40 and 400 mg/dL. The
+    count is returned as ``out_of_range_count``.
     """
 
     if interval_minutes <= 0:
         raise ValueError("interval_minutes must be positive")
-    if unit not in SUPPORTED_UNITS:
+    if unit is not None and unit not in SUPPORTED_UNITS:
         raise ValueError(f"unit must be one of {SUPPORTED_UNITS}")
+    if input_format not in INPUT_FORMATS:
+        raise ValueError(f"input_format must be one of {INPUT_FORMATS}")
+    if out_of_range not in OUT_OF_RANGE_POLICIES:
+        raise ValueError(f"out_of_range must be one of {OUT_OF_RANGE_POLICIES}")
 
     csv_path = Path(path)
-    rows: list[tuple[datetime, float | None]] = []
     with csv_path.open("r", newline="", encoding="utf-8-sig") as handle:
-        reader = csv.DictReader(handle)
-        fields = reader.fieldnames or []
-        missing_columns = {timestamp_col, glucose_col}.difference(fields)
-        if missing_columns:
-            missing = ", ".join(sorted(missing_columns))
-            raise ValueError(f"CSV is missing required column(s): {missing}")
-
-        for line_number, row in enumerate(reader, start=2):
-            try:
-                timestamp = parse_timestamp(row[timestamp_col])
-            except ValueError as exc:
-                raise ValueError(f"line {line_number}: {exc}") from exc
-
-            cell = row[glucose_col].strip()
-            if not cell:
-                value = None
-            else:
-                try:
-                    value = float(cell)
-                except ValueError as exc:
-                    raise ValueError(
-                        f"line {line_number}: glucose must be numeric or empty"
-                    ) from exc
-                if not np.isfinite(value):
-                    raise ValueError(f"line {line_number}: glucose must be finite")
-            rows.append((timestamp, value))
+        if input_format == "dexcom-clarity":
+            rows, declared_unit = _read_dexcom_clarity_rows(handle)
+            if unit is not None and unit != declared_unit:
+                raise ValueError(
+                    f"the Clarity export declares {declared_unit}, not {unit}"
+                )
+            unit = declared_unit
+        else:
+            rows = _read_plain_rows(handle, timestamp_col, glucose_col)
+    unit = unit or "mg/dL"
 
     if not rows:
         raise ValueError("CSV contains no data rows")
 
-    aware = {timestamp.tzinfo is not None for timestamp, _ in rows}
+    aware = {instant.tzinfo is not None for instant, _, _, _ in rows}
     if len(aware) > 1:
         raise ValueError("timestamps must be either all timezone-aware or all naive")
     rows.sort(key=lambda item: item[0])
@@ -160,36 +265,50 @@ def load_cgm_csv(
     final_offset = (rows[-1][0] - start).total_seconds()
     length = int(round(final_offset / step_seconds)) + 1
     values = np.full(length, np.nan, dtype=np.float32)
+    flags: list[str | None] = [None] * length
+    offsets: list[timedelta | None] = [None] * length
 
-    for timestamp, value in rows:
-        offset = (timestamp - start).total_seconds()
+    for instant, utc_offset, value, flag in rows:
+        offset = (instant - start).total_seconds()
         index = int(round(offset / step_seconds))
         alignment_error = abs(offset - index * step_seconds)
         if alignment_error > tolerance:
             raise ValueError(
-                f"timestamp {timestamp.isoformat()} is {alignment_error:.1f}s "
+                f"timestamp {instant.isoformat()} is {alignment_error:.1f}s "
                 "from the nearest grid point"
             )
+        offsets[index] = utc_offset
         if value is not None:
             values[index] = value
+            flags[index] = None
+        elif flag is not None and not np.isfinite(values[index]):
+            flags[index] = flag
 
-    observed = np.isfinite(values)
-    if not observed.any():
-        raise ValueError("CSV contains no observed glucose values")
-
-    median = float(np.median(values[observed]))
-    if unit == "mg/dL" and median < _UNIT_MEDIAN_BOUNDARY:
-        raise ValueError(
-            f"median glucose {median:g} is implausible for mg/dL; the file looks "
-            "like mmol/L (pass unit='mmol/L' or --unit mmol/L)"
-        )
-    if unit == "mmol/L":
-        if median >= _UNIT_MEDIAN_BOUNDARY:
+    out_of_range_positions = [
+        (index, flag) for index, flag in enumerate(flags) if flag is not None
+    ]
+    measured = np.isfinite(values)
+    if measured.any():
+        median = float(np.median(values[measured]))
+        if unit == "mg/dL" and median < _UNIT_MEDIAN_BOUNDARY:
+            raise ValueError(
+                f"median glucose {median:g} is implausible for mg/dL; the file "
+                "looks like mmol/L (pass unit='mmol/L' or --unit mmol/L)"
+            )
+        if unit == "mmol/L" and median >= _UNIT_MEDIAN_BOUNDARY:
             raise ValueError(
                 f"median glucose {median:g} is implausible for mmol/L; the file "
                 "looks like mg/dL"
             )
+    if unit == "mmol/L":
         values = values * np.float32(MG_DL_PER_MMOL_L)
+    if out_of_range == "clamp":
+        for index, flag in out_of_range_positions:
+            values[index] = SENSOR_LOW_MG_DL if flag == "low" else SENSOR_HIGH_MG_DL
+
+    observed = np.isfinite(values)
+    if not observed.any():
+        raise ValueError("CSV contains no observed glucose values")
 
     observed_values = values[observed].astype(np.float64)
     mean = float(observed_values.mean())
@@ -199,9 +318,16 @@ def load_cgm_csv(
 
     filled = np.zeros(length, dtype=np.float32)
     filled[observed] = values[observed]
-    timestamps = tuple(
-        start + timedelta(seconds=index * step_seconds) for index in range(length)
-    )
+    grid = [start + timedelta(seconds=index * step_seconds) for index in range(length)]
+    if start.tzinfo is not None:
+        # Carry each reading's offset to the empty positions that follow it.
+        current = next(offset for offset in offsets if offset is not None)
+        local = []
+        for instant, utc_offset in zip(grid, offsets):
+            current = utc_offset if utc_offset is not None else current
+            local.append(instant.astimezone(timezone(current)))
+        grid = local
+    timestamps = tuple(grid)
 
     return CGMSeries(
         timestamps=timestamps,
@@ -214,6 +340,9 @@ def load_cgm_csv(
         mean=mean,
         std=std,
         interval_minutes=interval_minutes,
+        input_unit=unit,
+        out_of_range_count=len(out_of_range_positions),
+        out_of_range_policy=out_of_range,
     )
 
 

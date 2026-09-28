@@ -14,6 +14,25 @@ unit (below 35 for mg/dL, 35 or above for mmol/L); it never guesses. Empty
 glucose cells are missing. The loader builds a five-minute grid without
 interpolation, and the physical observation mask remains authoritative.
 
+**Time zones.** Timestamps may carry an offset (`2026-01-01T08:00:00+05:30`)
+or none; a file must not mix the two. Offsets are used to place readings by
+true elapsed time, and time-of-day features use each reading's own local
+clock, so 08:00 in India is morning to the model. Offsets may change within a
+file, for example across a daylight-saving change.
+
+**Dexcom Clarity exports.** Pass `--format dexcom-clarity` to read a Clarity
+CSV export directly. Only estimated glucose value (`EGV`) rows are used, and the
+unit is read from the export's own glucose column header.
+
+**Readings beyond the sensor range.** Dexcom records values below 40 mg/dL as
+`Low` and above 400 mg/dL as `High`, with no number. By default these are
+treated as **missing**, because the true value was never measured, and a
+warning reports how many there were. `--out-of-range clamp` records them at
+40 and 400 mg/dL instead, which keeps the shape of an extreme but assumes a
+value. The fingerprint metadata records `out_of_range_readings` and
+`out_of_range_policy`. The released checkpoint never saw such readings during
+training. `Low`/`High` are also accepted in plain CSVs.
+
 One fingerprint represents one complete 288-position window. If a CSV contains
 multiple complete non-overlapping windows, pass `--window-index`. Partial final
 windows are not padded or encoded.

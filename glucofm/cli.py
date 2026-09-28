@@ -28,6 +28,11 @@ COMMANDS: dict[str, tuple[str, str, str]] = {
         "convert the Colas 2019 PLOS dataset to canonical days",
     ),
     "split": ("glucofm.corpus", "main", "participant-disjoint corpus split"),
+    "verify-protocol": (
+        "glucofm.protocols",
+        "main",
+        "check published splits against declared checksums",
+    ),
     "reserve-holdout": ("glucofm.reserve", "main", "reserve a new prospective holdout"),
     "pretrain": ("glucofm.pretrain", "main", "source-balanced latent pretraining"),
     "evaluate": ("glucofm.evaluate", "main", "run a frozen evaluation protocol"),

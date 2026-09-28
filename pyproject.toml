@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "glucotrace"
-version = "0.2.1"
+version = "0.2.2"
 description = "A small, readable Transformer encoder for research with continuous glucose monitor time series."
 readme = "README.md"
 requires-python = ">=3.10"
@@ -57,6 +57,7 @@ glucofm-search = "glucofm.commands:search_main"
 glucofm-report = "glucofm.report:main"
 glucofm-download-model = "glucofm.commands:download_main"
 glucofm-reserve-holdout = "glucofm.reserve:main"
+glucofm-verify-protocol = "glucofm.protocols:main"
 glucofm-split-corpus = "glucofm.corpus:main"
 
 [tool.setuptools.packages.find]

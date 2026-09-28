@@ -1,0 +1,857 @@
+{
+  "dropped_participants": [],
+  "parent_split": "../colas/splits_protocol_1_2.json",
+  "parent_split_sha256": "28de2e3418dc3939b8fd24fa6995c5ba71801941425c9e30bc1b6d93a1932a5b",
+  "participant_key": [
+    "dataset",
+    "participant_id"
+  ],
+  "schema_version": "1.0",
+  "source_manifest": "manifest.json",
+  "source_manifest_sha256": "706e9056aec882633ad4930b2995a9aefaff5fae90fba7144a76a9825a74576a",
+  "splits": {
+    "test": {
+      "participant_count": 29,
+      "participants": [
+        {
+          "dataset": "Colas2019",
+          "participant_id": "004"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "018"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "021"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "028"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "030"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "036"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "040"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "043"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "045"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "054"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "060"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "068"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "072"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "073"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "074"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "087"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "088"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "089"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "095"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "100"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "127"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "128"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "129"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "133"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "143"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "155"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "163"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "185"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "196"
+        }
+      ],
+      "record_count": 55
+    },
+    "train": {
+      "participant_count": 147,
+      "participants": [
+        {
+          "dataset": "Colas2019",
+          "participant_id": "002"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "003"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "005"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "006"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "007"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "009"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "010"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "011"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "012"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "013"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "014"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "016"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "017"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "019"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "020"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "022"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "023"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "027"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "029"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "031"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "032"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "034"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "035"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "037"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "038"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "039"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "042"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "044"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "046"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "048"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "049"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "050"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "051"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "053"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "055"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "056"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "057"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "058"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "061"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "063"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "064"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "065"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "066"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "067"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "069"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "070"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "071"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "075"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "077"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "078"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "079"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "080"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "081"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "082"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "083"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "084"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "085"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "086"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "091"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "092"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "093"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "094"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "096"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "097"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "098"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "099"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "101"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "102"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "103"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "104"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "105"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "106"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "107"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "108"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "109"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "111"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "114"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "115"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "116"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "117"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "118"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "120"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "122"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "124"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "125"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "126"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "130"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "131"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "132"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "134"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "135"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "136"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "137"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "138"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "139"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "141"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "144"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "146"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "147"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "149"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "151"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "152"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "153"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "156"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "157"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "159"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "160"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "161"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "162"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "164"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "165"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "166"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "167"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "168"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "169"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "170"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "171"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "172"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "175"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "176"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "177"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "178"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "179"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "180"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "181"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "182"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "183"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "184"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "186"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "187"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "188"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "189"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "190"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "191"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "192"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "194"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "197"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "198"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "199"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "200"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "201"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "202"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "203"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "204"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "206"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "207"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "208"
+        }
+      ],
+      "record_count": 281
+    },
+    "validation": {
+      "participant_count": 30,
+      "participants": [
+        {
+          "dataset": "Colas2019",
+          "participant_id": "001"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "008"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "015"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "024"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "025"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "026"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "033"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "041"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "047"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "052"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "059"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "062"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "076"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "090"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "110"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "112"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "113"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "119"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "121"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "123"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "140"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "142"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "145"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "154"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "158"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "173"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "174"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "193"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "195"
+        },
+        {
+          "dataset": "Colas2019",
+          "participant_id": "205"
+        }
+      ],
+      "record_count": 55
+    }
+  },
+  "strategy": "membership_carried_from_parent_v1"
+}

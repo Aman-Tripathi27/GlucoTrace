@@ -1,0 +1,1700 @@
+{
+  "canonical_unit": "mg/dL",
+  "interval_minutes": 5,
+  "records": [
+    {
+      "file": "days/BIG_IDEAs__001__20200214T000332.csv",
+      "observed_count": 288,
+      "observed_fraction": 1.0,
+      "participant_id": "001",
+      "provenance": {
+        "dataset": "BIG_IDEAs",
+        "device": "Dexcom G6",
+        "license_name": "Open Data Commons Attribution License v1.0",
+        "license_url": "https://opendatacommons.org/licenses/by/1-0/",
+        "participant_id": "001",
+        "source_url": "https://physionet.org/content/big-ideas-glycemic-wearable/1.1.3/",
+        "unit": "mg/dL",
+        "version": "1.1.3"
+      },
+      "sha256": "a98f1108337ae8c9c298d9e6231747f7f44947e20d12b76106e29201de622e4a",
+      "start_time": "2020-02-14T00:03:32"
+    },
+    {
+      "file": "days/BIG_IDEAs__001__20200215T000332.csv",
+      "observed_count": 286,
+      "observed_fraction": 0.9930555820465088,
+      "participant_id": "001",
+      "provenance": {
+        "dataset": "BIG_IDEAs",
+        "device": "Dexcom G6",
+        "license_name": "Open Data Commons Attribution License v1.0",
+        "license_url": "https://opendatacommons.org/licenses/by/1-0/",
+        "participant_id": "001",
+        "source_url": "https://physionet.org/content/big-ideas-glycemic-wearable/1.1.3/",
+        "unit": "mg/dL",
+        "version": "1.1.3"
+      },
+      "sha256": "b5ce867c529fe6ce04952a0dff9e7dca91eaf61e1143ea94fce28ddd67d16559",
+      "start_time": "2020-02-15T00:03:32"
+    },
+    {
+      "file": "days/BIG_IDEAs__001__20200216T000332.csv",
+      "observed_count": 287,
+      "observed_fraction": 0.9965277910232544,
+      "participant_id": "001",
+      "provenance": {
+        "dataset": "BIG_IDEAs",
+        "device": "Dexcom G6",
+        "license_name": "Open Data Commons Attribution License v1.0",
+        "license_url": "https://opendatacommons.org/licenses/by/1-0/",
+        "participant_id": "001",
+        "source_url": "https://physionet.org/content/big-ideas-glycemic-wearable/1.1.3/",
+        "unit": "mg/dL",
+        "version": "1.1.3"
+      },
+      "sha256": "ed3d6fb5c4ccd019590b0cc328ddce519eca857c7be0d138dc1a992332c53f56",
+      "start_time": "2020-02-16T00:03:32"
+    },
+    {
+      "file": "days/BIG_IDEAs__001__20200217T000332.csv",
+      "observed_count": 287,
+      "observed_fraction": 0.9965277910232544,
+      "participant_id": "001",
+      "provenance": {
+        "dataset": "BIG_IDEAs",
+        "device": "Dexcom G6",
+        "license_name": "Open Data Commons Attribution License v1.0",
+        "license_url": "https://opendatacommons.org/licenses/by/1-0/",
+        "participant_id": "001",
+        "source_url": "https://physionet.org/content/big-ideas-glycemic-wearable/1.1.3/",
+        "unit": "mg/dL",
+        "version": "1.1.3"
+      },
+      "sha256": "d8b770777b120a3970242bb7f138b9314adc0f858672946cdd1f433a288d2054",
+      "start_time": "2020-02-17T00:03:32"
+    },
+    {
+      "file": "days/BIG_IDEAs__001__20200218T000332.csv",
+      "observed_count": 287,
+      "observed_fraction": 0.9965277910232544,
+      "participant_id": "001",
+      "provenance": {
+        "dataset": "BIG_IDEAs",
+        "device": "Dexcom G6",
+        "license_name": "Open Data Commons Attribution License v1.0",
+        "license_url": "https://opendatacommons.org/licenses/by/1-0/",
+        "participant_id": "001",
+        "source_url": "https://physionet.org/content/big-ideas-glycemic-wearable/1.1.3/",
+        "unit": "mg/dL",
+        "version": "1.1.3"
+      },
+      "sha256": "1f9c1302c98d0101890c9b59e118e2a57002de6ceeafaaec83f655223a18c141",
+      "start_time": "2020-02-18T00:03:32"
+    },
+    {
+      "file": "days/BIG_IDEAs__001__20200221T000325.csv",
+      "observed_count": 288,
+      "observed_fraction": 1.0,
+      "participant_id": "001",
+      "provenance": {
+        "dataset": "BIG_IDEAs",
+        "device": "Dexcom G6",
+        "license_name": "Open Data Commons Attribution License v1.0",
+        "license_url": "https://opendatacommons.org/licenses/by/1-0/",
+        "participant_id": "001",
+        "source_url": "https://physionet.org/content/big-ideas-glycemic-wearable/1.1.3/",
+        "unit": "mg/dL",
+        "version": "1.1.3"
+      },
+      "sha256": "3f118ffd497aa1d2f924e5b3f503eef9dd38af9ca313e49c722b9a02b32f9f5f",
+      "start_time": "2020-02-21T00:03:25"
+    },
+    {
+      "file": "days/BIG_IDEAs__002__20200222T000336.csv",
+      "observed_count": 287,
+      "observed_fraction": 0.9965277910232544,
+      "participant_id": "002",
+      "provenance": {
+        "dataset": "BIG_IDEAs",
+        "device": "Dexcom G6",
+        "license_name": "Open Data Commons Attribution License v1.0",
+        "license_url": "https://opendatacommons.org/licenses/by/1-0/",
+        "participant_id": "002",
+        "source_url": "https://physionet.org/content/big-ideas-glycemic-wearable/1.1.3/",
+        "unit": "mg/dL",
+        "version": "1.1.3"
+      },
+      "sha256": "547a584849082a7cb726a130141f174c4988d652a5acc504775a8096a0c4c36a",
+      "start_time": "2020-02-22T00:03:36"
+    },
+    {
+      "file": "days/BIG_IDEAs__002__20200223T000336.csv",
+      "observed_count": 287,
+      "observed_fraction": 0.9965277910232544,
+      "participant_id": "002",
+      "provenance": {
+        "dataset": "BIG_IDEAs",
+        "device": "Dexcom G6",
+        "license_name": "Open Data Commons Attribution License v1.0",
+        "license_url": "https://opendatacommons.org/licenses/by/1-0/",
+        "participant_id": "002",
+        "source_url": "https://physionet.org/content/big-ideas-glycemic-wearable/1.1.3/",
+        "unit": "mg/dL",
+        "version": "1.1.3"
+      },
+      "sha256": "8d5b9789cbbf70a4278070a967b4bf48b2e9fe30049b684f836c31d844b5580d",
+      "start_time": "2020-02-23T00:03:36"
+    },
+    {
+      "file": "days/BIG_IDEAs__002__20200226T000330.csv",
+      "observed_count": 287,
+      "observed_fraction": 0.9965277910232544,
+      "participant_id": "002",
+      "provenance": {
+        "dataset": "BIG_IDEAs",
+        "device": "Dexcom G6",
+        "license_name": "Open Data Commons Attribution License v1.0",
+        "license_url": "https://opendatacommons.org/licenses/by/1-0/",
+        "participant_id": "002",
+        "source_url": "https://physionet.org/content/big-ideas-glycemic-wearable/1.1.3/",
+        "unit": "mg/dL",
+        "version": "1.1.3"
+      },
+      "sha256": "48111957125abdae27a8d67c0a5c5c002cc0b800d452519262627b32286fbd31",
+      "start_time": "2020-02-26T00:03:30"
+    },
+    {
+      "file": "days/BIG_IDEAs__002__20200227T000330.csv",
+      "observed_count": 287,
+      "observed_fraction": 0.9965277910232544,
+      "participant_id": "002",
+      "provenance": {
+        "dataset": "BIG_IDEAs",
+        "device": "Dexcom G6",
+        "license_name": "Open Data Commons Attribution License v1.0",
+        "license_url": "https://opendatacommons.org/licenses/by/1-0/",
+        "participant_id": "002",
+        "source_url": "https://physionet.org/content/big-ideas-glycemic-wearable/1.1.3/",
+        "unit": "mg/dL",
+        "version": "1.1.3"
+      },
+      "sha256": "65d8e8fd5496cf1801c1f1802b262bdd2c3eaf6ef42987e50d4a606ff1fcc789",
+      "start_time": "2020-02-27T00:03:30"
+    },
+    {
+      "file": "days/BIG_IDEAs__002__20200228T000330.csv",
+      "observed_count": 287,
+      "observed_fraction": 0.9965277910232544,
+      "participant_id": "002",
+      "provenance": {
+        "dataset": "BIG_IDEAs",
+        "device": "Dexcom G6",
+        "license_name": "Open Data Commons Attribution License v1.0",
+        "license_url": "https://opendatacommons.org/licenses/by/1-0/",
+        "participant_id": "002",
+        "source_url": "https://physionet.org/content/big-ideas-glycemic-wearable/1.1.3/",
+        "unit": "mg/dL",
+        "version": "1.1.3"
+      },
+      "sha256": "3eef72e0e055c4b87d9bf804feb67148bfa7554091e05bbc6f4a7704c996eb2a",
+      "start_time": "2020-02-28T00:03:30"
+    },
+    {
+      "file": "days/BIG_IDEAs__003__20200223T000144.csv",
+      "observed_count": 288,
+      "observed_fraction": 1.0,
+      "participant_id": "003",
+      "provenance": {
+        "dataset": "BIG_IDEAs",
+        "device": "Dexcom G6",
+        "license_name": "Open Data Commons Attribution License v1.0",
+        "license_url": "https://opendatacommons.org/licenses/by/1-0/",
+        "participant_id": "003",
+        "source_url": "https://physionet.org/content/big-ideas-glycemic-wearable/1.1.3/",
+        "unit": "mg/dL",
+        "version": "1.1.3"
+      },
+      "sha256": "03c3ea1397c6c810612f55964c96f48e3d8856bf9f45a86fedbf60a49b4bd3a9",
+      "start_time": "2020-02-23T00:01:44"
+    },
+    {
+      "file": "days/BIG_IDEAs__003__20200224T000144.csv",
+      "observed_count": 287,
+      "observed_fraction": 0.9965277910232544,
+      "participant_id": "003",
+      "provenance": {
+        "dataset": "BIG_IDEAs",
+        "device": "Dexcom G6",
+        "license_name": "Open Data Commons Attribution License v1.0",
+        "license_url": "https://opendatacommons.org/licenses/by/1-0/",
+        "participant_id": "003",
+        "source_url": "https://physionet.org/content/big-ideas-glycemic-wearable/1.1.3/",
+        "unit": "mg/dL",
+        "version": "1.1.3"
+      },
+      "sha256": "4036b5f092233eea47effdd6bc4265b7e3eff0c52400bd79bcd86fb39c10fdc7",
+      "start_time": "2020-02-24T00:01:44"
+    },
+    {
+      "file": "days/BIG_IDEAs__003__20200226T000140.csv",
+      "observed_count": 287,
+      "observed_fraction": 0.9965277910232544,
+      "participant_id": "003",
+      "provenance": {
+        "dataset": "BIG_IDEAs",
+        "device": "Dexcom G6",
+        "license_name": "Open Data Commons Attribution License v1.0",
+        "license_url": "https://opendatacommons.org/licenses/by/1-0/",
+        "participant_id": "003",
+        "source_url": "https://physionet.org/content/big-ideas-glycemic-wearable/1.1.3/",
+        "unit": "mg/dL",
+        "version": "1.1.3"
+      },
+      "sha256": "b3f4e1147d6ec453ff78ad0f0b64da8a115426381d1749cfd8f29901a1af67b6",
+      "start_time": "2020-02-26T00:01:40"
+    },
+    {
+      "file": "days/BIG_IDEAs__003__20200227T000140.csv",
+      "observed_count": 287,
+      "observed_fraction": 0.9965277910232544,
+      "participant_id": "003",
+      "provenance": {
+        "dataset": "BIG_IDEAs",
+        "device": "Dexcom G6",
+        "license_name": "Open Data Commons Attribution License v1.0",
+        "license_url": "https://opendatacommons.org/licenses/by/1-0/",
+        "participant_id": "003",
+        "source_url": "https://physionet.org/content/big-ideas-glycemic-wearable/1.1.3/",
+        "unit": "mg/dL",
+        "version": "1.1.3"
+      },
+      "sha256": "c2ac41d2b62b72fce4275a5e7fcb79af8468ca006031c5e3b6e4e70f47c9ccf6",
+      "start_time": "2020-02-27T00:01:40"
+    },
+    {
+      "file": "days/BIG_IDEAs__003__20200228T000140.csv",
+      "observed_count": 287,
+      "observed_fraction": 0.9965277910232544,
+      "participant_id": "003",
+      "provenance": {
+        "dataset": "BIG_IDEAs",
+        "device": "Dexcom G6",
+        "license_name": "Open Data Commons Attribution License v1.0",
+        "license_url": "https://opendatacommons.org/licenses/by/1-0/",
+        "participant_id": "003",
+        "source_url": "https://physionet.org/content/big-ideas-glycemic-wearable/1.1.3/",
+        "unit": "mg/dL",
+        "version": "1.1.3"
+      },
+      "sha256": "c65367368679f948db5ff63219a496b1fb063d54cd719ab3c7df11bc6699c506",
+      "start_time": "2020-02-28T00:01:40"
+    },
+    {
+      "file": "days/BIG_IDEAs__003__20200229T000140.csv",
+      "observed_count": 287,
+      "observed_fraction": 0.9965277910232544,
+      "participant_id": "003",
+      "provenance": {
+        "dataset": "BIG_IDEAs",
+        "device": "Dexcom G6",
+        "license_name": "Open Data Commons Attribution License v1.0",
+        "license_url": "https://opendatacommons.org/licenses/by/1-0/",
+        "participant_id": "003",
+        "source_url": "https://physionet.org/content/big-ideas-glycemic-wearable/1.1.3/",
+        "unit": "mg/dL",
+        "version": "1.1.3"
+      },
+      "sha256": "b53b937ade3c11dd75a7aaa15e8b6348180afb8ab73e4d7b93578a8ab89c5811",
+      "start_time": "2020-02-29T00:01:40"
+    },
+    {
+      "file": "days/BIG_IDEAs__004__20200228T000120.csv",
+      "observed_count": 288,
+      "observed_fraction": 1.0,
+      "participant_id": "004",
+      "provenance": {
+        "dataset": "BIG_IDEAs",
+        "device": "Dexcom G6",
+        "license_name": "Open Data Commons Attribution License v1.0",
+        "license_url": "https://opendatacommons.org/licenses/by/1-0/",
+        "participant_id": "004",
+        "source_url": "https://physionet.org/content/big-ideas-glycemic-wearable/1.1.3/",
+        "unit": "mg/dL",
+        "version": "1.1.3"
+      },
+      "sha256": "742542f8952f610ecc4036e6f2ee5c5d2922bac3f7a25403bdb2d7fabfe26062",
+      "start_time": "2020-02-28T00:01:20"
+    },
+    {
+      "file": "days/BIG_IDEAs__004__20200229T000120.csv",
+      "observed_count": 285,
+      "observed_fraction": 0.9895833134651184,
+      "participant_id": "004",
+      "provenance": {
+        "dataset": "BIG_IDEAs",
+        "device": "Dexcom G6",
+        "license_name": "Open Data Commons Attribution License v1.0",
+        "license_url": "https://opendatacommons.org/licenses/by/1-0/",
+        "participant_id": "004",
+        "source_url": "https://physionet.org/content/big-ideas-glycemic-wearable/1.1.3/",
+        "unit": "mg/dL",
+        "version": "1.1.3"
+      },
+      "sha256": "b880e2970149bf0afcbc3d91ddf08bdd091691926862e319b66e0dab2f0026bb",
+      "start_time": "2020-02-29T00:01:20"
+    },
+    {
+      "file": "days/BIG_IDEAs__004__20200301T000120.csv",
+      "observed_count": 287,
+      "observed_fraction": 0.9965277910232544,
+      "participant_id": "004",
+      "provenance": {
+        "dataset": "BIG_IDEAs",
+        "device": "Dexcom G6",
+        "license_name": "Open Data Commons Attribution License v1.0",
+        "license_url": "https://opendatacommons.org/licenses/by/1-0/",
+        "participant_id": "004",
+        "source_url": "https://physionet.org/content/big-ideas-glycemic-wearable/1.1.3/",
+        "unit": "mg/dL",
+        "version": "1.1.3"
+      },
+      "sha256": "47101164451769d611e886acde914d322397ce118bc7eb945fcfa21303f045fe",
+      "start_time": "2020-03-01T00:01:20"
+    },
+    {
+      "file": "days/BIG_IDEAs__004__20200304T000111.csv",
+      "observed_count": 287,
+      "observed_fraction": 0.9965277910232544,
+      "participant_id": "004",
+      "provenance": {
+        "dataset": "BIG_IDEAs",
+        "device": "Dexcom G6",
+        "license_name": "Open Data Commons Attribution License v1.0",
+        "license_url": "https://opendatacommons.org/licenses/by/1-0/",
+        "participant_id": "004",
+        "source_url": "https://physionet.org/content/big-ideas-glycemic-wearable/1.1.3/",
+        "unit": "mg/dL",
+        "version": "1.1.3"
+      },
+      "sha256": "692eaf6bbb4d3a756f5a255ddd02449dce6d728c5d7f21345577ba645464af74",
+      "start_time": "2020-03-04T00:01:11"
+    },
+    {
+      "file": "days/BIG_IDEAs__004__20200305T000111.csv",
+      "observed_count": 287,
+      "observed_fraction": 0.9965277910232544,
+      "participant_id": "004",
+      "provenance": {
+        "dataset": "BIG_IDEAs",
+        "device": "Dexcom G6",
+        "license_name": "Open Data Commons Attribution License v1.0",
+        "license_url": "https://opendatacommons.org/licenses/by/1-0/",
+        "participant_id": "004",
+        "source_url": "https://physionet.org/content/big-ideas-glycemic-wearable/1.1.3/",
+        "unit": "mg/dL",
+        "version": "1.1.3"
+      },
+      "sha256": "81675d60b08e4bc1db2d82e73763656d02400dea3f33040b0ab547a09a4b1a08",
+      "start_time": "2020-03-05T00:01:11"
+    },
+    {
+      "file": "days/BIG_IDEAs__005__20200228T000013.csv",
+      "observed_count": 288,
+      "observed_fraction": 1.0,
+      "participant_id": "005",
+      "provenance": {
+        "dataset": "BIG_IDEAs",
+        "device": "Dexcom G6",
+        "license_name": "Open Data Commons Attribution License v1.0",
+        "license_url": "https://opendatacommons.org/licenses/by/1-0/",
+        "participant_id": "005",
+        "source_url": "https://physionet.org/content/big-ideas-glycemic-wearable/1.1.3/",
+        "unit": "mg/dL",
+        "version": "1.1.3"
+      },
+      "sha256": "982341770c5c99f0bffdb6a65b63af29cd426fb55450433603b8a72a796cf0e5",
+      "start_time": "2020-02-28T00:00:13"
+    },
+    {
+      "file": "days/BIG_IDEAs__005__20200229T000013.csv",
+      "observed_count": 287,
+      "observed_fraction": 0.9965277910232544,
+      "participant_id": "005",
+      "provenance": {
+        "dataset": "BIG_IDEAs",
+        "device": "Dexcom G6",
+        "license_name": "Open Data Commons Attribution License v1.0",
+        "license_url": "https://opendatacommons.org/licenses/by/1-0/",
+        "participant_id": "005",
+        "source_url": "https://physionet.org/content/big-ideas-glycemic-wearable/1.1.3/",
+        "unit": "mg/dL",
+        "version": "1.1.3"
+      },
+      "sha256": "2916a1ddce6e563dd9dd14c7283aba79057d34dd15c16c1610e77bd10d0c22fd",
+      "start_time": "2020-02-29T00:00:13"
+    },
+    {
+      "file": "days/BIG_IDEAs__005__20200301T000013.csv",
+      "observed_count": 287,
+      "observed_fraction": 0.9965277910232544,
+      "participant_id": "005",
+      "provenance": {
+        "dataset": "BIG_IDEAs",
+        "device": "Dexcom G6",
+        "license_name": "Open Data Commons Attribution License v1.0",
+        "license_url": "https://opendatacommons.org/licenses/by/1-0/",
+        "participant_id": "005",
+        "source_url": "https://physionet.org/content/big-ideas-glycemic-wearable/1.1.3/",
+        "unit": "mg/dL",
+        "version": "1.1.3"
+      },
+      "sha256": "b0d4a88fa3e25314eb16da87cf7e5b79a0fa5e2169652a20599d756245c36b9a",
+      "start_time": "2020-03-01T00:00:13"
+    },
+    {
+      "file": "days/BIG_IDEAs__005__20200302T000013.csv",
+      "observed_count": 287,
+      "observed_fraction": 0.9965277910232544,
+      "participant_id": "005",
+      "provenance": {
+        "dataset": "BIG_IDEAs",
+        "device": "Dexcom G6",
+        "license_name": "Open Data Commons Attribution License v1.0",
+        "license_url": "https://opendatacommons.org/licenses/by/1-0/",
+        "participant_id": "005",
+        "source_url": "https://physionet.org/content/big-ideas-glycemic-wearable/1.1.3/",
+        "unit": "mg/dL",
+        "version": "1.1.3"
+      },
+      "sha256": "c14b6c98158dbdb22a3835552b768c42fb7f21b73992703abfd1728f589203fb",
+      "start_time": "2020-03-02T00:00:13"
+    },
+    {
+      "file": "days/BIG_IDEAs__005__20200305T000116.csv",
+      "observed_count": 287,
+      "observed_fraction": 0.9965277910232544,
+      "participant_id": "005",
+      "provenance": {
+        "dataset": "BIG_IDEAs",
+        "device": "Dexcom G6",
+        "license_name": "Open Data Commons Attribution License v1.0",
+        "license_url": "https://opendatacommons.org/licenses/by/1-0/",
+        "participant_id": "005",
+        "source_url": "https://physionet.org/content/big-ideas-glycemic-wearable/1.1.3/",
+        "unit": "mg/dL",
+        "version": "1.1.3"
+      },
+      "sha256": "cd3181c564f0d2f7ab5b77cf78f14c10da940465511b9cf520327a17363682a5",
+      "start_time": "2020-03-05T00:01:16"
+    },
+    {
+      "file": "days/BIG_IDEAs__005__20200306T000116.csv",
+      "observed_count": 287,
+      "observed_fraction": 0.9965277910232544,
+      "participant_id": "005",
+      "provenance": {
+        "dataset": "BIG_IDEAs",
+        "device": "Dexcom G6",
+        "license_name": "Open Data Commons Attribution License v1.0",
+        "license_url": "https://opendatacommons.org/licenses/by/1-0/",
+        "participant_id": "005",
+        "source_url": "https://physionet.org/content/big-ideas-glycemic-wearable/1.1.3/",
+        "unit": "mg/dL",
+        "version": "1.1.3"
+      },
+      "sha256": "84df3e55af6cb814481fdfb7db93b87b36aa17cf96b620a653f13fecdca08627",
+      "start_time": "2020-03-06T00:01:16"
+    },
+    {
+      "file": "days/BIG_IDEAs__006__20200229T000314.csv",
+      "observed_count": 287,
+      "observed_fraction": 0.9965277910232544,
+      "participant_id": "006",
+      "provenance": {
+        "dataset": "BIG_IDEAs",
+        "device": "Dexcom G6",
+        "license_name": "Open Data Commons Attribution License v1.0",
+        "license_url": "https://opendatacommons.org/licenses/by/1-0/",
+        "participant_id": "006",
+        "source_url": "https://physionet.org/content/big-ideas-glycemic-wearable/1.1.3/",
+        "unit": "mg/dL",
+        "version": "1.1.3"
+      },
+      "sha256": "be54ac20441e1d6de13d73da450b6d8559fccea190c695c9341b9a09839e75bb",
+      "start_time": "2020-02-29T00:03:14"
+    },
+    {
+      "file": "days/BIG_IDEAs__006__20200301T000314.csv",
+      "observed_count": 287,
+      "observed_fraction": 0.9965277910232544,
+      "participant_id": "006",
+      "provenance": {
+        "dataset": "BIG_IDEAs",
+        "device": "Dexcom G6",
+        "license_name": "Open Data Commons Attribution License v1.0",
+        "license_url": "https://opendatacommons.org/licenses/by/1-0/",
+        "participant_id": "006",
+        "source_url": "https://physionet.org/content/big-ideas-glycemic-wearable/1.1.3/",
+        "unit": "mg/dL",
+        "version": "1.1.3"
+      },
+      "sha256": "beb00a827278eda5b6405889786cc09ca29af4f459222d34e5194c522229fc87",
+      "start_time": "2020-03-01T00:03:14"
+    },
+    {
+      "file": "days/BIG_IDEAs__006__20200302T000314.csv",
+      "observed_count": 287,
+      "observed_fraction": 0.9965277910232544,
+      "participant_id": "006",
+      "provenance": {
+        "dataset": "BIG_IDEAs",
+        "device": "Dexcom G6",
+        "license_name": "Open Data Commons Attribution License v1.0",
+        "license_url": "https://opendatacommons.org/licenses/by/1-0/",
+        "participant_id": "006",
+        "source_url": "https://physionet.org/content/big-ideas-glycemic-wearable/1.1.3/",
+        "unit": "mg/dL",
+        "version": "1.1.3"
+      },
+      "sha256": "4b3a8a77f6b845cef2066a0c90d3ed87c2fb4fda1c8814854fe7e46345c5e569",
+      "start_time": "2020-03-02T00:03:14"
+    },
+    {
+      "file": "days/BIG_IDEAs__006__20200303T000314.csv",
+      "observed_count": 287,
+      "observed_fraction": 0.9965277910232544,
+      "participant_id": "006",
+      "provenance": {
+        "dataset": "BIG_IDEAs",
+        "device": "Dexcom G6",
+        "license_name": "Open Data Commons Attribution License v1.0",
+        "license_url": "https://opendatacommons.org/licenses/by/1-0/",
+        "participant_id": "006",
+        "source_url": "https://physionet.org/content/big-ideas-glycemic-wearable/1.1.3/",
+        "unit": "mg/dL",
+        "version": "1.1.3"
+      },
+      "sha256": "213ee377c790f90abf079248c5381d036aa0fd5839a60c5035c86671b7690bb0",
+      "start_time": "2020-03-03T00:03:14"
+    },
+    {
+      "file": "days/BIG_IDEAs__006__20200304T000314.csv",
+      "observed_count": 287,
+      "observed_fraction": 0.9965277910232544,
+      "participant_id": "006",
+      "provenance": {
+        "dataset": "BIG_IDEAs",
+        "device": "Dexcom G6",
+        "license_name": "Open Data Commons Attribution License v1.0",
+        "license_url": "https://opendatacommons.org/licenses/by/1-0/",
+        "participant_id": "006",
+        "source_url": "https://physionet.org/content/big-ideas-glycemic-wearable/1.1.3/",
+        "unit": "mg/dL",
+        "version": "1.1.3"
+      },
+      "sha256": "5b8515b2735d71b4150468943274238653b42e2e31adbb3932a8b28442f39680",
+      "start_time": "2020-03-04T00:03:14"
+    },
+    {
+      "file": "days/BIG_IDEAs__006__20200305T000314.csv",
+      "observed_count": 287,
+      "observed_fraction": 0.9965277910232544,
+      "participant_id": "006",
+      "provenance": {
+        "dataset": "BIG_IDEAs",
+        "device": "Dexcom G6",
+        "license_name": "Open Data Commons Attribution License v1.0",
+        "license_url": "https://opendatacommons.org/licenses/by/1-0/",
+        "participant_id": "006",
+        "source_url": "https://physionet.org/content/big-ideas-glycemic-wearable/1.1.3/",
+        "unit": "mg/dL",
+        "version": "1.1.3"
+      },
+      "sha256": "5e75a90df98a3586131f4e562cf165b7d2a0d3a09b62372ffd61a4ebfcababe5",
+      "start_time": "2020-03-05T00:03:14"
+    },
+    {
+      "file": "days/BIG_IDEAs__006__20200306T000314.csv",
+      "observed_count": 287,
+      "observed_fraction": 0.9965277910232544,
+      "participant_id": "006",
+      "provenance": {
+        "dataset": "BIG_IDEAs",
+        "device": "Dexcom G6",
+        "license_name": "Open Data Commons Attribution License v1.0",
+        "license_url": "https://opendatacommons.org/licenses/by/1-0/",
+        "participant_id": "006",
+        "source_url": "https://physionet.org/content/big-ideas-glycemic-wearable/1.1.3/",
+        "unit": "mg/dL",
+        "version": "1.1.3"
+      },
+      "sha256": "9b7c4ac51936ab32485c43557d31acb5941751d74787c282a2927e17f00e848e",
+      "start_time": "2020-03-06T00:03:14"
+    },
+    {
+      "file": "days/BIG_IDEAs__006__20200307T000314.csv",
+      "observed_count": 287,
+      "observed_fraction": 0.9965277910232544,
+      "participant_id": "006",
+      "provenance": {
+        "dataset": "BIG_IDEAs",
+        "device": "Dexcom G6",
+        "license_name": "Open Data Commons Attribution License v1.0",
+        "license_url": "https://opendatacommons.org/licenses/by/1-0/",
+        "participant_id": "006",
+        "source_url": "https://physionet.org/content/big-ideas-glycemic-wearable/1.1.3/",
+        "unit": "mg/dL",
+        "version": "1.1.3"
+      },
+      "sha256": "d81cf54db99601fd9e6e5bcbe7ee91822964409c640e037e2012ca82d4f7a8bd",
+      "start_time": "2020-03-07T00:03:14"
+    },
+    {
+      "file": "days/BIG_IDEAs__006__20200308T000314.csv",
+      "observed_count": 287,
+      "observed_fraction": 0.9965277910232544,
+      "participant_id": "006",
+      "provenance": {
+        "dataset": "BIG_IDEAs",
+        "device": "Dexcom G6",
+        "license_name": "Open Data Commons Attribution License v1.0",
+        "license_url": "https://opendatacommons.org/licenses/by/1-0/",
+        "participant_id": "006",
+        "source_url": "https://physionet.org/content/big-ideas-glycemic-wearable/1.1.3/",
+        "unit": "mg/dL",
+        "version": "1.1.3"
+      },
+      "sha256": "15fb91c4eae56f06b52f6c853240c8ec4036289e5319af324906168223177f12",
+      "start_time": "2020-03-08T00:03:14"
+    },
+    {
+      "file": "days/BIG_IDEAs__007__20200315T000219.csv",
+      "observed_count": 287,
+      "observed_fraction": 0.9965277910232544,
+      "participant_id": "007",
+      "provenance": {
+        "dataset": "BIG_IDEAs",
+        "device": "Dexcom G6",
+        "license_name": "Open Data Commons Attribution License v1.0",
+        "license_url": "https://opendatacommons.org/licenses/by/1-0/",
+        "participant_id": "007",
+        "source_url": "https://physionet.org/content/big-ideas-glycemic-wearable/1.1.3/",
+        "unit": "mg/dL",
+        "version": "1.1.3"
+      },
+      "sha256": "a305117153e7c00d723940abb4221360ceecb34a644550e163226ec5c5c5ce2c",
+      "start_time": "2020-03-15T00:02:19"
+    },
+    {
+      "file": "days/BIG_IDEAs__007__20200316T000219.csv",
+      "observed_count": 287,
+      "observed_fraction": 0.9965277910232544,
+      "participant_id": "007",
+      "provenance": {
+        "dataset": "BIG_IDEAs",
+        "device": "Dexcom G6",
+        "license_name": "Open Data Commons Attribution License v1.0",
+        "license_url": "https://opendatacommons.org/licenses/by/1-0/",
+        "participant_id": "007",
+        "source_url": "https://physionet.org/content/big-ideas-glycemic-wearable/1.1.3/",
+        "unit": "mg/dL",
+        "version": "1.1.3"
+      },
+      "sha256": "7ea41d5a056fad336d5fa538500cd56595a1aa651ab82108f0fc82c934a42ab7",
+      "start_time": "2020-03-16T00:02:19"
+    },
+    {
+      "file": "days/BIG_IDEAs__007__20200317T000219.csv",
+      "observed_count": 287,
+      "observed_fraction": 0.9965277910232544,
+      "participant_id": "007",
+      "provenance": {
+        "dataset": "BIG_IDEAs",
+        "device": "Dexcom G6",
+        "license_name": "Open Data Commons Attribution License v1.0",
+        "license_url": "https://opendatacommons.org/licenses/by/1-0/",
+        "participant_id": "007",
+        "source_url": "https://physionet.org/content/big-ideas-glycemic-wearable/1.1.3/",
+        "unit": "mg/dL",
+        "version": "1.1.3"
+      },
+      "sha256": "7490702f8a3b1012b4b20ed9c9a739520f280f1615f592fa0a5853a7835ca91d",
+      "start_time": "2020-03-17T00:02:19"
+    },
+    {
+      "file": "days/BIG_IDEAs__007__20200319T000208.csv",
+      "observed_count": 287,
+      "observed_fraction": 0.9965277910232544,
+      "participant_id": "007",
+      "provenance": {
+        "dataset": "BIG_IDEAs",
+        "device": "Dexcom G6",
+        "license_name": "Open Data Commons Attribution License v1.0",
+        "license_url": "https://opendatacommons.org/licenses/by/1-0/",
+        "participant_id": "007",
+        "source_url": "https://physionet.org/content/big-ideas-glycemic-wearable/1.1.3/",
+        "unit": "mg/dL",
+        "version": "1.1.3"
+      },
+      "sha256": "7520b904254989a9d8427a6a91bd220f44c333d956276b3931a39227b648bfbf",
+      "start_time": "2020-03-19T00:02:08"
+    },
+    {
+      "file": "days/BIG_IDEAs__007__20200320T000208.csv",
+      "observed_count": 287,
+      "observed_fraction": 0.9965277910232544,
+      "participant_id": "007",
+      "provenance": {
+        "dataset": "BIG_IDEAs",
+        "device": "Dexcom G6",
+        "license_name": "Open Data Commons Attribution License v1.0",
+        "license_url": "https://opendatacommons.org/licenses/by/1-0/",
+        "participant_id": "007",
+        "source_url": "https://physionet.org/content/big-ideas-glycemic-wearable/1.1.3/",
+        "unit": "mg/dL",
+        "version": "1.1.3"
+      },
+      "sha256": "3772a625aa5ee8f22e71f7f774843f06d789221b80e48c6243224386e1a55515",
+      "start_time": "2020-03-20T00:02:08"
+    },
+    {
+      "file": "days/BIG_IDEAs__007__20200321T000208.csv",
+      "observed_count": 287,
+      "observed_fraction": 0.9965277910232544,
+      "participant_id": "007",
+      "provenance": {
+        "dataset": "BIG_IDEAs",
+        "device": "Dexcom G6",
+        "license_name": "Open Data Commons Attribution License v1.0",
+        "license_url": "https://opendatacommons.org/licenses/by/1-0/",
+        "participant_id": "007",
+        "source_url": "https://physionet.org/content/big-ideas-glycemic-wearable/1.1.3/",
+        "unit": "mg/dL",
+        "version": "1.1.3"
+      },
+      "sha256": "2b9ba588d11b2fc655373014deb40bdd656ded276c9e7ab5b766c0e8a2c1fabe",
+      "start_time": "2020-03-21T00:02:08"
+    },
+    {
+      "file": "days/BIG_IDEAs__008__20200316T000451.csv",
+      "observed_count": 287,
+      "observed_fraction": 0.9965277910232544,
+      "participant_id": "008",
+      "provenance": {
+        "dataset": "BIG_IDEAs",
+        "device": "Dexcom G6",
+        "license_name": "Open Data Commons Attribution License v1.0",
+        "license_url": "https://opendatacommons.org/licenses/by/1-0/",
+        "participant_id": "008",
+        "source_url": "https://physionet.org/content/big-ideas-glycemic-wearable/1.1.3/",
+        "unit": "mg/dL",
+        "version": "1.1.3"
+      },
+      "sha256": "1f45acc680d5b08b0d88008345014790ff76420838a239a0608bfc03c6dc47fd",
+      "start_time": "2020-03-16T00:04:51"
+    },
+    {
+      "file": "days/BIG_IDEAs__008__20200318T000446.csv",
+      "observed_count": 287,
+      "observed_fraction": 0.9965277910232544,
+      "participant_id": "008",
+      "provenance": {
+        "dataset": "BIG_IDEAs",
+        "device": "Dexcom G6",
+        "license_name": "Open Data Commons Attribution License v1.0",
+        "license_url": "https://opendatacommons.org/licenses/by/1-0/",
+        "participant_id": "008",
+        "source_url": "https://physionet.org/content/big-ideas-glycemic-wearable/1.1.3/",
+        "unit": "mg/dL",
+        "version": "1.1.3"
+      },
+      "sha256": "505fca4afa27e7446def8429265ef06c3d8bd20cd6461ca55cd5eea409041453",
+      "start_time": "2020-03-18T00:04:46"
+    },
+    {
+      "file": "days/BIG_IDEAs__008__20200320T000441.csv",
+      "observed_count": 280,
+      "observed_fraction": 0.9722222089767456,
+      "participant_id": "008",
+      "provenance": {
+        "dataset": "BIG_IDEAs",
+        "device": "Dexcom G6",
+        "license_name": "Open Data Commons Attribution License v1.0",
+        "license_url": "https://opendatacommons.org/licenses/by/1-0/",
+        "participant_id": "008",
+        "source_url": "https://physionet.org/content/big-ideas-glycemic-wearable/1.1.3/",
+        "unit": "mg/dL",
+        "version": "1.1.3"
+      },
+      "sha256": "b46d0b94aa89431e0d1c796b43e3e127b2a69bd3ed29c0baf3974b116fbffe00",
+      "start_time": "2020-03-20T00:04:41"
+    },
+    {
+      "file": "days/BIG_IDEAs__008__20200321T000441.csv",
+      "observed_count": 287,
+      "observed_fraction": 0.9965277910232544,
+      "participant_id": "008",
+      "provenance": {
+        "dataset": "BIG_IDEAs",
+        "device": "Dexcom G6",
+        "license_name": "Open Data Commons Attribution License v1.0",
+        "license_url": "https://opendatacommons.org/licenses/by/1-0/",
+        "participant_id": "008",
+        "source_url": "https://physionet.org/content/big-ideas-glycemic-wearable/1.1.3/",
+        "unit": "mg/dL",
+        "version": "1.1.3"
+      },
+      "sha256": "5972295e834202ce7eeb8a46142c6141e273fc66230575d44aaaf59823ce0337",
+      "start_time": "2020-03-21T00:04:41"
+    },
+    {
+      "file": "days/BIG_IDEAs__008__20200322T000441.csv",
+      "observed_count": 287,
+      "observed_fraction": 0.9965277910232544,
+      "participant_id": "008",
+      "provenance": {
+        "dataset": "BIG_IDEAs",
+        "device": "Dexcom G6",
+        "license_name": "Open Data Commons Attribution License v1.0",
+        "license_url": "https://opendatacommons.org/licenses/by/1-0/",
+        "participant_id": "008",
+        "source_url": "https://physionet.org/content/big-ideas-glycemic-wearable/1.1.3/",
+        "unit": "mg/dL",
+        "version": "1.1.3"
+      },
+      "sha256": "90a5834f93b3349d0cc2c74e3b717870e0c0f90a7d6ff16877f50276addbceb3",
+      "start_time": "2020-03-22T00:04:41"
+    },
+    {
+      "file": "days/BIG_IDEAs__009__20200322T000151.csv",
+      "observed_count": 286,
+      "observed_fraction": 0.9930555820465088,
+      "participant_id": "009",
+      "provenance": {
+        "dataset": "BIG_IDEAs",
+        "device": "Dexcom G6",
+        "license_name": "Open Data Commons Attribution License v1.0",
+        "license_url": "https://opendatacommons.org/licenses/by/1-0/",
+        "participant_id": "009",
+        "source_url": "https://physionet.org/content/big-ideas-glycemic-wearable/1.1.3/",
+        "unit": "mg/dL",
+        "version": "1.1.3"
+      },
+      "sha256": "391806d8be29e3ccec5e5126264596a85a21d91615cea04932d6af3822d3ee12",
+      "start_time": "2020-03-22T00:01:51"
+    },
+    {
+      "file": "days/BIG_IDEAs__009__20200323T000151.csv",
+      "observed_count": 287,
+      "observed_fraction": 0.9965277910232544,
+      "participant_id": "009",
+      "provenance": {
+        "dataset": "BIG_IDEAs",
+        "device": "Dexcom G6",
+        "license_name": "Open Data Commons Attribution License v1.0",
+        "license_url": "https://opendatacommons.org/licenses/by/1-0/",
+        "participant_id": "009",
+        "source_url": "https://physionet.org/content/big-ideas-glycemic-wearable/1.1.3/",
+        "unit": "mg/dL",
+        "version": "1.1.3"
+      },
+      "sha256": "31ce0cba3a91643ff4c4ebd5225e71857270d335e6b0133da1763547c8057759",
+      "start_time": "2020-03-23T00:01:51"
+    },
+    {
+      "file": "days/BIG_IDEAs__009__20200324T000151.csv",
+      "observed_count": 287,
+      "observed_fraction": 0.9965277910232544,
+      "participant_id": "009",
+      "provenance": {
+        "dataset": "BIG_IDEAs",
+        "device": "Dexcom G6",
+        "license_name": "Open Data Commons Attribution License v1.0",
+        "license_url": "https://opendatacommons.org/licenses/by/1-0/",
+        "participant_id": "009",
+        "source_url": "https://physionet.org/content/big-ideas-glycemic-wearable/1.1.3/",
+        "unit": "mg/dL",
+        "version": "1.1.3"
+      },
+      "sha256": "fad996a192a952f34536d4aaf56e26cfd5fd62918693f180a90352ae6869851c",
+      "start_time": "2020-03-24T00:01:51"
+    },
+    {
+      "file": "days/BIG_IDEAs__009__20200325T000151.csv",
+      "observed_count": 287,
+      "observed_fraction": 0.9965277910232544,
+      "participant_id": "009",
+      "provenance": {
+        "dataset": "BIG_IDEAs",
+        "device": "Dexcom G6",
+        "license_name": "Open Data Commons Attribution License v1.0",
+        "license_url": "https://opendatacommons.org/licenses/by/1-0/",
+        "participant_id": "009",
+        "source_url": "https://physionet.org/content/big-ideas-glycemic-wearable/1.1.3/",
+        "unit": "mg/dL",
+        "version": "1.1.3"
+      },
+      "sha256": "3cbfa6e2e97c0e166ae3945eaf170f332b6659608a80c95bcc7d7143f6a0fc58",
+      "start_time": "2020-03-25T00:01:51"
+    },
+    {
+      "file": "days/BIG_IDEAs__009__20200326T000151.csv",
+      "observed_count": 287,
+      "observed_fraction": 0.9965277910232544,
+      "participant_id": "009",
+      "provenance": {
+        "dataset": "BIG_IDEAs",
+        "device": "Dexcom G6",
+        "license_name": "Open Data Commons Attribution License v1.0",
+        "license_url": "https://opendatacommons.org/licenses/by/1-0/",
+        "participant_id": "009",
+        "source_url": "https://physionet.org/content/big-ideas-glycemic-wearable/1.1.3/",
+        "unit": "mg/dL",
+        "version": "1.1.3"
+      },
+      "sha256": "671553badf48627943c46169b280b956f2410756ae515fed2649031b8bdbfee5",
+      "start_time": "2020-03-26T00:01:51"
+    },
+    {
+      "file": "days/BIG_IDEAs__009__20200327T000151.csv",
+      "observed_count": 287,
+      "observed_fraction": 0.9965277910232544,
+      "participant_id": "009",
+      "provenance": {
+        "dataset": "BIG_IDEAs",
+        "device": "Dexcom G6",
+        "license_name": "Open Data Commons Attribution License v1.0",
+        "license_url": "https://opendatacommons.org/licenses/by/1-0/",
+        "participant_id": "009",
+        "source_url": "https://physionet.org/content/big-ideas-glycemic-wearable/1.1.3/",
+        "unit": "mg/dL",
+        "version": "1.1.3"
+      },
+      "sha256": "03ed4f751b7520c0b402360dc481db416a8ce2e240e6c3537be0a79819ec80e7",
+      "start_time": "2020-03-27T00:01:51"
+    },
+    {
+      "file": "days/BIG_IDEAs__009__20200328T000151.csv",
+      "observed_count": 287,
+      "observed_fraction": 0.9965277910232544,
+      "participant_id": "009",
+      "provenance": {
+        "dataset": "BIG_IDEAs",
+        "device": "Dexcom G6",
+        "license_name": "Open Data Commons Attribution License v1.0",
+        "license_url": "https://opendatacommons.org/licenses/by/1-0/",
+        "participant_id": "009",
+        "source_url": "https://physionet.org/content/big-ideas-glycemic-wearable/1.1.3/",
+        "unit": "mg/dL",
+        "version": "1.1.3"
+      },
+      "sha256": "4358387d66703e51d73a7c45a75b8146255a718e61047cb19111619531f3e7c6",
+      "start_time": "2020-03-28T00:01:51"
+    },
+    {
+      "file": "days/BIG_IDEAs__010__20200325T000415.csv",
+      "observed_count": 287,
+      "observed_fraction": 0.9965277910232544,
+      "participant_id": "010",
+      "provenance": {
+        "dataset": "BIG_IDEAs",
+        "device": "Dexcom G6",
+        "license_name": "Open Data Commons Attribution License v1.0",
+        "license_url": "https://opendatacommons.org/licenses/by/1-0/",
+        "participant_id": "010",
+        "source_url": "https://physionet.org/content/big-ideas-glycemic-wearable/1.1.3/",
+        "unit": "mg/dL",
+        "version": "1.1.3"
+      },
+      "sha256": "cce0da42a40ce5501b4171153abf7e6dafca9c859ddb8b246f20e55e97c924a7",
+      "start_time": "2020-03-25T00:04:15"
+    },
+    {
+      "file": "days/BIG_IDEAs__010__20200326T000415.csv",
+      "observed_count": 287,
+      "observed_fraction": 0.9965277910232544,
+      "participant_id": "010",
+      "provenance": {
+        "dataset": "BIG_IDEAs",
+        "device": "Dexcom G6",
+        "license_name": "Open Data Commons Attribution License v1.0",
+        "license_url": "https://opendatacommons.org/licenses/by/1-0/",
+        "participant_id": "010",
+        "source_url": "https://physionet.org/content/big-ideas-glycemic-wearable/1.1.3/",
+        "unit": "mg/dL",
+        "version": "1.1.3"
+      },
+      "sha256": "414f2a4bc5285a11f747c12d169e17a44bde1a19669a549cf40c6f69c6bea513",
+      "start_time": "2020-03-26T00:04:15"
+    },
+    {
+      "file": "days/BIG_IDEAs__010__20200327T000415.csv",
+      "observed_count": 287,
+      "observed_fraction": 0.9965277910232544,
+      "participant_id": "010",
+      "provenance": {
+        "dataset": "BIG_IDEAs",
+        "device": "Dexcom G6",
+        "license_name": "Open Data Commons Attribution License v1.0",
+        "license_url": "https://opendatacommons.org/licenses/by/1-0/",
+        "participant_id": "010",
+        "source_url": "https://physionet.org/content/big-ideas-glycemic-wearable/1.1.3/",
+        "unit": "mg/dL",
+        "version": "1.1.3"
+      },
+      "sha256": "75b2b289687d42bb6bb267ffd927caf61ec8a55add36f63babec96e7541c3b85",
+      "start_time": "2020-03-27T00:04:15"
+    },
+    {
+      "file": "days/BIG_IDEAs__011__20200407T000110.csv",
+      "observed_count": 287,
+      "observed_fraction": 0.9965277910232544,
+      "participant_id": "011",
+      "provenance": {
+        "dataset": "BIG_IDEAs",
+        "device": "Dexcom G6",
+        "license_name": "Open Data Commons Attribution License v1.0",
+        "license_url": "https://opendatacommons.org/licenses/by/1-0/",
+        "participant_id": "011",
+        "source_url": "https://physionet.org/content/big-ideas-glycemic-wearable/1.1.3/",
+        "unit": "mg/dL",
+        "version": "1.1.3"
+      },
+      "sha256": "c583d2dc6ba22363b6cddcd0424cab355ec7d48d61ded5f589795eaca192202d",
+      "start_time": "2020-04-07T00:01:10"
+    },
+    {
+      "file": "days/BIG_IDEAs__011__20200408T000110.csv",
+      "observed_count": 287,
+      "observed_fraction": 0.9965277910232544,
+      "participant_id": "011",
+      "provenance": {
+        "dataset": "BIG_IDEAs",
+        "device": "Dexcom G6",
+        "license_name": "Open Data Commons Attribution License v1.0",
+        "license_url": "https://opendatacommons.org/licenses/by/1-0/",
+        "participant_id": "011",
+        "source_url": "https://physionet.org/content/big-ideas-glycemic-wearable/1.1.3/",
+        "unit": "mg/dL",
+        "version": "1.1.3"
+      },
+      "sha256": "facfb8b49e392234ae41b35bcf3ee9123eadb5f50bf9c589d16df800df94a275",
+      "start_time": "2020-04-08T00:01:10"
+    },
+    {
+      "file": "days/BIG_IDEAs__011__20200409T000110.csv",
+      "observed_count": 279,
+      "observed_fraction": 0.96875,
+      "participant_id": "011",
+      "provenance": {
+        "dataset": "BIG_IDEAs",
+        "device": "Dexcom G6",
+        "license_name": "Open Data Commons Attribution License v1.0",
+        "license_url": "https://opendatacommons.org/licenses/by/1-0/",
+        "participant_id": "011",
+        "source_url": "https://physionet.org/content/big-ideas-glycemic-wearable/1.1.3/",
+        "unit": "mg/dL",
+        "version": "1.1.3"
+      },
+      "sha256": "c2a30a19531f32208cb2afa359e88f45ac25789f0f716ff6d0ffa24f1538676b",
+      "start_time": "2020-04-09T00:01:10"
+    },
+    {
+      "file": "days/BIG_IDEAs__011__20200410T000110.csv",
+      "observed_count": 282,
+      "observed_fraction": 0.9791666865348816,
+      "participant_id": "011",
+      "provenance": {
+        "dataset": "BIG_IDEAs",
+        "device": "Dexcom G6",
+        "license_name": "Open Data Commons Attribution License v1.0",
+        "license_url": "https://opendatacommons.org/licenses/by/1-0/",
+        "participant_id": "011",
+        "source_url": "https://physionet.org/content/big-ideas-glycemic-wearable/1.1.3/",
+        "unit": "mg/dL",
+        "version": "1.1.3"
+      },
+      "sha256": "8ced8781dbcc7973c3b3bc2895c86da03cbdf2b7b4526f5e125cbff1bb8bf219",
+      "start_time": "2020-04-10T00:01:10"
+    },
+    {
+      "file": "days/BIG_IDEAs__011__20200411T000110.csv",
+      "observed_count": 287,
+      "observed_fraction": 0.9965277910232544,
+      "participant_id": "011",
+      "provenance": {
+        "dataset": "BIG_IDEAs",
+        "device": "Dexcom G6",
+        "license_name": "Open Data Commons Attribution License v1.0",
+        "license_url": "https://opendatacommons.org/licenses/by/1-0/",
+        "participant_id": "011",
+        "source_url": "https://physionet.org/content/big-ideas-glycemic-wearable/1.1.3/",
+        "unit": "mg/dL",
+        "version": "1.1.3"
+      },
+      "sha256": "7f774662af549adeee9b2520f6b85a35be6c5dc02b2595ad5b74cebbb819e4c7",
+      "start_time": "2020-04-11T00:01:10"
+    },
+    {
+      "file": "days/BIG_IDEAs__011__20200412T000110.csv",
+      "observed_count": 287,
+      "observed_fraction": 0.9965277910232544,
+      "participant_id": "011",
+      "provenance": {
+        "dataset": "BIG_IDEAs",
+        "device": "Dexcom G6",
+        "license_name": "Open Data Commons Attribution License v1.0",
+        "license_url": "https://opendatacommons.org/licenses/by/1-0/",
+        "participant_id": "011",
+        "source_url": "https://physionet.org/content/big-ideas-glycemic-wearable/1.1.3/",
+        "unit": "mg/dL",
+        "version": "1.1.3"
+      },
+      "sha256": "d4f200ec068ca69e575725e45b87b4beeb7b9ae52adbf427e66a1de719f48e6c",
+      "start_time": "2020-04-12T00:01:10"
+    },
+    {
+      "file": "days/BIG_IDEAs__011__20200413T000110.csv",
+      "observed_count": 287,
+      "observed_fraction": 0.9965277910232544,
+      "participant_id": "011",
+      "provenance": {
+        "dataset": "BIG_IDEAs",
+        "device": "Dexcom G6",
+        "license_name": "Open Data Commons Attribution License v1.0",
+        "license_url": "https://opendatacommons.org/licenses/by/1-0/",
+        "participant_id": "011",
+        "source_url": "https://physionet.org/content/big-ideas-glycemic-wearable/1.1.3/",
+        "unit": "mg/dL",
+        "version": "1.1.3"
+      },
+      "sha256": "81ce55f9ea0bcf42f344ab4217e228d63a4e4668938375f322eb71aea62f5f34",
+      "start_time": "2020-04-13T00:01:10"
+    },
+    {
+      "file": "days/BIG_IDEAs__011__20200414T000110.csv",
+      "observed_count": 287,
+      "observed_fraction": 0.9965277910232544,
+      "participant_id": "011",
+      "provenance": {
+        "dataset": "BIG_IDEAs",
+        "device": "Dexcom G6",
+        "license_name": "Open Data Commons Attribution License v1.0",
+        "license_url": "https://opendatacommons.org/licenses/by/1-0/",
+        "participant_id": "011",
+        "source_url": "https://physionet.org/content/big-ideas-glycemic-wearable/1.1.3/",
+        "unit": "mg/dL",
+        "version": "1.1.3"
+      },
+      "sha256": "8fe26d059f3df733ecdaa5e9302d8257aa27b87072cf8f69bdad88e7e7021fa2",
+      "start_time": "2020-04-14T00:01:10"
+    },
+    {
+      "file": "days/BIG_IDEAs__011__20200415T000110.csv",
+      "observed_count": 287,
+      "observed_fraction": 0.9965277910232544,
+      "participant_id": "011",
+      "provenance": {
+        "dataset": "BIG_IDEAs",
+        "device": "Dexcom G6",
+        "license_name": "Open Data Commons Attribution License v1.0",
+        "license_url": "https://opendatacommons.org/licenses/by/1-0/",
+        "participant_id": "011",
+        "source_url": "https://physionet.org/content/big-ideas-glycemic-wearable/1.1.3/",
+        "unit": "mg/dL",
+        "version": "1.1.3"
+      },
+      "sha256": "58515a4a0d1dca5868785d9b4b491ff19c72d3c9ecfd8b035ae7fb84f1b90f6d",
+      "start_time": "2020-04-15T00:01:10"
+    },
+    {
+      "file": "days/BIG_IDEAs__012__20200504T000213.csv",
+      "observed_count": 286,
+      "observed_fraction": 0.9930555820465088,
+      "participant_id": "012",
+      "provenance": {
+        "dataset": "BIG_IDEAs",
+        "device": "Dexcom G6",
+        "license_name": "Open Data Commons Attribution License v1.0",
+        "license_url": "https://opendatacommons.org/licenses/by/1-0/",
+        "participant_id": "012",
+        "source_url": "https://physionet.org/content/big-ideas-glycemic-wearable/1.1.3/",
+        "unit": "mg/dL",
+        "version": "1.1.3"
+      },
+      "sha256": "112c1e2d6f050a49f7f524b8b4c5f1b8c6ac9d46b8eefd60f411a621b2440683",
+      "start_time": "2020-05-04T00:02:13"
+    },
+    {
+      "file": "days/BIG_IDEAs__012__20200505T000213.csv",
+      "observed_count": 287,
+      "observed_fraction": 0.9965277910232544,
+      "participant_id": "012",
+      "provenance": {
+        "dataset": "BIG_IDEAs",
+        "device": "Dexcom G6",
+        "license_name": "Open Data Commons Attribution License v1.0",
+        "license_url": "https://opendatacommons.org/licenses/by/1-0/",
+        "participant_id": "012",
+        "source_url": "https://physionet.org/content/big-ideas-glycemic-wearable/1.1.3/",
+        "unit": "mg/dL",
+        "version": "1.1.3"
+      },
+      "sha256": "7a61e66b4bee2bd9c0a52e11747626636e71834a0d9aac6993a713fd76a64dc8",
+      "start_time": "2020-05-05T00:02:13"
+    },
+    {
+      "file": "days/BIG_IDEAs__012__20200506T000213.csv",
+      "observed_count": 287,
+      "observed_fraction": 0.9965277910232544,
+      "participant_id": "012",
+      "provenance": {
+        "dataset": "BIG_IDEAs",
+        "device": "Dexcom G6",
+        "license_name": "Open Data Commons Attribution License v1.0",
+        "license_url": "https://opendatacommons.org/licenses/by/1-0/",
+        "participant_id": "012",
+        "source_url": "https://physionet.org/content/big-ideas-glycemic-wearable/1.1.3/",
+        "unit": "mg/dL",
+        "version": "1.1.3"
+      },
+      "sha256": "dfbbb5de7820a1e6c6356493093d69af687c805c85ef1f8f24de86a99e3f8f2e",
+      "start_time": "2020-05-06T00:02:13"
+    },
+    {
+      "file": "days/BIG_IDEAs__012__20200507T000213.csv",
+      "observed_count": 276,
+      "observed_fraction": 0.9583333134651184,
+      "participant_id": "012",
+      "provenance": {
+        "dataset": "BIG_IDEAs",
+        "device": "Dexcom G6",
+        "license_name": "Open Data Commons Attribution License v1.0",
+        "license_url": "https://opendatacommons.org/licenses/by/1-0/",
+        "participant_id": "012",
+        "source_url": "https://physionet.org/content/big-ideas-glycemic-wearable/1.1.3/",
+        "unit": "mg/dL",
+        "version": "1.1.3"
+      },
+      "sha256": "aabb5cfa325ada27219006bfd369f1c4eba9eb5e14cafa39c4ed51a42907f985",
+      "start_time": "2020-05-07T00:02:13"
+    },
+    {
+      "file": "days/BIG_IDEAs__012__20200508T000213.csv",
+      "observed_count": 287,
+      "observed_fraction": 0.9965277910232544,
+      "participant_id": "012",
+      "provenance": {
+        "dataset": "BIG_IDEAs",
+        "device": "Dexcom G6",
+        "license_name": "Open Data Commons Attribution License v1.0",
+        "license_url": "https://opendatacommons.org/licenses/by/1-0/",
+        "participant_id": "012",
+        "source_url": "https://physionet.org/content/big-ideas-glycemic-wearable/1.1.3/",
+        "unit": "mg/dL",
+        "version": "1.1.3"
+      },
+      "sha256": "ea21aede751a89aa9e8e0267ccf6744ff7428c08428cfb028f7f95ef8eb8c9bf",
+      "start_time": "2020-05-08T00:02:13"
+    },
+    {
+      "file": "days/BIG_IDEAs__012__20200509T000213.csv",
+      "observed_count": 287,
+      "observed_fraction": 0.9965277910232544,
+      "participant_id": "012",
+      "provenance": {
+        "dataset": "BIG_IDEAs",
+        "device": "Dexcom G6",
+        "license_name": "Open Data Commons Attribution License v1.0",
+        "license_url": "https://opendatacommons.org/licenses/by/1-0/",
+        "participant_id": "012",
+        "source_url": "https://physionet.org/content/big-ideas-glycemic-wearable/1.1.3/",
+        "unit": "mg/dL",
+        "version": "1.1.3"
+      },
+      "sha256": "9cc3c4fe3b82799aa50d17865dec56e82cd7b8b896d0c80df8ccf7b89fadf845",
+      "start_time": "2020-05-09T00:02:13"
+    },
+    {
+      "file": "days/BIG_IDEAs__013__20200529T000157.csv",
+      "observed_count": 287,
+      "observed_fraction": 0.9965277910232544,
+      "participant_id": "013",
+      "provenance": {
+        "dataset": "BIG_IDEAs",
+        "device": "Dexcom G6",
+        "license_name": "Open Data Commons Attribution License v1.0",
+        "license_url": "https://opendatacommons.org/licenses/by/1-0/",
+        "participant_id": "013",
+        "source_url": "https://physionet.org/content/big-ideas-glycemic-wearable/1.1.3/",
+        "unit": "mg/dL",
+        "version": "1.1.3"
+      },
+      "sha256": "354c1c5a504b3b8d2f26d38dc89b8435166ce4d04afa635d8a856209a2dfab07",
+      "start_time": "2020-05-29T00:01:57"
+    },
+    {
+      "file": "days/BIG_IDEAs__013__20200530T000157.csv",
+      "observed_count": 287,
+      "observed_fraction": 0.9965277910232544,
+      "participant_id": "013",
+      "provenance": {
+        "dataset": "BIG_IDEAs",
+        "device": "Dexcom G6",
+        "license_name": "Open Data Commons Attribution License v1.0",
+        "license_url": "https://opendatacommons.org/licenses/by/1-0/",
+        "participant_id": "013",
+        "source_url": "https://physionet.org/content/big-ideas-glycemic-wearable/1.1.3/",
+        "unit": "mg/dL",
+        "version": "1.1.3"
+      },
+      "sha256": "7ec3998fc77db10c95dd06a3abcf435c3cfaf7a1e907ea0001e46c78bc51cd88",
+      "start_time": "2020-05-30T00:01:57"
+    },
+    {
+      "file": "days/BIG_IDEAs__013__20200531T000157.csv",
+      "observed_count": 287,
+      "observed_fraction": 0.9965277910232544,
+      "participant_id": "013",
+      "provenance": {
+        "dataset": "BIG_IDEAs",
+        "device": "Dexcom G6",
+        "license_name": "Open Data Commons Attribution License v1.0",
+        "license_url": "https://opendatacommons.org/licenses/by/1-0/",
+        "participant_id": "013",
+        "source_url": "https://physionet.org/content/big-ideas-glycemic-wearable/1.1.3/",
+        "unit": "mg/dL",
+        "version": "1.1.3"
+      },
+      "sha256": "400cf744f15af0d8bc311b23bfad222d203697fd68fc601343a4adc21ac90207",
+      "start_time": "2020-05-31T00:01:57"
+    },
+    {
+      "file": "days/BIG_IDEAs__013__20200601T000157.csv",
+      "observed_count": 287,
+      "observed_fraction": 0.9965277910232544,
+      "participant_id": "013",
+      "provenance": {
+        "dataset": "BIG_IDEAs",
+        "device": "Dexcom G6",
+        "license_name": "Open Data Commons Attribution License v1.0",
+        "license_url": "https://opendatacommons.org/licenses/by/1-0/",
+        "participant_id": "013",
+        "source_url": "https://physionet.org/content/big-ideas-glycemic-wearable/1.1.3/",
+        "unit": "mg/dL",
+        "version": "1.1.3"
+      },
+      "sha256": "ef1eec5527a6ee74cc5b7b8fe6bc26035dd02ac63d47e8e2e0a731caa1e57deb",
+      "start_time": "2020-06-01T00:01:57"
+    },
+    {
+      "file": "days/BIG_IDEAs__013__20200602T000157.csv",
+      "observed_count": 287,
+      "observed_fraction": 0.9965277910232544,
+      "participant_id": "013",
+      "provenance": {
+        "dataset": "BIG_IDEAs",
+        "device": "Dexcom G6",
+        "license_name": "Open Data Commons Attribution License v1.0",
+        "license_url": "https://opendatacommons.org/licenses/by/1-0/",
+        "participant_id": "013",
+        "source_url": "https://physionet.org/content/big-ideas-glycemic-wearable/1.1.3/",
+        "unit": "mg/dL",
+        "version": "1.1.3"
+      },
+      "sha256": "f3a75e07861f13c4cbabd370c895bfd1c306c085fef5366f4676280c070cb420",
+      "start_time": "2020-06-02T00:01:57"
+    },
+    {
+      "file": "days/BIG_IDEAs__013__20200603T000157.csv",
+      "observed_count": 287,
+      "observed_fraction": 0.9965277910232544,
+      "participant_id": "013",
+      "provenance": {
+        "dataset": "BIG_IDEAs",
+        "device": "Dexcom G6",
+        "license_name": "Open Data Commons Attribution License v1.0",
+        "license_url": "https://opendatacommons.org/licenses/by/1-0/",
+        "participant_id": "013",
+        "source_url": "https://physionet.org/content/big-ideas-glycemic-wearable/1.1.3/",
+        "unit": "mg/dL",
+        "version": "1.1.3"
+      },
+      "sha256": "ed3ccc8a1f2a190ea1624ad74a95f6a37c49195cdada78eab50bc554baa86c07",
+      "start_time": "2020-06-03T00:01:57"
+    },
+    {
+      "file": "days/BIG_IDEAs__014__20200606T000310.csv",
+      "observed_count": 287,
+      "observed_fraction": 0.9965277910232544,
+      "participant_id": "014",
+      "provenance": {
+        "dataset": "BIG_IDEAs",
+        "device": "Dexcom G6",
+        "license_name": "Open Data Commons Attribution License v1.0",
+        "license_url": "https://opendatacommons.org/licenses/by/1-0/",
+        "participant_id": "014",
+        "source_url": "https://physionet.org/content/big-ideas-glycemic-wearable/1.1.3/",
+        "unit": "mg/dL",
+        "version": "1.1.3"
+      },
+      "sha256": "a44220c4791c0197b31efa220834407b7703c15c9842b2e9908adf8da5ebec4d",
+      "start_time": "2020-06-06T00:03:10"
+    },
+    {
+      "file": "days/BIG_IDEAs__014__20200607T000310.csv",
+      "observed_count": 287,
+      "observed_fraction": 0.9965277910232544,
+      "participant_id": "014",
+      "provenance": {
+        "dataset": "BIG_IDEAs",
+        "device": "Dexcom G6",
+        "license_name": "Open Data Commons Attribution License v1.0",
+        "license_url": "https://opendatacommons.org/licenses/by/1-0/",
+        "participant_id": "014",
+        "source_url": "https://physionet.org/content/big-ideas-glycemic-wearable/1.1.3/",
+        "unit": "mg/dL",
+        "version": "1.1.3"
+      },
+      "sha256": "ffa9bb058e2f3ed0c8a62d41838d647054e95d9185c4f7f14ea87f578a837414",
+      "start_time": "2020-06-07T00:03:10"
+    },
+    {
+      "file": "days/BIG_IDEAs__014__20200608T000310.csv",
+      "observed_count": 287,
+      "observed_fraction": 0.9965277910232544,
+      "participant_id": "014",
+      "provenance": {
+        "dataset": "BIG_IDEAs",
+        "device": "Dexcom G6",
+        "license_name": "Open Data Commons Attribution License v1.0",
+        "license_url": "https://opendatacommons.org/licenses/by/1-0/",
+        "participant_id": "014",
+        "source_url": "https://physionet.org/content/big-ideas-glycemic-wearable/1.1.3/",
+        "unit": "mg/dL",
+        "version": "1.1.3"
+      },
+      "sha256": "8a70dac3964a343dbb4f2cd490ecca97e0a44573d1aaf1eaf005df79be9348a9",
+      "start_time": "2020-06-08T00:03:10"
+    },
+    {
+      "file": "days/BIG_IDEAs__014__20200609T000310.csv",
+      "observed_count": 287,
+      "observed_fraction": 0.9965277910232544,
+      "participant_id": "014",
+      "provenance": {
+        "dataset": "BIG_IDEAs",
+        "device": "Dexcom G6",
+        "license_name": "Open Data Commons Attribution License v1.0",
+        "license_url": "https://opendatacommons.org/licenses/by/1-0/",
+        "participant_id": "014",
+        "source_url": "https://physionet.org/content/big-ideas-glycemic-wearable/1.1.3/",
+        "unit": "mg/dL",
+        "version": "1.1.3"
+      },
+      "sha256": "f97ec389bebc540652e4a60c6946b6816f5e6f647a40f25018e34cd7a0fc6b25",
+      "start_time": "2020-06-09T00:03:10"
+    },
+    {
+      "file": "days/BIG_IDEAs__014__20200610T000310.csv",
+      "observed_count": 287,
+      "observed_fraction": 0.9965277910232544,
+      "participant_id": "014",
+      "provenance": {
+        "dataset": "BIG_IDEAs",
+        "device": "Dexcom G6",
+        "license_name": "Open Data Commons Attribution License v1.0",
+        "license_url": "https://opendatacommons.org/licenses/by/1-0/",
+        "participant_id": "014",
+        "source_url": "https://physionet.org/content/big-ideas-glycemic-wearable/1.1.3/",
+        "unit": "mg/dL",
+        "version": "1.1.3"
+      },
+      "sha256": "4fc626ef9a6be498c9fd60bf08528a3e62da8275f87a4ec1b54231540010e4f8",
+      "start_time": "2020-06-10T00:03:10"
+    },
+    {
+      "file": "days/BIG_IDEAs__014__20200611T000310.csv",
+      "observed_count": 287,
+      "observed_fraction": 0.9965277910232544,
+      "participant_id": "014",
+      "provenance": {
+        "dataset": "BIG_IDEAs",
+        "device": "Dexcom G6",
+        "license_name": "Open Data Commons Attribution License v1.0",
+        "license_url": "https://opendatacommons.org/licenses/by/1-0/",
+        "participant_id": "014",
+        "source_url": "https://physionet.org/content/big-ideas-glycemic-wearable/1.1.3/",
+        "unit": "mg/dL",
+        "version": "1.1.3"
+      },
+      "sha256": "68fda68686cd1951cf4aabff1fcf1b7272b245fbbfaac33f5f5441136400bbef",
+      "start_time": "2020-06-11T00:03:10"
+    },
+    {
+      "file": "days/BIG_IDEAs__014__20200612T000310.csv",
+      "observed_count": 287,
+      "observed_fraction": 0.9965277910232544,
+      "participant_id": "014",
+      "provenance": {
+        "dataset": "BIG_IDEAs",
+        "device": "Dexcom G6",
+        "license_name": "Open Data Commons Attribution License v1.0",
+        "license_url": "https://opendatacommons.org/licenses/by/1-0/",
+        "participant_id": "014",
+        "source_url": "https://physionet.org/content/big-ideas-glycemic-wearable/1.1.3/",
+        "unit": "mg/dL",
+        "version": "1.1.3"
+      },
+      "sha256": "f765c7fc0ae165aa5ce44e1424ea4e4a8e08378bc7cea3aeac5a71d11e4ded4a",
+      "start_time": "2020-06-12T00:03:10"
+    },
+    {
+      "file": "days/BIG_IDEAs__015__20200722T000352.csv",
+      "observed_count": 288,
+      "observed_fraction": 1.0,
+      "participant_id": "015",
+      "provenance": {
+        "dataset": "BIG_IDEAs",
+        "device": "Dexcom G6",
+        "license_name": "Open Data Commons Attribution License v1.0",
+        "license_url": "https://opendatacommons.org/licenses/by/1-0/",
+        "participant_id": "015",
+        "source_url": "https://physionet.org/content/big-ideas-glycemic-wearable/1.1.3/",
+        "unit": "mg/dL",
+        "version": "1.1.3"
+      },
+      "sha256": "d39272e55cd5b1c4dc078ba88d3f2492ae3daedee29009f28e940cebda5d40f4",
+      "start_time": "2020-07-22T00:03:52"
+    },
+    {
+      "file": "days/BIG_IDEAs__015__20200723T000352.csv",
+      "observed_count": 287,
+      "observed_fraction": 0.9965277910232544,
+      "participant_id": "015",
+      "provenance": {
+        "dataset": "BIG_IDEAs",
+        "device": "Dexcom G6",
+        "license_name": "Open Data Commons Attribution License v1.0",
+        "license_url": "https://opendatacommons.org/licenses/by/1-0/",
+        "participant_id": "015",
+        "source_url": "https://physionet.org/content/big-ideas-glycemic-wearable/1.1.3/",
+        "unit": "mg/dL",
+        "version": "1.1.3"
+      },
+      "sha256": "7910d3ab0b3e40f94585d4778a6644858403baecad0ebccfc0c6010506da754e",
+      "start_time": "2020-07-23T00:03:52"
+    },
+    {
+      "file": "days/BIG_IDEAs__015__20200724T000352.csv",
+      "observed_count": 287,
+      "observed_fraction": 0.9965277910232544,
+      "participant_id": "015",
+      "provenance": {
+        "dataset": "BIG_IDEAs",
+        "device": "Dexcom G6",
+        "license_name": "Open Data Commons Attribution License v1.0",
+        "license_url": "https://opendatacommons.org/licenses/by/1-0/",
+        "participant_id": "015",
+        "source_url": "https://physionet.org/content/big-ideas-glycemic-wearable/1.1.3/",
+        "unit": "mg/dL",
+        "version": "1.1.3"
+      },
+      "sha256": "640afcd906df399a726fb49ed5b016fe8831b6b7c575a36a1b5af642dd4b62f9",
+      "start_time": "2020-07-24T00:03:52"
+    },
+    {
+      "file": "days/BIG_IDEAs__016__20200717T000325.csv",
+      "observed_count": 287,
+      "observed_fraction": 0.9965277910232544,
+      "participant_id": "016",
+      "provenance": {
+        "dataset": "BIG_IDEAs",
+        "device": "Dexcom G6",
+        "license_name": "Open Data Commons Attribution License v1.0",
+        "license_url": "https://opendatacommons.org/licenses/by/1-0/",
+        "participant_id": "016",
+        "source_url": "https://physionet.org/content/big-ideas-glycemic-wearable/1.1.3/",
+        "unit": "mg/dL",
+        "version": "1.1.3"
+      },
+      "sha256": "6bb37c834b2a57787d95ed70e02bcb99bde64f155dfb708c620e753695f63971",
+      "start_time": "2020-07-17T00:03:25"
+    },
+    {
+      "file": "days/BIG_IDEAs__016__20200718T000325.csv",
+      "observed_count": 283,
+      "observed_fraction": 0.9826388955116272,
+      "participant_id": "016",
+      "provenance": {
+        "dataset": "BIG_IDEAs",
+        "device": "Dexcom G6",
+        "license_name": "Open Data Commons Attribution License v1.0",
+        "license_url": "https://opendatacommons.org/licenses/by/1-0/",
+        "participant_id": "016",
+        "source_url": "https://physionet.org/content/big-ideas-glycemic-wearable/1.1.3/",
+        "unit": "mg/dL",
+        "version": "1.1.3"
+      },
+      "sha256": "7342b7683d419fac7d7c85bfc21bb78f55d0c174f33c10af28889b620f73b064",
+      "start_time": "2020-07-18T00:03:25"
+    },
+    {
+      "file": "days/BIG_IDEAs__016__20200719T000325.csv",
+      "observed_count": 287,
+      "observed_fraction": 0.9965277910232544,
+      "participant_id": "016",
+      "provenance": {
+        "dataset": "BIG_IDEAs",
+        "device": "Dexcom G6",
+        "license_name": "Open Data Commons Attribution License v1.0",
+        "license_url": "https://opendatacommons.org/licenses/by/1-0/",
+        "participant_id": "016",
+        "source_url": "https://physionet.org/content/big-ideas-glycemic-wearable/1.1.3/",
+        "unit": "mg/dL",
+        "version": "1.1.3"
+      },
+      "sha256": "8c7b467f3e9fdcea8088e52a6050f1758afc98c2c55bcc2a2df4500be35f62ce",
+      "start_time": "2020-07-19T00:03:25"
+    },
+    {
+      "file": "days/BIG_IDEAs__016__20200722T000315.csv",
+      "observed_count": 287,
+      "observed_fraction": 0.9965277910232544,
+      "participant_id": "016",
+      "provenance": {
+        "dataset": "BIG_IDEAs",
+        "device": "Dexcom G6",
+        "license_name": "Open Data Commons Attribution License v1.0",
+        "license_url": "https://opendatacommons.org/licenses/by/1-0/",
+        "participant_id": "016",
+        "source_url": "https://physionet.org/content/big-ideas-glycemic-wearable/1.1.3/",
+        "unit": "mg/dL",
+        "version": "1.1.3"
+      },
+      "sha256": "3a07301f1db0e411813f63c2b7bd7b9f2f136441842d0802e75a206e24997bb0",
+      "start_time": "2020-07-22T00:03:15"
+    },
+    {
+      "file": "days/BIG_IDEAs__016__20200723T000315.csv",
+      "observed_count": 287,
+      "observed_fraction": 0.9965277910232544,
+      "participant_id": "016",
+      "provenance": {
+        "dataset": "BIG_IDEAs",
+        "device": "Dexcom G6",
+        "license_name": "Open Data Commons Attribution License v1.0",
+        "license_url": "https://opendatacommons.org/licenses/by/1-0/",
+        "participant_id": "016",
+        "source_url": "https://physionet.org/content/big-ideas-glycemic-wearable/1.1.3/",
+        "unit": "mg/dL",
+        "version": "1.1.3"
+      },
+      "sha256": "91794a3ef032f2cd008670c0c933109597731552d02f2b04e11a4248c4d7b04f",
+      "start_time": "2020-07-23T00:03:15"
+    }
+  ],
+  "schema_version": "1.0",
+  "window_positions": 288
+}

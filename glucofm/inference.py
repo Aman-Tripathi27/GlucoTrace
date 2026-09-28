@@ -205,7 +205,9 @@ class ResearchEncoder:
         timestamp_col: str = "timestamp",
         glucose_col: str = "glucose",
         window_index: int | None = None,
-        unit: str = "mg/dL",
+        unit: str | None = None,
+        input_format: str = "plain",
+        out_of_range: str = "missing",
     ) -> tuple[torch.Tensor, dict[str, Any]]:
         """Encode exactly one full model window selected from a CSV."""
 
@@ -218,6 +220,8 @@ class ResearchEncoder:
             glucose_col=glucose_col,
             interval_minutes=interval,
             unit=unit,
+            input_format=input_format,
+            out_of_range=out_of_range,
         )
         windows = CGMWindowDataset(
             series,
@@ -257,7 +261,10 @@ class ResearchEncoder:
             "observed_count": observed_count,
             "observed_fraction": observed_count / window_size,
             "interval_minutes": interval,
-            "input_unit": unit,
+            "input_unit": series.input_unit,
+            "input_format": input_format,
+            "out_of_range_readings": series.out_of_range_count,
+            "out_of_range_policy": series.out_of_range_policy,
         }
         return fingerprint, metadata
 

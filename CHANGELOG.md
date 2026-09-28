@@ -1,5 +1,23 @@
 # Changelog
 
+## 0.2.2 (2026-09-28)
+
+### Fixed
+
+- **Timezone-aware timestamps now keep local time of day.** Previously
+  `08:00+05:30` reached the model as 02:30 UTC, skewing fingerprints for any
+  file with offsets. Files without offsets were unaffected.
+- **Dexcom `Low`/`High` readings no longer crash the loader.** They are
+  treated as missing by default, with a warning and a count in the output;
+  `--out-of-range clamp` records them at 40/400 mg/dL instead.
+
+### Added
+
+- `--format dexcom-clarity` reads Dexcom Clarity CSV exports directly.
+- `glucotrace verify-protocol`: checks the now-published manifests and split
+  files of protocols 1.0 to 1.3 against their declared SHA-256 values.
+- `.gitattributes` keeps published protocol files byte-exact on every OS.
+
 ## 0.2.1 (2026-09-24)
 
 Available on PyPI: `pip install glucotrace`. The research checkpoint is
