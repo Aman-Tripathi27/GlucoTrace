@@ -14,13 +14,13 @@ import torch
 from torch.nn import functional as F
 
 from . import probes
-from .model import GlucoFM, GlucoFMConfig
+from .model import GlucoTrace, GlucoTraceConfig
 from .pretrain import build_multisource_split
 
 PROTOCOL_VERSION = "1.0"
-PROTOCOL_VERSIONS = ("1.0", "1.1", "1.2", "1.3")
+PROTOCOL_VERSIONS = ("1.0", "1.1", "1.2", "1.3", "1.4")
 # Protocol 1.3 reuses the protocol 1.2 probes and gates on midnight-aligned days.
-PROBE_PROTOCOLS = ("1.2", "1.3")
+PROBE_PROTOCOLS = ("1.2", "1.3", "1.4")
 # Protocol 1.2: largest allowed excess of model over summary-baseline source
 # probe balanced accuracy. Declared in EVALUATION_1_2.md before training.
 SOURCE_PROBE_MARGIN = 0.10
@@ -352,7 +352,7 @@ def _collect(dataset: Any) -> dict[str, Any]:
 
 @torch.no_grad()
 def _encode(
-    model: GlucoFM,
+    model: GlucoTrace,
     data: dict[str, Any],
     *,
     device: torch.device,
@@ -385,14 +385,14 @@ def _sha256(path: Path) -> str:
     return digest.hexdigest()
 
 
-def _load_checkpoint(path: Path, device: torch.device) -> tuple[GlucoFM, dict]:
+def _load_checkpoint(path: Path, device: torch.device) -> tuple[GlucoTrace, dict]:
     checkpoint = torch.load(path, map_location="cpu", weights_only=True)
     if checkpoint.get("research_only") is not True:
         raise ValueError("checkpoint lacks the required research_only marker")
     config_values = dict(checkpoint["config"])
     config_values["trend_windows"] = tuple(config_values["trend_windows"])
     config_values.setdefault("pool_segments", 1)
-    model = GlucoFM(GlucoFMConfig(**config_values))
+    model = GlucoTrace(GlucoTraceConfig(**config_values))
     model.load_state_dict(checkpoint["model_state_dict"], strict=True)
     return model.to(device).eval(), checkpoint
 
@@ -425,7 +425,7 @@ def _verify_checkpoint_corpora(
 
 
 def _evaluate_missingness(
-    model: GlucoFM,
+    model: GlucoTrace,
     data: dict[str, Any],
     clean_embeddings: torch.Tensor,
     clean_baseline: torch.Tensor,
@@ -487,7 +487,7 @@ def _evaluate_missingness(
 
 
 def protocol_1_2_probes(
-    model: GlucoFM,
+    model: GlucoTrace,
     train: dict[str, Any],
     train_embeddings: torch.Tensor,
     target: dict[str, Any],
@@ -611,7 +611,7 @@ def protocol_1_2_checks(
 
 
 def _protocol_1_2_section(
-    model: GlucoFM,
+    model: GlucoTrace,
     corpus_pairs: Sequence[Sequence[str | Path]],
     target: dict[str, Any],
     target_embeddings: torch.Tensor,

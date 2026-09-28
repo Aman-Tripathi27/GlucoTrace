@@ -12,14 +12,14 @@ import csv
 import math
 from pathlib import Path
 
-from glucofm.canonical import (
+from glucotrace.canonical import (
     CGMDay,
     CGMReading,
     SourceProvenance,
     build_24h_windows,
     write_canonical_corpus,
 )
-from glucofm.data import parse_timestamp
+from glucotrace.data import parse_timestamp
 
 DATASET_NAME = "BIG_IDEAs"
 DATASET_VERSION = "1.1.3"

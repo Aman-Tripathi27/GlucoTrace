@@ -1,6 +1,6 @@
 import torch
 
-from glucofm.evaluate import (
+from glucotrace.evaluate import (
     MissingnessScenario,
     embedding_diagnostics,
     perturb_missingness,

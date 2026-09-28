@@ -4,8 +4,8 @@ from pathlib import Path
 
 import pytest
 
-from glucofm.canonical import CGMReading, build_24h_windows
-from glucofm.corpus import carry_split_membership, create_participant_split
+from glucotrace.canonical import CGMReading, build_24h_windows
+from glucotrace.corpus import carry_split_membership, create_participant_split
 from test_canonical import provenance
 from test_inference import make_manifest
 

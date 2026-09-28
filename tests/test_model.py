@@ -1,13 +1,13 @@
 import pytest
 import torch
 
-from glucofm.model import GlucoFM, GlucoFMConfig, causal_masked_average
-from glucofm.train import make_masked_batch
+from glucotrace.model import GlucoTrace, GlucoTraceConfig, causal_masked_average
+from glucotrace.train import make_masked_batch
 
 
-def small_model() -> GlucoFM:
-    return GlucoFM(
-        GlucoFMConfig(
+def small_model() -> GlucoTrace:
+    return GlucoTrace(
+        GlucoTraceConfig(
             hidden_size=16,
             num_layers=1,
             num_heads=4,
@@ -22,7 +22,7 @@ def small_model() -> GlucoFM:
 
 
 def test_default_model_is_a_128_value_day_encoder() -> None:
-    model = GlucoFM().eval()
+    model = GlucoTrace().eval()
     glucose = torch.full((288,), 110.0)
     observed = torch.ones(288, dtype=torch.bool)
 
@@ -136,7 +136,7 @@ def test_masked_batch_only_hides_observed_values() -> None:
 
 def test_config_and_length_validation() -> None:
     with pytest.raises(ValueError, match="event_trend_window"):
-        GlucoFMConfig(trend_windows=(3, 6), event_trend_window=12)
+        GlucoTraceConfig(trend_windows=(3, 6), event_trend_window=12)
 
     with pytest.raises(ValueError, match="divisible by patch_size"):
         small_model()(torch.ones(10), torch.ones(10, dtype=torch.bool))

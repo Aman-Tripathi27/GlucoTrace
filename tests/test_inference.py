@@ -8,20 +8,20 @@ from pathlib import Path
 import pytest
 import torch
 
-from glucofm.calibrate import calibrate_checkpoint
-from glucofm.commands import compare_main, encode_main, search_main
-from glucofm.corpus import create_participant_split
-from glucofm.inference import (
+from glucotrace.calibrate import calibrate_checkpoint
+from glucotrace.commands import compare_main, encode_main, search_main
+from glucotrace.corpus import create_participant_split
+from glucotrace.inference import (
     ResearchEncoder,
     cosine_similarity,
     search_manifests,
     sha256_file,
 )
-from glucofm.model import GlucoFM, GlucoFMConfig
+from glucotrace.model import GlucoTrace, GlucoTraceConfig
 
 
-def tiny_config() -> GlucoFMConfig:
-    return GlucoFMConfig(
+def tiny_config() -> GlucoTraceConfig:
+    return GlucoTraceConfig(
         hidden_size=16,
         num_layers=1,
         num_heads=4,
@@ -113,7 +113,7 @@ def make_checkpoint(
     torch.manual_seed(3)
     config = tiny_config()
     payload = {
-        "model_state_dict": GlucoFM(config).state_dict(),
+        "model_state_dict": GlucoTrace(config).state_dict(),
         "config": asdict(config),
         "research_only": True,
         "corpora": corpora or [],
@@ -149,7 +149,7 @@ def test_encoder_is_deterministic_calibrated_and_unit_length(tmp_path: Path) -> 
 def test_encoder_rejects_checkpoint_without_calibration(tmp_path: Path) -> None:
     checkpoint = make_checkpoint(tmp_path / "model.pt", calibrated=False)
 
-    with pytest.raises(ValueError, match="glucofm-calibrate"):
+    with pytest.raises(ValueError, match="glucotrace calibrate"):
         ResearchEncoder.load(checkpoint)
 
 
@@ -211,7 +211,7 @@ def test_encode_command_writes_versioned_json(
         sys,
         "argv",
         [
-            "glucofm-encode",
+            "glucotrace encode",
             str(day),
             "--checkpoint",
             str(checkpoint),
@@ -243,7 +243,7 @@ def test_compare_and_search_commands_write_descriptive_outputs(
         sys,
         "argv",
         [
-            "glucofm-compare",
+            "glucotrace compare",
             str(first),
             str(second),
             "--checkpoint",
@@ -259,7 +259,7 @@ def test_compare_and_search_commands_write_descriptive_outputs(
         sys,
         "argv",
         [
-            "glucofm-search",
+            "glucotrace search",
             str(first),
             "--checkpoint",
             str(checkpoint),

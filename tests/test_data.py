@@ -3,7 +3,7 @@ from pathlib import Path
 import pytest
 import torch
 
-from glucofm.data import CGMWindowDataset, load_cgm_csv
+from glucotrace.data import CGMWindowDataset, load_cgm_csv
 
 
 def write_csv(path: Path, body: str) -> Path:

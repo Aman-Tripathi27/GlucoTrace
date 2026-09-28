@@ -4,9 +4,9 @@ import pytest
 import torch
 from torch.utils.data import Dataset
 
-from glucofm.corpus import MultiSourceCGMDataset, SourceBalancedSampler
-from glucofm.model import GlucoFM, GlucoFMConfig
-from glucofm.pretrain import (
+from glucotrace.corpus import MultiSourceCGMDataset, SourceBalancedSampler
+from glucotrace.model import GlucoTrace, GlucoTraceConfig
+from glucotrace.pretrain import (
     LatentPretrainer,
     PretrainingConfig,
     augment_cgm_view,
@@ -37,9 +37,9 @@ class TinySource(Dataset):
         return {"dataset": self.source, "item": str(index)}
 
 
-def small_encoder() -> GlucoFM:
-    return GlucoFM(
-        GlucoFMConfig(
+def small_encoder() -> GlucoTrace:
+    return GlucoTrace(
+        GlucoTraceConfig(
             hidden_size=16,
             num_layers=1,
             num_heads=4,

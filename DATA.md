@@ -44,7 +44,7 @@ the CGM-only model.
 After installing the package, run:
 
 ```bash
-glucofm-prepare-big-ideas big-ideas-1.1.3 prepared/big-ideas
+glucotrace prepare-big-ideas big-ideas-1.1.3 prepared/big-ideas
 ```
 
 The adapter:
@@ -98,7 +98,7 @@ International license.
 Download the ZIP from the paper’s Supporting Information section, then run:
 
 ```bash
-glucofm-prepare-colas pone.0225817.s001.zip prepared/colas
+glucotrace prepare-colas pone.0225817.s001.zip prepared/colas
 ```
 
 The native case files have clock time but no calendar date. The adapter uses the
@@ -141,7 +141,7 @@ All final splits must be participant-disjoint and recorded in the manifest.
 After preparing a canonical corpus, create its split file with:
 
 ```bash
-glucofm-split-corpus prepared/big-ideas/manifest.json
+glucotrace split prepared/big-ideas/manifest.json
 ```
 
 The default creates a deterministic SHA-256 ordering from the seed and each
@@ -151,7 +151,7 @@ record counts, and source manifest checksum. The loader refuses to combine a
 split file with a changed manifest.
 
 ```python
-from glucofm import CanonicalCGMDataset
+from glucotrace import CanonicalCGMDataset
 
 validation_days = CanonicalCGMDataset(
     "prepared/big-ideas/manifest.json",

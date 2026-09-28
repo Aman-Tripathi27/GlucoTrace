@@ -8,36 +8,36 @@ from typing import Sequence
 
 # subcommand -> (module, function, one-line help)
 COMMANDS: dict[str, tuple[str, str, str]] = {
-    "encode": ("glucofm.commands", "encode_main", "encode one CGM day to a fingerprint"),
-    "compare": ("glucofm.commands", "compare_main", "cosine similarity of two days"),
-    "search": ("glucofm.commands", "search_main", "nearest days in canonical corpora"),
-    "report": ("glucofm.report", "main", "offline HTML report of a day and neighbours"),
+    "encode": ("glucotrace.commands", "encode_main", "encode one CGM day to a fingerprint"),
+    "compare": ("glucotrace.commands", "compare_main", "cosine similarity of two days"),
+    "search": ("glucotrace.commands", "search_main", "nearest days in canonical corpora"),
+    "report": ("glucotrace.report", "main", "offline HTML report of a day and neighbours"),
     "download-model": (
-        "glucofm.commands",
+        "glucotrace.commands",
         "download_main",
         "download and verify the research checkpoint",
     ),
     "prepare-big-ideas": (
-        "glucofm.adapters.big_ideas",
+        "glucotrace.adapters.big_ideas",
         "main",
         "convert PhysioNet BIG IDEAs to canonical days",
     ),
     "prepare-colas": (
-        "glucofm.adapters.colas",
+        "glucotrace.adapters.colas",
         "main",
         "convert the Colas 2019 PLOS dataset to canonical days",
     ),
-    "split": ("glucofm.corpus", "main", "participant-disjoint corpus split"),
+    "split": ("glucotrace.corpus", "main", "participant-disjoint corpus split"),
     "verify-protocol": (
-        "glucofm.protocols",
+        "glucotrace.protocols",
         "main",
         "check published splits against declared checksums",
     ),
-    "reserve-holdout": ("glucofm.reserve", "main", "reserve a new prospective holdout"),
-    "pretrain": ("glucofm.pretrain", "main", "source-balanced latent pretraining"),
-    "evaluate": ("glucofm.evaluate", "main", "run a frozen evaluation protocol"),
-    "calibrate": ("glucofm.calibrate", "main", "attach fingerprint calibration"),
-    "train-csv": ("glucofm.train", "main", "single-CSV reconstruction smoke test"),
+    "reserve-holdout": ("glucotrace.reserve", "main", "reserve a new prospective holdout"),
+    "pretrain": ("glucotrace.pretrain", "main", "source-balanced latent pretraining"),
+    "evaluate": ("glucotrace.evaluate", "main", "run a frozen evaluation protocol"),
+    "calibrate": ("glucotrace.calibrate", "main", "attach fingerprint calibration"),
+    "train-csv": ("glucotrace.train", "main", "single-CSV reconstruction smoke test"),
 }
 
 

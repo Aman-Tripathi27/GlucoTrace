@@ -1,6 +1,6 @@
 # Encoding, comparison, and search
 
-The inference tools use `checkpoints/glucofm-research.pt`. Every output is
+The inference tools use `checkpoints/glucotrace-research.pt`. Every output is
 research-only and descriptive. Similarity is not a diagnostic score and must not
 be used for treatment, dosing, monitoring, alerts, or patient care.
 
@@ -52,8 +52,8 @@ probability.
 ## Encode
 
 ```bash
-glucofm-encode day.csv \
-  --checkpoint checkpoints/glucofm-research.pt \
+glucotrace encode day.csv \
+  --checkpoint checkpoints/glucotrace-research.pt \
   --output day.fingerprint.json
 ```
 
@@ -63,14 +63,14 @@ observation fraction, calibration method, and 128-number fingerprint.
 For a multi-day file:
 
 ```bash
-glucofm-encode several-days.csv --window-index 1
+glucotrace encode several-days.csv --window-index 1
 ```
 
 ## Compare
 
 ```bash
-glucofm-compare first-day.csv second-day.csv \
-  --checkpoint checkpoints/glucofm-research.pt \
+glucotrace compare first-day.csv second-day.csv \
+  --checkpoint checkpoints/glucotrace-research.pt \
   --output comparison.json
 ```
 
@@ -81,8 +81,8 @@ normal, abnormal, or clinically related.
 ## Search
 
 ```bash
-glucofm-search query-day.csv \
-  --checkpoint checkpoints/glucofm-research.pt \
+glucotrace search query-day.csv \
+  --checkpoint checkpoints/glucotrace-research.pt \
   --manifest data/processed/big_ideas/manifest.json \
   --manifest data/processed/colas/manifest.json \
   --top-k 5 \
@@ -118,9 +118,9 @@ manifests may be shared.
 ## Python API
 
 ```python
-from glucofm import ResearchEncoder, cosine_similarity
+from glucotrace import ResearchEncoder, cosine_similarity
 
-encoder = ResearchEncoder.load("checkpoints/glucofm-research.pt")
+encoder = ResearchEncoder.load("checkpoints/glucotrace-research.pt")
 first, first_metadata = encoder.encode_csv("first-day.csv")
 second, second_metadata = encoder.encode_csv("second-day.csv")
 similarity = cosine_similarity(first, second)

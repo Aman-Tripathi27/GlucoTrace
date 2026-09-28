@@ -5,7 +5,7 @@ from pathlib import Path
 
 import pytest
 
-from glucofm.protocols import PROTOCOL_FILES, verify_protocol
+from glucotrace.protocols import PROTOCOL_FILES, verify_protocol
 
 REPO_DATA = Path(__file__).resolve().parents[1] / "data" / "processed"
 

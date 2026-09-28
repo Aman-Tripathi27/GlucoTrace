@@ -11,7 +11,7 @@ from torch.nn import functional as F
 
 
 @dataclass(frozen=True)
-class GlucoFMConfig:
+class GlucoTraceConfig:
     """Architecture settings for five-minute, 24-hour CGM windows."""
 
     hidden_size: int = 128
@@ -28,6 +28,9 @@ class GlucoFMConfig:
     glucose_scale_mg_dl: float = 40.0
     gap_age_cap_minutes: float = 60.0
     pool_segments: int = 4
+    # False zeroes the circular time-of-day input, so the model never sees
+    # clock time (a protocol 1.4 diagnostic). Older checkpoints default to True.
+    use_clock: bool = True
 
     def __post_init__(self) -> None:
         if self.hidden_size <= 0 or self.hidden_size % 2:
@@ -112,7 +115,7 @@ def causal_masked_average(
     return average, count / float(window)
 
 
-class GlucoFM(nn.Module):
+class GlucoTrace(nn.Module):
     """Encode a CGM window into hourly tokens and one 128-value embedding.
 
     ``glucose`` is expressed in mg/dL and has shape ``[batch, time]``.
@@ -124,9 +127,9 @@ class GlucoFM(nn.Module):
     encoder represents a complete window and is not a real-time forecaster.
     """
 
-    def __init__(self, config: GlucoFMConfig | None = None) -> None:
+    def __init__(self, config: GlucoTraceConfig | None = None) -> None:
         super().__init__()
-        self.config = config or GlucoFMConfig()
+        self.config = config or GlucoTraceConfig()
         branch_size = self.config.hidden_size // 2
         trend_count = len(self.config.trend_windows)
 
@@ -305,6 +308,8 @@ class GlucoFM(nn.Module):
             clock = self._default_time_of_day(
                 batch, length, glucose.device, glucose.dtype
             )
+        if not self.config.use_clock:
+            clock = torch.zeros_like(clock)
 
         trend_values = []
         trend_densities = []

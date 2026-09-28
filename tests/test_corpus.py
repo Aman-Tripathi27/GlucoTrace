@@ -5,13 +5,13 @@ from pathlib import Path
 import pytest
 import torch
 
-from glucofm.canonical import (
+from glucotrace.canonical import (
     CGMReading,
     SourceProvenance,
     build_24h_windows,
     write_canonical_corpus,
 )
-from glucofm.corpus import (
+from glucotrace.corpus import (
     CanonicalCGMDataset,
     create_participant_split,
     create_prospective_holdout_split,

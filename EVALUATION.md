@@ -19,7 +19,7 @@ inside the evaluator.
 Run it after training with:
 
 ```bash
-glucofm-evaluate checkpoints/glucofm-research.pt \
+glucotrace evaluate checkpoints/glucotrace-research.pt \
   --corpus data/processed/big_ideas/manifest.json data/processed/big_ideas/splits.json \
   --corpus data/processed/colas/manifest.json data/processed/colas/splits.json \
   --output evaluations/protocol-1.0.json

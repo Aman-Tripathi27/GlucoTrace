@@ -16,7 +16,7 @@ private CGM records or participant information.
 
 ## Environment
 
-- GlucoFM commit:
+- GlucoTrace commit:
 - Python version:
 - PyTorch version:
 - Operating system and device:

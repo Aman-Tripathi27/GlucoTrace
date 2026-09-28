@@ -17,11 +17,11 @@ sudo xcodebuild -license accept
 ```bash
 python -m pip install -e '.[dev]'
 pytest
-(cd checkpoints && shasum -a 256 -c glucofm-research.pt.sha256)
+(cd checkpoints && shasum -a 256 -c glucotrace-research.pt.sha256)
 ```
 
 The printed checksum must match `CHECKPOINT_SHA256` in
-`glucofm/inference.py`. `glucotrace download-model` refuses any other file.
+`glucotrace/inference.py`. `glucotrace download-model` refuses any other file.
 
 ## 2. Commit and tag
 
@@ -35,12 +35,12 @@ git push origin main --tags
 ## 3. GitHub release (hosts the checkpoint)
 
 `glucotrace download-model` downloads from
-`https://github.com/Aman-Tripathi27/GlucoTrace/releases/download/v0.2.0/glucofm-research.pt`.
+`https://github.com/Aman-Tripathi27/GlucoTrace/releases/download/v0.2.0/glucotrace-research.pt`.
 Create that release and attach the checkpoint:
 
 ```bash
-gh release create v0.2.0 checkpoints/glucofm-research.pt \
-  checkpoints/glucofm-research.pt.sha256 \
+gh release create v0.2.0 checkpoints/glucotrace-research.pt \
+  checkpoints/glucotrace-research.pt.sha256 \
   --title "GlucoTrace 0.2.0" --notes-file CHANGELOG.md
 ```
 

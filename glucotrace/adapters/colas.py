@@ -20,7 +20,7 @@ from datetime import datetime, timedelta
 from pathlib import Path
 from typing import Iterable, TextIO
 
-from glucofm.canonical import (
+from glucotrace.canonical import (
     CGMDay,
     CGMReading,
     SourceProvenance,

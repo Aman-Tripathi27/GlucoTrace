@@ -19,7 +19,7 @@ from .corpus import (
     MultiSourceCGMDataset,
     SourceBalancedSampler,
 )
-from .model import GlucoFM, GlucoFMConfig
+from .model import GlucoTrace, GlucoTraceConfig
 
 
 @dataclass(frozen=True)
@@ -262,13 +262,13 @@ class LatentPretrainer(nn.Module):
 
     def __init__(
         self,
-        student: GlucoFM | None = None,
+        student: GlucoTrace | None = None,
         config: PretrainingConfig | None = None,
         *,
         num_sources: int = 0,
     ) -> None:
         super().__init__()
-        self.student = student or GlucoFM()
+        self.student = student or GlucoTrace()
         self.teacher = copy.deepcopy(self.student)
         for parameter in self.teacher.parameters():
             parameter.requires_grad_(False)
@@ -535,9 +535,23 @@ def build_parser() -> argparse.ArgumentParser:
         default=0.0,
         help="weight of a gradient-reversal source classifier (0 disables it)",
     )
+    parser.add_argument(
+        "--random-phase-raw",
+        action="append",
+        nargs=2,
+        metavar=("DATASET", "RAW_PATH"),
+        help="train on 24-hour windows cut at random readings of the raw "
+        "continuous recordings (training participants of the --corpus splits "
+        "only); repeat once per source, e.g. BIG_IDEAs data/raw/big_ideas/1.1.3",
+    )
+    parser.add_argument(
+        "--no-clock",
+        action="store_true",
+        help="zero the time-of-day input so the model never sees clock time",
+    )
     parser.add_argument("--seed", type=int, default=7)
     parser.add_argument("--pool-segments", type=int, default=4)
-    parser.add_argument("--output", type=Path, default=Path("glucofm-pretrained.pt"))
+    parser.add_argument("--output", type=Path, default=Path("glucotrace pretrained.pt"))
     return parser
 
 
@@ -553,14 +567,34 @@ def main() -> None:
     sampler = SourceBalancedSampler(
         train_data, num_samples=args.samples_per_epoch, seed=args.seed
     )
-    train_loader = DataLoader(
-        train_data, batch_size=args.batch_size, sampler=sampler
-    )
+    random_phase = None
+    if args.random_phase_raw:
+        from .phase import RandomPhaseCGMDataset, load_training_recordings
+
+        recordings = load_training_recordings(
+            [(dataset, Path(path)) for dataset, path in args.random_phase_raw],
+            [split_file for _, split_file in args.corpus],
+        )
+        # Same number of draws per epoch as the canonical sampler.
+        random_phase = RandomPhaseCGMDataset(
+            recordings, samples_per_epoch=len(sampler), seed=args.seed
+        )
+        if set(random_phase.sources) != set(train_data.source_indices):
+            raise ValueError("random-phase sources must match the corpus sources")
+        train_loader = DataLoader(
+            random_phase, batch_size=args.batch_size, shuffle=False
+        )
+    else:
+        train_loader = DataLoader(
+            train_data, batch_size=args.batch_size, sampler=sampler
+        )
     validation_loader = DataLoader(
         validation_data, batch_size=args.batch_size, shuffle=False
     )
 
-    model_config = GlucoFMConfig(pool_segments=args.pool_segments)
+    model_config = GlucoTraceConfig(
+        pool_segments=args.pool_segments, use_clock=not args.no_clock
+    )
     objective_config = PretrainingConfig(
         mask_probability=args.mask_probability,
         ema_decay=args.ema_decay,
@@ -579,7 +613,7 @@ def main() -> None:
         or objective_config.source_adversary_weight > 0.0
     )
     pretrainer = LatentPretrainer(
-        GlucoFM(model_config), objective_config, num_sources=len(source_names)
+        GlucoTrace(model_config), objective_config, num_sources=len(source_names)
     ).to(device)
     trainable_parameters = [
         parameter for parameter in pretrainer.parameters() if parameter.requires_grad
@@ -593,6 +627,8 @@ def main() -> None:
     history = []
     for epoch in range(args.epochs):
         sampler.set_epoch(epoch)
+        if random_phase is not None:
+            random_phase.set_epoch(epoch)
         train_metrics = run_epoch(
             pretrainer,
             train_loader,
@@ -641,6 +677,13 @@ def main() -> None:
             "samples_per_epoch": len(sampler),
             "learning_rate": args.learning_rate,
             "weight_decay": args.weight_decay,
+            "window_sampling": (
+                "random_phase_raw" if random_phase is not None else "canonical_days"
+            ),
+            "random_phase_raw": [
+                {"dataset": dataset, "path": str(path)}
+                for dataset, path in (args.random_phase_raw or [])
+            ],
         },
         "corpora": corpus_provenance,
         "source_names": list(source_names),

@@ -6,18 +6,18 @@ from pathlib import Path
 import pytest
 import torch
 
-from glucofm import probes
-from glucofm.cli import COMMANDS
-from glucofm.cli import main as cli_main
-from glucofm.data import MG_DL_PER_MMOL_L, load_cgm_csv
-from glucofm.inference import ResearchEncoder
-from glucofm.pretrain import (
+from glucotrace import probes
+from glucotrace.cli import COMMANDS
+from glucotrace.cli import main as cli_main
+from glucotrace.data import MG_DL_PER_MMOL_L, load_cgm_csv
+from glucotrace.inference import ResearchEncoder
+from glucotrace.pretrain import (
     LatentPretrainer,
     PretrainingConfig,
     gradient_reversal,
     symmetric_contrastive_loss,
 )
-from glucofm.report import build_report, main as report_main
+from glucotrace.report import build_report, main as report_main
 from test_inference import make_checkpoint, make_manifest, write_day
 from test_pretrain import small_encoder
 
@@ -166,7 +166,7 @@ def test_report_is_self_contained_and_shows_gaps(tmp_path: Path) -> None:
     output = tmp_path / "out.html"
     argv = sys.argv
     sys.argv = [
-        "glucofm-report", str(query), "--manifest", str(manifest),
+        "glucotrace report", str(query), "--manifest", str(manifest),
         "--checkpoint", str(checkpoint), "--output", str(output), "--top-k", "2",
     ]
     try:
@@ -182,7 +182,7 @@ def test_cli_lists_and_dispatches(capsys: pytest.CaptureFixture[str]) -> None:
     assert all(name in listing for name in COMMANDS)
     assert cli_main(["nope"]) == 2
     assert cli_main(["--version"]) == 0
-    from glucofm import __version__
+    from glucotrace import __version__
 
     assert f"glucotrace {__version__}" in capsys.readouterr().out
     with pytest.raises(SystemExit) as exit_info:
@@ -192,28 +192,29 @@ def test_cli_lists_and_dispatches(capsys: pytest.CaptureFixture[str]) -> None:
     assert "download-model" in capsys.readouterr().err
 
 
-def test_glucotrace_alias_exposes_public_api() -> None:
+def test_public_api_uses_the_glucotrace_name() -> None:
+    import importlib.util
+
     import glucotrace
 
-    assert glucotrace.GlucoTrace is glucotrace.GlucoFM
-    import glucofm
-
-    assert glucotrace.__version__ == glucofm.__version__
+    assert glucotrace.GlucoTrace.__name__ == "GlucoTrace"
+    assert "GlucoTraceConfig" in glucotrace.__all__
+    assert importlib.util.find_spec("glucofm") is None
 
 
 def test_checkpoint_resolution_order(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
-    from glucofm import inference
+    from glucotrace import inference
 
     monkeypatch.chdir(tmp_path)
     monkeypatch.delenv("GLUCOTRACE_CHECKPOINT", raising=False)
     monkeypatch.setenv("GLUCOTRACE_HOME", str(tmp_path / "home"))
-    assert inference.default_checkpoint_path() == tmp_path / "home" / "glucofm-research.pt"
-    local = tmp_path / "checkpoints" / "glucofm-research.pt"
+    assert inference.default_checkpoint_path() == tmp_path / "home" / "glucotrace-research.pt"
+    local = tmp_path / "checkpoints" / "glucotrace-research.pt"
     local.parent.mkdir()
     local.write_bytes(b"x")
-    assert inference.default_checkpoint_path() == Path("checkpoints/glucofm-research.pt")
+    assert inference.default_checkpoint_path() == Path("checkpoints/glucotrace-research.pt")
     monkeypatch.setenv("GLUCOTRACE_CHECKPOINT", "/elsewhere/model.pt")
     assert inference.default_checkpoint_path() == Path("/elsewhere/model.pt")
     with pytest.raises(FileNotFoundError, match="download-model"):
@@ -240,7 +241,7 @@ def test_download_verifies_checksum_atomically(
 ) -> None:
     import hashlib
 
-    from glucofm import inference
+    from glucotrace import inference
 
     payload = b"model-bytes"
     digest = hashlib.sha256(payload).hexdigest()
@@ -262,3 +263,31 @@ def test_download_verifies_checksum_atomically(
         inference.download_checkpoint(
             tmp_path / "x.pt", url="http://example.test/m.pt", force=True
         )
+
+
+def test_download_falls_back_when_primary_release_is_missing(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    import hashlib
+    import urllib.error
+
+    from glucotrace import inference
+
+    payload = b"same-bytes"
+    requested = []
+
+    def fake_urlopen(url, timeout):
+        requested.append(url)
+        if url.endswith("primary.pt"):
+            raise urllib.error.HTTPError(url, 404, "Not Found", None, None)
+        return _FakeResponse(payload)
+
+    monkeypatch.setattr(inference.urllib.request, "urlopen", fake_urlopen)
+    path = inference.download_checkpoint(
+        tmp_path / "model.pt",
+        url="https://example.test/primary.pt",
+        fallback_urls=("https://example.test/legacy.pt",),
+        expected_sha256=hashlib.sha256(payload).hexdigest(),
+    )
+    assert path.read_bytes() == payload
+    assert requested == ["https://example.test/primary.pt", "https://example.test/legacy.pt"]

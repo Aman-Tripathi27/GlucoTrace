@@ -2,7 +2,7 @@ import csv
 from datetime import datetime, timedelta
 from pathlib import Path
 
-from glucofm.adapters.big_ideas import (
+from glucotrace.adapters.big_ideas import (
     EVENT_COLUMN,
     GLUCOSE_COLUMN,
     TIMESTAMP_COLUMN,

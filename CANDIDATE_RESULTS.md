@@ -6,7 +6,7 @@ and the results do not establish scientific or clinical usefulness.
 
 ## Training run
 
-- candidate file: `checkpoints/glucofm-research-candidate.pt`
+- candidate file: `checkpoints/glucotrace-research-candidate.pt`
 - checkpoint SHA-256:
   `d35299dfd119aa5b2f9d8b47c4a4ce54c68bf26300a51eb92782e8271202fe5d`
 - architecture: default 412,684-parameter GlucoTrace encoder
@@ -56,7 +56,7 @@ a sensor comparison.
 
 ## Decision and next research boundary
 
-The candidate is not promoted to `glucofm-research.pt` because it failed three
+The candidate is not promoted to `glucotrace-research.pt` because it failed three
 of five fixed engineering checks. The test result will not be used to weaken
 protocol 1.0 thresholds or select another model on the same test partition.
 

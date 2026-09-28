@@ -1,6 +1,6 @@
 # GlucoTrace research checkpoint results
 
-This report describes `checkpoints/glucofm-research.pt`. It is an experimental
+This report describes `checkpoints/glucotrace-research.pt`. It is an experimental
 representation model, not a medical device or a clinically evaluated model.
 
 ## Artifact
@@ -13,7 +13,7 @@ representation model, not a medical device or a clinically evaluated model.
 - explicit checkpoint marker: `research_only=true`
 - fingerprint calibration: validation feature z-score followed by L2 normalization
 
-The adjacent `glucofm-research.pt.sha256` file can be used to verify the binary.
+The adjacent `glucotrace-research.pt.sha256` file can be used to verify the binary.
 
 ## Data boundary
 

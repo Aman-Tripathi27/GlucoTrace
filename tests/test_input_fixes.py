@@ -8,9 +8,9 @@ from pathlib import Path
 import pytest
 import torch
 
-from glucofm.commands import encode_main
-from glucofm.data import SENSOR_HIGH_MG_DL, SENSOR_LOW_MG_DL, load_cgm_csv
-from glucofm.inference import ResearchEncoder
+from glucotrace.commands import encode_main
+from glucotrace.data import SENSOR_HIGH_MG_DL, SENSOR_LOW_MG_DL, load_cgm_csv
+from glucotrace.inference import ResearchEncoder
 from test_inference import make_checkpoint
 
 CLARITY_HEADER = [
@@ -192,7 +192,7 @@ def test_encode_warns_about_out_of_range_readings(
     path = write_clarity(tmp_path / "day.csv", values)
     argv = sys.argv
     sys.argv = [
-        "glucofm-encode", str(path), "--format", "dexcom-clarity",
+        "glucotrace encode", str(path), "--format", "dexcom-clarity",
         "--checkpoint", str(checkpoint),
     ]
     try:

@@ -9,7 +9,7 @@ import torch
 from torch.utils.data import DataLoader
 
 from .data import CGMWindowDataset, load_cgm_csv
-from .model import GlucoFM, GlucoFMConfig
+from .model import GlucoTrace, GlucoTraceConfig
 
 
 def make_masked_batch(
@@ -38,7 +38,7 @@ def make_masked_batch(
 
 
 def train_epoch(
-    model: GlucoFM,
+    model: GlucoTrace,
     loader: DataLoader,
     optimizer: torch.optim.Optimizer,
     *,
@@ -89,7 +89,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--learning-rate", type=float, default=1e-3)
     parser.add_argument("--mask-probability", type=float, default=0.15)
     parser.add_argument("--seed", type=int, default=7)
-    parser.add_argument("--output", type=Path, default=Path("glucofm.pt"))
+    parser.add_argument("--output", type=Path, default=Path("glucotrace.pt"))
     return parser
 
 
@@ -113,8 +113,8 @@ def main() -> None:
 
     if args.window_size % 12:
         raise ValueError("--window-size must be divisible by the 12-reading patch")
-    config = GlucoFMConfig(max_patches=max(24, args.window_size // 12))
-    model = GlucoFM(config).to(device)
+    config = GlucoTraceConfig(max_patches=max(24, args.window_size // 12))
+    model = GlucoTrace(config).to(device)
     optimizer = torch.optim.AdamW(model.parameters(), lr=args.learning_rate)
     for epoch in range(1, args.epochs + 1):
         loss = train_epoch(

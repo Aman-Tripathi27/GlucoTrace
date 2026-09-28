@@ -5,6 +5,7 @@ from __future__ import annotations
 import hashlib
 import os
 import tempfile
+import urllib.error
 import urllib.request
 from dataclasses import dataclass
 from pathlib import Path
@@ -15,15 +16,16 @@ from torch.nn import functional as F
 
 from .corpus import CanonicalCGMDataset
 from .data import CGMWindowDataset, load_cgm_csv
-from .model import GlucoFM, GlucoFMConfig
+from .model import GlucoTrace, GlucoTraceConfig
 
 
-CHECKPOINT_NAME = "glucofm-research.pt"
+CHECKPOINT_NAME = "glucotrace-research.pt"
 CHECKPOINT_SHA256 = "1fbeecd68d81d239fa26726b67ca2d05bf485569a8d3619cdc624f86bba8092b"
-CHECKPOINT_URL = (
-    "https://github.com/Aman-Tripathi27/GlucoTrace/releases/download/"
-    f"v0.2.0/{CHECKPOINT_NAME}"
-)
+_RELEASES = "https://github.com/Aman-Tripathi27/GlucoTrace/releases/download/"
+CHECKPOINT_URL = f"{_RELEASES}v0.3.0/{CHECKPOINT_NAME}"
+# The same bytes were published under the project's former file name in
+# v0.2.0; the pinned SHA-256 guarantees either copy is identical.
+CHECKPOINT_FALLBACK_URLS = (f"{_RELEASES}v0.2.0/glucofm-research.pt",)
 
 
 def checkpoint_cache_path() -> Path:
@@ -52,18 +54,34 @@ def download_checkpoint(
     url: str = CHECKPOINT_URL,
     expected_sha256: str = CHECKPOINT_SHA256,
     force: bool = False,
+    fallback_urls: tuple[str, ...] | None = None,
 ) -> Path:
     """Download the released checkpoint and verify its pinned SHA-256.
 
     The file is written atomically and only after the checksum matches, so a
-    partial or tampered download never replaces a usable checkpoint.
+    partial or tampered download never replaces a usable checkpoint. If the
+    primary URL is unavailable (for example before its release exists), the
+    fallback URLs are tried; each copy must match the same checksum.
     """
 
     target = Path(destination) if destination is not None else checkpoint_cache_path()
     if target.is_file() and not force and sha256_file(target) == expected_sha256:
         return target
-    if not url.startswith("https://"):
+    if fallback_urls is None:
+        fallback_urls = CHECKPOINT_FALLBACK_URLS if url == CHECKPOINT_URL else ()
+    candidates = (url, *fallback_urls)
+    if not all(candidate.startswith("https://") for candidate in candidates):
         raise ValueError("checkpoint downloads require an https URL")
+    last_error: Exception | None = None
+    for candidate in candidates:
+        try:
+            return _download_verified(candidate, target, expected_sha256)
+        except urllib.error.HTTPError as exc:
+            last_error = exc
+    raise ValueError(f"checkpoint could not be downloaded: {last_error}")
+
+
+def _download_verified(url: str, target: Path, expected_sha256: str) -> Path:
     target.parent.mkdir(parents=True, exist_ok=True)
     handle, temporary_name = tempfile.mkstemp(
         dir=target.parent, prefix=".download-", suffix=".pt"
@@ -102,7 +120,7 @@ def resolve_device(name: str) -> torch.device:
 
 def load_model_payload(
     checkpoint_path: str | Path, *, device: torch.device
-) -> tuple[GlucoFM, dict[str, Any]]:
+) -> tuple[GlucoTrace, dict[str, Any]]:
     """Load a marked research checkpoint without executing pickled code."""
 
     path = Path(checkpoint_path)
@@ -118,7 +136,7 @@ def load_model_payload(
         config_values = dict(checkpoint["config"])
         config_values["trend_windows"] = tuple(config_values["trend_windows"])
         config_values.setdefault("pool_segments", 1)
-        model = GlucoFM(GlucoFMConfig(**config_values))
+        model = GlucoTrace(GlucoTraceConfig(**config_values))
         model.load_state_dict(checkpoint["model_state_dict"], strict=True)
     except (KeyError, TypeError, RuntimeError, ValueError) as exc:
         raise ValueError(f"invalid GlucoTrace checkpoint: {exc}") from exc
@@ -129,7 +147,7 @@ def load_model_payload(
 class ResearchEncoder:
     """A loaded model plus its validation-fitted fingerprint calibration."""
 
-    model: GlucoFM
+    model: GlucoTrace
     checkpoint_path: Path
     checkpoint_sha256: str
     center: torch.Tensor
@@ -155,7 +173,7 @@ class ResearchEncoder:
         except (KeyError, TypeError, ValueError) as exc:
             raise ValueError(
                 "checkpoint has no valid embedding calibration; run "
-                "glucofm-calibrate first"
+                "glucotrace calibrate first"
             ) from exc
         expected = model.config.hidden_size
         if center.shape != (expected,) or scale.shape != (expected,):

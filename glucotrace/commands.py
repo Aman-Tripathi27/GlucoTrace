@@ -142,7 +142,7 @@ def encode_main() -> None:
     _emit(
         {
             "schema_version": "1.0",
-            "kind": "glucofm_fingerprint",
+            "kind": "glucotrace_fingerprint",
             "research_only": True,
             "model": _model_metadata(encoder),
             "input": input_metadata,
@@ -190,7 +190,7 @@ def compare_main() -> None:
     _emit(
         {
             "schema_version": "1.0",
-            "kind": "glucofm_comparison",
+            "kind": "glucotrace_comparison",
             "research_only": True,
             "model": _model_metadata(encoder),
             "first_input": first_metadata,
@@ -250,7 +250,7 @@ def search_main() -> None:
     _emit(
         {
             "schema_version": "1.0",
-            "kind": "glucofm_search",
+            "kind": "glucotrace_search",
             "research_only": True,
             "model": _model_metadata(encoder),
             "query": input_metadata,

@@ -1,5 +1,28 @@
 # Changelog
 
+## 0.3.0 (unreleased)
+
+### Breaking: renamed to GlucoTrace everywhere
+
+- The Python package is now `glucotrace` (was `glucofm`); the model classes are
+  `GlucoTrace` and `GlucoTraceConfig`.
+- All commands run through `glucotrace <command>`; the separate `glucofm-*`
+  commands are removed.
+- The checkpoint file is `glucotrace-research.pt`. Its bytes and SHA-256
+  (`1fbeecd6…8092b`) are unchanged, so existing fingerprints stay comparable.
+- Output kinds are `glucotrace_fingerprint`, `glucotrace_comparison`, and
+  `glucotrace_search`.
+- Cites the independent GlucoFM paper (arXiv:2605.30865) as related work.
+
+### Added
+
+- Protocol 1.4 (random-phase training windows, three seeds, a no-clock
+  diagnostic) with `--random-phase-raw` and `--no-clock` for pretraining.
+  Result: removing the clock input eliminated source leakage (margin
+  -0.004) at a ~3% utility cost; no recipe passed all gates.
+- `download-model` falls back to the identical v0.2.0 asset until a v0.3.0
+  release exists.
+
 ## 0.2.2 (2026-09-28)
 
 ### Fixed

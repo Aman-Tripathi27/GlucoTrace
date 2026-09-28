@@ -15,7 +15,7 @@ diagnostic, or safety evidence.
 
 All candidates used the candidate 6 recipe (40 epochs, batch size 32, seed 7,
 562 source-balanced draws per epoch) on the protocol 1.2 training partition.
-They differ only in the new source-invariance options in `glucofm-pretrain`.
+They differ only in the new source-invariance options in `glucotrace pretrain`.
 
 | Candidate | Within-source negatives | Adversary weight |
 |-----------|:-----------------------:|:----------------:|

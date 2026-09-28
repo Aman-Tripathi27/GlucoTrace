@@ -4,7 +4,7 @@ from pathlib import Path
 
 import torch
 
-from glucofm.canonical import (
+from glucotrace.canonical import (
     CGMReading,
     SourceProvenance,
     build_24h_windows,

@@ -6,7 +6,7 @@ from pathlib import Path
 
 import pytest
 
-from glucofm.adapters.colas import (
+from glucotrace.adapters.colas import (
     GLUCOSE_COLUMN,
     INDEX_COLUMN,
     TIME_COLUMN,

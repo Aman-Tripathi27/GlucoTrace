@@ -7,7 +7,7 @@ __pycache__/
 dist/
 build/
 *.pt
-!checkpoints/glucofm-research.pt
+!checkpoints/glucotrace-research.pt
 # Canonical day files and raw datasets stay local (dataset licenses). The
 # manifests and split files contain no glucose values and are published so
 # protocol declarations can be verified.
@@ -22,4 +22,5 @@ evaluations/*.json
 !evaluations/protocol-1.1.json
 !evaluations/protocol-1.2-candidate-*-validation.json
 !evaluations/protocol-1.3-candidate-*-validation.json
+!evaluations/protocol-1.4-recipe-*-validation.json
 checkpoints/protocol-*/

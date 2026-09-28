@@ -44,7 +44,6 @@ The input is a CSV with `timestamp,glucose` columns in mg/dL (or pass
 Time zones are respected, `Low`/`High` readings are handled explicitly, and
 files whose values contradict the declared unit are rejected rather than
 silently misread. Run `glucotrace --help` for all fourteen commands.
-In Python, `import glucotrace` exposes the same API as `glucofm`.
 
 ## Why GlucoTrace
 
@@ -59,9 +58,10 @@ In Python, `import glucotrace` exposes the same API as `glucofm`.
   summary statistics (7.7 vs 8.2 mg/dL, released checkpoint).
 - **Honest about its weak spot.** The embedding still reveals which dataset a
   day came from. [Protocol 1.2](PROTOCOL_1_2_RESULTS.md) traced this to clock
-  alignment, and [protocol 1.3](PROTOCOL_1_3_RESULTS.md) confirmed it: starting
-  every day at midnight halved the leakage, at a cost in usefulness that is
-  still being investigated.
+  alignment, and [protocol 1.3](PROTOCOL_1_3_RESULTS.md) halved it by starting every day at
+  midnight. [Protocol 1.4](PROTOCOL_1_4_RESULTS.md) found the remaining leak is
+  the time-of-day input: removing it eliminates the leakage at a ~3% cost in
+  usefulness.
 - **Small and hackable.** About 5,000 lines of typed Python, 88 tests, CPU
   training in minutes.
 
@@ -75,8 +75,6 @@ In Python, `import glucotrace` exposes the same API as `glucofm`.
 | Can a fingerprint link days from the same person? | Often: top-1 same-person match about 25% vs 3.5% chance. Treat fingerprints as personal data | [MODEL_CARD.md](MODEL_CARD.md) |
 | Is it clinically validated? | **No.** No clinical, diagnostic, or safety claim is made | [MODEL_CARD.md](MODEL_CARD.md) |
 
-The repository is branded **GlucoTrace**. The original `glucofm` import
-package, model class, and `glucofm-*` commands remain for compatibility.
 
 ## Verify the pre-registration
 
@@ -98,7 +96,7 @@ The BIG IDEAs adapter reads the official PhysioNet participant layout and emits
 provenance-tracked 24-hour CGM files:
 
 ```bash
-glucofm-prepare-big-ideas big-ideas-1.1.3 prepared/big-ideas
+glucotrace prepare-big-ideas big-ideas-1.1.3 prepared/big-ideas
 ```
 
 Only the small `Dexcom_*.csv` files are required. The source dataset is not
@@ -108,7 +106,7 @@ expected layout, canonical schema, and exact processing rules.
 The Colas adapter reads the authoritative PLOS Supporting File S1 ZIP directly:
 
 ```bash
-glucofm-prepare-colas pone.0225817.s001.zip prepared/colas
+glucotrace prepare-colas pone.0225817.s001.zip prepared/colas
 ```
 
 This source contains only clock times. The adapter preserves clock phase,
@@ -122,7 +120,7 @@ the exact transformation and attribution.
 Generate a deterministic participant-level split tied to the exact manifest:
 
 ```bash
-glucofm-split-corpus prepared/big-ideas/manifest.json
+glucotrace split prepared/big-ideas/manifest.json
 ```
 
 The default split uses the seed and participant key to create a stable SHA-256
@@ -132,7 +130,7 @@ SHA-256, seed, fractions, participant membership, and day counts. If the
 manifest changes later, the dataset loader rejects the stale split.
 
 ```python
-from glucofm import CanonicalCGMDataset
+from glucotrace import CanonicalCGMDataset
 
 train_days = CanonicalCGMDataset(
     "prepared/big-ideas/manifest.json",
@@ -194,12 +192,12 @@ must be within 2 minutes of its nearest grid point.
 ## Encode, compare, search, and report
 
 ```bash
-glucofm-encode day.csv --output day.fingerprint.json
-glucofm-compare first-day.csv second-day.csv --output comparison.json
-glucofm-search query-day.csv \
+glucotrace encode day.csv --output day.fingerprint.json
+glucotrace compare first-day.csv second-day.csv --output comparison.json
+glucotrace search query-day.csv \
   --manifest data/processed/big_ideas/manifest.json \
   --top-k 5 --output nearest-days.json
-glucofm-report query-day.csv \
+glucotrace report query-day.csv \
   --manifest data/processed/big_ideas/manifest.json \
   --output report.html
 ```
@@ -218,7 +216,7 @@ Python API, output schemas, and privacy limitations.
 ## Architecture API
 
 ```python
-from glucofm import CGMWindowDataset, GlucoTrace, load_cgm_csv
+from glucotrace import CGMWindowDataset, GlucoTrace, load_cgm_csv
 
 series = load_cgm_csv("cgm.csv", interval_minutes=5)
 windows = CGMWindowDataset(series, window_size=288, stride=72)
@@ -249,11 +247,11 @@ corpus to dominate. It masks complete hourly patches and trains a student to
 predict full-context tokens from an exponential-moving-average teacher:
 
 ```bash
-glucofm-pretrain \
+glucotrace pretrain \
   --corpus data/processed/big_ideas/manifest.json data/processed/big_ideas/splits_protocol_1_1.json \
   --corpus data/processed/colas/manifest.json data/processed/colas/splits_protocol_1_1.json \
   --epochs 40 --batch-size 32 \
-  --output checkpoints/glucofm-research.pt
+  --output checkpoints/glucotrace-research.pt
 ```
 
 The objective predicts masked hourly tokens while making two differently masked
@@ -265,13 +263,13 @@ details.
 
 ## Frozen representation evaluation
 
-Evaluation protocols 1.0 through 1.3 were specified before their corresponding
+Evaluation protocols 1.0 through 1.4 were specified before their corresponding
 training decisions. They measure
 embedding collapse, controlled missingness stability, retrieval consistency,
 and cross-source separability against a transparent summary-feature baseline:
 
 ```bash
-glucofm-evaluate checkpoints/glucofm-research.pt \
+glucotrace evaluate checkpoints/glucotrace-research.pt \
   --corpus data/processed/big_ideas/manifest.json data/processed/big_ideas/splits_protocol_1_1.json \
   --corpus data/processed/colas/manifest.json data/processed/colas/splits_protocol_1_1.json \
   --protocol-version 1.1 \
@@ -295,7 +293,7 @@ training options are available as `--within-source-negatives` and
 ## Single-CSV reconstruction smoke test
 
 ```bash
-glucofm-train cgm.csv --window-size 288 --epochs 5 --output glucofm.pt
+glucotrace train-csv cgm.csv --window-size 288 --epochs 5 --output glucotrace.pt
 ```
 
 This older example trainer randomly hides observed values, recomputes gap age from the
@@ -340,6 +338,17 @@ indeed, the source probe is a known warning. Glucose units are not inferred or
 converted unless `--unit mmol/L` is declared. Fingerprints can link days from
 the same person, so treat them as personal data. See
 [MODEL_CARD.md](MODEL_CARD.md) before using the code in research.
+
+## Related work
+
+GlucoTrace is independent of **GlucoFM** (Li et al., 2026,
+[arXiv:2605.30865](https://arxiv.org/abs/2605.30865)), a larger dual-stream CGM
+foundation model trained on about 109,000 hours from 477 people. Both separate
+slow trends from short-term deviations. GlucoTrace is much smaller and differs
+in emphasis: pre-registered evaluation protocols, published participant splits,
+and explicit leakage probes. Early versions of this repository used the
+package name `glucofm`; version 0.3.0 renamed everything to `glucotrace` to
+avoid confusion.
 
 ## Citation
 

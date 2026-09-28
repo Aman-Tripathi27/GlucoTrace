@@ -33,7 +33,7 @@ on the grid, and every day in both sources starts between `00:00` and `00:05`.
 ## Frozen split provenance
 
 Partition membership is **copied exactly** from protocol 1.2 with
-`glucofm-reserve-holdout --carry-membership`. No participant changes
+`glucotrace reserve-holdout --carry-membership`. No participant changes
 partition and none were dropped.
 
 The protocol 1.2 test partition was never opened: no candidate passed

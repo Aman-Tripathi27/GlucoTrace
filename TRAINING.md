@@ -13,11 +13,11 @@ only the `validation` partition. The command does not load test days.
 For the current local BIG IDEAs and Colas corpora:
 
 ```bash
-glucofm-pretrain \
+glucotrace pretrain \
   --corpus data/processed/big_ideas/manifest.json data/processed/big_ideas/splits_protocol_1_1.json \
   --corpus data/processed/colas/manifest.json data/processed/colas/splits_protocol_1_1.json \
   --epochs 40 --batch-size 32 \
-  --output checkpoints/glucofm-research.pt
+  --output checkpoints/glucotrace-research.pt
 ```
 
 `--corpus MANIFEST SPLITS` can be repeated for additional approved sources.

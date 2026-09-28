@@ -17,7 +17,7 @@ with 0.93 balanced accuracy. Protocol 1.2 makes that weakness a release gate.
 
 ## Frozen split provenance
 
-`glucofm-reserve-holdout` was run with seed `43` and reserve fraction `0.20` on
+`glucotrace reserve-holdout` was run with seed `43` and reserve fraction `0.20` on
 the protocol 1.1 split of each source. The protocol 1.1 test participants move
 into training. Validation participants are unchanged.
 
