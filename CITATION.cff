@@ -4,7 +4,9 @@ title: "GlucoTrace: a small, pre-registered representation encoder for continuou
 version: 0.2.2
 date-released: 2026-09-28
 license: MIT
+doi: 10.5281/zenodo.22935995
 repository-code: "https://github.com/Aman-Tripathi27/GlucoTrace"
+url: "https://aman-tripathi27.github.io/GlucoTrace/"
 authors:
   - family-names: Tripathi
     given-names: Aman

@@ -5,6 +5,7 @@ fingerprint, then compare it with, search for, and visualize similar days.**
 
 [![tests](https://github.com/Aman-Tripathi27/GlucoTrace/actions/workflows/tests.yml/badge.svg)](https://github.com/Aman-Tripathi27/GlucoTrace/actions/workflows/tests.yml)
 [![PyPI](https://img.shields.io/pypi/v/glucotrace)](https://pypi.org/project/glucotrace/)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22935995.svg)](https://doi.org/10.5281/zenodo.22935995)
 ![python](https://img.shields.io/badge/python-3.10%20%7C%203.13-blue)
 ![license](https://img.shields.io/badge/license-MIT-green)
 ![status](https://img.shields.io/badge/status-research%20only-orange)
@@ -339,6 +340,13 @@ indeed, the source probe is a known warning. Glucose units are not inferred or
 converted unless `--unit mmol/L` is declared. Fingerprints can link days from
 the same person, so treat them as personal data. See
 [MODEL_CARD.md](MODEL_CARD.md) before using the code in research.
+
+## Citation
+
+If you use GlucoTrace in research, please cite it with the DOI
+[10.5281/zenodo.22935995](https://doi.org/10.5281/zenodo.22935995), which always
+resolves to the latest version. GitHub's "Cite this repository" button uses
+[CITATION.cff](CITATION.cff).
 
 ## License
 
