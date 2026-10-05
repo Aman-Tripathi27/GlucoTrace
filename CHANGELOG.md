@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.1 (2026-10-05)
+
+Documentation update. The model and all behavior are unchanged from 0.3.0.
+
 ## 0.3.0 (2026-10-05)
 
 ### Breaking: renamed to GlucoTrace everywhere
