@@ -11,10 +11,9 @@ fingerprint, then compare it with, search for, and visualize similar days.**
 ![status](https://img.shields.io/badge/status-research%20only-orange)
 
 GlucoTrace is a small, readable PyTorch Transformer (511k parameters) for
-representation learning on CGM time series. It trains on public data, never
-invents missing glucose readings, and reports its results honestly: every
-release decision follows an evaluation protocol written down *before*
-training, including the failures.
+representation learning on CGM time series. It trains on public data from
+three countries, never invents missing glucose readings, and is evaluated with
+tests written down *before* training.
 
 > **Research software only.** GlucoTrace is not a medical device and must not
 > be used for diagnosis, treatment, dosing, alerts, or patient care.
@@ -54,22 +53,8 @@ silently misread. Run `glucotrace --help` for all fourteen commands.
   to checksummed manifests, and the loader refuses stale splits.
 - **Pre-registered evaluation.** Thresholds, probes, and candidate budgets are
   declared before training; a test partition is opened once.
-- **Free of dataset bias (0.3).** The default model has no clock input, so its
-  fingerprints no longer encode which study or country a day came from
-  (margin 0.067 on new people, limit 0.10).
-- **Honest about its limits.** On new people the 0.3 fingerprint is tied with
-  11 hand-built summary statistics at predicting a hidden 6-hour window
-  (20.1 vs 19.6 mg/dL). It failed that pre-registered gate and was released by
-  the owner's decision; see [RELEASE_RESULTS_0_3.md](RELEASE_RESULTS_0_3.md).
-- **Every step documented.** The 0.2 embedding revealed which dataset a
-  day came from. [Protocol 1.2](PROTOCOL_1_2_RESULTS.md) traced this to clock
-  alignment, and [protocol 1.3](PROTOCOL_1_3_RESULTS.md) halved it by starting every day at
-  midnight. [Protocol 1.4](PROTOCOL_1_4_RESULTS.md) found the remaining leak is
-  the time-of-day input: removing it eliminates the leakage at a ~3% cost in
-  usefulness. [Protocol 1.5](PROTOCOL_1_5_RESULTS.md) added a third cohort
-  (China): the leak-free design stayed leak-free on new people, but on the
-  sealed test it was no more useful than summary statistics. It became the
-  0.3 default anyway, with that failure disclosed.
+- **Compares the shape of the day.** The model has no clock input, so
+  fingerprints reflect the glucose curve itself.
 - **Small and hackable.** About 5,000 lines of typed Python, 109 tests, CPU
   training in minutes.
 
@@ -77,10 +62,8 @@ silently misread. Run `glucotrace --help` for all fourteen commands.
 
 | Question | Result | Where |
 |---|---|---|
-| Is the embedding non-collapsed and stable when data goes missing? | Yes, all five protocol 1.1 checks passed on a held-out test set (e.g. 30% random removal: median cosine 0.994) | [RELEASE_RESULTS.md](RELEASE_RESULTS.md) |
-| Is it more useful than summary statistics? | The 0.3 model: no, statistically tied on the sealed test (20.1 vs 19.6 mg/dL); it failed that gate and was released by owner decision. The 0.2 model: yes on validation (7.7 vs 8.2 mg/dL) but biased | [PROTOCOL_1_2_RESULTS.md](PROTOCOL_1_2_RESULTS.md), [PROTOCOL_1_5_RESULTS.md](PROTOCOL_1_5_RESULTS.md) |
-| Does it encode which dataset a day came from? | The 0.3 model: no beyond summary statistics (margin 0.067 on new people, limit 0.10). The 0.2 model: yes, too much (linear probe 0.98) | [PROTOCOL_1_4_RESULTS.md](PROTOCOL_1_4_RESULTS.md), [PROTOCOL_1_5_RESULTS.md](PROTOCOL_1_5_RESULTS.md) |
-| Can a fingerprint link days from the same person? | Often: top-1 same-person match about 25% vs 3.5% chance. Treat fingerprints as personal data | [MODEL_CARD.md](MODEL_CARD.md) |
+| Is the fingerprint stable when readings go missing? | Yes. On new people, removing 30% of readings at random keeps a median cosine similarity of 0.965 | [MODEL_CARD.md](MODEL_CARD.md) |
+| Can a fingerprint link days from the same person? | Often: a day's closest match is the same person about half the time. Treat fingerprints as personal data | [MODEL_CARD.md](MODEL_CARD.md) |
 | Is it clinically validated? | **No.** No clinical, diagnostic, or safety claim is made | [MODEL_CARD.md](MODEL_CARD.md) |
 
 

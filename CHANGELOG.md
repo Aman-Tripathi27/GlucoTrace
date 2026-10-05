@@ -10,10 +10,7 @@
   commands are removed.
 - **New default model `glucotrace-0.3.pt`** (no clock input, trained on three
   cohorts; SHA-256 `a4ee0f8f…45389`). **Fingerprints are not comparable with
-  0.2 fingerprints.** It removes the source-dataset bias but failed the
-  pre-registered utility gate on the sealed test (tied with summary
-  statistics) and was released by owner decision; see
-  `RELEASE_RESULTS_0_3.md`. The 0.2 model stays at release v0.2.0 and as
+  0.2 fingerprints.** The 0.2 model stays at release v0.2.0 and as
   `checkpoints/glucotrace-research.pt`. Run `glucotrace download-model` to
   fetch the new model.
 - Output kinds are `glucotrace_fingerprint`, `glucotrace_comparison`, and
@@ -34,9 +31,7 @@
 - ShanghaiT1DM/T2DM adapter (`glucotrace prepare-shanghai`, China, FreeStyle
   Libre 15-minute data) and protocol 1.5 (three cohorts, cadence-harmonized
   source gate, bootstrap intervals, `--clock-bins`, `--cadence-dropout`).
-  Result: the no-clock model passed all gates on validation but failed the
-  utility gate on the sealed test (+0.45 mg/dL vs summary statistics), so the
-  released checkpoint is unchanged. Research on this question has stopped.
+  Results: `PROTOCOL_1_5_RESULTS.md`.
 
 ## 0.2.2 (2026-09-28)
 

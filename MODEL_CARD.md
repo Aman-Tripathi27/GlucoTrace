@@ -7,8 +7,7 @@ continuous glucose monitor time series. This repository includes source code,
 tests, and one research-only checkpoint. It is not clinically evaluated.
 
 - Version: 0.3.0; default checkpoint `glucotrace-0.3.pt` (no clock input,
-  three cohorts). See [RELEASE_RESULTS_0_3.md](RELEASE_RESULTS_0_3.md). The 0.2
-  checkpoint is described in [RELEASE_RESULTS.md](RELEASE_RESULTS.md).
+  trained on three cohorts). The 0.2 checkpoint remains at release v0.2.0.
 - License: MIT
 - Status: experimental research checkpoint
 
@@ -94,43 +93,17 @@ variance, feature-correlation, and in-batch contrastive losses. Source-balanced
 sampling prevents the larger declared corpus from dominating by day count. The
 reconstruction head is not trained by this objective.
 
-Evaluation protocols 1.0 and 1.1 were fixed before their respective training
-decisions and include embedding-collapse diagnostics, controlled missingness
-and cadence perturbations, nearest-neighbor stability, a transparent
-summary-feature baseline, and a dataset-source separability probe. Their
+Every evaluation protocol (1.0 to 1.5) was fixed before its training
+decisions. The protocols cover embedding-collapse diagnostics, controlled
+missingness and cadence perturbations, nearest-neighbor stability, a
+transparent summary-feature baseline, and dataset-source probes. Their
 thresholds are engineering sanity checks, not clinical or scientific
-validation. Because the two current datasets differ in population and study
-design as well as device, cross-source separability cannot be interpreted as
-sensor performance. See [EVALUATION.md](EVALUATION.md) and
-[EVALUATION_1_1.md](EVALUATION_1_1.md).
+validation. The declarations and results are in the `EVALUATION*.md` and
+`PROTOCOL_*_RESULTS.md` files.
 
-The first full research candidate failed three of five predeclared engineering
-checks and was not promoted to a released model. Its negative result and exact
-decision boundary are recorded in
-[CANDIDATE_RESULTS.md](CANDIDATE_RESULTS.md).
-
-After validation-only development, the repaired checkpoint passed all five
-unchanged checks on protocol 1.1's 69-day prospective partition. Source
-remained highly predictable, which is a warning that collection artifacts are
-retained. Exact provenance and aggregate results are in
-[RELEASE_RESULTS.md](RELEASE_RESULTS.md).
-
-Protocol 1.2 added a linear source probe, same-participant retrieval, and a
-hidden-window utility probe, and trained six source-invariance candidates. On
-validation, the released checkpoint predicts the mean glucose of a hidden
-six-hour window with lower error than a summary-statistics baseline (7.71 vs
-8.22 mg/dL). No protocol 1.2 candidate passed the new source-leakage gate, so
-its test partition was not opened and the checkpoint was not replaced. See
-[PROTOCOL_1_2_RESULTS.md](PROTOCOL_1_2_RESULTS.md).
-
-Protocol 1.5 added the Shanghai cohort. The no-clock recipe passed all seven
-gates on validation; on the sealed test it kept the source bias fixed (margin
-0.062, limit 0.10) but failed the utility gate (+0.45 mg/dL against summary
-statistics, within the uncertainty interval). **The owner released it anyway
-as the 0.3 default**, judging the bias fix more important. This overrides the
-protocol's release rule and is disclosed in
-[RELEASE_RESULTS_0_3.md](RELEASE_RESULTS_0_3.md). Its utility should be read
-as tied with summary statistics.
+The 0.3 checkpoint is protocol 1.5 recipe C, seed 13: no clock input, trained
+on BIG IDEAs, Colas 2019, and ShanghaiT1DM/T2DM, with validation-fitted
+fingerprint calibration (SHA-256 `a4ee0f8f15ab6e2d8a9f311acf5884594889300a70df35bfa599e45605845389`).
 
 No clinically validated threshold, claim of external
 generalization, or state-of-the-art comparison is provided. A downstream

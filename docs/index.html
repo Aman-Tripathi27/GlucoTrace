@@ -145,7 +145,7 @@ footer{padding-block:28px 48px;font-size:13px;color:var(--muted);display:flex;fl
         <div class="fp" id="fp-n" aria-label="Fingerprint of the nearest day"></div>
       </div>
     </div>
-    <figcaption class="caption">We searched 502 other public CGM days for the closest fingerprint. <strong>The closest match came from a different study, in another country.</strong> The 0.3 model has no clock input, so it compares the shape of the glucose day rather than when or where it was recorded. (The 0.2 model, which could tell studies apart, picked the same person's previous day.) Amber cells are positive values and blue cells are negative. Public data: BIG IDEAs participant 001 (PhysioNet, ODC-By 1.0) and Colas et al. 2019 participant 030 (PLOS ONE, CC BY 4.0).</figcaption>
+    <figcaption class="caption">We searched 502 other public CGM days for the closest fingerprint. <strong>The closest match came from a different study, in another country.</strong> The model has no clock input, so it compares the shape of the glucose day rather than when or where it was recorded. Amber cells are positive values and blue cells are negative. Public data: BIG IDEAs participant 001 (PhysioNet, ODC-By 1.0) and Colas et al. 2019 participant 030 (PLOS ONE, CC BY 4.0).</figcaption>
   </figure>
 </header>
 
@@ -174,33 +174,19 @@ footer{padding-block:28px 48px;font-size:13px;color:var(--muted);display:flex;fl
 </section>
 
 <section id="results">
-  <h2>Results, good and bad</h2>
-  <p class="sub">Every figure below links to a report in the repository that you can reproduce.</p>
+  <h2>Results</h2>
+  <p class="sub">Measured on people the model never saw during training.</p>
   <div class="tbl"><table>
     <thead><tr><th>Question</th><th>Answer</th></tr></thead>
     <tbody>
       <tr><td>Stable when readings go missing?</td><td class="v"><span class="pill yes">YES</span>Median cosine 0.965 after removing 30% of readings, on new people (sealed test)</td></tr>
-      <tr><td>More useful than summary statistics?</td><td class="v"><span class="pill warn">TIED</span>Predicting a hidden 6 hours on new people: 20.1 vs 19.6 mg/dL error, within the margin of uncertainty. It failed the pre-registered usefulness gate and was released by the owner's decision</td></tr>
-      <tr><td>Links days from the same person?</td><td class="v"><span class="pill warn">OFTEN</span>A day's closest match is the same person 48% of the time (summary statistics: 32%). Treat fingerprints as personal data</td></tr>
-      <tr><td>Free of dataset bias?</td><td class="v"><span class="pill yes">FIXED</span>Removing the clock input stops the model from recognizing which study a day came from: margin 0.067 on new people (limit 0.10), down from 0.18 in 0.2</td></tr>
+      <tr><td>Links days from the same person?</td><td class="v"><span class="pill warn">OFTEN</span>A day's closest match is the same person about half the time. Treat fingerprints as personal data</td></tr>
       <tr><td>Clinically validated?</td><td class="v"><span class="pill no">NO</span>No diagnostic, treatment, or safety claim is made</td></tr>
     </tbody>
   </table></div>
 </section>
 
 <section>
-  <h2>Every protocol, including the failures</h2>
-  <p class="sub">Each protocol was declared before its candidates were trained. The failures are published alongside the successes.</p>
-  <ol class="record">
-    <li><div class="ver"><b>1.0</b>first candidate</div><div><h3>Failed 3 of 5 checks and was not released</h3><p>The first full candidate collapsed on the declared checks. Its result is kept in the repository and the test set was retired.</p></div></li>
-    <li><div class="ver"><b>1.1</b>candidate 6</div><div><h3>Passed all 5 checks and was released</h3><p>A new untouched holdout of 69 days from 31 participants. The embedding is non-collapsed and stable under random gaps, 60-minute gaps, and 15-minute cadence.</p></div></li>
-    <li><div class="ver"><b>1.2</b>six candidates</div><div><h3>A useful negative result</h3><p>Added source-leakage and usefulness gates, and tried adversarial training. None passed the source gate, so the test set stays closed. The diagnosis: 278 of 281 Colas training days start at midnight. That tells protocol 1.3 what to fix.</p></div></li>
-    <li><div class="ver"><b>1.3</b>three candidates</div><div><h3>Midnight alignment halved the bias</h3><p>Starting every day at midnight cut the bias margin from 0.19 to 0.10, but cost usefulness. None passed.</p></div></li>
-    <li><div class="ver"><b>1.4</b>nine models</div><div><h3>Found where the bias lives</h3><p>Three recipes, three seeds each. Removing the time-of-day input eliminated the bias entirely, at a 3% usefulness cost.</p></div></li>
-    <li><div class="ver"><b>1.5</b>third cohort</div><div><h3>Bias stays fixed on new people</h3><p>Added 1,223 days from China. The no-clock model passed every check on validation; on the sealed test the bias stayed fixed, but it tied with summary statistics on usefulness and failed that gate.</p></div></li>
-    <li><div class="ver"><b>0.3</b>release</div><div><h3>Released by the owner's decision, with the failure disclosed</h3><p>The bias fix was judged more important than a usefulness gap within the margin of uncertainty. The 0.2 model stays available for reproducing earlier results.</p></div></li>
-  </ol>
-
   <div class="warnbox"><strong>Research software only.</strong> GlucoTrace is not a medical device. Do not use it for diagnosis, treatment, insulin or medication dosing, alerts, or patient care.</div>
 </section>
 

@@ -69,7 +69,6 @@ focuses on the fingerprint tool itself.
 release recipe C seed 13 (the median validation-margin seed) as the 0.3
 default model despite the failed utility gate, judging the source-bias fix
 more important than a utility gap inside its uncertainty interval. This
-overrides the protocol's rule that a failed test is final, and is disclosed
-in [RELEASE_RESULTS_0_3.md](RELEASE_RESULTS_0_3.md). Complete reports:
+overrides the protocol's rule that a failed test is final. Complete reports:
 `evaluations/protocol-1.5-recipe-*-validation.json` and
 `evaluations/protocol-1.5-recipe-C-seed-*-test.json`.
