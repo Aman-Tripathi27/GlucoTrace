@@ -26,17 +26,13 @@ def _standardize(
     return (train - center) / scale, (target - center) / scale
 
 
-def linear_source_probe(
+def linear_source_predictions(
     train_features: torch.Tensor,
     train_sources: Sequence[str],
     target_features: torch.Tensor,
     target_sources: Sequence[str],
-) -> dict[str, float]:
-    """Fit a class-balanced L2 logistic regression and report held-out accuracy.
-
-    A linear probe is a stronger leakage test than nearest centroids: a model
-    can move centroids together while still encoding source along one axis.
-    """
+) -> tuple[torch.Tensor, torch.Tensor, list[str]]:
+    """Fit the class-balanced L2 logistic probe; return predicted and true labels."""
 
     source_names = sorted(set(train_sources))
     if len(source_names) < 2 or not set(target_sources).issubset(source_names):
@@ -66,15 +62,36 @@ def linear_source_probe(
     optimizer.step(closure)
     with torch.no_grad():
         predictions = (target @ weight + bias).argmax(dim=1)
+    return predictions, target_labels, source_names
+
+
+def balanced_accuracy(predictions: torch.Tensor, labels: torch.Tensor) -> float:
     recalls = [
-        (predictions[target_labels == index] == index).double().mean()
-        for index in range(len(source_names))
-        if (target_labels == index).any()
+        (predictions[labels == index] == index).double().mean()
+        for index in torch.unique(labels).tolist()
     ]
+    return float(torch.stack(recalls).mean())
+
+
+def linear_source_probe(
+    train_features: torch.Tensor,
+    train_sources: Sequence[str],
+    target_features: torch.Tensor,
+    target_sources: Sequence[str],
+) -> dict[str, float]:
+    """Fit a class-balanced L2 logistic regression and report held-out accuracy.
+
+    A linear probe is a stronger leakage test than nearest centroids: a model
+    can move centroids together while still encoding source along one axis.
+    """
+
+    predictions, labels, names = linear_source_predictions(
+        train_features, train_sources, target_features, target_sources
+    )
     return {
-        "accuracy": float((predictions == target_labels).double().mean()),
-        "balanced_accuracy": float(torch.stack(recalls).mean()),
-        "chance_balanced_accuracy": 1.0 / len(source_names),
+        "accuracy": float((predictions == labels).double().mean()),
+        "balanced_accuracy": balanced_accuracy(predictions, labels),
+        "chance_balanced_accuracy": 1.0 / len(names),
     }
 
 
@@ -121,7 +138,9 @@ def hide_final_window(
 
     Returns visible glucose, visible mask, the observed mean glucose of the
     hidden window, and a Boolean row filter requiring at least half of the
-    hidden window and one visible reading to be physically observed.
+    hidden window's expected readings and one visible reading to be observed.
+    Expected readings follow each day's own cadence (the median spacing of its
+    observations), so a 15-minute sensor needs half of 24 readings, not 72.
     """
 
     if glucose.ndim != 2 or observed_mask.shape != glucose.shape:
@@ -135,7 +154,14 @@ def hide_final_window(
     target = hidden_sum / hidden_count.clamp_min(1)
     visible = observed.clone()
     visible[:, -positions:] = False
-    eligible = (hidden_count >= positions // 2) & visible.any(dim=1)
+    grid = torch.arange(observed.shape[1])
+    expected = []
+    for row in observed:
+        spacing = grid[row].diff()
+        step = int(spacing.median()) if spacing.numel() else 1
+        expected.append(positions // max(1, step))
+    required = torch.tensor(expected) // 2
+    eligible = (hidden_count >= required) & visible.any(dim=1)
     return glucose.masked_fill(~visible, 0.0), visible, target, eligible
 
 
@@ -154,6 +180,22 @@ def last_visible_hour_mean(
     return torch.stack(rows)
 
 
+def ridge_predictions(
+    train_features: torch.Tensor,
+    train_targets: torch.Tensor,
+    target_features: torch.Tensor,
+    *,
+    penalty: float = RIDGE_PENALTY,
+) -> torch.Tensor:
+    """Closed-form ridge fitted on training rows; return target predictions."""
+
+    train, target = _standardize(train_features.double(), target_features.double())
+    offset = train_targets.double().mean()
+    gram = train.T @ train + penalty * torch.eye(train.shape[1], dtype=torch.float64)
+    coefficients = torch.linalg.solve(gram, train.T @ (train_targets.double() - offset))
+    return target @ coefficients + offset
+
+
 def ridge_regression(
     train_features: torch.Tensor,
     train_targets: torch.Tensor,
@@ -164,11 +206,9 @@ def ridge_regression(
 ) -> dict[str, float]:
     """Closed-form ridge fitted on training rows; returns MAE and R squared."""
 
-    train, target = _standardize(train_features.double(), target_features.double())
-    offset = train_targets.double().mean()
-    gram = train.T @ train + penalty * torch.eye(train.shape[1], dtype=torch.float64)
-    coefficients = torch.linalg.solve(gram, train.T @ (train_targets.double() - offset))
-    predictions = target @ coefficients + offset
+    predictions = ridge_predictions(
+        train_features, train_targets, target_features, penalty=penalty
+    )
     return _regression_metrics(predictions, target_targets.double())
 
 

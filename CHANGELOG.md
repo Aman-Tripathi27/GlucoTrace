@@ -22,6 +22,12 @@
   -0.004) at a ~3% utility cost; no recipe passed all gates.
 - `download-model` falls back to the identical v0.2.0 asset until a v0.3.0
   release exists.
+- ShanghaiT1DM/T2DM adapter (`glucotrace prepare-shanghai`, China, FreeStyle
+  Libre 15-minute data) and protocol 1.5 (three cohorts, cadence-harmonized
+  source gate, bootstrap intervals, `--clock-bins`, `--cadence-dropout`).
+  Result: the no-clock model passed all gates on validation but failed the
+  utility gate on the sealed test (+0.45 mg/dL vs summary statistics), so the
+  released checkpoint is unchanged. Research on this question has stopped.
 
 ## 0.2.2 (2026-09-28)
 

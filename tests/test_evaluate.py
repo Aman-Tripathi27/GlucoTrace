@@ -126,3 +126,18 @@ def test_predeclared_checks_use_frozen_metric_schema() -> None:
         ["top5_neighbor_overlap"]
         == 0.70
     )
+
+
+def test_cadence_scenario_leaves_native_coarse_cadence_unchanged() -> None:
+    from glucotrace.evaluate import MissingnessScenario, perturb_missingness
+
+    glucose = torch.full((2, 12), 100.0)
+    mask = torch.ones(2, 12, dtype=torch.bool)
+    mask[1] = torch.arange(12).remainder(3).eq(2)  # native 15-minute readings
+    scenario = MissingnessScenario("cadence_15_minutes", "cadence", 3, 3)
+    for repeat in range(3):
+        _, perturbed, _ = perturb_missingness(
+            glucose, mask, scenario, repeat=repeat, seed=7
+        )
+        assert torch.equal(perturbed[1], mask[1])
+        assert int(perturbed[0].sum()) == 4

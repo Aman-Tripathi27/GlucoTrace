@@ -25,7 +25,7 @@ from typing import Any, Sequence
 import torch
 from torch.utils.data import Dataset
 
-from .adapters import big_ideas, colas
+from .adapters import big_ideas, colas, shanghai
 from .canonical import (
     CGMReading,
     SourceProvenance,
@@ -33,7 +33,7 @@ from .canonical import (
     split_continuous_segments,
 )
 
-SOURCE_READERS = ("BIG_IDEAs", "Colas2019")
+SOURCE_READERS = ("BIG_IDEAs", "Colas2019", "Shanghai")
 
 
 @dataclass(frozen=True)
@@ -45,6 +45,16 @@ class Recording:
     readings: tuple[CGMReading, ...]
     timestamps: tuple[Any, ...]
     provenance: SourceProvenance
+
+    @property
+    def cadence_minutes(self) -> float:
+        """Median spacing of readings (5 for Dexcom/iPro, 15 for Libre)."""
+
+        gaps = sorted(
+            (later - earlier).total_seconds() / 60
+            for earlier, later in zip(self.timestamps, self.timestamps[1:])
+        )
+        return gaps[len(gaps) // 2] if gaps else 5.0
 
 
 def _training_members(split_path: Path) -> set[tuple[str, str]]:
@@ -84,6 +94,16 @@ def _read_participants(dataset: str, raw_path: Path) -> list[tuple[str, list[CGM
             participants.append(
                 (participant_id, readings, _provenance(colas, participant_id, colas.DEVICE))
             )
+        return participants
+    if dataset == "Shanghai":
+        participants = []
+        for subset in shanghai.SUBSETS:
+            for participant_id, readings in shanghai.load_participant_readings(
+                raw_path, subset
+            ).items():
+                participants.append(
+                    (participant_id, readings, shanghai._provenance(participant_id, subset))
+                )
         return participants
     raise ValueError(f"no raw reader for dataset {dataset!r}; known: {SOURCE_READERS}")
 
@@ -198,7 +218,8 @@ class RandomPhaseCGMDataset(Dataset[dict[str, Any]]):
                 )
             except ValueError:
                 continue
-            if day.observed_fraction >= self.min_observed_fraction:
+            cadence_scale = min(1.0, self.interval_minutes / recording.cadence_minutes)
+            if day.observed_fraction >= self.min_observed_fraction * cadence_scale:
                 return {
                     "glucose": day.glucose,
                     "observed_mask": day.observed_mask,

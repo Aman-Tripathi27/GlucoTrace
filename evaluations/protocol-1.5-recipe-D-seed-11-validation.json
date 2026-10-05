@@ -1,0 +1,389 @@
+{
+  "checkpoint": "checkpoints/protocol-1.5/recipe-D-seed-11.pt",
+  "checkpoint_sha256": "0c104ae8a7a42d9f7ed3726ea7c4d69cf03fe4971cc2cc5fabcc804654b619e9",
+  "corpora": [
+    {
+      "manifest": "data/processed/big_ideas_midnight/manifest.json",
+      "manifest_sha256": "2347aa6588eb86c380267824db2956ebdef58727c7cae81185bd3e458eb59c31",
+      "split_file": "data/processed/big_ideas_midnight/splits_protocol_1_3.json",
+      "split_sha256": "c9e9cb7e01eb1025753a9f2c2ccc3e8b6d0e2fabb77647baf0192c16e143a5e0"
+    },
+    {
+      "manifest": "data/processed/colas_midnight/manifest.json",
+      "manifest_sha256": "706e9056aec882633ad4930b2995a9aefaff5fae90fba7144a76a9825a74576a",
+      "split_file": "data/processed/colas_midnight/splits_protocol_1_3.json",
+      "split_sha256": "cdd3955d682ee6ba23e387d11243e39e5efc213c62cd01384ea8e7751c45e4b7"
+    },
+    {
+      "manifest": "data/processed/shanghai_t1dm_midnight/manifest.json",
+      "manifest_sha256": "de8435efe6cf7d0468e47aace2fdbe3e71cf7bd7b848613f4f16740650dc9d50",
+      "split_file": "data/processed/shanghai_t1dm_midnight/splits_protocol_1_5.json",
+      "split_sha256": "9c3a02fd43c6509e38000472c58611df809fdcc76b53123f1e59380dae7f7290"
+    },
+    {
+      "manifest": "data/processed/shanghai_t2dm_midnight/manifest.json",
+      "manifest_sha256": "3458d20f352f3b59c4d34c680c046c7baf5cf58a9c113dcec022365c043154d7",
+      "split_file": "data/processed/shanghai_t2dm_midnight/splits_protocol_1_5.json",
+      "split_sha256": "ac586243849a7786d52103ea8c76c00273cd8dd0dad9629d2a38f46edca33038"
+    }
+  ],
+  "embedding_diagnostics": {
+    "effective_rank": 5.939140319824219,
+    "mean_absolute_off_diagonal_cosine": 0.4205411374568939,
+    "mean_feature_std": 0.6413671374320984,
+    "minimum_feature_std": 0.07129862159490585
+  },
+  "evaluation_partition": "validation_development",
+  "interpretation_limit": "Standardization and diagnostics use the same development partition; this report is for candidate selection, not held-out evaluation.",
+  "missingness_robustness": {
+    "cadence_10_minutes": {
+      "amount": 2,
+      "kind": "cadence",
+      "mean_removed_observation_fraction": 0.5,
+      "model": {
+        "mean_cosine_similarity": 0.9202438592910767,
+        "median_cosine_similarity": 0.9613807201385498,
+        "median_relative_l2_drift": 0.2952249050140381,
+        "p10_cosine_similarity": 0.8028531670570374,
+        "top1_neighbor_agreement": 0.5477272868156433,
+        "top5_neighbor_overlap": 0.7822727560997009
+      },
+      "repeats": 2,
+      "summary_baseline": {
+        "mean_cosine_similarity": 0.6801130771636963,
+        "median_cosine_similarity": 0.7507205009460449,
+        "median_relative_l2_drift": 0.8699473142623901,
+        "p10_cosine_similarity": 0.333245187997818,
+        "top1_neighbor_agreement": 0.17499999701976776,
+        "top5_neighbor_overlap": 0.39454546570777893
+      }
+    },
+    "cadence_15_minutes": {
+      "amount": 3,
+      "kind": "cadence",
+      "mean_removed_observation_fraction": 0.20606060326099396,
+      "model": {
+        "mean_cosine_similarity": 0.9012766480445862,
+        "median_cosine_similarity": 0.9999999403953552,
+        "median_relative_l2_drift": 0.0,
+        "p10_cosine_similarity": 0.6738600730895996,
+        "top1_neighbor_agreement": 0.7318181991577148,
+        "top5_neighbor_overlap": 0.8018181920051575
+      },
+      "repeats": 3,
+      "summary_baseline": {
+        "mean_cosine_similarity": 0.7653207778930664,
+        "median_cosine_similarity": 0.9999999403953552,
+        "median_relative_l2_drift": 0.0,
+        "p10_cosine_similarity": 0.15127739310264587,
+        "top1_neighbor_agreement": 0.6954545378684998,
+        "top5_neighbor_overlap": 0.7081818580627441
+      }
+    },
+    "contiguous_120_minutes": {
+      "amount": 24,
+      "kind": "block",
+      "mean_removed_observation_fraction": 0.08332126587629318,
+      "model": {
+        "mean_cosine_similarity": 0.9366186261177063,
+        "median_cosine_similarity": 0.9759202003479004,
+        "median_relative_l2_drift": 0.235834002494812,
+        "p10_cosine_similarity": 0.8398441672325134,
+        "top1_neighbor_agreement": 0.5381818413734436,
+        "top5_neighbor_overlap": 0.7905455231666565
+      },
+      "repeats": 5,
+      "summary_baseline": {
+        "mean_cosine_similarity": 0.191852867603302,
+        "median_cosine_similarity": 0.20170167088508606,
+        "median_relative_l2_drift": 4.943022727966309,
+        "p10_cosine_similarity": -0.08423689752817154,
+        "top1_neighbor_agreement": 0.029999999329447746,
+        "top5_neighbor_overlap": 0.028909090906381607
+      }
+    },
+    "contiguous_30_minutes": {
+      "amount": 6,
+      "kind": "block",
+      "mean_removed_observation_fraction": 0.020833157002925873,
+      "model": {
+        "mean_cosine_similarity": 0.9916015863418579,
+        "median_cosine_similarity": 0.9990618228912354,
+        "median_relative_l2_drift": 0.04628303274512291,
+        "p10_cosine_similarity": 0.9786251783370972,
+        "top1_neighbor_agreement": 0.8299999833106995,
+        "top5_neighbor_overlap": 0.9298182725906372
+      },
+      "repeats": 5,
+      "summary_baseline": {
+        "mean_cosine_similarity": 0.6078678965568542,
+        "median_cosine_similarity": 0.5793125629425049,
+        "median_relative_l2_drift": 1.2248656749725342,
+        "p10_cosine_similarity": 0.44403091073036194,
+        "top1_neighbor_agreement": 0.07636363804340363,
+        "top5_neighbor_overlap": 0.19381819665431976
+      }
+    },
+    "contiguous_60_minutes": {
+      "amount": 12,
+      "kind": "block",
+      "mean_removed_observation_fraction": 0.04166975989937782,
+      "model": {
+        "mean_cosine_similarity": 0.9604325890541077,
+        "median_cosine_similarity": 0.9906379580497742,
+        "median_relative_l2_drift": 0.14666621387004852,
+        "p10_cosine_similarity": 0.8849798440933228,
+        "top1_neighbor_agreement": 0.6445454359054565,
+        "top5_neighbor_overlap": 0.8510909676551819
+      },
+      "repeats": 5,
+      "summary_baseline": {
+        "mean_cosine_similarity": 0.36287081241607666,
+        "median_cosine_similarity": 0.3321094810962677,
+        "median_relative_l2_drift": 2.4694764614105225,
+        "p10_cosine_similarity": 0.16001376509666443,
+        "top1_neighbor_agreement": 0.036363635212183,
+        "top5_neighbor_overlap": 0.06363636255264282
+      }
+    },
+    "random_10_percent": {
+      "amount": 0.1,
+      "kind": "random",
+      "mean_removed_observation_fraction": 0.10302338749170303,
+      "model": {
+        "mean_cosine_similarity": 0.9843670129776001,
+        "median_cosine_similarity": 0.9959746599197388,
+        "median_relative_l2_drift": 0.09510987997055054,
+        "p10_cosine_similarity": 0.9598350524902344,
+        "top1_neighbor_agreement": 0.7436363697052002,
+        "top5_neighbor_overlap": 0.8938182592391968
+      },
+      "repeats": 5,
+      "summary_baseline": {
+        "mean_cosine_similarity": 0.7448850274085999,
+        "median_cosine_similarity": 0.7611448764801025,
+        "median_relative_l2_drift": 0.9253873229026794,
+        "p10_cosine_similarity": 0.4744802713394165,
+        "top1_neighbor_agreement": 0.18727272748947144,
+        "top5_neighbor_overlap": 0.4005454480648041
+      }
+    },
+    "random_30_percent": {
+      "amount": 0.3,
+      "kind": "random",
+      "mean_removed_observation_fraction": 0.3010060489177704,
+      "model": {
+        "mean_cosine_similarity": 0.9358720183372498,
+        "median_cosine_similarity": 0.9759311676025391,
+        "median_relative_l2_drift": 0.23222273588180542,
+        "p10_cosine_similarity": 0.8358485698699951,
+        "top1_neighbor_agreement": 0.5600000023841858,
+        "top5_neighbor_overlap": 0.7994545698165894
+      },
+      "repeats": 5,
+      "summary_baseline": {
+        "mean_cosine_similarity": 0.5346548557281494,
+        "median_cosine_similarity": 0.48855555057525635,
+        "median_relative_l2_drift": 1.9531208276748657,
+        "p10_cosine_similarity": 0.31332558393478394,
+        "top1_neighbor_agreement": 0.06363636255264282,
+        "top5_neighbor_overlap": 0.12618182599544525
+      }
+    },
+    "random_50_percent": {
+      "amount": 0.5,
+      "kind": "random",
+      "mean_removed_observation_fraction": 0.5001764297485352,
+      "model": {
+        "mean_cosine_similarity": 0.8945482969284058,
+        "median_cosine_similarity": 0.9330233335494995,
+        "median_relative_l2_drift": 0.3821856379508972,
+        "p10_cosine_similarity": 0.7637338638305664,
+        "top1_neighbor_agreement": 0.44727271795272827,
+        "top5_neighbor_overlap": 0.7201818823814392
+      },
+      "repeats": 5,
+      "summary_baseline": {
+        "mean_cosine_similarity": 0.3541380763053894,
+        "median_cosine_similarity": 0.3035034239292145,
+        "median_relative_l2_drift": 3.2658886909484863,
+        "p10_cosine_similarity": 0.20329192280769348,
+        "top1_neighbor_agreement": 0.037272728979587555,
+        "top5_neighbor_overlap": 0.0525454580783844
+      }
+    }
+  },
+  "predeclared_engineering_checks": {
+    "all_passed": false,
+    "checks": {
+      "hidden_window_utility": {
+        "criterion": "model ridge MAE <= summary-baseline ridge MAE (mg/dL)",
+        "passed": true,
+        "value": -0.4128430978629485
+      },
+      "noncollapsed_effective_rank": {
+        "criterion": "effective_rank >= 8.0",
+        "passed": false,
+        "value": 5.939140319824219
+      },
+      "noncollapsed_feature_dispersion": {
+        "criterion": "mean_feature_std >= 0.05",
+        "passed": true,
+        "value": 0.6413671374320984
+      },
+      "source_leakage_linear_probe": {
+        "criterion": "cadence-harmonized (15-minute) model linear-probe balanced accuracy - summary-baseline balanced accuracy <= 0.1",
+        "passed": false,
+        "value": 0.10228806281437852
+      },
+      "stability_cadence_15_minutes": {
+        "criterion": "median_cosine_similarity >= 0.80; p10_cosine_similarity >= 0.50; top5_neighbor_overlap >= 0.50",
+        "passed": true,
+        "values": {
+          "median_cosine_similarity": 0.9999999403953552,
+          "p10_cosine_similarity": 0.6738600730895996,
+          "top5_neighbor_overlap": 0.8018181920051575
+        }
+      },
+      "stability_contiguous_60_minutes": {
+        "criterion": "median_cosine_similarity >= 0.80; p10_cosine_similarity >= 0.50; top5_neighbor_overlap >= 0.50",
+        "passed": true,
+        "values": {
+          "median_cosine_similarity": 0.9906379580497742,
+          "p10_cosine_similarity": 0.8849798440933228,
+          "top5_neighbor_overlap": 0.8510909676551819
+        }
+      },
+      "stability_random_30_percent": {
+        "criterion": "median_cosine_similarity >= 0.80; p10_cosine_similarity >= 0.50; top5_neighbor_overlap >= 0.50",
+        "passed": true,
+        "values": {
+          "median_cosine_similarity": 0.9759311676025391,
+          "p10_cosine_similarity": 0.8358485698699951,
+          "top5_neighbor_overlap": 0.7994545698165894
+        }
+      }
+    },
+    "interpretation_limit": "These fixed thresholds are representation sanity checks, not scientific or clinical validation."
+  },
+  "probes": {
+    "cadence_harmonized_source_probe": {
+      "chance_balanced_accuracy": 0.3333333333333333,
+      "margin": 0.10228806281437852,
+      "margin_ci95": {
+        "ci95_high": 0.2307760141093475,
+        "ci95_low": -0.07422288955622287,
+        "replicates": 1000,
+        "unit": "participant"
+      },
+      "model_balanced_accuracy": 0.8389154704944178,
+      "sources": [
+        "BIG_IDEAs",
+        "Colas2019",
+        "Shanghai"
+      ],
+      "summary_baseline_balanced_accuracy": 0.7366274076800393
+    },
+    "hidden_window_utility": {
+      "comparison": {
+        "model_mae_mg_dl": 15.546535113409027,
+        "model_minus_baseline_mae_mg_dl": -0.4128430978629485,
+        "summary_baseline_mae_mg_dl": 15.959378211271975
+      },
+      "last_visible_hour_persistence": {
+        "mae_mg_dl": 22.30606861114502,
+        "r_squared": 0.25018321164739754
+      },
+      "model": {
+        "mae_mg_dl": 15.546535113409027,
+        "r_squared": 0.5968049591646507
+      },
+      "summary_baseline": {
+        "mae_mg_dl": 15.959378211271975,
+        "r_squared": 0.5009012579812642
+      },
+      "target_days": 220,
+      "task": "predict mean glucose of the final 6 hours from the first 18 hours",
+      "train_days": 1190
+    },
+    "hidden_window_utility_detail": {
+      "model_mae_mg_dl": 15.546535113409027,
+      "model_minus_baseline_ci95": {
+        "ci95_high": 1.3348854435859157,
+        "ci95_low": -2.2735495772978447,
+        "replicates": 1000,
+        "unit": "participant"
+      },
+      "model_minus_baseline_mae_mg_dl": -0.4128430978629485,
+      "per_source": {
+        "BIG_IDEAs": {
+          "days": 13,
+          "model_mae_mg_dl": 10.269463946939332,
+          "summary_baseline_mae_mg_dl": 7.664339491951001
+        },
+        "Colas2019": {
+          "days": 55,
+          "model_mae_mg_dl": 8.448939841405865,
+          "summary_baseline_mae_mg_dl": 7.957837309181198
+        },
+        "Shanghai": {
+          "days": 152,
+          "model_mae_mg_dl": 18.5660723839635,
+          "summary_baseline_mae_mg_dl": 19.564116717628327
+        }
+      },
+      "summary_baseline_mae_mg_dl": 15.959378211271975
+    },
+    "linear_source_probe": {
+      "model": {
+        "accuracy": 0.9636363636363636,
+        "balanced_accuracy": 0.9515151515151515,
+        "chance_balanced_accuracy": 0.3333333333333333
+      },
+      "summary_baseline": {
+        "accuracy": 0.9454545454545454,
+        "balanced_accuracy": 0.8097902097902097,
+        "chance_balanced_accuracy": 0.3333333333333333
+      }
+    },
+    "same_participant_retrieval": {
+      "interpretation_limit": "High same-participant retrieval is a personal-pattern signal and equally a re-identification risk for shared fingerprints.",
+      "model": {
+        "chance_top1_same_participant": 0.0407773176170755,
+        "eligible_days": 215,
+        "top1_same_participant": 0.4325581395348837
+      },
+      "summary_baseline": {
+        "chance_top1_same_participant": 0.0407773176170755,
+        "eligible_days": 215,
+        "top1_same_participant": 0.2930232558139535
+      }
+    },
+    "same_participant_retrieval_by_source": {
+      "BIG_IDEAs": {
+        "chance_top1_same_participant": 0.46153846153846156,
+        "eligible_days": 13,
+        "top1_same_participant": 0.9230769230769231
+      },
+      "Colas2019": {
+        "chance_top1_same_participant": 0.018518518518518517,
+        "eligible_days": 50,
+        "top1_same_participant": 0.04
+      },
+      "Shanghai": {
+        "chance_top1_same_participant": 0.0783373997908679,
+        "eligible_days": 152,
+        "top1_same_participant": 0.5263157894736842
+      }
+    }
+  },
+  "protocol_version": "1.5",
+  "research_only": true,
+  "validation_days": 220,
+  "validation_days_by_source": {
+    "BIG_IDEAs": 13,
+    "Colas2019": 55,
+    "Shanghai": 152
+  },
+  "validation_participants": 48
+}

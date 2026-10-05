@@ -291,3 +291,11 @@ def test_download_falls_back_when_primary_release_is_missing(
     )
     assert path.read_bytes() == payload
     assert requested == ["https://example.test/primary.pt", "https://example.test/legacy.pt"]
+
+
+def test_hidden_window_eligibility_follows_each_days_cadence() -> None:
+    glucose = torch.full((2, 24), 100.0)
+    mask = torch.ones(2, 24, dtype=torch.bool)
+    mask[1] = torch.arange(24).remainder(3).eq(0)  # a 15-minute sensor
+    _, _, _, eligible = probes.hide_final_window(glucose, mask, positions=12)
+    assert eligible.tolist() == [True, True]

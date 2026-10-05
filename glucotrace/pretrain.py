@@ -19,6 +19,7 @@ from .corpus import (
     MultiSourceCGMDataset,
     SourceBalancedSampler,
 )
+from .data import thin_to_cadence
 from .model import GlucoTrace, GlucoTraceConfig
 
 
@@ -456,6 +457,8 @@ def run_epoch(
     device: torch.device,
     optimizer: torch.optim.Optimizer | None,
     source_names: Sequence[str] = (),
+    cadence_dropout: float = 0.0,
+    generator: torch.Generator | None = None,
 ) -> dict[str, float]:
     training = optimizer is not None
     pretrainer.train(training)
@@ -478,11 +481,19 @@ def run_epoch(
                 [source_names.index(name) for name in batch["dataset"]],
                 device=device,
             )
+        glucose, observed = batch["glucose"], batch["observed_mask"]
+        gap_age = batch["gap_age_minutes"].to(device)
+        if training and cadence_dropout > 0.0:
+            rows = torch.rand(glucose.shape[0], generator=generator) < cadence_dropout
+            glucose, observed = thin_to_cadence(
+                glucose, observed, 3, generator=generator, rows=rows
+            )
+            gap_age = None  # recomputed from the thinned mask
         with torch.set_grad_enabled(training):
             output = pretrainer(
-                batch["glucose"].to(device),
-                batch["observed_mask"].to(device),
-                batch["gap_age_minutes"].to(device),
+                glucose.to(device),
+                observed.to(device),
+                gap_age,
                 batch["time_of_day"].to(device),
                 source_labels=source_labels,
             )
@@ -545,6 +556,18 @@ def build_parser() -> argparse.ArgumentParser:
         "only); repeat once per source, e.g. BIG_IDEAs data/raw/big_ideas/1.1.3",
     )
     parser.add_argument(
+        "--clock-bins",
+        type=int,
+        default=0,
+        help="round the clock to this many bins per day (0 keeps exact time)",
+    )
+    parser.add_argument(
+        "--cadence-dropout",
+        type=float,
+        default=0.0,
+        help="probability of thinning each training day to 15-minute cadence",
+    )
+    parser.add_argument(
         "--no-clock",
         action="store_true",
         help="zero the time-of-day input so the model never sees clock time",
@@ -593,8 +616,12 @@ def main() -> None:
     )
 
     model_config = GlucoTraceConfig(
-        pool_segments=args.pool_segments, use_clock=not args.no_clock
+        pool_segments=args.pool_segments,
+        use_clock=not args.no_clock,
+        clock_bins=args.clock_bins,
     )
+    if not 0.0 <= args.cadence_dropout <= 1.0:
+        raise ValueError("cadence dropout must be in [0, 1]")
     objective_config = PretrainingConfig(
         mask_probability=args.mask_probability,
         ema_decay=args.ema_decay,
@@ -624,6 +651,7 @@ def main() -> None:
         weight_decay=args.weight_decay,
     )
 
+    cadence_generator = torch.Generator().manual_seed(args.seed + 1_000_003)
     history = []
     for epoch in range(args.epochs):
         sampler.set_epoch(epoch)
@@ -635,6 +663,8 @@ def main() -> None:
             device=device,
             optimizer=optimizer,
             source_names=source_names if needs_sources else (),
+            cadence_dropout=args.cadence_dropout,
+            generator=cadence_generator,
         )
         validation_metrics = run_epoch(
             pretrainer,
@@ -677,6 +707,7 @@ def main() -> None:
             "samples_per_epoch": len(sampler),
             "learning_rate": args.learning_rate,
             "weight_decay": args.weight_decay,
+            "cadence_dropout": args.cadence_dropout,
             "window_sampling": (
                 "random_phase_raw" if random_phase is not None else "canonical_days"
             ),

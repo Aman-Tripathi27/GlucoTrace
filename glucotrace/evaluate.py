@@ -18,9 +18,9 @@ from .model import GlucoTrace, GlucoTraceConfig
 from .pretrain import build_multisource_split
 
 PROTOCOL_VERSION = "1.0"
-PROTOCOL_VERSIONS = ("1.0", "1.1", "1.2", "1.3", "1.4")
+PROTOCOL_VERSIONS = ("1.0", "1.1", "1.2", "1.3", "1.4", "1.5")
 # Protocol 1.3 reuses the protocol 1.2 probes and gates on midnight-aligned days.
-PROBE_PROTOCOLS = ("1.2", "1.3", "1.4")
+PROBE_PROTOCOLS = ("1.2", "1.3", "1.4", "1.5")
 # Protocol 1.2: largest allowed excess of model over summary-baseline source
 # probe balanced accuracy. Declared in EVALUATION_1_2.md before training.
 SOURCE_PROBE_MARGIN = 0.10
@@ -96,6 +96,11 @@ def perturb_missingness(
             step = int(scenario.amount)
             if step <= 1:
                 raise ValueError("cadence step must be greater than one")
+            observed_positions = positions[original[row]]
+            if torch.unique(observed_positions.remainder(step)).numel() <= 1:
+                # Already at this cadence or coarser (for example a 15-minute
+                # sensor): thinning further would delete every reading.
+                continue
             offset = repeat % step
             perturbed[row] &= positions.remainder(step).eq(offset)
         else:
@@ -620,6 +625,7 @@ def _protocol_1_2_section(
     *,
     device: torch.device,
     batch_size: int,
+    protocol_version: str = "1.2",
 ) -> dict[str, Any]:
     train = _collect(build_multisource_split(corpus_pairs, "train"))
     train_embeddings = _encode(
@@ -634,12 +640,16 @@ def _protocol_1_2_section(
         device=device,
         batch_size=batch_size,
     )
-    return {
-        "probes": probe_report,
-        "predeclared_engineering_checks": protocol_1_2_checks(
-            diagnostics, missingness_report, probe_report
-        ),
-    }
+    checks = protocol_1_2_checks(diagnostics, missingness_report, probe_report)
+    if protocol_version == "1.5":
+        from . import rigor
+
+        extras = rigor.protocol_1_5_extras(
+            model, train, target, device=device, batch_size=batch_size
+        )
+        probe_report = {**probe_report, **extras}
+        checks = rigor.apply_protocol_1_5_gate(checks, extras, SOURCE_PROBE_MARGIN)
+    return {"probes": probe_report, "predeclared_engineering_checks": checks}
 
 
 def evaluate_validation_checkpoint(
@@ -701,6 +711,7 @@ def evaluate_validation_checkpoint(
             missingness_report,
             device=device,
             batch_size=batch_size,
+            protocol_version=protocol_version,
         )
         checks = extra.pop("predeclared_engineering_checks")
     return {
@@ -793,6 +804,7 @@ def evaluate_checkpoint(
             missingness_report,
             device=device,
             batch_size=batch_size,
+            protocol_version=protocol_version,
         )
         checks = extra.pop("predeclared_engineering_checks")
     return {
@@ -854,6 +866,14 @@ def build_parser() -> argparse.ArgumentParser:
         action="store_true",
         help="run development checks without constructing the test partition",
     )
+    parser.add_argument(
+        "--transfer-heldout",
+        action="append",
+        nargs=2,
+        metavar=("MANIFEST", "SPLITS"),
+        help="leave-one-dataset-out: score the checkpoint on this unseen "
+        "source's validation partition instead",
+    )
     parser.add_argument("--output", type=Path, default=Path("evaluation.json"))
     return parser
 
@@ -864,6 +884,24 @@ def main() -> None:
         device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     else:
         device = torch.device(args.device)
+    if args.transfer_heldout:
+        from .rigor import evaluate_transfer
+
+        report = evaluate_transfer(
+            args.checkpoint,
+            args.corpus,
+            args.transfer_heldout,
+            device=device,
+            batch_size=args.batch_size,
+            seed=args.seed,
+        )
+        args.output.parent.mkdir(parents=True, exist_ok=True)
+        args.output.write_text(
+            json.dumps(report, indent=2, sort_keys=True) + "\n", encoding="utf-8"
+        )
+        print(f"analysis=leave_one_dataset_out heldout={report['heldout_sources']}")
+        print(f"saved={args.output}")
+        return
     evaluation = (
         evaluate_validation_checkpoint if args.validation_only else evaluate_checkpoint
     )

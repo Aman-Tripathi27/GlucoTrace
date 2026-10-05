@@ -27,6 +27,11 @@ COMMANDS: dict[str, tuple[str, str, str]] = {
         "main",
         "convert the Colas 2019 PLOS dataset to canonical days",
     ),
+    "prepare-shanghai": (
+        "glucotrace.adapters.shanghai",
+        "main",
+        "convert the ShanghaiT1DM/T2DM datasets to canonical days",
+    ),
     "split": ("glucotrace.corpus", "main", "participant-disjoint corpus split"),
     "verify-protocol": (
         "glucotrace.protocols",

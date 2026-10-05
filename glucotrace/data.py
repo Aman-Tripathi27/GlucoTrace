@@ -346,6 +346,42 @@ def load_cgm_csv(
     )
 
 
+def thin_to_cadence(
+    glucose: torch.Tensor,
+    observed_mask: torch.Tensor,
+    step: int = 3,
+    *,
+    generator: torch.Generator | None = None,
+    rows: torch.Tensor | None = None,
+) -> tuple[torch.Tensor, torch.Tensor]:
+    """Keep every ``step``-th grid position of each selected row.
+
+    Each thinned row keeps positions with one residue modulo ``step``, chosen at
+    random so the phase carries no information. Rows whose observations
+    already share one residue (for example 15-minute sensors on a five-minute
+    grid) are left unchanged. ``rows`` optionally selects which rows to thin.
+    """
+
+    if glucose.ndim != 2 or observed_mask.shape != glucose.shape:
+        raise ValueError("glucose and observed_mask must have shape [batch, time]")
+    if step < 2:
+        raise ValueError("step must be at least 2")
+    mask = observed_mask.bool().clone()
+    positions = torch.arange(mask.shape[1])
+    selected = torch.ones(mask.shape[0], dtype=torch.bool) if rows is None else rows.bool()
+    for row in range(mask.shape[0]):
+        observed = positions[mask[row]]
+        if not selected[row] or observed.numel() == 0:
+            continue
+        if torch.unique(observed.remainder(step)).numel() == 1:
+            continue
+        offset = int(torch.randint(step, (1,), generator=generator))
+        kept = mask[row] & positions.remainder(step).eq(offset)
+        if kept.any():
+            mask[row] = kept
+    return glucose.masked_fill(~mask, 0.0), mask
+
+
 class CGMWindowDataset(Dataset[dict[str, Any]]):
     """Create fixed-size windows from a :class:`CGMSeries`."""
 

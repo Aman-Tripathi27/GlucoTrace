@@ -31,6 +31,9 @@ class GlucoTraceConfig:
     # False zeroes the circular time-of-day input, so the model never sees
     # clock time (a protocol 1.4 diagnostic). Older checkpoints default to True.
     use_clock: bool = True
+    # >0 rounds the clock to that many equal bins per day (4 = six-hour
+    # blocks), keeping coarse time of day without exact clock times.
+    clock_bins: int = 0
 
     def __post_init__(self) -> None:
         if self.hidden_size <= 0 or self.hidden_size % 2:
@@ -55,6 +58,8 @@ class GlucoTraceConfig:
             raise ValueError("glucose scale and gap-age cap must be positive")
         if not 0.0 <= self.dropout < 1.0:
             raise ValueError("dropout must be in [0, 1)")
+        if self.clock_bins < 0 or (self.clock_bins and not self.use_clock):
+            raise ValueError("clock_bins must be >= 0 and needs use_clock=True")
 
 
 class SinusoidalPositionEncoding(nn.Module):
@@ -310,6 +315,11 @@ class GlucoTrace(nn.Module):
             )
         if not self.config.use_clock:
             clock = torch.zeros_like(clock)
+        elif self.config.clock_bins:
+            width = 2.0 * math.pi / self.config.clock_bins
+            angle = torch.atan2(clock[..., 0], clock[..., 1]).remainder(2.0 * math.pi)
+            center = (torch.floor(angle / width) + 0.5) * width
+            clock = torch.stack((torch.sin(center), torch.cos(center)), dim=-1)
 
         trend_values = []
         trend_densities = []

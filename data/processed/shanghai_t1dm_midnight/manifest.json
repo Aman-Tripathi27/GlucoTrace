@@ -1,0 +1,2690 @@
+{
+  "canonical_unit": "mg/dL",
+  "interval_minutes": 5,
+  "records": [
+    {
+      "file": "days/Shanghai__1001__20210731T000300.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1001",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1001",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "84b8fc6b3a2c427f9d55d9f56ecad7561de99870cc241a1f37f8117d7ccd52e5",
+      "start_time": "2021-07-31T00:03:00"
+    },
+    {
+      "file": "days/Shanghai__1001__20210801T000300.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1001",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1001",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "a47ead4386ab7067649a09915ab121faf4b5370469be926bcfc8a8eef24fe5cd",
+      "start_time": "2021-08-01T00:03:00"
+    },
+    {
+      "file": "days/Shanghai__1001__20210802T000300.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1001",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1001",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "c90d2d1ea85c4c1193cda009b5e6435ab5f5ae39db76614d61c402e003304a5b",
+      "start_time": "2021-08-02T00:03:00"
+    },
+    {
+      "file": "days/Shanghai__1001__20210803T000300.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1001",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1001",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "ace36fc1b3927711e6aa354088de925bec5201e5a33c3c5eb8523eae6c3e6d73",
+      "start_time": "2021-08-03T00:03:00"
+    },
+    {
+      "file": "days/Shanghai__1001__20210804T000300.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1001",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1001",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "10625b15b9258c77024bba626b0ac5f999c9608ddd02cefcf830959faeffa85b",
+      "start_time": "2021-08-04T00:03:00"
+    },
+    {
+      "file": "days/Shanghai__1001__20210805T000300.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1001",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1001",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "f0cb16291f0cf40f1f4aeaf1d80afff7daaff1108b5a7f54da2fa679790c6fa9",
+      "start_time": "2021-08-05T00:03:00"
+    },
+    {
+      "file": "days/Shanghai__1002__20210505T000300.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1002",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1002",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "031cf6e6f22cacc07d3110b64902f1292315db2f02aee83200ce198a07b78b8c",
+      "start_time": "2021-05-05T00:03:00"
+    },
+    {
+      "file": "days/Shanghai__1002__20210506T000300.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1002",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1002",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "2915fda2202327f22a0cb55b4b02db5b05063a0dca65cd26917c55c1fc7cd0f2",
+      "start_time": "2021-05-06T00:03:00"
+    },
+    {
+      "file": "days/Shanghai__1002__20210507T000300.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1002",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1002",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "32e3c2fa885304e4c1c596754ef63a890470cd6c5245915e59d0169f5c9332aa",
+      "start_time": "2021-05-07T00:03:00"
+    },
+    {
+      "file": "days/Shanghai__1002__20210508T000300.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1002",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1002",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "4697fed17a4637896a2c449c00b2d107f9023ffb4dfbf8a13ccaf57a556e9986",
+      "start_time": "2021-05-08T00:03:00"
+    },
+    {
+      "file": "days/Shanghai__1002__20210509T000300.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1002",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1002",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "14e137d7a34ab2e8cf69137d91f200f2c7770bdfe9dd909b10276ed6aa925a7e",
+      "start_time": "2021-05-09T00:03:00"
+    },
+    {
+      "file": "days/Shanghai__1002__20210510T000300.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1002",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1002",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "5eae518fe02d93680ae3ac1803595cadd8f414347046a24ba7c80a8fe1ad91c6",
+      "start_time": "2021-05-10T00:03:00"
+    },
+    {
+      "file": "days/Shanghai__1002__20210511T000300.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1002",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1002",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "8f0f1d3169b6ffa66a57e8ae63dde1e231948ffcfd968df1c7aa8cc79ac9ef18",
+      "start_time": "2021-05-11T00:03:00"
+    },
+    {
+      "file": "days/Shanghai__1002__20210512T000300.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1002",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1002",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "c9b5bba55604f0b59a31bb9b8fe37bc888388f3e0dda4a3c1b4a409171b81b2c",
+      "start_time": "2021-05-12T00:03:00"
+    },
+    {
+      "file": "days/Shanghai__1002__20210513T000300.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1002",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1002",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "c67a4b98f0eb75345b4e2613eb3c806e64b87d1edef8eff80152d7362bd86afa",
+      "start_time": "2021-05-13T00:03:00"
+    },
+    {
+      "file": "days/Shanghai__1002__20210522T000200.csv",
+      "observed_count": 95,
+      "observed_fraction": 0.3298611044883728,
+      "participant_id": "1002",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1002",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "cfed83e68806650fd4772a521ab18782de774035e47b9c0fa1c5f4959fdb61e6",
+      "start_time": "2021-05-22T00:02:00"
+    },
+    {
+      "file": "days/Shanghai__1002__20210523T000200.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1002",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1002",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "8e228ab59b0d7a4f37b1785b9fa5b5dce9cf1e669b22ab1545c6006e520c0e05",
+      "start_time": "2021-05-23T00:02:00"
+    },
+    {
+      "file": "days/Shanghai__1002__20210524T000200.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1002",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1002",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "af9b79ebadd0e27809fede839aab84664164639de5e24cebc3ee33fa7ccfc5c5",
+      "start_time": "2021-05-24T00:02:00"
+    },
+    {
+      "file": "days/Shanghai__1002__20210525T000200.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1002",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1002",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "52620c1785965ad194298ff421c4098d012f41af14f9977a384a741c28d7b854",
+      "start_time": "2021-05-25T00:02:00"
+    },
+    {
+      "file": "days/Shanghai__1002__20210526T000200.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1002",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1002",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "5face08ac6d9a6b349935b32f0c2824fef78f7fb3f88be009710e79daea5e50d",
+      "start_time": "2021-05-26T00:02:00"
+    },
+    {
+      "file": "days/Shanghai__1002__20210527T000200.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1002",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1002",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "be32571b815f84977a0eeaaca9a66c00422386cd6cb78a3ed8c2d5ef317e57ac",
+      "start_time": "2021-05-27T00:02:00"
+    },
+    {
+      "file": "days/Shanghai__1002__20210528T000200.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1002",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1002",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "46c7df08d0fcaf09115764c656a2866dccf8185b8257f18c0407ec2f0aae6544",
+      "start_time": "2021-05-28T00:02:00"
+    },
+    {
+      "file": "days/Shanghai__1002__20210529T000200.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1002",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1002",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "91cba8db5ae0a676f08eb09b9e725be9ea88eaf59bac32963243da2734bafe65",
+      "start_time": "2021-05-29T00:02:00"
+    },
+    {
+      "file": "days/Shanghai__1002__20210530T000200.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1002",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1002",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "848cad179c268e54dcabd3fca8287a1d176659aef5cfdab47ddb523cb199a091",
+      "start_time": "2021-05-30T00:02:00"
+    },
+    {
+      "file": "days/Shanghai__1002__20210910T000100.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1002",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1002",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "47f9800a9b5a76b4ec34c01158e8022baa92247518ff38d4fc96578a6d0fbe8e",
+      "start_time": "2021-09-10T00:01:00"
+    },
+    {
+      "file": "days/Shanghai__1002__20210911T000100.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1002",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1002",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "9b3f09e4f68070e8e3f291159d0f205a671001536264d63d6a64e71a25590ee8",
+      "start_time": "2021-09-11T00:01:00"
+    },
+    {
+      "file": "days/Shanghai__1002__20210912T000100.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1002",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1002",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "68c24db341c8c3080a541b049b5af313a69e4ab96dec047fee8efebd7aea8398",
+      "start_time": "2021-09-12T00:01:00"
+    },
+    {
+      "file": "days/Shanghai__1003__20210901T000300.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1003",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1003",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "746e6dddc8c6193437f33cc084a26998410b79c0b6476c48512cb9a49f9c0370",
+      "start_time": "2021-09-01T00:03:00"
+    },
+    {
+      "file": "days/Shanghai__1003__20210902T000300.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1003",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1003",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "27b48c53571bd87b39079c343d027570e89ac79247df745e264df2eff37c72d9",
+      "start_time": "2021-09-02T00:03:00"
+    },
+    {
+      "file": "days/Shanghai__1003__20210903T000300.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1003",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1003",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "80cbb9829f0f999e647f7f0dc31b2de92c69c853dba3006b3ea6e50d51a501e3",
+      "start_time": "2021-09-03T00:03:00"
+    },
+    {
+      "file": "days/Shanghai__1003__20210904T000300.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1003",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1003",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "77e8ab5522a46e1ce06dbf03d404251db6967945bf7765bf36e5519518479bb7",
+      "start_time": "2021-09-04T00:03:00"
+    },
+    {
+      "file": "days/Shanghai__1003__20210905T000300.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1003",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1003",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "c7a19af5b6ddb096dd8fafd7fd2371241859ac6bf1357aa6e81281ad4dc73325",
+      "start_time": "2021-09-05T00:03:00"
+    },
+    {
+      "file": "days/Shanghai__1003__20210906T000300.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1003",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1003",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "da67cbb5e9167b79ce4e83b257d8fd1be82d31d4b66b56764f5831b6fb29d695",
+      "start_time": "2021-09-06T00:03:00"
+    },
+    {
+      "file": "days/Shanghai__1003__20210907T000300.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1003",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1003",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "c454c438657ccb96a3ca2ecb448705282ab71405d02102480d296d44d951719d",
+      "start_time": "2021-09-07T00:03:00"
+    },
+    {
+      "file": "days/Shanghai__1003__20210908T000300.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1003",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1003",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "0d8de6df1776a34850c9182a3cc3bd6f8f19c86f84a5ed098458b119f197cd62",
+      "start_time": "2021-09-08T00:03:00"
+    },
+    {
+      "file": "days/Shanghai__1003__20210909T000300.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1003",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1003",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "3ad260e5abbe22f1e8c8e66feca20c9dbb8a88b1ccf0e5439f89e6590156349d",
+      "start_time": "2021-09-09T00:03:00"
+    },
+    {
+      "file": "days/Shanghai__1003__20210910T000300.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1003",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1003",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "648328231d75ef03e8eb2efedfc509e104f4d896ca5d0f21fe1fd3f6d54f7fb0",
+      "start_time": "2021-09-10T00:03:00"
+    },
+    {
+      "file": "days/Shanghai__1003__20210911T000300.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1003",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1003",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "9f45e32f9501b4ae6533c2bede38de0b64ed4455f4515f15172f095c18a7b752",
+      "start_time": "2021-09-11T00:03:00"
+    },
+    {
+      "file": "days/Shanghai__1003__20210912T000300.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1003",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1003",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "9f7bebb8b209c5353ecf5a2577ea884c463cf57989ea74661747fc15add2df9d",
+      "start_time": "2021-09-12T00:03:00"
+    },
+    {
+      "file": "days/Shanghai__1003__20210913T000300.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1003",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1003",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "b84007c613d0b79acb6141a7dad42b2705cf766270a22fc02d9fe9fcf1d5844e",
+      "start_time": "2021-09-13T00:03:00"
+    },
+    {
+      "file": "days/Shanghai__1004__20210426T000100.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1004",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1004",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "5bc9e151c1420d23b0c039a6078f43d527dc1e154279d9d305545e5f1a3dd9d8",
+      "start_time": "2021-04-26T00:01:00"
+    },
+    {
+      "file": "days/Shanghai__1004__20210427T000100.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1004",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1004",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "010b0c7075304b77ca08f214684b20200dd05978b7ea284e9fb43bec2376bb30",
+      "start_time": "2021-04-27T00:01:00"
+    },
+    {
+      "file": "days/Shanghai__1004__20210428T000100.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1004",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1004",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "b52f6655111fdaea90f699d60d4dc01fdeb9eba01b0924a6c9b97e1c4a50a37f",
+      "start_time": "2021-04-28T00:01:00"
+    },
+    {
+      "file": "days/Shanghai__1004__20210429T000100.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1004",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1004",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "4669ccc8f4958ba898ef580eb48411ef90bae9d0349dc42aad784d977f77d766",
+      "start_time": "2021-04-29T00:01:00"
+    },
+    {
+      "file": "days/Shanghai__1004__20210430T000100.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1004",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1004",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "781396baecec18f566b2b5bd10d49f9bbcfd2f20deda2005fbfcc62ca3d476e6",
+      "start_time": "2021-04-30T00:01:00"
+    },
+    {
+      "file": "days/Shanghai__1004__20210501T000100.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1004",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1004",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "410c4d5744c63236035a69ca245e2280a86c4fe03e1e298b4e51b12ab8a3831b",
+      "start_time": "2021-05-01T00:01:00"
+    },
+    {
+      "file": "days/Shanghai__1004__20210502T000100.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1004",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1004",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "43a9e1758164a41923bb7c3a08f963b4070144838fcdab7a910c4497527dfc6b",
+      "start_time": "2021-05-02T00:01:00"
+    },
+    {
+      "file": "days/Shanghai__1004__20210503T000100.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1004",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1004",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "af872801a62a82163fdb0cdaa54cd65937dc05fcb80a23bbd34ac93269f0d9c7",
+      "start_time": "2021-05-03T00:01:00"
+    },
+    {
+      "file": "days/Shanghai__1004__20210504T000100.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1004",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1004",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "308aba75a7ebf043ab60d2641e6e9303f284f1c488ad0749f8e206b8dfd5ffa5",
+      "start_time": "2021-05-04T00:01:00"
+    },
+    {
+      "file": "days/Shanghai__1005__20210523T000400.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1005",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1005",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "63209ea6883018be822ed688d35f7a9c73cfed259c71cbdc35ba695c2cf0344a",
+      "start_time": "2021-05-23T00:04:00"
+    },
+    {
+      "file": "days/Shanghai__1005__20210524T000400.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1005",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1005",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "575d00ad62a69a6bfdf7f481a890c41443df57c9465b2abf24b56281be20b5f7",
+      "start_time": "2021-05-24T00:04:00"
+    },
+    {
+      "file": "days/Shanghai__1005__20210525T000400.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1005",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1005",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "b273f5664f111fcb23e7c577a52dce3710a2906da022b419e9f5a019053f9d40",
+      "start_time": "2021-05-25T00:04:00"
+    },
+    {
+      "file": "days/Shanghai__1005__20210526T000400.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1005",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1005",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "66187b7d33d8677abbe6c5cfa9526459b3289ca6f6100e513ed52dec927cb0a7",
+      "start_time": "2021-05-26T00:04:00"
+    },
+    {
+      "file": "days/Shanghai__1005__20210527T000400.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1005",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1005",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "94edfbfd47728882dce93d6d7eafd709f880b67a1eb4a3a2f2db4e61866e512e",
+      "start_time": "2021-05-27T00:04:00"
+    },
+    {
+      "file": "days/Shanghai__1005__20210528T000400.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1005",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1005",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "d12ce282d689ac649c99e9bd875090f18c969a5f740008bda632c8242a2f96ab",
+      "start_time": "2021-05-28T00:04:00"
+    },
+    {
+      "file": "days/Shanghai__1005__20210529T000400.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1005",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1005",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "d38ec7c3fa076cee4f8995b7974c73e9eb8774098b0f4916b05dfb61e16f1d11",
+      "start_time": "2021-05-29T00:04:00"
+    },
+    {
+      "file": "days/Shanghai__1005__20210530T000400.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1005",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1005",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "ab17a5b37431c9e3f1a34a6c79fcc964d63ebce801fcc3f815d137748c11c59b",
+      "start_time": "2021-05-30T00:04:00"
+    },
+    {
+      "file": "days/Shanghai__1005__20210531T000400.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1005",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1005",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "ba5b9924574312fc79b2f9c2e415143ebc525aff4892b194b3761592b8d1e18e",
+      "start_time": "2021-05-31T00:04:00"
+    },
+    {
+      "file": "days/Shanghai__1005__20210601T000400.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1005",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1005",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "0856079dcc8c2100b180f8eabbda1dba838e5a81ac127c6fbe8871c70722a104",
+      "start_time": "2021-06-01T00:04:00"
+    },
+    {
+      "file": "days/Shanghai__1005__20210602T000400.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1005",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1005",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "a0aacfafe0ab4bd803d0f18de32f2afb828624b2602173c6d7745318ac03c832",
+      "start_time": "2021-06-02T00:04:00"
+    },
+    {
+      "file": "days/Shanghai__1005__20210603T000400.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1005",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1005",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "ef71c6da16f13bdba40f65a9edf4afb71052cad1a86ffb1d0652698f5ce084a6",
+      "start_time": "2021-06-03T00:04:00"
+    },
+    {
+      "file": "days/Shanghai__1006__20210115T000400.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1006",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1006",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "a9990eb7074f740790994a991e20b5a9379987e1b19bf7c0d140f2b4d02e79e7",
+      "start_time": "2021-01-15T00:04:00"
+    },
+    {
+      "file": "days/Shanghai__1006__20210116T000400.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1006",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1006",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "531171c77ee53d3828f9e1cc810e0daed4592f92758919c4327b5d30452aead8",
+      "start_time": "2021-01-16T00:04:00"
+    },
+    {
+      "file": "days/Shanghai__1006__20210117T000400.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1006",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1006",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "d7b9e61ca755702939f9c8560e97a607c9e3ba10daebeb3381f01310bfef8de2",
+      "start_time": "2021-01-17T00:04:00"
+    },
+    {
+      "file": "days/Shanghai__1006__20210118T000400.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1006",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1006",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "4cc784174a0a3397c57437ea954fadd13aca724b12dae4908e5a92d93b2eac2d",
+      "start_time": "2021-01-18T00:04:00"
+    },
+    {
+      "file": "days/Shanghai__1006__20210119T000400.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1006",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1006",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "da8f8e6be2b1dadd3c9c1c3ac92d3e18f24855030faf6940a3b869b01f4fb3da",
+      "start_time": "2021-01-19T00:04:00"
+    },
+    {
+      "file": "days/Shanghai__1006__20210120T000400.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1006",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1006",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "95a174c0d132166c31b68f4d134c34d2fd864e5178a309bd0eb6f50666383248",
+      "start_time": "2021-01-20T00:04:00"
+    },
+    {
+      "file": "days/Shanghai__1006__20210121T000400.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1006",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1006",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "533e75bd5984c8329ee3a864adc6e73b59b1f77caff2bc624e488e57dfe6b04d",
+      "start_time": "2021-01-21T00:04:00"
+    },
+    {
+      "file": "days/Shanghai__1006__20210122T000400.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1006",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1006",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "ca435be7c33603f48a6cf4e2159c8a7cfb75e8ce6f1d96955f339977017a486c",
+      "start_time": "2021-01-22T00:04:00"
+    },
+    {
+      "file": "days/Shanghai__1006__20210123T000400.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1006",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1006",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "e23851ad5be44ab60a6dd5985f35fee948ed0919114cc1f23db156ca6cb9ec7a",
+      "start_time": "2021-01-23T00:04:00"
+    },
+    {
+      "file": "days/Shanghai__1006__20210124T000400.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1006",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1006",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "19fa8e772215ce2d76a96978044607ce52191146f6885afa7fe76793a7a1a1e3",
+      "start_time": "2021-01-24T00:04:00"
+    },
+    {
+      "file": "days/Shanghai__1006__20210125T000400.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1006",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1006",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "e6efcabc1e9949c27f73682394ff91aabbdee2a4f37053df34c6627337bab6a9",
+      "start_time": "2021-01-25T00:04:00"
+    },
+    {
+      "file": "days/Shanghai__1006__20210126T000400.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1006",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1006",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "a3e85faa00222ac6f06b68a52e9afa2cb953f447edc3dcb0328398760d25fb4c",
+      "start_time": "2021-01-26T00:04:00"
+    },
+    {
+      "file": "days/Shanghai__1006__20210210T000000.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1006",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1006",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "5daf23296552b6fc66d18536d1b4533ec90e8a333ee0111f3682a20f86352090",
+      "start_time": "2021-02-10T00:00:00"
+    },
+    {
+      "file": "days/Shanghai__1006__20210211T000000.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1006",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1006",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "f169e5060198846f114da29d1694f51854ca563492152bde9bbdfaf77dcff57c",
+      "start_time": "2021-02-11T00:00:00"
+    },
+    {
+      "file": "days/Shanghai__1006__20210212T000000.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1006",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1006",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "8f46b566e0e4e8b2cfb4ce0e42dc26d872ac0d7edb43ae241df4f8d3d7c86382",
+      "start_time": "2021-02-12T00:00:00"
+    },
+    {
+      "file": "days/Shanghai__1006__20210213T000000.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1006",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1006",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "b63a34b3a8abd0d8d0d27e9f7d2f74359bba58cb77a02d55b9fef6908c5ab73e",
+      "start_time": "2021-02-13T00:00:00"
+    },
+    {
+      "file": "days/Shanghai__1006__20210214T000000.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1006",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1006",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "446aafe4e5a3bae534ce8f1c5b18dddf4913661b954369d3eac1e769e9395273",
+      "start_time": "2021-02-14T00:00:00"
+    },
+    {
+      "file": "days/Shanghai__1006__20210215T000000.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1006",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1006",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "111548f6fd3bdcc9c945f6653aef6daeecda1e98908d434385b9d3c579ff809d",
+      "start_time": "2021-02-15T00:00:00"
+    },
+    {
+      "file": "days/Shanghai__1006__20210216T000000.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1006",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1006",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "c6238e4f70d48b4ec9726fca3a71cd7204911d845e4c786dfca70dee47bdef4d",
+      "start_time": "2021-02-16T00:00:00"
+    },
+    {
+      "file": "days/Shanghai__1006__20210217T000000.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1006",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1006",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "3a04ecc231384a5da3d9008c55e114789fae5271430938edd178bc31dda01887",
+      "start_time": "2021-02-17T00:00:00"
+    },
+    {
+      "file": "days/Shanghai__1006__20210218T000000.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1006",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1006",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "0b85fc81cfa44ca4d033598e1c2194b4c06ef505ee271a9d9671c805b2da3c8a",
+      "start_time": "2021-02-18T00:00:00"
+    },
+    {
+      "file": "days/Shanghai__1006__20210219T000000.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1006",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1006",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "0b265100a70be99721e35959d8b3b3d3c03b1296dabb4379a2c7aae393056239",
+      "start_time": "2021-02-19T00:00:00"
+    },
+    {
+      "file": "days/Shanghai__1006__20210220T000000.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1006",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1006",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "6e34680c325f41f3e75e8f68a07b52b0a8a20cb0d4d21a9977542405b9972aa9",
+      "start_time": "2021-02-20T00:00:00"
+    },
+    {
+      "file": "days/Shanghai__1006__20210221T000000.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1006",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1006",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "65c0f0dd0722910becf69c355f25f836752998b85c52fcc41950dbe254bb92e3",
+      "start_time": "2021-02-21T00:00:00"
+    },
+    {
+      "file": "days/Shanghai__1006__20210222T000000.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1006",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1006",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "b38f3e891d3f0afdfd9c630920eccbdaae04b819b5dd06f34c2fb9725a86ef8d",
+      "start_time": "2021-02-22T00:00:00"
+    },
+    {
+      "file": "days/Shanghai__1006__20210304T000300.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1006",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1006",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "c0fa13eea305798f815c4bdd9c411a34615dd7289d14fa6471aa411b90225deb",
+      "start_time": "2021-03-04T00:03:00"
+    },
+    {
+      "file": "days/Shanghai__1006__20210305T000300.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1006",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1006",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "2af0978773b1e659fad1255038a53b74026f7ca4ee5e72adf4c58ffd380be6bc",
+      "start_time": "2021-03-05T00:03:00"
+    },
+    {
+      "file": "days/Shanghai__1006__20210306T000300.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1006",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1006",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "50e5180863ddff2bfe2c3912f8c09fe77ada9d3dc5af056e76668e72f1cf046d",
+      "start_time": "2021-03-06T00:03:00"
+    },
+    {
+      "file": "days/Shanghai__1006__20210307T000300.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1006",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1006",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "a6aab46999bba752d711bab098104c13de1eaa678da4c16a8fa7bab83dfe24c2",
+      "start_time": "2021-03-07T00:03:00"
+    },
+    {
+      "file": "days/Shanghai__1006__20210308T000300.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1006",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1006",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "6ee14b40f7528f8d0fa448ee9d8b7af180553104ebb5a2b246304902081fa156",
+      "start_time": "2021-03-08T00:03:00"
+    },
+    {
+      "file": "days/Shanghai__1006__20210309T000300.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1006",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1006",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "ee1f8e1c216f56bca805acaa6abb8dcd7e1541a2951fbaebcdc780fec8c5a5e5",
+      "start_time": "2021-03-09T00:03:00"
+    },
+    {
+      "file": "days/Shanghai__1006__20210310T000300.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1006",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1006",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "1b2e524f9d3bd5b1aa27ad833a04009e2ed704923467871e919f9521c0f5df5e",
+      "start_time": "2021-03-10T00:03:00"
+    },
+    {
+      "file": "days/Shanghai__1006__20210311T000300.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1006",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1006",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "5ecbcd9c0650b5a27bed439b4ff573a540f808bceaf0e8ccba532dc2a4d2bda4",
+      "start_time": "2021-03-11T00:03:00"
+    },
+    {
+      "file": "days/Shanghai__1006__20210312T000300.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1006",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1006",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "05e4f4b719a5fad034803bb50e984af712d6f1279f80ce124aa2301e00775e31",
+      "start_time": "2021-03-12T00:03:00"
+    },
+    {
+      "file": "days/Shanghai__1006__20210313T000300.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1006",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1006",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "7473f1c4f7510a1e0b9144e26c3c4e00b8eafef5f2b4eab7ac2c991e1ff82cb8",
+      "start_time": "2021-03-13T00:03:00"
+    },
+    {
+      "file": "days/Shanghai__1006__20210314T000300.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1006",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1006",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "58019539cd9a58896ec8087fe9472bbc1eecca11e0f235a92887ee17328445bc",
+      "start_time": "2021-03-14T00:03:00"
+    },
+    {
+      "file": "days/Shanghai__1007__20210727T000300.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1007",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1007",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "418995b33cb4aa5799775ddf27d6b95533148ec25c322f47746ff3bec0ee357b",
+      "start_time": "2021-07-27T00:03:00"
+    },
+    {
+      "file": "days/Shanghai__1007__20210728T000300.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1007",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1007",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "06edc28685d4b9e593412e94c48561134d0044afa7cb42b92aec9fea7bba06fe",
+      "start_time": "2021-07-28T00:03:00"
+    },
+    {
+      "file": "days/Shanghai__1007__20210729T000300.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1007",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1007",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "7d3afa1761a3a9fb0de5543e90c015ca20ed516d501270f64711881e08b3786b",
+      "start_time": "2021-07-29T00:03:00"
+    },
+    {
+      "file": "days/Shanghai__1007__20210730T000300.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1007",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1007",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "f81b09eb6f3bec8bd8f914b2c8305e5af28d33e01d9f74f1f5fe19455c7dd439",
+      "start_time": "2021-07-30T00:03:00"
+    },
+    {
+      "file": "days/Shanghai__1007__20210731T000300.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1007",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1007",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "244a28524479580bbe65a531ef7044a216eda398c121fe12fdb7d270222c39c0",
+      "start_time": "2021-07-31T00:03:00"
+    },
+    {
+      "file": "days/Shanghai__1007__20210801T000300.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1007",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1007",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "678bba83d81e76a19b75225bf2e02f426a74b405be754fea5b5987191e075155",
+      "start_time": "2021-08-01T00:03:00"
+    },
+    {
+      "file": "days/Shanghai__1007__20210802T000300.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1007",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1007",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "a502f356fed8b256f9fc7a8143d98fd86692db702d33932500fef98a0c7cd3da",
+      "start_time": "2021-08-02T00:03:00"
+    },
+    {
+      "file": "days/Shanghai__1007__20210803T000300.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1007",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1007",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "cb7465458c44ee0ad5f455f51d90e5998b8da1ef84ab1b19fb0a0b1f2d0ba0a1",
+      "start_time": "2021-08-03T00:03:00"
+    },
+    {
+      "file": "days/Shanghai__1007__20210804T000300.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1007",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1007",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "1ebb532f536fe500f2c10a15f544985a7f6b97a62b370e8fffe80bf853232e93",
+      "start_time": "2021-08-04T00:03:00"
+    },
+    {
+      "file": "days/Shanghai__1007__20210805T000300.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1007",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1007",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "091f910f5d4f8ee0cd31049eb288ce26804f2a3a87b0ffdf8ba4cab731fe1662",
+      "start_time": "2021-08-05T00:03:00"
+    },
+    {
+      "file": "days/Shanghai__1007__20210806T000300.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1007",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1007",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "8d59d815ef47b00daafe32b23e6765f6a439159ca06a72939e16478307c3a172",
+      "start_time": "2021-08-06T00:03:00"
+    },
+    {
+      "file": "days/Shanghai__1007__20210807T000300.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1007",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1007",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "5e351fb59bb2d8fbee6a76b3aff37fe0a29e49aa80360f65492a883061612be4",
+      "start_time": "2021-08-07T00:03:00"
+    },
+    {
+      "file": "days/Shanghai__1007__20210808T000300.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1007",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1007",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "75e929a21c62a8e192707fffa5c276179cb0ba808d100c61800ffb8f8a061b14",
+      "start_time": "2021-08-08T00:03:00"
+    },
+    {
+      "file": "days/Shanghai__1008__20210714T000200.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1008",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1008",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "585ab00576242ae9126d083d11647458dc8b11c4ca94c7ed9359bb2db80a2f67",
+      "start_time": "2021-07-14T00:02:00"
+    },
+    {
+      "file": "days/Shanghai__1008__20210715T000200.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1008",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1008",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "ff1636f1b2e7e335a48226bf84d4061ec8f05833c87f8ea410e8ab5c7488d480",
+      "start_time": "2021-07-15T00:02:00"
+    },
+    {
+      "file": "days/Shanghai__1008__20210716T000200.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1008",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1008",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "9866471a013255fffbee800ebf3c6ee4713f15fd46609f5888f0a54ed796fd5a",
+      "start_time": "2021-07-16T00:02:00"
+    },
+    {
+      "file": "days/Shanghai__1008__20210717T000200.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1008",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1008",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "e2469ee10ed1720de4f2708736a3a42f3dd01b43ee6d765a8d712beea4fb8c29",
+      "start_time": "2021-07-17T00:02:00"
+    },
+    {
+      "file": "days/Shanghai__1008__20210718T000200.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1008",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1008",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "732fbfbebbf4c84a250d96b008616e01a93d6bdfa5829a30f96e4aafd6e07f07",
+      "start_time": "2021-07-18T00:02:00"
+    },
+    {
+      "file": "days/Shanghai__1008__20210719T000200.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1008",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1008",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "116f102e374e4770cff4e6e34ca3f107fb2c496dad8fb02de0bc996340c81057",
+      "start_time": "2021-07-19T00:02:00"
+    },
+    {
+      "file": "days/Shanghai__1008__20210720T000200.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1008",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1008",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "7109afcba07a6c4d06d3f6bc521c645f3d22f0ddbc303ab14b528ce696c51cfc",
+      "start_time": "2021-07-20T00:02:00"
+    },
+    {
+      "file": "days/Shanghai__1009__20210804T000400.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1009",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1009",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "4f0e6465f6732a8965d0e204475bc6a7a6ee667c0e527e19146e7b4c15433da9",
+      "start_time": "2021-08-04T00:04:00"
+    },
+    {
+      "file": "days/Shanghai__1009__20210805T000400.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1009",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1009",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "d062d111443fd30bdae69c4321c07ec6c3b885f682f41f8292a866bdc08899b4",
+      "start_time": "2021-08-05T00:04:00"
+    },
+    {
+      "file": "days/Shanghai__1009__20210806T000400.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1009",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1009",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "c89104c8631279b2301533ecc979d9625adbb5468760e00fd71dff37740d581b",
+      "start_time": "2021-08-06T00:04:00"
+    },
+    {
+      "file": "days/Shanghai__1009__20210807T000400.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1009",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1009",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "680bf63aae5dd2b8bb8ed0ca28eb7280d8352c8e1787a76e0115efbcc0f83ef0",
+      "start_time": "2021-08-07T00:04:00"
+    },
+    {
+      "file": "days/Shanghai__1009__20210808T000400.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1009",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1009",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "e2d1a07a240e44e0ac23e8b1f84509424e2b04e09feaeb1018022eab117947ad",
+      "start_time": "2021-08-08T00:04:00"
+    },
+    {
+      "file": "days/Shanghai__1009__20210809T000400.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1009",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1009",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "47d61e5453eebcd24403cf621067bcd428436ef108ba25ee8a79be5f7e0f3ec4",
+      "start_time": "2021-08-09T00:04:00"
+    },
+    {
+      "file": "days/Shanghai__1010__20210915T000000.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1010",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1010",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "efac86da1e9e945d34914a90076b4eb60763deecdefdf963bff720e2ed566316",
+      "start_time": "2021-09-15T00:00:00"
+    },
+    {
+      "file": "days/Shanghai__1010__20210916T000000.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1010",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1010",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "c65b3bd0668867764ebe0dd0503a16d1213eee65227a279cb02bb3b310088036",
+      "start_time": "2021-09-16T00:00:00"
+    },
+    {
+      "file": "days/Shanghai__1010__20210917T000000.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1010",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1010",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "98349d1eccbedc4f610d5c8b1077814bae5431d1153a0296839693892837744c",
+      "start_time": "2021-09-17T00:00:00"
+    },
+    {
+      "file": "days/Shanghai__1010__20210918T000000.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1010",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1010",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "10d0e6d246c36139cb27126b641e9a5c1341607c7b54b4ad6c4ddd91a05e3360",
+      "start_time": "2021-09-18T00:00:00"
+    },
+    {
+      "file": "days/Shanghai__1010__20210919T000000.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1010",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1010",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "01a0261e1ee9e0b3c1ed5f8ef7691cc4631c46f7efab2db946c45ca2f32fa937",
+      "start_time": "2021-09-19T00:00:00"
+    },
+    {
+      "file": "days/Shanghai__1010__20210920T000000.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1010",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1010",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "cb559387143e1d828d740a2a5192a47ad7e976e265bb458d1e2bd378f5601549",
+      "start_time": "2021-09-20T00:00:00"
+    },
+    {
+      "file": "days/Shanghai__1010__20210921T000000.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1010",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1010",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "422b541edc26e01b7fa4e00d83bb5b5367bdb5248de34b0fc71378cb851194bb",
+      "start_time": "2021-09-21T00:00:00"
+    },
+    {
+      "file": "days/Shanghai__1010__20210922T000000.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1010",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1010",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "1677f328c91133c2d8628934d32b13cd1a129380d38d85654392ebfd47f68da1",
+      "start_time": "2021-09-22T00:00:00"
+    },
+    {
+      "file": "days/Shanghai__1010__20210923T000000.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1010",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1010",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "eb404503a9c1f5760bdfa0688f9dcfef1bbc327882bf1d50d9be56ee396d3f69",
+      "start_time": "2021-09-23T00:00:00"
+    },
+    {
+      "file": "days/Shanghai__1011__20210623T000300.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1011",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1011",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "91c0145706ac4097e4a7d7b4b610043b8419546a82695d4604d15bf95a445ce2",
+      "start_time": "2021-06-23T00:03:00"
+    },
+    {
+      "file": "days/Shanghai__1011__20210624T000300.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1011",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1011",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "4441d9d2f9479e4734e9be90e3ca46b489ff606ac4b62be6a9f39da8cfc48180",
+      "start_time": "2021-06-24T00:03:00"
+    },
+    {
+      "file": "days/Shanghai__1011__20210625T000300.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1011",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1011",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "0efa23bddf6a18ba6c18afa0069bab99780669904bc87610971830b27f3daf05",
+      "start_time": "2021-06-25T00:03:00"
+    },
+    {
+      "file": "days/Shanghai__1011__20210626T000300.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1011",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1011",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "825c8844dfa7e0a842242296c9e516dd08605b9c7e2efcfaedf46d511f0e87b2",
+      "start_time": "2021-06-26T00:03:00"
+    },
+    {
+      "file": "days/Shanghai__1011__20210627T000300.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1011",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1011",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "2c96754c871ea2b2393a82f900030169bc04bb88b1f204f2ceebb182a8b62ca4",
+      "start_time": "2021-06-27T00:03:00"
+    },
+    {
+      "file": "days/Shanghai__1012__20210924T000300.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1012",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1012",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "0f495fa09cbaf21cf3fdb1966687e03768c19941111752ff92c4900db010ccce",
+      "start_time": "2021-09-24T00:03:00"
+    },
+    {
+      "file": "days/Shanghai__1012__20210925T000300.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1012",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1012",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "8baf1e754ad3dba3a2bebae62902da079ca7414e42258a33a32f966beac71fc3",
+      "start_time": "2021-09-25T00:03:00"
+    },
+    {
+      "file": "days/Shanghai__1012__20210926T000300.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1012",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1012",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "21d5b808eb0514f2893a31ae417e564ddc81ad8b21ffeb84846a714624aca311",
+      "start_time": "2021-09-26T00:03:00"
+    },
+    {
+      "file": "days/Shanghai__1012__20210927T000300.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1012",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1012",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "fb2ff003c19899a6ef1b4e319c51e0fd83dd849f2e32b57eb6bb550c95c8a86e",
+      "start_time": "2021-09-27T00:03:00"
+    },
+    {
+      "file": "days/Shanghai__1012__20210928T000300.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1012",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1012",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "b83733a8f63cc0497c88ac36d84e782c847dbc9b69b8c2d81cff5518f06e5f40",
+      "start_time": "2021-09-28T00:03:00"
+    },
+    {
+      "file": "days/Shanghai__1012__20210929T000300.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1012",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1012",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "9e9cbaf914f4c4bf15331ef74669a84f075ff041688e519b8aa334259a8f6554",
+      "start_time": "2021-09-29T00:03:00"
+    },
+    {
+      "file": "days/Shanghai__1012__20210930T000300.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1012",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1012",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "b002b2125f0ff592c8286af3713f94236763dea21eed8d7508ec298e8cbcf5ee",
+      "start_time": "2021-09-30T00:03:00"
+    },
+    {
+      "file": "days/Shanghai__1012__20211001T000300.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1012",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1012",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "25b248acd9640c7843ec961d68ef2aa2fa1feedf385f1d54389384d97efff397",
+      "start_time": "2021-10-01T00:03:00"
+    },
+    {
+      "file": "days/Shanghai__1012__20211002T000300.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1012",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1012",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "29e2098567f262bf1555e25ff8b5b487008446fafe0618d9fc270690354a35b8",
+      "start_time": "2021-10-02T00:03:00"
+    },
+    {
+      "file": "days/Shanghai__1012__20211003T000300.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1012",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1012",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "7edc1e357a4b68787aae45e78e81b707658b29cadb2b47c0c100a0bf2f7112f7",
+      "start_time": "2021-10-03T00:03:00"
+    },
+    {
+      "file": "days/Shanghai__1012__20211004T000300.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1012",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1012",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "f04695d8ec262e4a63d3a62fec14d022ffc03e1580a31625bc83dc5cc5b1c90e",
+      "start_time": "2021-10-04T00:03:00"
+    },
+    {
+      "file": "days/Shanghai__1012__20211005T000300.csv",
+      "observed_count": 96,
+      "observed_fraction": 0.3333333432674408,
+      "participant_id": "1012",
+      "provenance": {
+        "dataset": "Shanghai",
+        "device": "Abbott FreeStyle Libre H",
+        "license_name": "Creative Commons Attribution 4.0 International",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "participant_id": "1012",
+        "source_url": "https://doi.org/10.6084/m9.figshare.21600933.v5",
+        "unit": "mg/dL",
+        "version": "figshare-21600933-v5/T1DM"
+      },
+      "sha256": "7c152a2d8ddce29408b28dca7b0144b1ea3ea68a5a0b96bad496f92106e98fad",
+      "start_time": "2021-10-05T00:03:00"
+    }
+  ],
+  "schema_version": "1.0",
+  "window_positions": 288
+}

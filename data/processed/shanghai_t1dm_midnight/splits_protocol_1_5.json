@@ -1,0 +1,84 @@
+{
+  "fractions": {
+    "test": 0.15,
+    "train": 0.7,
+    "validation": 0.15
+  },
+  "participant_key": [
+    "dataset",
+    "participant_id"
+  ],
+  "schema_version": "1.0",
+  "seed": 71,
+  "source_manifest": "manifest.json",
+  "source_manifest_sha256": "de8435efe6cf7d0468e47aace2fdbe3e71cf7bd7b848613f4f16740650dc9d50",
+  "splits": {
+    "test": {
+      "participant_count": 3,
+      "participants": [
+        {
+          "dataset": "Shanghai",
+          "participant_id": "1012"
+        },
+        {
+          "dataset": "Shanghai",
+          "participant_id": "1006"
+        },
+        {
+          "dataset": "Shanghai",
+          "participant_id": "1009"
+        }
+      ],
+      "record_count": 54
+    },
+    "train": {
+      "participant_count": 8,
+      "participants": [
+        {
+          "dataset": "Shanghai",
+          "participant_id": "1001"
+        },
+        {
+          "dataset": "Shanghai",
+          "participant_id": "1008"
+        },
+        {
+          "dataset": "Shanghai",
+          "participant_id": "1003"
+        },
+        {
+          "dataset": "Shanghai",
+          "participant_id": "1005"
+        },
+        {
+          "dataset": "Shanghai",
+          "participant_id": "1004"
+        },
+        {
+          "dataset": "Shanghai",
+          "participant_id": "1007"
+        },
+        {
+          "dataset": "Shanghai",
+          "participant_id": "1002"
+        },
+        {
+          "dataset": "Shanghai",
+          "participant_id": "1010"
+        }
+      ],
+      "record_count": 90
+    },
+    "validation": {
+      "participant_count": 1,
+      "participants": [
+        {
+          "dataset": "Shanghai",
+          "participant_id": "1011"
+        }
+      ],
+      "record_count": 5
+    }
+  },
+  "strategy": "participant_disjoint_seeded_sha256_order"
+}

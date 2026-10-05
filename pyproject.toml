@@ -41,7 +41,8 @@ Repository = "https://github.com/Aman-Tripathi27/GlucoTrace"
 Issues = "https://github.com/Aman-Tripathi27/GlucoTrace/issues"
 
 [project.optional-dependencies]
-dev = ["pytest>=7.4", "build>=1.2"]
+shanghai = ["pandas>=2.0", "openpyxl>=3.1", "xlrd>=2.0"]
+dev = ["pytest>=7.4", "build>=1.2", "pandas>=2.0", "openpyxl>=3.1", "xlrd>=2.0"]
 
 [project.scripts]
 glucotrace = "glucotrace.cli:main"

@@ -85,6 +85,35 @@ PROTOCOL_FILES: dict[str, dict[str, Any]] = {
             ),
         },
     },
+    "1.5": {
+        "declaration": "EVALUATION_1_5.md",
+        "files": {
+            "big_ideas_midnight/manifest.json": (
+                "2347aa6588eb86c380267824db2956ebdef58727c7cae81185bd3e458eb59c31"
+            ),
+            "big_ideas_midnight/splits_protocol_1_3.json": (
+                "c9e9cb7e01eb1025753a9f2c2ccc3e8b6d0e2fabb77647baf0192c16e143a5e0"
+            ),
+            "colas_midnight/manifest.json": (
+                "706e9056aec882633ad4930b2995a9aefaff5fae90fba7144a76a9825a74576a"
+            ),
+            "colas_midnight/splits_protocol_1_3.json": (
+                "cdd3955d682ee6ba23e387d11243e39e5efc213c62cd01384ea8e7751c45e4b7"
+            ),
+            "shanghai_t1dm_midnight/manifest.json": (
+                "de8435efe6cf7d0468e47aace2fdbe3e71cf7bd7b848613f4f16740650dc9d50"
+            ),
+            "shanghai_t1dm_midnight/splits_protocol_1_5.json": (
+                "9c3a02fd43c6509e38000472c58611df809fdcc76b53123f1e59380dae7f7290"
+            ),
+            "shanghai_t2dm_midnight/manifest.json": (
+                "3458d20f352f3b59c4d34c680c046c7baf5cf58a9c113dcec022365c043154d7"
+            ),
+            "shanghai_t2dm_midnight/splits_protocol_1_5.json": (
+                "ac586243849a7786d52103ea8c76c00273cd8dd0dad9629d2a38f46edca33038"
+            ),
+        },
+    },
 }
 
 

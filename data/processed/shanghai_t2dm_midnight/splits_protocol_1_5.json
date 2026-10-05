@@ -1,0 +1,436 @@
+{
+  "fractions": {
+    "test": 0.15,
+    "train": 0.7,
+    "validation": 0.15
+  },
+  "participant_key": [
+    "dataset",
+    "participant_id"
+  ],
+  "schema_version": "1.0",
+  "seed": 71,
+  "source_manifest": "manifest.json",
+  "source_manifest_sha256": "3458d20f352f3b59c4d34c680c046c7baf5cf58a9c113dcec022365c043154d7",
+  "splits": {
+    "test": {
+      "participant_count": 15,
+      "participants": [
+        {
+          "dataset": "Shanghai",
+          "participant_id": "2005"
+        },
+        {
+          "dataset": "Shanghai",
+          "participant_id": "2007"
+        },
+        {
+          "dataset": "Shanghai",
+          "participant_id": "2079"
+        },
+        {
+          "dataset": "Shanghai",
+          "participant_id": "2045"
+        },
+        {
+          "dataset": "Shanghai",
+          "participant_id": "2052"
+        },
+        {
+          "dataset": "Shanghai",
+          "participant_id": "2055"
+        },
+        {
+          "dataset": "Shanghai",
+          "participant_id": "2002"
+        },
+        {
+          "dataset": "Shanghai",
+          "participant_id": "2027"
+        },
+        {
+          "dataset": "Shanghai",
+          "participant_id": "2060"
+        },
+        {
+          "dataset": "Shanghai",
+          "participant_id": "2082"
+        },
+        {
+          "dataset": "Shanghai",
+          "participant_id": "2081"
+        },
+        {
+          "dataset": "Shanghai",
+          "participant_id": "2099"
+        },
+        {
+          "dataset": "Shanghai",
+          "participant_id": "2006"
+        },
+        {
+          "dataset": "Shanghai",
+          "participant_id": "2064"
+        },
+        {
+          "dataset": "Shanghai",
+          "participant_id": "2074"
+        }
+      ],
+      "record_count": 175
+    },
+    "train": {
+      "participant_count": 70,
+      "participants": [
+        {
+          "dataset": "Shanghai",
+          "participant_id": "2063"
+        },
+        {
+          "dataset": "Shanghai",
+          "participant_id": "2010"
+        },
+        {
+          "dataset": "Shanghai",
+          "participant_id": "2031"
+        },
+        {
+          "dataset": "Shanghai",
+          "participant_id": "2094"
+        },
+        {
+          "dataset": "Shanghai",
+          "participant_id": "2020"
+        },
+        {
+          "dataset": "Shanghai",
+          "participant_id": "2083"
+        },
+        {
+          "dataset": "Shanghai",
+          "participant_id": "2078"
+        },
+        {
+          "dataset": "Shanghai",
+          "participant_id": "2062"
+        },
+        {
+          "dataset": "Shanghai",
+          "participant_id": "2029"
+        },
+        {
+          "dataset": "Shanghai",
+          "participant_id": "2009"
+        },
+        {
+          "dataset": "Shanghai",
+          "participant_id": "2067"
+        },
+        {
+          "dataset": "Shanghai",
+          "participant_id": "2087"
+        },
+        {
+          "dataset": "Shanghai",
+          "participant_id": "2073"
+        },
+        {
+          "dataset": "Shanghai",
+          "participant_id": "2008"
+        },
+        {
+          "dataset": "Shanghai",
+          "participant_id": "2065"
+        },
+        {
+          "dataset": "Shanghai",
+          "participant_id": "2030"
+        },
+        {
+          "dataset": "Shanghai",
+          "participant_id": "2096"
+        },
+        {
+          "dataset": "Shanghai",
+          "participant_id": "2093"
+        },
+        {
+          "dataset": "Shanghai",
+          "participant_id": "2037"
+        },
+        {
+          "dataset": "Shanghai",
+          "participant_id": "2075"
+        },
+        {
+          "dataset": "Shanghai",
+          "participant_id": "2058"
+        },
+        {
+          "dataset": "Shanghai",
+          "participant_id": "2086"
+        },
+        {
+          "dataset": "Shanghai",
+          "participant_id": "2028"
+        },
+        {
+          "dataset": "Shanghai",
+          "participant_id": "2035"
+        },
+        {
+          "dataset": "Shanghai",
+          "participant_id": "2043"
+        },
+        {
+          "dataset": "Shanghai",
+          "participant_id": "2061"
+        },
+        {
+          "dataset": "Shanghai",
+          "participant_id": "2068"
+        },
+        {
+          "dataset": "Shanghai",
+          "participant_id": "2070"
+        },
+        {
+          "dataset": "Shanghai",
+          "participant_id": "2069"
+        },
+        {
+          "dataset": "Shanghai",
+          "participant_id": "2071"
+        },
+        {
+          "dataset": "Shanghai",
+          "participant_id": "2044"
+        },
+        {
+          "dataset": "Shanghai",
+          "participant_id": "2051"
+        },
+        {
+          "dataset": "Shanghai",
+          "participant_id": "2018"
+        },
+        {
+          "dataset": "Shanghai",
+          "participant_id": "2092"
+        },
+        {
+          "dataset": "Shanghai",
+          "participant_id": "2076"
+        },
+        {
+          "dataset": "Shanghai",
+          "participant_id": "2039"
+        },
+        {
+          "dataset": "Shanghai",
+          "participant_id": "2014"
+        },
+        {
+          "dataset": "Shanghai",
+          "participant_id": "2046"
+        },
+        {
+          "dataset": "Shanghai",
+          "participant_id": "2049"
+        },
+        {
+          "dataset": "Shanghai",
+          "participant_id": "2041"
+        },
+        {
+          "dataset": "Shanghai",
+          "participant_id": "2066"
+        },
+        {
+          "dataset": "Shanghai",
+          "participant_id": "2085"
+        },
+        {
+          "dataset": "Shanghai",
+          "participant_id": "2032"
+        },
+        {
+          "dataset": "Shanghai",
+          "participant_id": "2090"
+        },
+        {
+          "dataset": "Shanghai",
+          "participant_id": "2025"
+        },
+        {
+          "dataset": "Shanghai",
+          "participant_id": "2088"
+        },
+        {
+          "dataset": "Shanghai",
+          "participant_id": "2047"
+        },
+        {
+          "dataset": "Shanghai",
+          "participant_id": "2012"
+        },
+        {
+          "dataset": "Shanghai",
+          "participant_id": "2003"
+        },
+        {
+          "dataset": "Shanghai",
+          "participant_id": "2015"
+        },
+        {
+          "dataset": "Shanghai",
+          "participant_id": "2072"
+        },
+        {
+          "dataset": "Shanghai",
+          "participant_id": "2054"
+        },
+        {
+          "dataset": "Shanghai",
+          "participant_id": "2034"
+        },
+        {
+          "dataset": "Shanghai",
+          "participant_id": "2023"
+        },
+        {
+          "dataset": "Shanghai",
+          "participant_id": "2050"
+        },
+        {
+          "dataset": "Shanghai",
+          "participant_id": "2077"
+        },
+        {
+          "dataset": "Shanghai",
+          "participant_id": "2001"
+        },
+        {
+          "dataset": "Shanghai",
+          "participant_id": "2016"
+        },
+        {
+          "dataset": "Shanghai",
+          "participant_id": "2011"
+        },
+        {
+          "dataset": "Shanghai",
+          "participant_id": "2026"
+        },
+        {
+          "dataset": "Shanghai",
+          "participant_id": "2033"
+        },
+        {
+          "dataset": "Shanghai",
+          "participant_id": "2000"
+        },
+        {
+          "dataset": "Shanghai",
+          "participant_id": "2004"
+        },
+        {
+          "dataset": "Shanghai",
+          "participant_id": "2089"
+        },
+        {
+          "dataset": "Shanghai",
+          "participant_id": "2095"
+        },
+        {
+          "dataset": "Shanghai",
+          "participant_id": "2097"
+        },
+        {
+          "dataset": "Shanghai",
+          "participant_id": "2024"
+        },
+        {
+          "dataset": "Shanghai",
+          "participant_id": "2021"
+        },
+        {
+          "dataset": "Shanghai",
+          "participant_id": "2053"
+        },
+        {
+          "dataset": "Shanghai",
+          "participant_id": "2019"
+        }
+      ],
+      "record_count": 752
+    },
+    "validation": {
+      "participant_count": 15,
+      "participants": [
+        {
+          "dataset": "Shanghai",
+          "participant_id": "2098"
+        },
+        {
+          "dataset": "Shanghai",
+          "participant_id": "2057"
+        },
+        {
+          "dataset": "Shanghai",
+          "participant_id": "2080"
+        },
+        {
+          "dataset": "Shanghai",
+          "participant_id": "2036"
+        },
+        {
+          "dataset": "Shanghai",
+          "participant_id": "2017"
+        },
+        {
+          "dataset": "Shanghai",
+          "participant_id": "2040"
+        },
+        {
+          "dataset": "Shanghai",
+          "participant_id": "2059"
+        },
+        {
+          "dataset": "Shanghai",
+          "participant_id": "2013"
+        },
+        {
+          "dataset": "Shanghai",
+          "participant_id": "2022"
+        },
+        {
+          "dataset": "Shanghai",
+          "participant_id": "2038"
+        },
+        {
+          "dataset": "Shanghai",
+          "participant_id": "2048"
+        },
+        {
+          "dataset": "Shanghai",
+          "participant_id": "2056"
+        },
+        {
+          "dataset": "Shanghai",
+          "participant_id": "2042"
+        },
+        {
+          "dataset": "Shanghai",
+          "participant_id": "2084"
+        },
+        {
+          "dataset": "Shanghai",
+          "participant_id": "2091"
+        }
+      ],
+      "record_count": 147
+    }
+  },
+  "strategy": "participant_disjoint_seeded_sha256_order"
+}

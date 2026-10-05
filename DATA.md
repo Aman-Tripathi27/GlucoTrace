@@ -127,10 +127,38 @@ Reference audit for the official ZIP with SHA-256
 These are mechanical ingestion statistics, not performance or clinical
 findings.
 
+## Third supported source: ShanghaiT1DM and ShanghaiT2DM
+
+- Release: `diabetes_datasets.zip`, figshare version 5,
+  <https://doi.org/10.6084/m9.figshare.21600933.v5> (SHA-256
+  `59b5f5c4053a32bb6b7827844a0191597dc82228fe88ce332a189fdfc659c4cb`)
+- Citation: Zhao Q. et al., "Chinese diabetes datasets for data-driven
+  machine learning", *Scientific Data* 10, 35 (2023)
+- License: Creative Commons Attribution 4.0 International
+- Content: 12 T1DM and 100 T2DM patients in Shanghai, China; Abbott FreeStyle
+  Libre H every 15 minutes, with self-reported, timestamped meals
+
+Install the optional readers, then prepare each subset:
+
+```bash
+pip install 'glucotrace[shanghai]'
+glucotrace prepare-shanghai diabetes_datasets.zip prepared/shanghai-t2dm \
+  --subset T2DM --anchor midnight
+```
+
+Each Excel file is one recording period, and the file name starts with the
+patient number; one patient can have several files, and the adapter merges
+them so splitting stays patient-level. Readings go on the canonical
+five-minute grid, and the two positions between 15-minute readings are marked
+missing, never interpolated. A day qualifies when at least 80% of the sensor's
+own 96 daily readings are present. Only the CGM column enters canonical days;
+meal times are read separately, for descriptive analysis only. Clinical
+tables, insulin, and medication columns are not loaded.
+
 ## Planned source roles
 
-- BIG IDEAs, Colas, selected ShanghaiT2DM sessions, and an eligible Stanford
-  subset: candidate self-supervised pretraining sources.
+- BIG IDEAs, Colas, and ShanghaiT1DM/T2DM: self-supervised pretraining
+  sources (protocol 1.5). An eligible Stanford subset remains a candidate.
 - CGMacros: initially reserved for paired Dexcom/Libre representation tests.
 - Google/Fitbit Wear-CGM: not used because it is non-public.
 
