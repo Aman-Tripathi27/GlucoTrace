@@ -11,7 +11,7 @@ tags:
   - research-only
 ---
 
-# GlucoTrace research checkpoint
+# GlucoTrace 0.3 research checkpoint
 
 A 511k-parameter Transformer that encodes one 24-hour continuous glucose
 monitor (CGM) day into a 128-number fingerprint for similarity search and
@@ -25,37 +25,42 @@ representation research.
 ```bash
 pip install glucotrace
 glucotrace download-model
-glucotrace encode day.csv
-glucotrace report day.csv --manifest corpus/manifest.json --output report.html
+glucotrace encode day.csv                         # plain timestamp,glucose CSV
+glucotrace encode export.csv --format libreview   # FreeStyle Libre export
+glucotrace encode export.csv --format dexcom-clarity
 ```
 
-Input: a CSV with `timestamp,glucose` in mg/dL (or pass `--unit mmol/L`) on a
-five-minute grid. Missing readings stay missing; nothing is interpolated.
+Missing readings stay missing; nothing is interpolated.
+
+## What changed in 0.3
+
+The model has **no clock input**. The 0.2 model could tell which study (and
+country) a day came from by its meal times; this one sees only the shape of
+the glucose day. Fingerprints are not comparable with 0.2 fingerprints.
 
 ## Training data
 
-Participant-disjoint training partitions of two public datasets:
-BIG IDEAs Glycemic Wearable (PhysioNet 1.1.3, ODC-By 1.0) and the Colas et al.
-2019 PLOS ONE supporting dataset. 363 training days from 159 participants.
+Participant-disjoint training partitions of BIG IDEAs (USA, Dexcom G6),
+Colas et al. 2019 (Spain, Medtronic iPro), and ShanghaiT1DM/T2DM (China,
+FreeStyle Libre H): 1,190 training days from 237 participants.
 
-## Evaluation (all pre-registered)
+## Evaluation (pre-registered, protocol 1.5; sealed test, 49 new people)
 
-- Protocol 1.1 held-out test (69 days, 31 participants): passed all five
-  checks for non-collapse and stability under missing data (median cosine
-  0.994 after removing 30% of readings).
-- Validation: predicts the mean glucose of a hidden six-hour window with a
-  lower error than a summary-statistics baseline (7.71 vs 8.22 mg/dL).
+- Source bias fixed: margin 0.067 against summary statistics (limit 0.10).
+- Stable under missing data (median cosine 0.965 after removing 30%).
+- **Utility: tied with summary statistics** (20.1 vs 19.6 mg/dL hidden-window
+  error). This failed the pre-registered utility gate; the owner released the
+  model anyway because of the bias fix. Disclosed in `RELEASE_RESULTS_0_3.md`.
 
 ## Known limitations
 
-- The embedding strongly encodes the source dataset (linear probe about 0.98
-  balanced accuracy). This is likely caused by the datasets aligning days to
-  different clock times.
-- Fingerprints can link days from the same person. Treat them as personal
-  data.
-- Two datasets, no external validation, and no subgroup or fairness analysis.
+- Blind to clock time: an after-breakfast and an after-dinner rise of the same
+  shape look alike.
+- Fingerprints link days from the same person about half the time. Treat them
+  as personal data.
+- Three cohorts, no external validation, no subgroup or fairness analysis.
 
-Full details: the project's `MODEL_CARD.md`, `RELEASE_RESULTS.md`, and
-`PROTOCOL_1_2_RESULTS.md` on GitHub (Aman-Tripathi27/GlucoTrace).
+Full details on GitHub (Aman-Tripathi27/GlucoTrace): `MODEL_CARD.md`,
+`RELEASE_RESULTS_0_3.md`, `PROTOCOL_1_5_RESULTS.md`.
 
-SHA-256: `1fbeecd68d81d239fa26726b67ca2d05bf485569a8d3619cdc624f86bba8092b`
+SHA-256: `a4ee0f8f15ab6e2d8a9f311acf5884594889300a70df35bfa599e45605845389`

@@ -36,16 +36,24 @@ def input_arguments(parser: argparse.ArgumentParser) -> None:
     parser.add_argument(
         "--format",
         dest="input_format",
-        choices=("plain", "dexcom-clarity"),
+        choices=("plain", "dexcom-clarity", "libreview"),
         default="plain",
-        help="plain timestamp/glucose CSV, or a Dexcom Clarity CSV export",
+        help="plain timestamp/glucose CSV, a Dexcom Clarity export, or a "
+        "FreeStyle Libre LibreView export",
+    )
+    parser.add_argument(
+        "--date-order",
+        choices=("auto", "mdy", "dmy"),
+        default="auto",
+        help="LibreView date order: month-day-year or day-month-year "
+        "(default: detect from the file, and refuse if it is ambiguous)",
     )
     parser.add_argument(
         "--out-of-range",
         choices=("missing", "clamp"),
         default="missing",
-        help="treat Low/High readings as missing (default) or record them at "
-        "the sensor limits of 40 and 400 mg/dL",
+        help="treat Low/High (LO/HI) readings as missing (default) or record "
+        "them at the sensor limits (Dexcom 40/400, Libre 40/500 mg/dL)",
     )
 
 
@@ -137,6 +145,7 @@ def encode_main() -> None:
         unit=args.unit,
         input_format=args.input_format,
         out_of_range=args.out_of_range,
+        date_order=args.date_order,
     )
     warn_out_of_range(input_metadata)
     _emit(
@@ -174,6 +183,7 @@ def compare_main() -> None:
         unit=args.unit,
         input_format=args.input_format,
         out_of_range=args.out_of_range,
+        date_order=args.date_order,
     )
     second, second_metadata = encoder.encode_csv(
         args.second_csv,
@@ -183,6 +193,7 @@ def compare_main() -> None:
         unit=args.unit,
         input_format=args.input_format,
         out_of_range=args.out_of_range,
+        date_order=args.date_order,
     )
     similarity = cosine_similarity(first, second)
     warn_out_of_range(first_metadata)
@@ -237,6 +248,7 @@ def search_main() -> None:
         unit=args.unit,
         input_format=args.input_format,
         out_of_range=args.out_of_range,
+        date_order=args.date_order,
     )
     warn_out_of_range(input_metadata)
     matches = search_manifests(

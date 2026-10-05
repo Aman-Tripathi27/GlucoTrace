@@ -6,7 +6,9 @@ GlucoTrace is a compact PyTorch Transformer encoder for regularly sampled
 continuous glucose monitor time series. This repository includes source code,
 tests, and one research-only checkpoint. It is not clinically evaluated.
 
-- Version: 0.3.0 (software); checkpoint weights unchanged from 0.1.0
+- Version: 0.3.0; default checkpoint `glucotrace-0.3.pt` (no clock input,
+  three cohorts). See [RELEASE_RESULTS_0_3.md](RELEASE_RESULTS_0_3.md). The 0.2
+  checkpoint is described in [RELEASE_RESULTS.md](RELEASE_RESULTS.md).
 - License: MIT
 - Status: experimental research checkpoint
 
@@ -56,8 +58,11 @@ The model represents a completed window and is not a real-time forecaster.
 
 ## Data and preprocessing
 
-No dataset is bundled with the source package. The checkpoint was trained on
-participant-disjoint portions of BIG IDEAs and Colas 2019. The canonical
+No dataset is bundled with the source package. The 0.3 checkpoint was trained
+on participant-disjoint portions of BIG IDEAs (USA), Colas 2019 (Spain), and
+ShanghaiT1DM/T2DM (China); the 0.2 checkpoint on BIG IDEAs and Colas only.
+The 0.3 checkpoint receives **no time-of-day input**: protocols 1.4 and 1.5
+showed that clock time let the model identify the source dataset. The canonical
 public-data pipeline constructs 288-position days, zero-fills tensor
 placeholders, retains an observation mask, records gap age, and keeps source
 provenance in a manifest. The convenience CSV loader follows the same
@@ -117,6 +122,15 @@ six-hour window with lower error than a summary-statistics baseline (7.71 vs
 8.22 mg/dL). No protocol 1.2 candidate passed the new source-leakage gate, so
 its test partition was not opened and the checkpoint was not replaced. See
 [PROTOCOL_1_2_RESULTS.md](PROTOCOL_1_2_RESULTS.md).
+
+Protocol 1.5 added the Shanghai cohort. The no-clock recipe passed all seven
+gates on validation; on the sealed test it kept the source bias fixed (margin
+0.062, limit 0.10) but failed the utility gate (+0.45 mg/dL against summary
+statistics, within the uncertainty interval). **The owner released it anyway
+as the 0.3 default**, judging the bias fix more important. This overrides the
+protocol's release rule and is disclosed in
+[RELEASE_RESULTS_0_3.md](RELEASE_RESULTS_0_3.md). Its utility should be read
+as tied with summary statistics.
 
 No clinically validated threshold, claim of external
 generalization, or state-of-the-art comparison is provided. A downstream

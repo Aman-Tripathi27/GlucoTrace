@@ -8,6 +8,7 @@ dist/
 build/
 *.pt
 !checkpoints/glucotrace-research.pt
+!checkpoints/glucotrace-0.3.pt
 # Canonical day files and raw datasets stay local (dataset licenses). The
 # manifests and split files contain no glucose values and are published so
 # protocol declarations can be verified.

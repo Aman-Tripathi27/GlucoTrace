@@ -22,12 +22,20 @@ SUPPORTED_UNITS = ("mg/dL", "mmol/L")
 # No plausible day of mg/dL readings has a median this low, and no plausible
 # day of mmol/L readings has a median this high.
 _UNIT_MEDIAN_BOUNDARY = 35.0
-INPUT_FORMATS = ("plain", "dexcom-clarity")
+INPUT_FORMATS = ("plain", "dexcom-clarity", "libreview")
 OUT_OF_RANGE_POLICIES = ("missing", "clamp")
-OUT_OF_RANGE_TEXT = ("low", "high")
+DATE_ORDERS = ("auto", "mdy", "dmy")
+# Text a sensor writes instead of a number when a reading is out of range.
+OUT_OF_RANGE_TEXT = {"low": "low", "high": "high", "lo": "low", "hi": "high"}
 # Dexcom G6/G7 report readings beyond these limits as "Low"/"High".
 SENSOR_LOW_MG_DL = 40.0
 SENSOR_HIGH_MG_DL = 400.0
+# FreeStyle Libre reports "LO" below 40 and "HI" above 500 mg/dL.
+SENSOR_LIMITS_MG_DL = {
+    "plain": (SENSOR_LOW_MG_DL, SENSOR_HIGH_MG_DL),
+    "dexcom-clarity": (SENSOR_LOW_MG_DL, SENSOR_HIGH_MG_DL),
+    "libreview": (40.0, 500.0),
+}
 
 
 def parse_timestamp(value: str) -> datetime:
@@ -117,7 +125,9 @@ def _parse_glucose_cell(cell: str, line_number: int) -> tuple[float | None, str 
         return None, None
     lowered = text.lower()
     if lowered in OUT_OF_RANGE_TEXT:
-        return None, lowered
+        return None, OUT_OF_RANGE_TEXT[lowered]
+    if "," in text and "." not in text:
+        text = text.replace(",", ".")  # decimal comma, as in many European exports
     try:
         value = float(text)
     except ValueError as exc:
@@ -188,6 +198,129 @@ def _read_dexcom_clarity_rows(handle: Any) -> tuple[list[_Row], str]:
     return rows, unit
 
 
+_LIBRE_TIMESTAMP = "Device Timestamp"
+_LIBRE_HISTORIC = "0"  # record type of automatic sensor readings
+
+
+def _split_libre_stamp(text: str) -> tuple[list[int], str]:
+    """Split ``03-01-2024 08:05 AM`` into ([3, 1, 2024], "08:05 AM")."""
+
+    date_part, _, time_part = text.strip().partition(" ")
+    pieces = date_part.replace("/", "-").replace(".", "-").split("-")
+    if len(pieces) != 3 or not all(piece.isdigit() for piece in pieces):
+        raise ValueError(f"unrecognized LibreView timestamp {text!r}")
+    return [int(piece) for piece in pieces], time_part.strip()
+
+
+def _libre_date_order(stamps: list[str]) -> str:
+    """Decide whether dates are month-day-year or day-month-year.
+
+    Year-first dates are unambiguous. Otherwise a first field above 12 means
+    day-month, a second field above 12 means month-day, and an AM/PM clock is
+    the US month-day style. If nothing decides it, the file is rejected rather
+    than guessed, because swapping days and months silently corrupts every day.
+    """
+
+    first_above = second_above = ampm = False
+    for stamp in stamps:
+        fields, clock = _split_libre_stamp(stamp)
+        if fields[0] > 31:
+            return "ymd"
+        first_above |= fields[0] > 12
+        second_above |= fields[1] > 12
+        ampm |= clock.upper().endswith(("AM", "PM"))
+    if first_above and second_above:
+        raise ValueError("LibreView dates are inconsistent (neither MM-DD nor DD-MM)")
+    if first_above:
+        return "dmy"
+    if second_above or ampm:
+        return "mdy"
+    raise ValueError(
+        "cannot tell whether LibreView dates are month-day or day-month; "
+        "pass --date-order mdy or --date-order dmy"
+    )
+
+
+def _parse_libre_stamp(text: str, order: str) -> datetime:
+    fields, clock = _split_libre_stamp(text)
+    if order == "ymd":
+        year, month, day = fields
+    elif order == "mdy":
+        month, day, year = fields
+    else:
+        day, month, year = fields
+    upper = clock.upper()
+    meridiem = upper[-2:] if upper.endswith(("AM", "PM")) else None
+    hours_text, _, minutes_text = (upper[:-2] if meridiem else upper).strip().partition(":")
+    try:
+        hour, minute = int(hours_text), int(minutes_text[:2])
+    except ValueError as exc:
+        raise ValueError(f"unrecognized LibreView time {text!r}") from exc
+    if meridiem:
+        if not 1 <= hour <= 12:
+            raise ValueError(f"unrecognized LibreView time {text!r}")
+        hour = hour % 12 + (12 if meridiem == "PM" else 0)
+    return datetime(year, month, day, hour, minute)
+
+
+def _read_libreview_rows(handle: Any, date_order: str) -> tuple[list[_Row], str]:
+    """Read historic glucose rows and the unit from a LibreView CSV export.
+
+    LibreView exports start with a title line, then a header that includes
+    ``Device Timestamp``, ``Record Type``, and ``Historic Glucose <unit>``.
+    Only record type 0 (automatic historic readings, usually every 15
+    minutes) is used; scans, strips, food, insulin, and notes are skipped.
+    Timestamps are the device's local clock.
+    """
+
+    lines = list(csv.reader(handle))
+    header_index = next(
+        (i for i, line in enumerate(lines) if _LIBRE_TIMESTAMP in line), None
+    )
+    if header_index is None:
+        raise ValueError(
+            "not a LibreView export: expected a 'Device Timestamp' column"
+        )
+    header = lines[header_index]
+    glucose_col = next((c for c in header if c.startswith("Historic Glucose")), None)
+    if glucose_col is None or "Record Type" not in header:
+        raise ValueError(
+            "not a LibreView export: expected 'Record Type' and "
+            "'Historic Glucose ...' columns"
+        )
+    if "mmol/L" in glucose_col:
+        unit = "mmol/L"
+    elif "mg/dL" in glucose_col:
+        unit = "mg/dL"
+    else:
+        raise ValueError(f"cannot read the glucose unit from column {glucose_col!r}")
+    stamp_at = header.index(_LIBRE_TIMESTAMP)
+    type_at = header.index("Record Type")
+    glucose_at = header.index(glucose_col)
+    historic = [
+        (line_number, line)
+        for line_number, line in enumerate(lines[header_index + 1 :], start=header_index + 2)
+        if len(line) > max(stamp_at, type_at, glucose_at)
+        and line[type_at].strip() == _LIBRE_HISTORIC
+    ]
+    if not historic:
+        return [], unit
+    order = (
+        _libre_date_order([line[stamp_at] for _, line in historic])
+        if date_order == "auto"
+        else date_order
+    )
+    rows: list[_Row] = []
+    for line_number, line in historic:
+        try:
+            instant = _parse_libre_stamp(line[stamp_at], order)
+        except ValueError as exc:
+            raise ValueError(f"line {line_number}: {exc}") from exc
+        value, flag = _parse_glucose_cell(line[glucose_at], line_number)
+        rows.append((instant, None, value, flag))
+    return rows, unit
+
+
 def load_cgm_csv(
     path: str | Path,
     *,
@@ -198,6 +331,7 @@ def load_cgm_csv(
     unit: str | None = None,
     input_format: str = "plain",
     out_of_range: str = "missing",
+    date_order: str = "auto",
 ) -> CGMSeries:
     """Load a CGM CSV onto a regular time grid.
 
@@ -211,14 +345,17 @@ def load_cgm_csv(
     ``08:00+05:30`` is morning, not 02:30 UTC. Files may mix offsets (for
     example across a daylight-saving change) but not aware and naive stamps.
 
-    ``input_format`` is ``"plain"`` (``timestamp_col``/``glucose_col``) or
-    ``"dexcom-clarity"`` (a Clarity CSV export, whose header declares the
-    unit). ``unit`` declares a plain file's unit (default mg/dL); mmol/L is
+    ``input_format`` is ``"plain"`` (``timestamp_col``/``glucose_col``),
+    ``"dexcom-clarity"`` (a Clarity CSV export), or ``"libreview"`` (a
+    FreeStyle Libre LibreView CSV export). Both exports declare their unit.
+    LibreView dates are read as month-day or day-month automatically when the
+    file makes it clear; otherwise pass ``date_order`` ("mdy" or "dmy"). ``unit`` declares a plain file's unit (default mg/dL); mmol/L is
     converted to mg/dL. A file whose median contradicts the unit is rejected.
 
     Readings recorded as ``Low``/``High`` (beyond the sensor's range) have no
     measured value. ``out_of_range="missing"`` marks them missing;
-    ``"clamp"`` records them at the sensor limits of 40 and 400 mg/dL. The
+    ``"clamp"`` records them at the sensor limits (Dexcom 40 and 400 mg/dL,
+    FreeStyle Libre 40 and 500 mg/dL). The
     count is returned as ``out_of_range_count``.
     """
 
@@ -230,14 +367,19 @@ def load_cgm_csv(
         raise ValueError(f"input_format must be one of {INPUT_FORMATS}")
     if out_of_range not in OUT_OF_RANGE_POLICIES:
         raise ValueError(f"out_of_range must be one of {OUT_OF_RANGE_POLICIES}")
+    if date_order not in DATE_ORDERS:
+        raise ValueError(f"date_order must be one of {DATE_ORDERS}")
 
     csv_path = Path(path)
     with csv_path.open("r", newline="", encoding="utf-8-sig") as handle:
-        if input_format == "dexcom-clarity":
-            rows, declared_unit = _read_dexcom_clarity_rows(handle)
+        if input_format in ("dexcom-clarity", "libreview"):
+            if input_format == "dexcom-clarity":
+                rows, declared_unit = _read_dexcom_clarity_rows(handle)
+            else:
+                rows, declared_unit = _read_libreview_rows(handle, date_order)
             if unit is not None and unit != declared_unit:
                 raise ValueError(
-                    f"the Clarity export declares {declared_unit}, not {unit}"
+                    f"the {input_format} export declares {declared_unit}, not {unit}"
                 )
             unit = declared_unit
         else:
@@ -303,8 +445,9 @@ def load_cgm_csv(
     if unit == "mmol/L":
         values = values * np.float32(MG_DL_PER_MMOL_L)
     if out_of_range == "clamp":
+        low, high = SENSOR_LIMITS_MG_DL[input_format]
         for index, flag in out_of_range_positions:
-            values[index] = SENSOR_LOW_MG_DL if flag == "low" else SENSOR_HIGH_MG_DL
+            values[index] = low if flag == "low" else high
 
     observed = np.isfinite(values)
     if not observed.any():

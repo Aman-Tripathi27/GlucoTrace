@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.3.0 (unreleased)
+## 0.3.0 (2026-10-05)
 
 ### Breaking: renamed to GlucoTrace everywhere
 
@@ -8,20 +8,29 @@
   `GlucoTrace` and `GlucoTraceConfig`.
 - All commands run through `glucotrace <command>`; the separate `glucofm-*`
   commands are removed.
-- The checkpoint file is `glucotrace-research.pt`. Its bytes and SHA-256
-  (`1fbeecd6…8092b`) are unchanged, so existing fingerprints stay comparable.
+- **New default model `glucotrace-0.3.pt`** (no clock input, trained on three
+  cohorts; SHA-256 `a4ee0f8f…45389`). **Fingerprints are not comparable with
+  0.2 fingerprints.** It removes the source-dataset bias but failed the
+  pre-registered utility gate on the sealed test (tied with summary
+  statistics) and was released by owner decision; see
+  `RELEASE_RESULTS_0_3.md`. The 0.2 model stays at release v0.2.0 and as
+  `checkpoints/glucotrace-research.pt`. Run `glucotrace download-model` to
+  fetch the new model.
 - Output kinds are `glucotrace_fingerprint`, `glucotrace_comparison`, and
   `glucotrace_search`.
 - Cites the independent GlucoFM paper (arXiv:2605.30865) as related work.
 
 ### Added
 
+- `--format libreview` reads FreeStyle Libre LibreView CSV exports directly:
+  historic readings only, unit from the header, decimal commas, `LO`/`HI`,
+  and automatic month-day/day-month detection that refuses ambiguous files
+  (`--date-order mdy|dmy` resolves them). Closes issue #2.
+
 - Protocol 1.4 (random-phase training windows, three seeds, a no-clock
   diagnostic) with `--random-phase-raw` and `--no-clock` for pretraining.
   Result: removing the clock input eliminated source leakage (margin
   -0.004) at a ~3% utility cost; no recipe passed all gates.
-- `download-model` falls back to the identical v0.2.0 asset until a v0.3.0
-  release exists.
 - ShanghaiT1DM/T2DM adapter (`glucotrace prepare-shanghai`, China, FreeStyle
   Libre 15-minute data) and protocol 1.5 (three cohorts, cadence-harmonized
   source gate, bootstrap intervals, `--clock-bins`, `--cadence-dropout`).

@@ -278,6 +278,7 @@ def build_report(
     unit: str | None = None,
     input_format: str = "plain",
     out_of_range: str = "missing",
+    date_order: str = "auto",
     window_index: int | None = None,
     timestamp_col: str = "timestamp",
     glucose_col: str = "glucose",
@@ -292,6 +293,7 @@ def build_report(
         unit=unit,
         input_format=input_format,
         out_of_range=out_of_range,
+        date_order=date_order,
     )
     warn_out_of_range(metadata)
     series = load_cgm_csv(
@@ -302,6 +304,7 @@ def build_report(
         unit=unit,
         input_format=input_format,
         out_of_range=out_of_range,
+        date_order=date_order,
     )
     window = CGMWindowDataset(
         series,
@@ -370,6 +373,7 @@ def main() -> None:
         unit=args.unit,
         input_format=args.input_format,
         out_of_range=args.out_of_range,
+        date_order=args.date_order,
         window_index=args.window_index,
         timestamp_col=args.timestamp_col,
         glucose_col=args.glucose_col,

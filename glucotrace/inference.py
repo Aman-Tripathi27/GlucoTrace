@@ -19,13 +19,15 @@ from .data import CGMWindowDataset, load_cgm_csv
 from .model import GlucoTrace, GlucoTraceConfig
 
 
-CHECKPOINT_NAME = "glucotrace-research.pt"
-CHECKPOINT_SHA256 = "1fbeecd68d81d239fa26726b67ca2d05bf485569a8d3619cdc624f86bba8092b"
+# The 0.3 model: no clock input, trained on three cohorts (protocol 1.5,
+# recipe C, seed 13). Its fingerprints are not comparable with 0.2 ones.
+CHECKPOINT_NAME = "glucotrace-0.3.pt"
+CHECKPOINT_SHA256 = "a4ee0f8f15ab6e2d8a9f311acf5884594889300a70df35bfa599e45605845389"
 _RELEASES = "https://github.com/Aman-Tripathi27/GlucoTrace/releases/download/"
 CHECKPOINT_URL = f"{_RELEASES}v0.3.0/{CHECKPOINT_NAME}"
-# The same bytes were published under the project's former file name in
-# v0.2.0; the pinned SHA-256 guarantees either copy is identical.
-CHECKPOINT_FALLBACK_URLS = (f"{_RELEASES}v0.2.0/glucofm-research.pt",)
+# No fallback: no other release holds these bytes. The 0.2 model remains at
+# v0.2.0 (glucofm-research.pt) for reproducing earlier results.
+CHECKPOINT_FALLBACK_URLS: tuple[str, ...] = ()
 
 
 def checkpoint_cache_path() -> Path:
@@ -226,6 +228,7 @@ class ResearchEncoder:
         unit: str | None = None,
         input_format: str = "plain",
         out_of_range: str = "missing",
+        date_order: str = "auto",
     ) -> tuple[torch.Tensor, dict[str, Any]]:
         """Encode exactly one full model window selected from a CSV."""
 
@@ -240,6 +243,7 @@ class ResearchEncoder:
             unit=unit,
             input_format=input_format,
             out_of_range=out_of_range,
+            date_order=date_order,
         )
         windows = CGMWindowDataset(
             series,

@@ -4,8 +4,9 @@ Protocol 1.5 ([EVALUATION_1_5.md](EVALUATION_1_5.md)) added a third cohort
 (ShanghaiT1DM/T2DM, China) and tested three clock designs, each with seeds 7,
 11, and 13. Recipe C (no clock) was the only recipe to pass all seven gates on
 validation, so the test partition was opened once for it. **On the test
-partition it failed the utility gate.** That result is final: the checkpoint
-is not released, and the released checkpoint is unchanged.
+partition it failed the utility gate.** Under the protocol that result is
+final and the checkpoint would not be released. The owner later released it
+anyway as the 0.3 default, with the failure disclosed (see Decision below).
 
 This is representation research only. None of these numbers are clinical,
 diagnostic, or safety evidence.
@@ -62,6 +63,13 @@ not better than them.
 ## Decision
 
 Research on this question stops here, as the owner decided. The project now
-focuses on the fingerprint tool itself. Complete reports:
+focuses on the fingerprint tool itself.
+
+**Amendment, 2026-10-05, after the test result.** The owner decided to
+release recipe C seed 13 (the median validation-margin seed) as the 0.3
+default model despite the failed utility gate, judging the source-bias fix
+more important than a utility gap inside its uncertainty interval. This
+overrides the protocol's rule that a failed test is final, and is disclosed
+in [RELEASE_RESULTS_0_3.md](RELEASE_RESULTS_0_3.md). Complete reports:
 `evaluations/protocol-1.5-recipe-*-validation.json` and
 `evaluations/protocol-1.5-recipe-C-seed-*-test.json`.

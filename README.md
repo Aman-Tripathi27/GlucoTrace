@@ -40,7 +40,8 @@ glucotrace report my-day.csv \
 ```
 
 The input is a CSV with `timestamp,glucose` columns in mg/dL (or pass
-`--unit mmol/L`), or a Dexcom Clarity export with `--format dexcom-clarity`.
+`--unit mmol/L`), a Dexcom Clarity export with `--format dexcom-clarity`, or a
+FreeStyle Libre LibreView export with `--format libreview`.
 Time zones are respected, `Low`/`High` readings are handled explicitly, and
 files whose values contradict the declared unit are rejected rather than
 silently misread. Run `glucotrace --help` for all fourteen commands.
@@ -53,19 +54,23 @@ silently misread. Run `glucotrace --help` for all fourteen commands.
   to checksummed manifests, and the loader refuses stale splits.
 - **Pre-registered evaluation.** Thresholds, probes, and candidate budgets are
   declared before training; a test partition is opened once.
-- **Beats a transparent baseline.** On validation, the embedding predicts the
-  mean glucose of a hidden 6-hour window with lower error than 11 hand-built
-  summary statistics (7.7 vs 8.2 mg/dL, released checkpoint).
-- **Honest about its weak spot.** The embedding still reveals which dataset a
+- **Free of dataset bias (0.3).** The default model has no clock input, so its
+  fingerprints no longer encode which study or country a day came from
+  (margin 0.067 on new people, limit 0.10).
+- **Honest about its limits.** On new people the 0.3 fingerprint is tied with
+  11 hand-built summary statistics at predicting a hidden 6-hour window
+  (20.1 vs 19.6 mg/dL). It failed that pre-registered gate and was released by
+  the owner's decision; see [RELEASE_RESULTS_0_3.md](RELEASE_RESULTS_0_3.md).
+- **Every step documented.** The 0.2 embedding revealed which dataset a
   day came from. [Protocol 1.2](PROTOCOL_1_2_RESULTS.md) traced this to clock
   alignment, and [protocol 1.3](PROTOCOL_1_3_RESULTS.md) halved it by starting every day at
   midnight. [Protocol 1.4](PROTOCOL_1_4_RESULTS.md) found the remaining leak is
   the time-of-day input: removing it eliminates the leakage at a ~3% cost in
   usefulness. [Protocol 1.5](PROTOCOL_1_5_RESULTS.md) added a third cohort
   (China): the leak-free design stayed leak-free on new people, but on the
-  sealed test it was no more useful than summary statistics, so it was not
-  released.
-- **Small and hackable.** About 5,000 lines of typed Python, 88 tests, CPU
+  sealed test it was no more useful than summary statistics. It became the
+  0.3 default anyway, with that failure disclosed.
+- **Small and hackable.** About 5,000 lines of typed Python, 109 tests, CPU
   training in minutes.
 
 ## Results at a glance
@@ -73,8 +78,8 @@ silently misread. Run `glucotrace --help` for all fourteen commands.
 | Question | Result | Where |
 |---|---|---|
 | Is the embedding non-collapsed and stable when data goes missing? | Yes, all five protocol 1.1 checks passed on a held-out test set (e.g. 30% random removal: median cosine 0.994) | [RELEASE_RESULTS.md](RELEASE_RESULTS.md) |
-| Is it more useful than summary statistics? | The released model: yes on validation (7.7 vs 8.2 mg/dL). The leak-free model: no, statistically tied on the protocol 1.5 sealed test (20.06 vs 19.60 mg/dL) | [PROTOCOL_1_2_RESULTS.md](PROTOCOL_1_2_RESULTS.md), [PROTOCOL_1_5_RESULTS.md](PROTOCOL_1_5_RESULTS.md) |
-| Does it encode which dataset a day came from? | The released model: yes, too much (linear probe 0.98). Removing the clock input fixes it, also on new people (margin 0.06, limit 0.10) | [PROTOCOL_1_4_RESULTS.md](PROTOCOL_1_4_RESULTS.md), [PROTOCOL_1_5_RESULTS.md](PROTOCOL_1_5_RESULTS.md) |
+| Is it more useful than summary statistics? | The 0.3 model: no, statistically tied on the sealed test (20.1 vs 19.6 mg/dL); it failed that gate and was released by owner decision. The 0.2 model: yes on validation (7.7 vs 8.2 mg/dL) but biased | [PROTOCOL_1_2_RESULTS.md](PROTOCOL_1_2_RESULTS.md), [PROTOCOL_1_5_RESULTS.md](PROTOCOL_1_5_RESULTS.md) |
+| Does it encode which dataset a day came from? | The 0.3 model: no beyond summary statistics (margin 0.067 on new people, limit 0.10). The 0.2 model: yes, too much (linear probe 0.98) | [PROTOCOL_1_4_RESULTS.md](PROTOCOL_1_4_RESULTS.md), [PROTOCOL_1_5_RESULTS.md](PROTOCOL_1_5_RESULTS.md) |
 | Can a fingerprint link days from the same person? | Often: top-1 same-person match about 25% vs 3.5% chance. Treat fingerprints as personal data | [MODEL_CARD.md](MODEL_CARD.md) |
 | Is it clinically validated? | **No.** No clinical, diagnostic, or safety claim is made | [MODEL_CARD.md](MODEL_CARD.md) |
 

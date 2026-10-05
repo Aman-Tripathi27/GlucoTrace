@@ -137,15 +137,15 @@ footer{padding-block:28px 48px;font-size:13px;color:var(--muted);display:flex;fl
     </div>
     <div class="fp-rows">
       <div class="fp-row" id="fp-row-q">
-        <div class="fp-label"><b>16 Feb 2020</b>fingerprint · 128</div>
+        <div class="fp-label"><b>USA · BIG IDEAs</b>fingerprint · 128</div>
         <div class="fp" id="fp-q" aria-label="Fingerprint of the query day"></div>
       </div>
       <div class="fp-row dim" id="fp-row-n">
-        <div class="fp-label"><b>15 Feb 2020</b>cosine <span id="sim">0.987</span></div>
+        <div class="fp-label"><b>Spain · Colas 2019</b>cosine <span id="sim">0.972</span></div>
         <div class="fp" id="fp-n" aria-label="Fingerprint of the nearest day"></div>
       </div>
     </div>
-    <figcaption class="caption">We searched 502 other public CGM days for the closest fingerprint. <strong>It picked the same person's previous day</strong>, with no participant labels involved. Amber cells are positive values and blue cells are negative. Public data: BIG IDEAs participant 001, PhysioNet, ODC-By 1.0.</figcaption>
+    <figcaption class="caption">We searched 502 other public CGM days for the closest fingerprint. <strong>The closest match came from a different study, in another country.</strong> The 0.3 model has no clock input, so it compares the shape of the glucose day rather than when or where it was recorded. (The 0.2 model, which could tell studies apart, picked the same person's previous day.) Amber cells are positive values and blue cells are negative. Public data: BIG IDEAs participant 001 (PhysioNet, ODC-By 1.0) and Colas et al. 2019 participant 030 (PLOS ONE, CC BY 4.0).</figcaption>
   </figure>
 </header>
 
@@ -169,7 +169,7 @@ footer{padding-block:28px 48px;font-size:13px;color:var(--muted);display:flex;fl
     <div><span class="unit">observed_mask · gap_age</span><h3>Missing stays missing</h3><p>Sensor gaps are tracked explicitly and never interpolated. A dropped reading can't pass for a real one.</p></div>
     <div><span class="unit">sha-256 · participant-disjoint</span><h3>No leakage by accident</h3><p>Splits are made by participant and bound to checksummed manifests. The loader refuses splits that no longer match their data.</p></div>
     <div><span class="unit">declared before training</span><h3>Pre-registered tests</h3><p>Thresholds, probes, and the number of candidates are fixed in writing first. Each test set is opened once.</p></div>
-    <div><span class="unit">511,372 parameters</span><h3>Small enough to read</h3><p>A three-layer Transformer that trains on a laptop CPU in minutes, with 88 tests and no hidden services.</p></div>
+    <div><span class="unit">511,372 parameters</span><h3>Small enough to read</h3><p>A three-layer Transformer that trains on a laptop CPU in minutes, with 109 tests and no hidden services.</p></div>
   </div>
 </section>
 
@@ -179,10 +179,10 @@ footer{padding-block:28px 48px;font-size:13px;color:var(--muted);display:flex;fl
   <div class="tbl"><table>
     <thead><tr><th>Question</th><th>Answer</th></tr></thead>
     <tbody>
-      <tr><td>Stable when readings go missing?</td><td class="v"><span class="pill yes">YES</span>Median cosine 0.994 after removing 30% of readings, on held-out participants</td></tr>
-      <tr><td>More useful than summary statistics?</td><td class="v"><span class="pill yes">YES</span>Hidden 6-hour mean: 7.7 vs 8.2 mg/dL error on validation</td></tr>
-      <tr><td>Links days from the same person?</td><td class="v"><span class="pill warn">OFTEN</span>About 25% top-1 vs 3.5% chance. Treat fingerprints as personal data</td></tr>
-      <tr><td>Free of dataset artifacts?</td><td class="v"><span class="pill warn">NOT YET</span>A linear probe identifies the source dataset (0.88–0.98). The likely cause is that the datasets align days to different clock times</td></tr>
+      <tr><td>Stable when readings go missing?</td><td class="v"><span class="pill yes">YES</span>Median cosine 0.965 after removing 30% of readings, on new people (sealed test)</td></tr>
+      <tr><td>More useful than summary statistics?</td><td class="v"><span class="pill warn">TIED</span>Predicting a hidden 6 hours on new people: 20.1 vs 19.6 mg/dL error, within the margin of uncertainty. It failed the pre-registered usefulness gate and was released by the owner's decision</td></tr>
+      <tr><td>Links days from the same person?</td><td class="v"><span class="pill warn">OFTEN</span>A day's closest match is the same person 48% of the time (summary statistics: 32%). Treat fingerprints as personal data</td></tr>
+      <tr><td>Free of dataset bias?</td><td class="v"><span class="pill yes">FIXED</span>Removing the clock input stops the model from recognizing which study a day came from: margin 0.067 on new people (limit 0.10), down from 0.18 in 0.2</td></tr>
       <tr><td>Clinically validated?</td><td class="v"><span class="pill no">NO</span>No diagnostic, treatment, or safety claim is made</td></tr>
     </tbody>
   </table></div>
@@ -195,19 +195,23 @@ footer{padding-block:28px 48px;font-size:13px;color:var(--muted);display:flex;fl
     <li><div class="ver"><b>1.0</b>first candidate</div><div><h3>Failed 3 of 5 checks and was not released</h3><p>The first full candidate collapsed on the declared checks. Its result is kept in the repository and the test set was retired.</p></div></li>
     <li><div class="ver"><b>1.1</b>candidate 6</div><div><h3>Passed all 5 checks and was released</h3><p>A new untouched holdout of 69 days from 31 participants. The embedding is non-collapsed and stable under random gaps, 60-minute gaps, and 15-minute cadence.</p></div></li>
     <li><div class="ver"><b>1.2</b>six candidates</div><div><h3>A useful negative result</h3><p>Added source-leakage and usefulness gates, and tried adversarial training. None passed the source gate, so the test set stays closed. The diagnosis: 278 of 281 Colas training days start at midnight. That tells protocol 1.3 what to fix.</p></div></li>
+    <li><div class="ver"><b>1.3</b>three candidates</div><div><h3>Midnight alignment halved the bias</h3><p>Starting every day at midnight cut the bias margin from 0.19 to 0.10, but cost usefulness. None passed.</p></div></li>
+    <li><div class="ver"><b>1.4</b>nine models</div><div><h3>Found where the bias lives</h3><p>Three recipes, three seeds each. Removing the time-of-day input eliminated the bias entirely, at a 3% usefulness cost.</p></div></li>
+    <li><div class="ver"><b>1.5</b>third cohort</div><div><h3>Bias stays fixed on new people</h3><p>Added 1,223 days from China. The no-clock model passed every check on validation; on the sealed test the bias stayed fixed, but it tied with summary statistics on usefulness and failed that gate.</p></div></li>
+    <li><div class="ver"><b>0.3</b>release</div><div><h3>Released by the owner's decision, with the failure disclosed</h3><p>The bias fix was judged more important than a usefulness gap within the margin of uncertainty. The 0.2 model stays available for reproducing earlier results.</p></div></li>
   </ol>
 
   <div class="warnbox"><strong>Research software only.</strong> GlucoTrace is not a medical device. Do not use it for diagnosis, treatment, insulin or medication dosing, alerts, or patient care.</div>
 </section>
 
 <footer>
-  <span>GlucoTrace 0.2.0 · MIT license · trained on BIG IDEAs (PhysioNet) and Colas et al. 2019 (PLOS ONE)</span>
+  <span>GlucoTrace 0.3.0 · MIT license · trained on BIG IDEAs (PhysioNet), Colas et al. 2019 (PLOS ONE), and ShanghaiT1DM/T2DM (Scientific Data)</span>
   <a href="https://github.com/Aman-Tripathi27/GlucoTrace">github.com/Aman-Tripathi27/GlucoTrace</a>
 </footer>
 </div>
 
 <script>
-const DATA = {"query":{"values":[null,104,105,106,108,109,109,108,107,107,106,105,104,104,104,106,107,107,108,108,108,107,106,105,103,100,97,96,99,104,106,104,103,105,108,108,108,107,107,108,108,108,110,117,127,135,140,142,140,137,135,136,137,138,138,138,135,131,125,117,109,103,98,95,94,94,94,94,95,94,94,95,96,98,96,94,92,94,96,96,92,89,86,85,85,87,89,90,91,91,92,92,92,92,89,87,86,88,90,93,95,95,94,93,90,88,87,88,91,93,95,97,99,98,97,96,96,97,97,98,98,98,97,97,94,92,90,91,92,92,89,86,83,83,83,83,84,85,87,89,90,92,92,92,91,91,92,92,93,92,92,95,98,100,98,95,92,91,90,90,91,92,94,99,108,117,123,124,120,111,98,85,78,79,83,87,91,96,103,107,108,104,101,98,96,94,93,92,93,94,95,95,95,94,94,93,93,94,95,95,94,94,94,95,95,95,95,96,98,100,100,99,99,99,99,98,98,98,99,101,101,102,101,99,97,94,93,92,92,92,93,97,102,107,111,114,114,113,111,110,108,107,106,106,108,112,116,119,119,117,116,116,117,118,120,124,130,130,125,115,107,101,97,95,95,95,97,99,101,103,105,106,105,103,102,102,102,102,101,101,102,104,105,104,101,98,94,91],"fp":[0.0405,-0.0182,-0.008,-0.0491,0.0087,0.28,-0.0203,-0.0312,0.0554,-0.0178,0.0493,0.0634,0.1943,0.0135,-0.0693,0.0071,-0.0227,-0.0308,-0.0176,-0.0357,0.0607,0.0407,-0.0313,0.0673,0.0087,0.0672,-0.0094,-0.0228,0.0979,-0.0217,-0.0319,-0.0222,-0.0471,-0.023,0.0676,0.0625,-0.0186,-0.0105,-0.0219,-0.0329,-0.0195,-0.0734,0.0079,-0.0552,-0.0454,-0.023,-0.0108,-0.0094,-0.0105,-0.0313,0.0329,0.0912,0.0373,-0.0186,-0.0475,0.3613,-0.0462,0.0149,-0.0026,0.0493,-0.02,-0.0109,-0.0089,-0.0019,-0.0096,-0.0134,0.0061,-0.0209,-0.0417,-0.0084,-0.0226,-0.028,0.0627,-0.0104,-0.0345,0.0031,-0.0198,0.0705,0.0436,-0.0069,0.0114,0.0097,-0.0473,-0.0212,0.5396,-0.0254,-0.0373,0.0159,0.0032,0.0193,-0.0297,-0.0517,-0.0481,-0.0462,0.074,-0.0127,-0.0042,-0.0189,-0.0401,-0.0158,0.0653,-0.018,-0.0197,-0.0413,0.1213,0.0162,-0.023,-0.0068,0.0021,-0.0508,-0.0367,-0.0157,-0.0218,-0.0341,-0.0125,0.028,-0.003,0.4528,0.0587,0.0202,-0.0395,0.0146,-0.0037,-0.0481,-0.0115,-0.0186,0.2923,-0.0107],"start":"2020-02-16T17:23:32"},"neighbor":{"values":[null,95,93,94,96,98,99,101,99,98,98,100,102,97,89,82,79,80,81,82,82,82,80,81,82,84,84,83,83,88,94,97,96,92,88,88,88,89,90,95,102,109,112,109,102,93,89,89,92,96,98,99,102,106,111,113,114,114,113,111,109,108,108,106,103,101,102,103,104,104,105,105,106,108,109,109,108,108,108,108,108,108,108,108,109,110,110,110,110,110,109,108,107,106,106,106,107,108,108,109,109,109,109,107,107,107,109,110,110,110,109,107,106,106,106,106,105,103,102,101,101,102,103,105,105,106,106,106,106,106,106,105,104,103,103,104,104,103,102,101,100,99,98,98,99,100,102,104,104,103,101,99,97,96,97,101,101,98,92,88,87,88,88,87,89,96,108,120,129,133,133,128,116,99,78,60,49,46,48,55,65,79,96,111,120,121,119,114,106,99,94,93,95,98,103,108,114,119,121,116,109,100,92,86,84,85,86,87,88,89,91,91,91,90,90,90,91,90,90,89,90,91,90,87,84,84,90,99,111,123,134,140,138,131,119,109,103,104,110,117,121,119,113,110,109,113,118,121,121,119,118,119,120,120,118,114,111,105,101,96,93,91,88,84,83,84,89,95,99,101,100,99,99,100,101,101,99,97,97,98,101,104,105,106,105,105,102,101],"fp":[0.0604,0.0049,-0.0031,-0.0605,-0.0009,0.3195,-0.0207,-0.0349,0.0598,-0.0187,0.0691,0.0075,0.1992,0.0097,-0.074,0.0012,-0.0233,-0.0344,-0.0527,-0.037,0.0505,0.0352,-0.0323,0.0842,-0.0042,0.0389,-0.0103,-0.0237,0.152,-0.0265,-0.0328,-0.023,-0.049,-0.0182,0.0551,0.0636,-0.0181,-0.0125,-0.0138,-0.0332,-0.0187,-0.0777,0.0045,-0.0589,-0.0444,-0.0251,-0.0154,-0.0119,-0.0149,-0.0349,0.0176,0.1026,0.0352,-0.0216,-0.0517,0.2993,-0.0387,0.0366,-0.0056,0.0698,-0.018,-0.0138,-0.0121,-0.0086,-0.0127,-0.0197,0.0026,-0.022,-0.0408,-0.0118,-0.0105,-0.0297,0.0273,-0.0148,-0.0395,0.003,-0.0224,0.1001,0.0722,-0.0098,0.0341,0.0042,-0.0568,-0.0216,0.5127,-0.0072,-0.039,0.0129,-0.0005,-0.006,-0.0417,-0.0568,-0.0251,-0.0478,0.078,-0.018,0.0153,-0.0073,-0.0436,-0.0221,0.0758,-0.0112,-0.0272,-0.036,0.1424,-0.006,-0.0266,-0.0093,0.0006,-0.0536,-0.038,-0.0169,-0.0264,-0.0365,-0.0148,0.024,-0.0216,0.462,0.0627,0.0289,-0.0414,0.0079,-0.0076,-0.0521,-0.014,-0.0339,0.2837,-0.0139],"start":"2020-02-15T17:23:32","similarity":0.987}};
+const DATA = {"query":{"values":[null,104,105,106,108,109,109,108,107,107,106,105,104,104,104,106,107,107,108,108,108,107,106,105,103,100,97,96,99,104,106,104,103,105,108,108,108,107,107,108,108,108,110,117,127,135,140,142,140,137,135,136,137,138,138,138,135,131,125,117,109,103,98,95,94,94,94,94,95,94,94,95,96,98,96,94,92,94,96,96,92,89,86,85,85,87,89,90,91,91,92,92,92,92,89,87,86,88,90,93,95,95,94,93,90,88,87,88,91,93,95,97,99,98,97,96,96,97,97,98,98,98,97,97,94,92,90,91,92,92,89,86,83,83,83,83,84,85,87,89,90,92,92,92,91,91,92,92,93,92,92,95,98,100,98,95,92,91,90,90,91,92,94,99,108,117,123,124,120,111,98,85,78,79,83,87,91,96,103,107,108,104,101,98,96,94,93,92,93,94,95,95,95,94,94,93,93,94,95,95,94,94,94,95,95,95,95,96,98,100,100,99,99,99,99,98,98,98,99,101,101,102,101,99,97,94,93,92,92,92,93,97,102,107,111,114,114,113,111,110,108,107,106,106,108,112,116,119,119,117,116,116,117,118,120,124,130,130,125,115,107,101,97,95,95,95,97,99,101,103,105,106,105,103,102,102,102,102,101,101,102,104,105,104,101,98,94,91],"fp":[-0.0035,-0.0859,-0.0284,-0.0605,-0.0107,-0.0547,-0.0343,-0.083,0.1726,-0.0425,0.0055,0.0014,0.2986,0.0414,-0.0221,-0.0218,-0.0446,0.1064,-0.0481,-0.0701,-0.0513,0.0361,0.2672,-0.0935,0.2244,-0.062,-0.0455,-0.0556,-0.0247,-0.0597,-0.0104,-0.0356,-0.0588,-0.0496,-0.0513,0.1989,-0.076,0.0647,-0.0521,-0.0193,-0.0329,0.0188,-0.0567,-0.0084,-0.0011,0.1271,-0.028,0.1341,-0.0459,-0.0369,0.1271,-0.0239,-0.0095,-0.0504,0.319,-0.0169,-0.0678,0.0177,0.007,-0.0391,0.1108,-0.0187,-0.0422,-0.0054,-0.0168,-0.0522,-0.0594,-0.0915,-0.0268,-0.081,-0.0387,0.2936,0.0405,-0.0105,-0.0282,0.0323,0.2462,-0.0355,-0.0774,0.1722,-0.0302,-0.0309,-0.0351,0.1032,0.0298,-0.097,0.0082,0.0121,-0.0376,0.0035,0.0143,-0.0333,-0.0112,-0.0364,-0.0325,-0.0185,-0.035,-0.0648,-0.0751,-0.0305,-0.0202,-0.0661,-0.0063,-0.0441,-0.0119,-0.0182,-0.0905,-0.0294,-0.0322,-0.0356,0.105,0.0414,0.0367,-0.073,-0.0618,0.2081,-0.0152,-0.0699,-0.0459,-0.0345,-0.0446,-0.0127,-0.0037,-0.0228,-0.0519,0.0547,0.2855,-0.0355],"start":"2020-02-16T17:23:32"},"neighbor":{"values":[120,117,115,114,114,115,117,119,122,126,130,133,135,134,130,124,117,109,102,96,92,90,90,91,94,97,100,102,104,105,105,105,105,105,105,105,106,106,106,106,106,106,106,106,106,105,105,104,104,103,103,103,102,102,102,102,101,101,101,100,99,99,98,98,98,98,98,98,99,99,99,99,99,99,99,99,99,99,100,100,101,101,102,102,102,102,102,102,102,101,101,101,101,100,100,100,100,99,99,99,98,97,97,96,95,95,95,95,95,95,95,94,94,94,94,94,94,93,91,90,89,89,89,90,91,92,92,93,94,94,95,95,95,95,95,94,93,93,92,91,90,89,88,86,84,82,80,78,77,76,75,74,73,73,72,72,73,74,77,81,87,93,100,106,111,114,116,117,117,117,117,117,117,118,119,120,120,118,115,112,110,110,112,116,121,125,129,130,129,127,124,121,118,117,116,115,114,115,119,123,128,129,129,126,123,120,115,110,106,102,99,98,100,102,105,107,107,106,104,101,99,98,98,99,100,102,103,104,105,105,104,103,100,98,95,92,91,89,89,88,89,90,91,92,93,94,94,94,93,91,88,86,null,null,null,null,null,null,null,null,111,114,117,119,120,120,120,120,120,120,120,120,120,121,121,121,121,121,121,122,123,124,127,131,135,139,143,144],"fp":[0.0034,-0.0921,-0.0254,-0.061,-0.0056,-0.0511,-0.045,-0.0826,0.1669,-0.0398,-0.0212,0.0089,0.3183,0.0014,-0.0193,-0.0186,-0.049,0.0954,-0.0334,-0.0576,-0.0503,-0.0511,0.3229,-0.0868,0.2363,-0.0599,-0.0336,-0.0524,0.0024,-0.0607,-0.0119,-0.0202,-0.0552,-0.0321,-0.048,0.1681,-0.0744,0.0443,-0.0499,-0.0015,-0.0335,0.0009,-0.0525,-0.0035,0.0067,0.0978,-0.0326,0.0971,-0.0439,-0.0335,0.1622,-0.018,0.0124,-0.0477,0.3219,-0.0291,-0.0692,0.0084,-0.0008,-0.0479,0.0989,-0.0127,-0.0385,-0.0238,-0.012,-0.0518,-0.0574,-0.087,-0.0318,-0.0842,-0.0211,0.2912,0.0652,-0.0233,-0.0303,0.0991,0.1679,-0.0314,-0.0664,0.1867,-0.0259,-0.0266,-0.0315,0.1105,-0.0307,-0.0978,0.0343,0.0222,-0.0333,0.0112,-0.0266,-0.0143,-0.0072,-0.0104,-0.0305,0.0184,-0.0395,-0.0429,-0.0711,-0.0264,-0.0154,-0.0638,-0.0019,-0.045,-0.0412,-0.0283,-0.087,0.0035,-0.0349,-0.0286,0.1584,0.0959,0.0411,-0.074,-0.0579,0.2175,-0.008,-0.0651,-0.0473,-0.0263,-0.0359,-0.0081,0.0022,-0.0185,-0.0447,0.0442,0.2474,-0.0619],"start":"2000-01-02T00:00:42","similarity":0.972}};
 (function(){
   const svg = document.getElementById('trace');
   const W = 960, H = 260, L = 44, R = 12, T = 12, B = 30;
@@ -225,7 +229,8 @@ const DATA = {"query":{"values":[null,104,105,106,108,109,109,108,107,107,106,10
     return d;
   }
   const start = new Date(DATA.query.start);
-  const clock = i => { const t = new Date(start.getTime() + i * 5 * 60000); return String(t.getHours()).padStart(2, '0') + ':' + String(t.getMinutes()).padStart(2, '0'); };
+  // Hours since the window starts: the 0.3 model never sees clock time.
+  const clock = i => '+' + Math.floor(i * 5 / 60) + 'h' + (i * 5 % 60 ? String(i * 5 % 60).padStart(2, '0') : '');
 
   svg.appendChild(el('rect', { x: L, y: y(180), width: W - L - R, height: y(70) - y(180), fill: 'var(--band)' }));
   [70, 180].forEach(v => {
@@ -236,7 +241,7 @@ const DATA = {"query":{"values":[null,104,105,106,108,109,109,108,107,107,106,10
   for (let h = 0; h <= 24; h += 4) {
     const i = Math.round(h * (n - 1) / 24);
     const anchor = h === 0 ? 'start' : h === 24 ? 'end' : 'middle';
-    svg.appendChild(el('text', { x: x(i), y: H - 8, 'text-anchor': anchor }, clock(i)));
+    svg.appendChild(el('text', { x: x(i), y: H - 8, 'text-anchor': anchor }, '+' + h + 'h'));
   }
   const neighbor = el('path', { d: path(DATA.neighbor.values), fill: 'none', stroke: 'var(--amber)', 'stroke-width': 2, 'stroke-linejoin': 'round', opacity: 0 });
   neighbor.style.transition = 'opacity .3s';
@@ -279,7 +284,7 @@ const DATA = {"query":{"values":[null,104,105,106,108,109,109,108,107,107,106,10
     const v = DATA.query.values[i], w = DATA.neighbor.values[i];
     cursor.setAttribute('x1', x(i)); cursor.setAttribute('x2', x(i)); cursor.setAttribute('opacity', 1);
     let label = clock(i) + '  ' + (v == null ? 'missing' : v + ' mg/dL');
-    if (both) label += '  ·  prev day ' + (w == null ? 'missing' : w);
+    if (both) label += '  ·  match ' + (w == null ? 'missing' : w);
     tip.textContent = label; tip.hidden = false;
     tip.style.left = (x(i) / W * r.width) + 'px';
     tip.style.top = ((v == null ? y(120) : y(v)) / H * r.height) + 'px';

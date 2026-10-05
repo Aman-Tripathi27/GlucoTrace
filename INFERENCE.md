@@ -24,6 +24,21 @@ file, for example across a daylight-saving change.
 CSV export directly. Only estimated glucose value (`EGV`) rows are used, and the
 unit is read from the export's own glucose column header.
 
+**FreeStyle Libre (LibreView) exports.** Pass `--format libreview` to read a
+LibreView CSV export directly. Only automatic historic readings (record type
+`0`, usually every 15 minutes) are used; scans, strip tests, food, insulin, and
+notes are skipped. The unit comes from the `Historic Glucose` column header,
+and decimal commas (`5,6`) are accepted. LibreView writes dates as month-day
+(`03-01-2024 08:05 AM`) or day-month (`01-03-2024 08:05`) depending on region.
+The order is detected from the file; if every date could be read either way,
+the file is rejected rather than guessed, and you pass `--date-order mdy` or
+`--date-order dmy`. Readings 15 minutes apart sit on every third position of
+the five-minute grid, with the positions between marked missing, never
+interpolated. The released checkpoint was trained on five-minute data; its
+fingerprints passed the protocol 1.1 stability check at 15-minute cadence
+(median cosine 0.993), but expect somewhat more noise than with five-minute
+data.
+
 **Readings beyond the sensor range.** Dexcom records values below 40 mg/dL as
 `Low` and above 400 mg/dL as `High`, with no number. By default these are
 treated as **missing**, because the true value was never measured, and a
@@ -31,7 +46,9 @@ warning reports how many there were. `--out-of-range clamp` records them at
 40 and 400 mg/dL instead, which keeps the shape of an extreme but assumes a
 value. The fingerprint metadata records `out_of_range_readings` and
 `out_of_range_policy`. The released checkpoint never saw such readings during
-training. `Low`/`High` are also accepted in plain CSVs.
+training. `Low`/`High` are also accepted in plain CSVs. FreeStyle Libre writes
+`LO` (below 40) and `HI` (above 500 mg/dL); with `--out-of-range clamp` these
+are recorded at 40 and 500 mg/dL.
 
 One fingerprint represents one complete 288-position window. If a CSV contains
 multiple complete non-overlapping windows, pass `--window-index`. Partial final

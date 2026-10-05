@@ -210,11 +210,11 @@ def test_checkpoint_resolution_order(
     monkeypatch.chdir(tmp_path)
     monkeypatch.delenv("GLUCOTRACE_CHECKPOINT", raising=False)
     monkeypatch.setenv("GLUCOTRACE_HOME", str(tmp_path / "home"))
-    assert inference.default_checkpoint_path() == tmp_path / "home" / "glucotrace-research.pt"
-    local = tmp_path / "checkpoints" / "glucotrace-research.pt"
+    assert inference.default_checkpoint_path() == tmp_path / "home" / inference.CHECKPOINT_NAME
+    local = tmp_path / "checkpoints" / inference.CHECKPOINT_NAME
     local.parent.mkdir()
     local.write_bytes(b"x")
-    assert inference.default_checkpoint_path() == Path("checkpoints/glucotrace-research.pt")
+    assert inference.default_checkpoint_path() == Path("checkpoints") / inference.CHECKPOINT_NAME
     monkeypatch.setenv("GLUCOTRACE_CHECKPOINT", "/elsewhere/model.pt")
     assert inference.default_checkpoint_path() == Path("/elsewhere/model.pt")
     with pytest.raises(FileNotFoundError, match="download-model"):
