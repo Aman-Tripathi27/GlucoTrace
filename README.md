@@ -53,8 +53,10 @@ silently misread. Run `glucotrace --help` for all fourteen commands.
   to checksummed manifests, and the loader refuses stale splits.
 - **Pre-registered evaluation.** Thresholds, probes, and candidate budgets are
   declared before training; a test partition is opened once.
-- **Compares the shape of the day.** The model has no clock input, so
-  fingerprints reflect the glucose curve itself.
+- **Compares the shape of the day.** The released 0.3 checkpoint ignores
+  time of day (it was trained with `use_clock=False`, which zeroes that
+  input), so fingerprints reflect the glucose curve itself. Protocol 1.4 found
+  that clock time let earlier models identify the source dataset.
 - **Small and hackable.** About 5,000 lines of typed Python, 109 tests, CPU
   training in minutes.
 
@@ -226,6 +228,12 @@ print(result["pooled_embedding"].shape)  # [128] day embedding
 print(result["reconstruction"].shape)    # [288]
 ```
 
+The forward pass accepts `time_of_day` so that every checkpoint shares one
+interface. Whether the model uses it is set by `GlucoTraceConfig.use_clock`:
+a bare `GlucoTrace()` defaults to `True` for compatibility with older
+checkpoints, while the released 0.3 checkpoint sets it to `False`, so the
+input is replaced with zeros before it reaches the network.
+
 Model inputs remain in mg/dL. Internally, observed glucose is transformed by the
 fixed, documented numerical scaling `(glucose - 120) / 40`; these constants are
 not estimated from the input day. Missing placeholders are set to zero only
@@ -298,9 +306,11 @@ multi-source project objective or a validated training protocol.
 - Every trend is mask-normalized and causal: it uses only the current and
   preceding observations. Transformer attention is bidirectional because this
   model encodes a completed day; it is not a real-time forecasting model.
-- Trend density, physical observation mask, capped gap age, and circular
-  time-of-day are explicit inputs. Missing glucose is never silently presented
-  as measured.
+- Trend density, physical observation mask, and capped gap age are explicit
+  inputs. Missing glucose is never silently presented as measured.
+- Circular time-of-day is an optional input, switched off in the released
+  0.3 checkpoint (`use_clock=False`). It can be restored, or coarsened with
+  `clock_bins`, for ablations; see [PROTOCOL_1_4_RESULTS.md](PROTOCOL_1_4_RESULTS.md).
 - Keeping three trend widths makes the slow/event split inspectable and permits
   direct ablation. The rapid stream uses the one-hour trend as its baseline.
 - Sinusoidal patch positions avoid a learned day-length-specific table.
